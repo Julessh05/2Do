@@ -69,6 +69,19 @@ class Converter {
     return "$day.$month.$year";
   }
 
+  /// Converts a [TimeOfDay] to a [String] and returns it in the
+  /// following Format:
+  /// HH:MM
+  static String timeOfDaytoString(TimeOfDay time) {
+    // Convert Hour
+    final String hour = time.hour.toString().padLeft(2, '0');
+
+    // Convert Minute
+    final String minute = time.minute.toString().padLeft(2, '0');
+
+    return "$hour:$minute";
+  }
+
   /// Parses an Settings Value of an supported Type to String
   /// so you can show it or store it
   //static String parseSupportedObjectToString() {}

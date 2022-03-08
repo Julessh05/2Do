@@ -74,6 +74,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
+  /// Pushes the [AddTodoScreen] on Top of the current Route
   void _openAddTodo() {
     Navigator.pushNamed(context, AddTodoScreen.routeName);
   }

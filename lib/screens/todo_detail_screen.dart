@@ -40,23 +40,34 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: <TodoDetailsTile>[
+          // Title
           TodoDetailsTile(
             title: "Title:",
             subtitle: widget.todo.title,
           ),
+
+          // Content
           TodoDetailsTile(
             title: "Content:",
             subtitle: widget.todo.content,
           ),
+
+          // Time
           TodoDetailsTile(
             title: "Time:",
             subtitle: widget.todo.onlyTime,
           ),
+
+          // Date
           TodoDetailsTile(
             title: "Date:",
             subtitle: widget.todo.onlyDate,
           ),
+
+          // Divider
           const TodoDetailsTile.divider(),
+
+          // Created on Date and Time
           TodoDetailsTile(
             title: "Created on:",
             subtitle: widget.todo.createdAsString,

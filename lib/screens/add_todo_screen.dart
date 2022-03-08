@@ -3,7 +3,10 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
+import 'package:todo/models/todo.dart';
+import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
@@ -15,6 +18,11 @@ class AddTodoScreen extends StatefulWidget {
 }
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
+  DateTime? date;
+  TimeOfDay? time;
+  String? title;
+  String content = "";
+
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
@@ -22,14 +30,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         title: Text("Add Todo".translate()),
         automaticallyImplyLeading: true,
       ),
-      body: ListView(
-        addAutomaticKeepAlives: true,
-        addRepaintBoundaries: true,
-        addSemanticIndexes: true,
-        physics: const BouncingScrollPhysics(),
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        dragStartBehavior: DragStartBehavior.start,
-        scrollDirection: Axis.vertical,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
+        mainAxisSize: MainAxisSize.max,
+        textDirection: TextDirection.ltr,
+        verticalDirection: VerticalDirection.down,
         children: <Widget>[
           TextField(
             autocorrect: true,
@@ -63,10 +70,21 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               paste: true,
               selectAll: true,
             ),
+            decoration: InputDecoration(
+              labelText: "Insert Title".translate(),
+              floatingLabelStyle: const TextStyle(color: Colors.grey),
+              labelStyle: TextStyle(color: Colors.grey.shade400),
+            ),
+            onSubmitted: (value) {
+              title = value;
+            },
+            onChanged: (value) {
+              title = value;
+            },
           ),
           TextField(
             autocorrect: true,
-            autofocus: true,
+            autofocus: false,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             dragStartBehavior: DragStartBehavior.start,
             enableIMEPersonalizedLearning: true,
@@ -95,11 +113,182 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               paste: true,
               selectAll: true,
             ),
+            decoration: InputDecoration(
+              labelText: "Insert Content".translate(),
+              floatingLabelStyle: const TextStyle(color: Colors.grey),
+              labelStyle: TextStyle(color: Colors.grey.shade400),
+            ),
+            onSubmitted: (value) {
+              content = value;
+            },
+            onChanged: (value) {
+              content = value;
+            },
           ),
+          ListTile(
+            autofocus: false,
+            enabled: true,
+            isThreeLine: false,
+            title: Text(
+              date == null ? "Set a Date".translate() : "Date".translate(),
+            ),
+            subtitle: date == null ? null : Text(Converter.onlyDate(date!)),
+            leading: const Icon(Icons.date_range_rounded),
+            onTap: () => _setDate().then(
+              (value) => setState(() {
+                date = value;
+              }),
+            ),
+          ),
+          ListTile(
+            autofocus: false,
+            enabled: true,
+            isThreeLine: false,
+            title: Text(
+              date == null ? "Set a Time".translate() : "Time".translate(),
+            ),
+            subtitle:
+                time == null ? null : Text(Converter.timeOfDaytoString(time!)),
+            leading: const Icon(Icons.timelapse_rounded),
+            onTap: () => _setTime().then(
+              (value) => setState(() {
+                time = value;
+              }),
+            ),
+          ),
+          const SizedBox(height: 50),
+          TextButton(
+            onPressed: _createTodo,
+            child: Text("Confirm".translate()),
+            autofocus: false,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+          )
         ],
       ),
     );
 
     return _scaffold;
+  }
+
+  /// Creates a Todo and inserts the Values
+  /// Also checks if the Values are give and shows a Dialog
+  /// if Values are missing
+  void _createTodo() {
+    List<String> missingValues = [];
+
+    if (title == null || title!.isEmpty) {
+      missingValues.add("Title".translate());
+    }
+    if (date == null) {
+      missingValues.add("Date".translate());
+    }
+    if (time == null) {
+      missingValues.add("Time".translate());
+    }
+
+    if (missingValues.isNotEmpty) {
+      showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (_) {
+          return _errorDialog(missingValues);
+        },
+      );
+    } else {
+      // Make one DateTime from date and time
+      final DateTime dateTime = DateTime(
+        date!.year,
+        date!.month,
+        date!.day,
+        time!.hour,
+        time!.minute,
+      );
+      final _todo = Todo(
+        title: title!,
+        content: content,
+        time: dateTime,
+      );
+      // Add the Todo to the global List
+      listOfTodos.add(_todo);
+      // Pops the current Route
+      Navigator.pop(context);
+    }
+  }
+
+  /// Shows an Error Dialog if some Values are not given
+  /// and as a consequence the Todo can't be created
+  AlertDialog _errorDialog(List<String> missingValues) {
+    final String _title;
+    final String _content1;
+    String _content2;
+    if (missingValues.length < 1) {
+      final _component = missingValues[0];
+      _title = "$_component " + "is missing".translate();
+      _content1 = "The following Value is missing:".translate();
+      _content2 = " - $_component";
+    } else {
+      _title = "Some Values missing".translate();
+      _content1 = "The following Values are missing:".translate();
+      _content2 = "";
+      for (String component in missingValues) {
+        _content2 += " * $component \n";
+      }
+    }
+    final _content = _content1 + "\n" + "\n" + _content2;
+    final _dialog = AlertDialog(
+      scrollable: true,
+      title: Text(_title),
+      content: Text(_content),
+      actionsAlignment: MainAxisAlignment.center,
+      alignment: Alignment.center,
+      elevation: 20.0,
+      actionsOverflowDirection: VerticalDirection.down,
+      semanticLabel: "Some Values missing".translate(),
+      actionsPadding: const EdgeInsets.all(5),
+      actions: <Center>[
+        Center(
+          child: TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("OK".translate()),
+            autofocus: true,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+          ),
+        ),
+      ],
+    );
+
+    return _dialog;
+  }
+
+  /// Shows the Date Picker and returns the Date
+  Future<DateTime?> _setDate() async {
+    return showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022, 2, 22, 22, 22, 22, 22, 22),
+      lastDate: DateTime(2222, 2, 22, 22, 22, 22, 22, 22),
+      textDirection: TextDirection.ltr,
+      currentDate: DateTime.now(),
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendar,
+      locale: Translation.activeLocale,
+      cancelText: "Cancel".translate(),
+      confirmText: "Confirm".translate(),
+      // TODO: right / useful?
+      useRootNavigator: true,
+    );
+  }
+
+  /// Shows the Time Picker and returns the time
+  Future<TimeOfDay?> _setTime() async {
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.dial,
+      cancelText: "Cancel".translate(),
+      confirmText: "Confirm".translate(),
+      // TODO: right / useful?
+      useRootNavigator: true,
+    );
   }
 }

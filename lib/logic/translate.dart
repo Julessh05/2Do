@@ -91,6 +91,58 @@ class Translation {
     {
       const Locale("en", "US"): "Add Todo",
       const Locale("de", "DE"): "Todo hinzufügen",
+    },
+    {
+      const Locale("en", "US"): "Set a Date",
+      const Locale("de", "DE"): "Setze das Datum",
+    },
+    {
+      const Locale("en", "US"): "Date",
+      const Locale("de", "DE"): "Datum",
+    },
+    {
+      const Locale("en", "US"): "Set a Time",
+      const Locale("de", "DE"): "Setze die Zeit",
+    },
+    {
+      const Locale("en", "US"): "Time",
+      const Locale("de", "DE"): "Zeit",
+    },
+    {
+      const Locale("en", "US"): "Cancel",
+      const Locale("de", "DE"): "Abbrechen",
+    },
+    {
+      const Locale("en", "US"): "Confirm",
+      const Locale("de", "DE"): "Bestätigen",
+    },
+    {
+      const Locale("en", "US"): "Insert Title",
+      const Locale("de", "DE"): "Titel einfügen",
+    },
+    {
+      const Locale("en", "US"): "Insert Content",
+      const Locale("de", "DE"): "Inhalt einfügen",
+    },
+    {
+      const Locale("en", "US"): "is missing",
+      const Locale("de", "DE"): "fehlt",
+    },
+    {
+      const Locale("en", "US"): "Some Values missing",
+      const Locale("de", "DE"): "Einige Informationen fehlen",
+    },
+    {
+      const Locale("en", "US"): "The following Value is missing:",
+      const Locale("de", "DE"): "The folgende Information fehlt:",
+    },
+    {
+      const Locale("en", "US"): "The following Values are missing:",
+      const Locale("de", "DE"): "The folgenden Informationen fehlen:",
+    },
+    {
+      const Locale("en", "US"): "OK",
+      const Locale("de", "DE"): "OK",
     }
   ];
 

@@ -123,19 +123,24 @@ class Setting implements IdentifiableModel {
   Pattern get regExp => throw UnimplementedError();
 }
 
+/// The List that holds all Settings
+final List<Setting> listOfSettings = [
+  AllSettings.languageSetting,
+  AllSettings.themeModeSetting,
+];
+
+/// Class that holds all Settings
 class AllSettings {
+  /// The Language Setting which gives information
+  /// about the current language and Locale
   static final languageSetting = Setting(
     name: "Language",
     objectValue: Translation.activeLocale,
   );
 
+  /// Gives Information about the Theme Mode
   static final themeModeSetting = Setting(
     name: "ThemeMode",
     objectValue: Themes.themeMode,
   );
-
-  static final List<Setting> listOfSettings = [
-    languageSetting,
-    themeModeSetting,
-  ];
 }

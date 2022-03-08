@@ -110,6 +110,9 @@ class Themes {
       /* Text Button Theme */
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            const EdgeInsets.only(right: 10, left: 10),
+          ),
           alignment: Alignment.center,
           elevation: MaterialStateProperty.all<double>(10.0),
           enableFeedback: true,
@@ -167,24 +170,24 @@ class Themes {
             Radius.circular(30),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade800,
+            color: Colors.blue.shade700,
             style: BorderStyle.solid,
-            width: 0.9,
+            width: 1.0,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(30),
+            Radius.circular(35),
           ),
           borderSide: BorderSide(
             color: Colors.blue.shade800,
             style: BorderStyle.solid,
-            width: 0.9,
+            width: 1.0,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(30),
+            Radius.circular(15),
           ),
           borderSide: BorderSide(
             color: Colors.red.shade700,
@@ -194,17 +197,17 @@ class Themes {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(30),
+            Radius.circular(20),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade800,
+            color: Colors.purple.shade700,
             style: BorderStyle.solid,
-            width: 0.9,
+            width: 0.7,
           ),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(30),
+            Radius.circular(17),
           ),
           borderSide: BorderSide(
             color: Colors.blue.shade800,

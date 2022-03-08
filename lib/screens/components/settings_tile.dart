@@ -80,6 +80,7 @@ class _SettingsTileState extends State<SettingsTile> {
         if (widget.uiSwitch != null) {
         } else if (widget.simpleDialog != null) {
           showDialog(
+            barrierDismissible: true,
             context: context,
             builder: (_) {
               return widget.simpleDialog!;
@@ -87,6 +88,7 @@ class _SettingsTileState extends State<SettingsTile> {
           );
         } else if (widget.alertDialog != null) {
           showDialog(
+            barrierDismissible: true,
             context: context,
             builder: (_) {
               return widget.alertDialog!;
