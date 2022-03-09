@@ -59,6 +59,10 @@ class Translation {
       const Locale("de", "DE"): "Todo Titel",
     },
     {
+      const Locale("en", "US"): "Todo Time",
+      const Locale("de", "DE"): "Todo Zeit",
+    },
+    {
       const Locale("en", "US"): "Unknown Page",
       const Locale("de", "DE"): "Unbekannte Seite",
     },
@@ -143,7 +147,27 @@ class Translation {
     {
       const Locale("en", "US"): "OK",
       const Locale("de", "DE"): "OK",
-    }
+    },
+    {
+      const Locale("en", "US"): "Edit Title",
+      const Locale("de", "DE"): "Titel bearbeiten",
+    },
+    {
+      const Locale("en", "US"): "Edit",
+      const Locale("de", "DE"): "Bearbeiten",
+    },
+    {
+      const Locale("en", "US"): "Language",
+      const Locale("de", "DE"): "Sprache",
+    },
+    {
+      const Locale("en", "US"): "Thememode",
+      const Locale("de", "DE"): "Helligkeitsmodus",
+    },
+    {
+      const Locale("en", "US"): "Notification",
+      const Locale("de", "DE"): "Benachrichtigungen",
+    },
   ];
 
   /// Translates the String to the [activeLocale]

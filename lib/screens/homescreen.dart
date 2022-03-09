@@ -1,6 +1,5 @@
 library screens;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
@@ -13,6 +12,7 @@ final Todo _todo = Todo(
   time: DateTime.now(),
   title: "Todo",
   content: "Content",
+  created: DateTime.now(),
 );
 
 class Homescreen extends StatefulWidget {

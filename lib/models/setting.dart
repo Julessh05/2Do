@@ -54,10 +54,10 @@ import 'package:todo/styles/themes.dart';
 /// Error would be: "You can only define one Value."
 class Setting implements IdentifiableModel {
   final String name;
-  final bool? boolValue;
-  final int? intValue;
-  final String? stringValue;
-  final dynamic objectValue;
+  bool? boolValue;
+  int? intValue;
+  String? stringValue;
+  dynamic objectValue;
   late final Type _valueType;
 
   Setting({
@@ -98,6 +98,14 @@ class Setting implements IdentifiableModel {
     }
   }
 
+  Setting.empty({
+    this.name = "Placeholder",
+    this.boolValue,
+    this.intValue,
+    this.stringValue,
+    this.objectValue,
+  });
+
   /// Returns the current State of the givven Value
   /// as String, no matter what kind of Object you put in
   String get value {
@@ -116,6 +124,25 @@ class Setting implements IdentifiableModel {
   }
 
   @override
+  String toString() {
+    String _result = "";
+
+    // Add Name
+    _result += "Name:";
+    _result += name;
+
+    // Add ValueType
+    _result += "ValueType:";
+    _result += _valueType.toString();
+
+    // Add Value as String
+    _result += "ValueAsString:";
+    _result += value;
+
+    return _result;
+  }
+
+  @override
   String get identifier => "Setting:";
 
   @override
@@ -127,6 +154,9 @@ class Setting implements IdentifiableModel {
 final List<Setting> listOfSettings = [
   AllSettings.languageSetting,
   AllSettings.themeModeSetting,
+  AllSettings.notificationActiveSetting,
+  AllSettings.notificationImportanceSetting,
+  AllSettings.emptySetting,
 ];
 
 /// Class that holds all Settings
@@ -140,7 +170,18 @@ class AllSettings {
 
   /// Gives Information about the Theme Mode
   static final themeModeSetting = Setting(
-    name: "ThemeMode",
+    name: "Thememode",
     objectValue: Themes.themeMode,
+  );
+
+  static final notificationActiveSetting = Setting(
+    name: "activated",
+  );
+
+  static final emptySetting = Setting.empty();
+
+  static final notificationImportanceSetting = Setting(
+    name: "Importance",
+    intValue: 1,
   );
 }

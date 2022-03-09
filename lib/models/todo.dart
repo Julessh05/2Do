@@ -10,7 +10,7 @@ import 'package:todo/models/identifiable_model.dart';
 class Todo implements IdentifiableModel {
   final String title;
   final String content;
-  final DateTime time;
+  late final DateTime time;
   final List<String> tags;
   bool selected;
   bool checked;
@@ -23,6 +23,7 @@ class Todo implements IdentifiableModel {
     this.tags = const ["Standard"],
     this.checked = false,
     this.selected = false,
+    required this.created,
   })  : assert(
           selected == false,
           "A Todo can't be selected while being created",
@@ -30,7 +31,16 @@ class Todo implements IdentifiableModel {
         assert(
           checked == false,
           "A Todo can't be checked while being created",
-        ) {
+        );
+
+  Todo.empty({
+    this.title = "",
+    this.content = "",
+    this.checked = false,
+    this.selected = false,
+    this.tags = const ["Standard"],
+  }) {
+    time = DateTime.now();
     created = DateTime.now();
   }
 
@@ -72,15 +82,15 @@ class Todo implements IdentifiableModel {
     _result += "Checked";
     _result += checked.toString();
 
-    // Add Tags
-    for (int i = 0; i <= tags.length; i++) {
-      _result += "${i.toString()}:";
-      _result += tags[i];
-    }
-
     // Add created Time
     _result += "Created on:";
     _result += createdAsString;
+
+    // Add Tags
+    for (int i = 0; i <= tags.length; i++) {
+      _result += "tag ${i.toString()}:";
+      _result += tags[i];
+    }
 
     return _result;
   }
@@ -89,13 +99,20 @@ class Todo implements IdentifiableModel {
   /// or to store the Value
   String get timeAsString => Converter.dateToString(time);
 
+  /// Returns only the time from the [time]
   String get onlyTime => Converter.onlyTime(time);
 
+  /// Returns only the date of the [time]
   String get onlyDate => Converter.onlyDate(time);
 
+  /// Returns the DateTime as String. The DateTime returned is the
+  /// Date of creation of this Todo
   String get createdAsString => Converter.dateToString(created);
 
   @override
+
+  /// Returns the Identifier of this Todo Object
+  /// This is used to mark a new Todo in the Storage
   String get identifier => "Todo:";
 
   @override

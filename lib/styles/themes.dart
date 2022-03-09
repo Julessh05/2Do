@@ -126,6 +126,25 @@ class Themes {
       /* Switch Theme Data */
       switchTheme: const SwitchThemeData(),
 
+      /* Bottom Sheet Theme */
+      bottomSheetTheme: BottomSheetThemeData(
+        modalBackgroundColor: Colors.green,
+        modalElevation: 10.0,
+        backgroundColor: Colors.white,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          side: BorderSide(
+            color: Colors.blue.shade800,
+            style: BorderStyle.solid,
+            width: 0.2,
+          ),
+        ),
+      ),
+
       /* Floating Action Button Theme */
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Colors.blue.shade800,
@@ -156,6 +175,9 @@ class Themes {
 
       /* Input Decoration Theme */
       inputDecorationTheme: InputDecorationTheme(
+        floatingLabelStyle: const TextStyle(color: Colors.grey),
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        helperMaxLines: 2,
         isDense: false,
         filled: false,
         floatingLabelAlignment: FloatingLabelAlignment.start,

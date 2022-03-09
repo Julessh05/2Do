@@ -84,5 +84,24 @@ class Converter {
 
   /// Parses an Settings Value of an supported Type to String
   /// so you can show it or store it
-  //static String parseSupportedObjectToString() {}
+  static String supportedObjectToString() {
+    return "";
+  }
+
+  /// Parses a String o an Object which is supported and used in
+  /// the App. Returns this Object.
+  /// Used to get a ObjectValue from a Setting while reading it from
+  /// the Storage
+  static Object stringToSupportedObject(String string) {
+    return Object;
+  }
+}
+
+/// Parse String to Bool
+extension BoolParse on String {
+  /// Parses String to Boolean and returns eigther true or false
+  /// null isn't possible
+  bool parseBool() {
+    return toLowerCase() == "true";
+  }
 }

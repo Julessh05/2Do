@@ -72,8 +72,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ),
             decoration: InputDecoration(
               labelText: "Insert Title".translate(),
-              floatingLabelStyle: const TextStyle(color: Colors.grey),
-              labelStyle: TextStyle(color: Colors.grey.shade400),
             ),
             onSubmitted: (value) {
               title = value;
@@ -115,8 +113,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ),
             decoration: InputDecoration(
               labelText: "Insert Content".translate(),
-              floatingLabelStyle: const TextStyle(color: Colors.grey),
-              labelStyle: TextStyle(color: Colors.grey.shade400),
             ),
             onSubmitted: (value) {
               content = value;
@@ -207,6 +203,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         title: title!,
         content: content,
         time: dateTime,
+        created: DateTime.now(),
       );
       // Add the Todo to the global List
       listOfTodos.add(_todo);

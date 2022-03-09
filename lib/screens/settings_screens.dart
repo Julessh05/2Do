@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/setting.dart';
+import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/styles/themes.dart';
 
@@ -51,6 +52,31 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             icon: const Icon(Icons.color_lens),
             simpleDialog: _themeModeDialog,
           ),
+
+          // Notifiaction Settings
+          SettingsTile(
+            setting: AllSettings.emptySetting,
+            icon: const Icon(Icons.notifications),
+            subtiles: <SettingsSubTile>[
+              // Notifiations Active
+              SettingsSubTile(
+                setting: AllSettings.notificationActiveSetting,
+                icon: AllSettings.notificationActiveSetting.boolValue!
+                    ? const Icon(Icons.notifications_active_rounded)
+                    : const Icon(Icons.notifications_rounded),
+                uiSwitch: Switch.adaptive(
+                  value: AllSettings.notificationActiveSetting.boolValue!,
+                  onChanged: (_) {
+                    setState(() {});
+                  },
+                ),
+              ),
+              SettingsSubTile(
+                setting: AllSettings.notificationImportanceSetting,
+                icon: const Icon(Icons.notification_important_rounded),
+              )
+            ],
+          ),
         ],
       ),
     );
@@ -68,6 +94,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       semanticLabel: "Choose your Language".translate(),
       title: Text("Choose your Language".translate()),
       children: <SimpleDialogOption>[
+        // Option English
         SimpleDialogOption(
           onPressed: () {},
           child: Container(
@@ -88,6 +115,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
           ),
         ),
+
+        // Option German
         SimpleDialogOption(
           onPressed: () {},
           child: Container(
@@ -108,6 +137,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
           ),
         ),
+
+        // Cancel Button
         SimpleDialogOption(
           child: Center(
             child: Text(

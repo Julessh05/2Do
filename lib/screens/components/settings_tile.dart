@@ -39,6 +39,19 @@ class SettingsTile extends StatefulWidget {
         ),
         super(key: key);
 
+  /// Settings Tile without any Action.
+  /// This can be used to have an About Tile or some
+  /// other kind of information
+  const SettingsTile.withoutAction(
+    this.setting, [
+    this.icon,
+    this.alertDialog,
+    this.simpleDialog,
+    this.subtiles,
+    this.uiSwitch,
+    Key? key,
+  ]) : super(key: key);
+
   final Setting setting;
   final Switch? uiSwitch;
   final SimpleDialog? simpleDialog;
@@ -68,7 +81,7 @@ class _SettingsTileState extends State<SettingsTile> {
       enabled: true,
       isThreeLine: false,
       title: Text(
-        widget.setting.name,
+        widget.setting.name.translate(),
         semanticsLabel: "Name of the Setting".translate(),
       ),
       subtitle: Text(
@@ -78,7 +91,9 @@ class _SettingsTileState extends State<SettingsTile> {
       leading: widget.icon,
       onTap: () {
         if (widget.uiSwitch != null) {
+          // Nothing done when you have a Switch
         } else if (widget.simpleDialog != null) {
+          // Show Simple Dialog
           showDialog(
             barrierDismissible: true,
             context: context,
@@ -87,6 +102,7 @@ class _SettingsTileState extends State<SettingsTile> {
             },
           );
         } else if (widget.alertDialog != null) {
+          // Show Alert Dialog
           showDialog(
             barrierDismissible: true,
             context: context,

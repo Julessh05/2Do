@@ -24,6 +24,18 @@ class SettingsSubTile extends StatefulWidget {
         ),
         super(key: key);
 
+  /// Settings Sub Tile without any Action.
+  /// This can be used to have an About Tile or some
+  /// other kind of information
+  const SettingsSubTile.withoutAction(
+    this.setting, [
+    this.icon,
+    this.alertDialog,
+    this.simpleDialog,
+    this.uiSwitch,
+    Key? key,
+  ]) : super(key: key);
+
   final Setting setting;
   final Switch? uiSwitch;
   final SimpleDialog? simpleDialog;

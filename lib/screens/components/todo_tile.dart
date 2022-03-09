@@ -33,10 +33,12 @@ class _TodoTileState extends State<TodoTile> {
         value: widget.todo.checked,
         onChanged: (_) => _onChecked,
       ),
+      // Title
       title: Text(
         widget.todo.title,
         semanticsLabel: "Todo Title".translate(),
       ),
+      // Time
       subtitle: Text(
         widget.todo.timeAsString,
         semanticsLabel: "Todo Time".translate(),
