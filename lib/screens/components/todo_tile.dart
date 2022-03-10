@@ -1,6 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -43,7 +44,7 @@ class _TodoTileState extends State<TodoTile> {
         widget.todo.timeAsString,
         semanticsLabel: "Todo Time".translate(),
       ),
-      onTap: _openTodoDetails,
+      onTap: () => Jumper.openTodoDetails(context, widget.todo),
     );
 
     return _tile;
@@ -65,16 +66,5 @@ class _TodoTileState extends State<TodoTile> {
       if (widget.todo.checked == true) {
       } else {}
     });
-  }
-
-  /// Pushes the [TodoDetailScreen] on Top of the current Route.
-  /// Passes a Todo, which is used in the TodoDetailsScreen to show the Todo
-  /// and get the Information needed.
-  void _openTodoDetails() {
-    Navigator.pushNamed(
-      context,
-      TodoDetailScreen.routeName,
-      arguments: widget.todo,
-    );
   }
 }

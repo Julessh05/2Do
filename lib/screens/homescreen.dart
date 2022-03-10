@@ -1,10 +1,13 @@
 library screens;
 
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/add_todo_screen.dart';
+import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/storage/storage.dart';
 import 'components/todo_tile.dart';
 
 // TODO: Remove in Production Code
@@ -27,18 +30,19 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
+    listOfTodos.add(_todo);
     final _scaffold = Scaffold(
       appBar: AppBar(
         title: Text("2Do".translate(), semanticsLabel: "Title".translate()),
         actions: <IconButton>[
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () => Jumper.openSearch(context),
             tooltip: "Search".translate(),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: _openSettings,
+            onPressed: () => Jumper.openSettings(context),
             tooltip: "Open Settings".translate(),
           )
         ],
@@ -49,13 +53,13 @@ class _HomescreenState extends State<Homescreen> {
         addSemanticIndexes: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (_, counter) {
-          return TodoTile(todo: _todo);
+          return TodoTile(todo: listOfTodos[counter]);
         },
-        itemCount: 20,
+        itemCount: listOfTodos.length,
         scrollDirection: Axis.vertical,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _openAddTodo,
+        onPressed: () => Jumper.openAddTodo(context),
         child: const Icon(Icons.add_rounded),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
@@ -65,17 +69,5 @@ class _HomescreenState extends State<Homescreen> {
     );
 
     return _scaffold;
-  }
-
-  /// Pushed the [SettingsMainScreen] on Top of the current Route
-  void _openSettings() {
-    Navigator.pushNamed(context, SettingsMainScreen.routeName).then(
-      (_) => setState(() {}),
-    );
-  }
-
-  /// Pushes the [AddTodoScreen] on Top of the current Route
-  void _openAddTodo() {
-    Navigator.pushNamed(context, AddTodoScreen.routeName);
   }
 }

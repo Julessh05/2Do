@@ -98,13 +98,20 @@ class Setting implements IdentifiableModel {
     }
   }
 
+  /// Created an empty Setting.
+  /// Can be used to have access to the [identifier] and [regExp] without
+  /// having to create a complex Setting
   Setting.empty({
     this.name = "Placeholder",
-    this.boolValue,
-    this.intValue,
-    this.stringValue,
-    this.objectValue,
-  });
+  }) {
+    _valueType = Null;
+  }
+
+  Setting.folder({
+    required this.name,
+  }) {
+    _valueType = Null;
+  }
 
   /// Returns the current State of the givven Value
   /// as String, no matter what kind of Object you put in
@@ -176,6 +183,7 @@ class AllSettings {
 
   static final notificationActiveSetting = Setting(
     name: "activated",
+    boolValue: true,
   );
 
   static final emptySetting = Setting.empty();

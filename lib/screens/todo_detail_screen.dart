@@ -43,27 +43,27 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
         children: <TodoDetailsTile>[
           // Title
           TodoDetailsTile(
-            title: "Title:",
-            subtitle: widget.todo.title,
-          ),
+              title: "Title:",
+              subtitle: widget.todo.title,
+              function: _showBottomSheet),
 
           // Content
           TodoDetailsTile(
-            title: "Content:",
-            subtitle: widget.todo.content,
-          ),
+              title: "Content:",
+              subtitle: widget.todo.content,
+              function: _showBottomSheet),
 
           // Time
           TodoDetailsTile(
-            title: "Time:",
-            subtitle: widget.todo.onlyTime,
-          ),
+              title: "Time:",
+              subtitle: widget.todo.onlyTime,
+              function: _showBottomSheet),
 
           // Date
           TodoDetailsTile(
-            title: "Date:",
-            subtitle: widget.todo.onlyDate,
-          ),
+              title: "Date:",
+              subtitle: widget.todo.onlyDate,
+              function: _showBottomSheet),
 
           // Divider
           const TodoDetailsTile.divider(),
@@ -77,7 +77,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
           // Edit Button
           TodoDetailsTile.button(
             title: "Edit".translate(),
-            buttonFunction: _showBottomSheet,
+            function: _showBottomSheet,
           )
         ],
       ),

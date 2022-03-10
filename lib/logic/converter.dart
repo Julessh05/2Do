@@ -84,7 +84,13 @@ class Converter {
 
   /// Parses an Settings Value of an supported Type to String
   /// so you can show it or store it
-  static String supportedObjectToString() {
+  static String supportedObjectToString(dynamic object, Type type) {
+    final String _output;
+    switch (type) {
+      case Locale:
+        _output = "Locale($object, $object)";
+        break;
+    }
     return "";
   }
 
@@ -92,7 +98,12 @@ class Converter {
   /// the App. Returns this Object.
   /// Used to get a ObjectValue from a Setting while reading it from
   /// the Storage
-  static Object stringToSupportedObject(String string) {
+  static Object stringToSupportedObject(String string, String type) {
+    switch (string) {
+      case "Locale":
+        break;
+      default:
+    }
     return Object;
   }
 }

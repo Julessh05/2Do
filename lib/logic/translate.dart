@@ -165,8 +165,28 @@ class Translation {
       const Locale("de", "DE"): "Helligkeitsmodus",
     },
     {
-      const Locale("en", "US"): "Notification",
+      const Locale("en", "US"): "Notifications",
       const Locale("de", "DE"): "Benachrichtigungen",
+    },
+    {
+      const Locale("en", "US"): "Search Results",
+      const Locale("de", "DE"): "Suchergebnisse",
+    },
+    {
+      const Locale("en", "US"): "No Results",
+      const Locale("de", "DE"): "Keine Ergebnisse",
+    },
+    {
+      const Locale("en", "US"): "No Results were found",
+      const Locale("de", "DE"): "Es wurden keine Ergebnisse gefunden",
+    },
+    {
+      const Locale("en", "US"): "Todo",
+      const Locale("de", "DE"): "Todo",
+    },
+    {
+      const Locale("en", "US"): "Setting",
+      const Locale("de", "DE"): "Einstellung",
     },
   ];
 

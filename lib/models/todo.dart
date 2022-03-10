@@ -33,6 +33,9 @@ class Todo implements IdentifiableModel {
           "A Todo can't be checked while being created",
         );
 
+  /// Created an empty Todo.
+  /// Can be used to have access to the [identifier] and [regExp] without
+  /// having to create a complex Todo
   Todo.empty({
     this.title = "",
     this.content = "",

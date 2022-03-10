@@ -112,6 +112,7 @@ class Storage {
         case "Object":
           listOfSettings[i].objectValue = Converter.stringToSupportedObject(
             _splittedString[2],
+            _splittedString[1],
           );
           break;
       }

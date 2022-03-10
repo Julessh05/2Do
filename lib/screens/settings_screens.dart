@@ -2,6 +2,7 @@ library screens;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
@@ -54,8 +55,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           ),
 
           // Notifiaction Settings
-          SettingsTile(
-            setting: AllSettings.emptySetting,
+          SettingsTile.folder(
+            setting: Setting.folder(name: "Notifications".translate()),
             icon: const Icon(Icons.notifications),
             subtiles: <SettingsSubTile>[
               // Notifiations Active
@@ -74,6 +75,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               SettingsSubTile(
                 setting: AllSettings.notificationImportanceSetting,
                 icon: const Icon(Icons.notification_important_rounded),
+                simpleDialog: _notificationImportanceDialog,
               )
             ],
           ),
@@ -149,7 +151,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Jumper.back(context),
         )
       ],
     );
@@ -232,5 +234,63 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     );
 
     return _dialog;
+  }
+
+  SimpleDialog get _notificationImportanceDialog {
+    final _dialog = SimpleDialog();
+
+    return _dialog;
+  }
+}
+
+/// Class that represents the SettingsSubScreen Arguments as a single Object
+/// This can be used to extract the Arguments using the Named NAvigator
+/// and routes
+class SettingsSubScreenArguments {
+  const SettingsSubScreenArguments({
+    required this.subtiles,
+    required this.folder,
+  });
+
+  final List<SettingsSubTile> subtiles;
+  final Setting folder;
+}
+
+class SettingsSubScreen extends StatefulWidget {
+  const SettingsSubScreen({
+    required this.arguments,
+    Key? key,
+  }) : super(key: key);
+
+  final SettingsSubScreenArguments arguments;
+
+  static const routeName = "/settings/subSettings";
+
+  @override
+  State<SettingsSubScreen> createState() => _SettingsSubScreenState();
+}
+
+class _SettingsSubScreenState extends State<SettingsSubScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final _scaffold = Scaffold(
+      appBar: AppBar(
+        title: Text(widget.arguments.folder.name),
+        automaticallyImplyLeading: true,
+      ),
+      body: ListView(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        children: widget.arguments.subtiles,
+      ),
+    );
+
+    return _scaffold;
   }
 }

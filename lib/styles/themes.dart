@@ -27,6 +27,9 @@ class Themes {
       primaryColorDark: Colors.blue.shade800,
       primaryColorLight: Colors.blue.shade800,
       dividerColor: Colors.grey.shade800,
+      backgroundColor: Colors.white,
+      dialogBackgroundColor: Colors.white,
+      bottomAppBarColor: Colors.blue.shade800,
 
       /* Cupertino Override Theme */
       cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
@@ -40,7 +43,7 @@ class Themes {
         elevation: 5.0,
         // TODO: check on Device with Navigation Bar and find out what it does
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
           statusBarColor: Colors.blue.shade900,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.transparent,

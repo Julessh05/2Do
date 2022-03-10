@@ -10,25 +10,25 @@ class TodoDetailsTile extends StatefulWidget {
   /// A single Tile in the [TodoDetailScreen] to show
   /// one piece of Information from the Todo
   /// The [isButton] have to be false
-  /// The [buttonFunction] should be null
+  /// The [function] should be null
   const TodoDetailsTile({
     required this.title,
     this.subtitle = "",
     this.icon,
     Key? key,
     this.isButton = false,
-    this.buttonFunction,
+    this.function,
   }) : super(key: key);
 
   /// An empty divider used to organise the Details visually
   /// The [isButton] have to be false
-  /// The [buttonFunction] should be null
+  /// The [function] should be null
   const TodoDetailsTile.divider({
     this.title = "",
     this.subtitle = "",
     this.icon,
     this.isButton = false,
-    this.buttonFunction,
+    this.function,
     Key? key,
   }) : super(key: key);
 
@@ -37,7 +37,7 @@ class TodoDetailsTile extends StatefulWidget {
   /// to be true
   const TodoDetailsTile.button({
     required this.title,
-    required this.buttonFunction,
+    required this.function,
     this.subtitle = "",
     this.icon,
     this.isButton = true,
@@ -48,7 +48,7 @@ class TodoDetailsTile extends StatefulWidget {
   final String subtitle;
   final Icon? icon;
   final bool isButton;
-  final void Function()? buttonFunction;
+  final void Function()? function;
 
   @override
   State<TodoDetailsTile> createState() => _TodoDetailsTileState();
@@ -59,10 +59,17 @@ class _TodoDetailsTileState extends State<TodoDetailsTile> {
   Widget build(BuildContext context) {
     final Widget _tile;
     if (widget.isButton) {
-      _tile = TextButton(
-        autofocus: false,
-        onPressed: widget.buttonFunction,
-        child: Text(widget.title),
+      // Fitted Box to make Button not appear
+      // in the whole width
+      _tile = FittedBox(
+        alignment: Alignment.center,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        fit: BoxFit.scaleDown,
+        child: TextButton(
+          autofocus: false,
+          onPressed: widget.function,
+          child: Text(widget.title),
+        ),
       );
     } else {
       _tile = ListTile(
@@ -78,6 +85,7 @@ class _TodoDetailsTileState extends State<TodoDetailsTile> {
         enabled: true,
         leading: widget.icon,
         isThreeLine: false,
+        onTap: widget.function,
       );
     }
     return _tile;

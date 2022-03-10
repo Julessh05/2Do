@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/logic/converter.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/storage/storage.dart';
@@ -208,7 +209,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       // Add the Todo to the global List
       listOfTodos.add(_todo);
       // Pops the current Route
-      Navigator.pop(context);
+      Jumper.back(context);
     }
   }
 
@@ -245,7 +246,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       actions: <Center>[
         Center(
           child: TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Jumper.back(context),
             child: Text("OK".translate()),
             autofocus: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,

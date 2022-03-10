@@ -1,8 +1,8 @@
 library screens;
 
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
-import 'package:todo/screens/homescreen.dart';
 
 class UnknownPage extends StatefulWidget {
   const UnknownPage({Key? key}) : super(key: key);
@@ -26,6 +26,11 @@ class _UnknownPageState extends State<UnknownPage> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1.5,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            verticalDirection: VerticalDirection.down,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
@@ -39,14 +44,14 @@ class _UnknownPageState extends State<UnknownPage> {
                 height: 20,
               ),
               TextButton(
-                onPressed: _backToTheHomescreen,
+                onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
                   "Back to the Homescreen".translate(),
                   semanticsLabel: "Back to the Homescreen".translate(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-              )
+              ),
             ],
           ),
         ),
@@ -54,13 +59,5 @@ class _UnknownPageState extends State<UnknownPage> {
     );
 
     return _scaffold;
-  }
-
-  void _backToTheHomescreen() {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      Homescreen.routeName,
-      (route) => false,
-    );
   }
 }

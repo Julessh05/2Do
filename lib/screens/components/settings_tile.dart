@@ -1,9 +1,11 @@
 library components;
 
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
+import 'package:todo/screens/settings_screens.dart';
 
 /// Represents one Setting.
 /// There are several Widgets you can pass to the Tile
@@ -42,15 +44,25 @@ class SettingsTile extends StatefulWidget {
   /// Settings Tile without any Action.
   /// This can be used to have an About Tile or some
   /// other kind of information
-  const SettingsTile.withoutAction(
-    this.setting, [
+  const SettingsTile.withoutAction({
+    required this.setting,
     this.icon,
     this.alertDialog,
     this.simpleDialog,
     this.subtiles,
     this.uiSwitch,
     Key? key,
-  ]) : super(key: key);
+  }) : super(key: key);
+
+  const SettingsTile.folder({
+    required this.setting,
+    this.alertDialog,
+    this.icon,
+    this.simpleDialog,
+    required this.subtiles,
+    this.uiSwitch,
+    Key? key,
+  }) : super(key: key);
 
   final Setting setting;
   final Switch? uiSwitch;
@@ -109,6 +121,12 @@ class _SettingsTileState extends State<SettingsTile> {
             builder: (_) {
               return widget.alertDialog!;
             },
+          );
+        } else if (widget.subtiles != null) {
+          Jumper.openSettingsSubScreen(
+            context,
+            widget.subtiles!,
+            widget.setting,
           );
         }
       },
