@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
-import 'package:todo/screens/add_todo_screen.dart';
-import 'package:todo/screens/search_screen.dart';
-import 'package:todo/screens/settings_screens.dart';
 import 'package:todo/storage/storage.dart';
 import 'components/todo_tile.dart';
 

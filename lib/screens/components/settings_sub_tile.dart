@@ -62,6 +62,29 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
       ),
       enabled: true,
       leading: widget.icon,
+      onTap: () {
+        if (widget.uiSwitch != null) {
+          // Nothing done when you have a Switch
+        } else if (widget.simpleDialog != null) {
+          // Show Simple Dialog
+          showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (_) {
+              return widget.simpleDialog!;
+            },
+          );
+        } else if (widget.alertDialog != null) {
+          // Show Alert Dialog
+          showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (_) {
+              return widget.alertDialog!;
+            },
+          );
+        }
+      },
     );
 
     return _tile;

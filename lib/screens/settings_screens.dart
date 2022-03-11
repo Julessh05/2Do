@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/setting.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/styles/themes.dart';
@@ -168,66 +169,50 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       alignment: Alignment.center,
       children: <SimpleDialogOption>[
         SimpleDialogOption(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Text(
-                "System",
-                semanticsLabel: "System",
-              ),
-              Radio(
-                value: ThemeMode.system,
-                groupValue: Themes.themeMode,
-                onChanged: (_) {
-                  setState(() {
-                    Themes.themeMode = ThemeMode.system;
-                  });
-                },
-              ),
-            ],
+          child: RadioListTile(
+            autofocus: false,
+            enableFeedback: true,
+            isThreeLine: false,
+            toggleable: true,
+            title: Text(
+              "System".translate(),
+              semanticsLabel: "System".translate(),
+            ),
+            value: ThemeMode.system,
+            groupValue: Themes.themeMode,
+            onChanged: (_) {
+              setState(() {});
+            },
           ),
         ),
         SimpleDialogOption(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Light".translate(),
-                semanticsLabel: "Light".translate(),
-              ),
-              Radio(
-                value: ThemeMode.light,
-                groupValue: Themes.themeMode,
-                onChanged: (_) {
-                  setState(() {
-                    Themes.themeMode = ThemeMode.light;
-                  });
-                },
-              ),
-            ],
+          child: RadioListTile(
+            autofocus: false,
+            enableFeedback: true,
+            isThreeLine: false,
+            toggleable: true,
+            title: Text(
+              "Light".translate(),
+              semanticsLabel: "Light".translate(),
+            ),
+            value: ThemeMode.light,
+            groupValue: Themes.themeMode,
+            onChanged: (_) {},
           ),
         ),
         SimpleDialogOption(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Dark".translate(),
-                semanticsLabel: "Dark".translate(),
-              ),
-              Radio(
-                value: ThemeMode.dark,
-                groupValue: Themes.themeMode,
-                onChanged: (_) {
-                  setState(() {
-                    Themes.themeMode = ThemeMode.dark;
-                  });
-                },
-              ),
-            ],
+          child: RadioListTile(
+            autofocus: false,
+            enableFeedback: true,
+            isThreeLine: false,
+            toggleable: true,
+            value: ThemeMode.light,
+            groupValue: Themes.themeMode,
+            onChanged: (_) {},
+            title: Text(
+              "Dark".translate(),
+              semanticsLabel: "Dark".translate(),
+            ),
           ),
         ),
       ],
@@ -236,8 +221,45 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     return _dialog;
   }
 
+  /// Dialog to choose the Importance of your Notifications
+  /// This is used to determine whether your importance should interrupt
+  /// or not
   SimpleDialog get _notificationImportanceDialog {
-    final _dialog = SimpleDialog();
+    final _dialog = SimpleDialog(
+      alignment: Alignment.center,
+      title: Text("Choose an Standard Importance".translate()),
+      children: <SimpleDialogOption>[
+        SimpleDialogOption(
+          child: RadioListTile(
+            autofocus: false,
+            enableFeedback: true,
+            isThreeLine: false,
+            // TODO: translate
+            title: Text(
+              "unimportant".translate(),
+              semanticsLabel: "unimportant".translate(),
+            ),
+            value: 0,
+            groupValue: Notifications.importance,
+            onChanged: (_) {},
+          ),
+        ),
+        SimpleDialogOption(
+          child: RadioListTile(
+            autofocus: false,
+            enableFeedback: true,
+            isThreeLine: false,
+            title: Text(
+              "middle Importance".translate(),
+              semanticsLabel: "middle Importance".translate(),
+            ),
+            value: 1,
+            groupValue: Notifications.importance,
+            onChanged: (_) {},
+          ),
+        )
+      ],
+    );
 
     return _dialog;
   }

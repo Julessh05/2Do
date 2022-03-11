@@ -130,6 +130,17 @@ class Setting implements IdentifiableModel {
     }
   }
 
+  /// Returns the Setting as a Map of String : String
+  Map<String, String> get asMap {
+    final _map = <String, String>{
+      "Name": name,
+      "ValueType": _valueType.toString(),
+      "Value": value,
+    };
+
+    return _map;
+  }
+
   @override
   String toString() {
     String _result = "";
@@ -181,6 +192,7 @@ class AllSettings {
     objectValue: Themes.themeMode,
   );
 
+  /// Gives Information if the Notifications are active
   static final notificationActiveSetting = Setting(
     name: "activated",
     boolValue: true,

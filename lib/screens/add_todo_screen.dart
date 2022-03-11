@@ -7,6 +7,7 @@ import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   TimeOfDay? time;
   String? title;
   String content = "";
+  int? importance;
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +155,20 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               }),
             ),
           ),
+          ListTile(
+            autofocus: false,
+            enabled: true,
+            isThreeLine: false,
+            title: Text(
+              importance == null
+                  ? "Set an Importance".translate()
+                  : "Importance".translate(),
+            ),
+            leading: const Icon(Icons.notification_important_rounded),
+            subtitle: Text(
+              Notifications.importance.toString(),
+            ),
+          ),
           const SizedBox(height: 50),
           TextButton(
             onPressed: _createTodo,
@@ -205,6 +221,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         content: content,
         time: dateTime,
         created: DateTime.now(),
+        importance: importance,
       );
       // Add the Todo to the global List
       listOfTodos.add(_todo);

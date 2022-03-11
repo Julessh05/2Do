@@ -188,6 +188,18 @@ class Translation {
       const Locale("en", "US"): "Setting",
       const Locale("de", "DE"): "Einstellung",
     },
+    {
+      const Locale("en", "US"): "Choose an Standard Importance",
+      const Locale("de", "DE"): "Wähle die Standard Dringlichkeit",
+    },
+    {
+      const Locale("en", "US"): "Set an Importance",
+      const Locale("de", "DE"): "Setze die Dringlichkeit"
+    },
+    {
+      const Locale("en", "US"): "Importance",
+      const Locale("de", "DE"): "Dringlichkeit",
+    }
   ];
 
   /// Translates the String to the [activeLocale]

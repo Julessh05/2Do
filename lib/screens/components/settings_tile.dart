@@ -5,7 +5,6 @@ import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
-import 'package:todo/screens/settings_screens.dart';
 
 /// Represents one Setting.
 /// There are several Widgets you can pass to the Tile

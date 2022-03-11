@@ -3,6 +3,7 @@ library styles;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:todo/logic/translate.dart';
 
 /// Class with all styles
 class Themes {
@@ -30,11 +31,17 @@ class Themes {
       backgroundColor: Colors.white,
       dialogBackgroundColor: Colors.white,
       bottomAppBarColor: Colors.blue.shade800,
+      indicatorColor: Colors.blue.shade800,
+
+      /* Color Scheme */
+      // TODO: change to own Color Scheme
+      colorScheme: ColorScheme.light(),
 
       /* Cupertino Override Theme */
-      cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
+      cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
+        primaryColor: Colors.blue.shade800,
       ),
 
       /* AppBar Theme */
@@ -73,6 +80,11 @@ class Themes {
           ),
         ),
       ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ),
 
       /* List Tile Theme */
       listTileTheme: ListTileThemeData(
@@ -98,6 +110,8 @@ class Themes {
       checkboxTheme: CheckboxThemeData(
         checkColor: MaterialStateProperty.all<Color>(Colors.white),
         fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(30),
@@ -110,9 +124,13 @@ class Themes {
         ),
       ),
 
+      /* === BUTTONS === */
+
       /* Text Button Theme */
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
+          tapTargetSize: MaterialTapTargetSize.padded,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             const EdgeInsets.only(right: 10, left: 10),
           ),
@@ -126,8 +144,61 @@ class Themes {
         ),
       ),
 
+      /* Toggle Buttons Theme */
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        disabledColor: Colors.grey.shade400,
+        disabledBorderColor: Colors.grey,
+        color: Colors.white,
+        fillColor: Colors.blue.shade800,
+      ),
+
+      /* Elevated Button Theme */
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          alignment: Alignment.center,
+          elevation: MaterialStateProperty.all<double>(10.0),
+          enableFeedback: true,
+          tapTargetSize: MaterialTapTargetSize.padded,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+      ),
+
+      /* Outline Button Theme */
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          alignment: Alignment.center,
+          elevation: MaterialStateProperty.all<double>(10.0),
+          enableFeedback: true,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          tapTargetSize: MaterialTapTargetSize.padded,
+        ),
+      ),
+
+      /* Button Theme */
+      buttonTheme: const ButtonThemeData(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ),
+
+      /* Floating Action Button Theme */
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.blue.shade800,
+        disabledElevation: 10.0,
+        elevation: 14.0,
+        enableFeedback: true,
+        foregroundColor: Colors.white,
+        shape: CircleBorder(
+          side: BorderSide(
+            color: Colors.blue.shade600,
+            style: BorderStyle.solid,
+            width: 0.7,
+          ),
+        ),
+      ),
+
       /* Switch Theme Data */
-      switchTheme: const SwitchThemeData(),
+      switchTheme: const SwitchThemeData(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ),
 
       /* Bottom Sheet Theme */
       bottomSheetTheme: BottomSheetThemeData(
@@ -144,22 +215,6 @@ class Themes {
             color: Colors.blue.shade800,
             style: BorderStyle.solid,
             width: 0.2,
-          ),
-        ),
-      ),
-
-      /* Floating Action Button Theme */
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.blue.shade800,
-        disabledElevation: 10.0,
-        elevation: 14.0,
-        enableFeedback: true,
-        foregroundColor: Colors.white,
-        shape: CircleBorder(
-          side: BorderSide(
-            color: Colors.blue.shade600,
-            style: BorderStyle.solid,
-            width: 0.7,
           ),
         ),
       ),
@@ -190,6 +245,7 @@ class Themes {
         fillColor: Colors.transparent,
         prefixIconColor: Colors.black,
         suffixIconColor: Colors.black,
+        isCollapsed: false,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             Radius.circular(30),
@@ -235,7 +291,7 @@ class Themes {
             Radius.circular(17),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade800,
+            color: Colors.grey.shade400,
             style: BorderStyle.solid,
             width: 0.9,
           ),
@@ -258,6 +314,128 @@ class Themes {
           decorationThickness: 0.3,
           decorationStyle: TextDecorationStyle.wavy,
         ),
+      ),
+
+      /* Text Theme */
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        bodyMedium: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        bodySmall: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        displayLarge: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        displayMedium: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        displaySmall: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        headlineLarge: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        headlineMedium: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        headlineSmall: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        labelLarge: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        labelMedium: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        labelSmall: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        titleLarge: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        titleMedium: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+        titleSmall: TextStyle(
+          color: Colors.black,
+          overflow: TextOverflow.fade,
+          locale: Translation.activeLocale,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+      ),
+
+      /* Divider Theme */
+      dividerTheme: DividerThemeData(
+        color: Colors.grey.shade300,
+      ),
+
+      /* Progress Indicator Theme */
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        circularTrackColor: Colors.white,
+        color: Colors.blue.shade800,
+        refreshBackgroundColor: Colors.white,
+      ),
+
+      /* Drawer Theme */
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: Colors.white70,
+        elevation: 7.0,
+      ),
+
+      /* Typography */
+      typography: Typography(),
+
+      /* Scrollbar Theme */
+      scrollbarTheme: const ScrollbarThemeData(
+        interactive: true,
+        showTrackOnHover: true,
+        isAlwaysShown: false,
       ),
     );
 
