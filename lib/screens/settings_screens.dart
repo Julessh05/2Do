@@ -87,6 +87,16 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     return _scaffold;
   }
 
+  /// Method called when a Value is changed.
+  /// This method calls setState and sets the [value]
+  /// to the [newValue]
+  void _onChanged(dynamic value, dynamic newValue) {
+    setState(() {
+      value = newValue;
+      print(value);
+    });
+  }
+
   /// The Simple Dialog shown to choose your Language
   SimpleDialog get _languageDialog {
     final _dialog = SimpleDialog(
@@ -180,9 +190,10 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
             value: ThemeMode.system,
             groupValue: Themes.themeMode,
-            onChanged: (_) {
-              setState(() {});
-            },
+            onChanged: (_) => _onChanged(
+              Themes.themeMode,
+              ThemeMode.system,
+            ),
           ),
         ),
         SimpleDialogOption(
@@ -197,7 +208,10 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
             value: ThemeMode.light,
             groupValue: Themes.themeMode,
-            onChanged: (_) {},
+            onChanged: (_) => _onChanged(
+              Themes.themeMode,
+              ThemeMode.light,
+            ),
           ),
         ),
         SimpleDialogOption(
@@ -206,9 +220,12 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             enableFeedback: true,
             isThreeLine: false,
             toggleable: true,
-            value: ThemeMode.light,
+            value: ThemeMode.dark,
             groupValue: Themes.themeMode,
-            onChanged: (_) {},
+            onChanged: (_) => _onChanged(
+              Themes.themeMode,
+              ThemeMode.dark,
+            ),
             title: Text(
               "Dark".translate(),
               semanticsLabel: "Dark".translate(),

@@ -5,7 +5,6 @@ import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/homescreen.dart';
-import 'package:todo/screens/todo_detail_screen.dart';
 
 /// A Tile to represent a single Todo in the [Homescreen]
 class TodoTile extends StatefulWidget {
@@ -32,7 +31,7 @@ class _TodoTileState extends State<TodoTile> {
         autofocus: false,
         tristate: false,
         value: widget.todo.checked,
-        onChanged: (_) => _onChecked,
+        onChanged: (_) => _onChecked(),
       ),
       // Title
       title: Text(
@@ -64,7 +63,25 @@ class _TodoTileState extends State<TodoTile> {
     setState(() {
       widget.todo.checked = !widget.todo.checked;
       if (widget.todo.checked == true) {
+        listOfTodos.where((element) {
+          if (element == widget.todo) {
+            listOfTodos.remove(element);
+            listOfCheckedTodos.add(element);
+            return true;
+          } else {
+            return false;
+          }
+        });
       } else {}
+      listOfCheckedTodos.where((element) {
+        if (element == widget.todo) {
+          listOfCheckedTodos.remove(element);
+          listOfTodos.add(element);
+          return true;
+        } else {
+          return false;
+        }
+      });
     });
   }
 }

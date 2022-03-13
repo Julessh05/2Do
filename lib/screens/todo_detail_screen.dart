@@ -21,7 +21,8 @@ class TodoDetailScreen extends StatefulWidget {
   State<TodoDetailScreen> createState() => _TodoDetailScreenState();
 }
 
-class _TodoDetailScreenState extends State<TodoDetailScreen> {
+class _TodoDetailScreenState extends State<TodoDetailScreen>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
@@ -89,17 +90,111 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
   void _showBottomSheet() {
     showModalBottomSheet(
-      context: context,
-      builder: (_) {
-        return _bottomSheet;
-      },
-    );
+        context: context,
+        builder: (_) {
+          return _bottomSheet;
+        });
   }
 
   Widget get _bottomSheet {
+    final _sheet = DraggableScrollableSheet(
+      builder: (_, __) {
+        return ListView(
+          addAutomaticKeepAlives: true,
+          addRepaintBoundaries: true,
+          addSemanticIndexes: true,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          dragStartBehavior: DragStartBehavior.start,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            ListTile(
+              autofocus: false,
+              title: Text("Edit Todo".translate()),
+            ),
+            const SizedBox(height: 15),
+            TextField(
+              autocorrect: true,
+              autofocus: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              dragStartBehavior: DragStartBehavior.start,
+              enableIMEPersonalizedLearning: true,
+              enableInteractiveSelection: true,
+              enableSuggestions: true,
+              enabled: true,
+              keyboardAppearance: Theme.of(context).brightness,
+              keyboardType: TextInputType.text,
+              maxLines: 2,
+              maxLength: 100,
+              maxLengthEnforcement:
+                  MaxLengthEnforcement.truncateAfterCompositionEnds,
+              minLines: 1,
+              obscureText: false,
+              readOnly: false,
+              scrollPhysics: const BouncingScrollPhysics(),
+              smartDashesType: SmartDashesType.enabled,
+              smartQuotesType: SmartQuotesType.enabled,
+              showCursor: true,
+              textDirection: TextDirection.ltr,
+              textAlignVertical: TextAlignVertical.center,
+              textCapitalization: TextCapitalization.sentences,
+              textInputAction: TextInputAction.next,
+              toolbarOptions: const ToolbarOptions(
+                copy: true,
+                cut: true,
+                paste: true,
+                selectAll: true,
+              ),
+              decoration: InputDecoration(
+                labelText: "Edit Title".translate(),
+              ),
+            ),
+            TextField(
+              autocorrect: true,
+              autofocus: false,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              dragStartBehavior: DragStartBehavior.start,
+              enableIMEPersonalizedLearning: true,
+              enableInteractiveSelection: true,
+              enableSuggestions: true,
+              enabled: true,
+              keyboardAppearance: Theme.of(context).brightness,
+              keyboardType: TextInputType.text,
+              maxLines: 5,
+              minLines: 1,
+              maxLengthEnforcement:
+                  MaxLengthEnforcement.truncateAfterCompositionEnds,
+              obscureText: false,
+              readOnly: false,
+              scrollPhysics: const BouncingScrollPhysics(),
+              smartDashesType: SmartDashesType.enabled,
+              smartQuotesType: SmartQuotesType.enabled,
+              showCursor: true,
+              textDirection: TextDirection.ltr,
+              textAlignVertical: TextAlignVertical.center,
+              textCapitalization: TextCapitalization.sentences,
+              textInputAction: TextInputAction.next,
+              toolbarOptions: const ToolbarOptions(
+                copy: true,
+                cut: true,
+                paste: true,
+                selectAll: true,
+              ),
+              decoration: InputDecoration(
+                labelText: "Insert Content".translate(),
+              ),
+            ),
+          ],
+        );
+      },
+    );
     final _bottomSheet = BottomSheet(
       enableDrag: true,
-      //animationController: AnimationController(vsync: ),
+      animationController: AnimationController(
+        vsync: this,
+        animationBehavior: AnimationBehavior.preserve,
+      ),
       onClosing: () {},
       builder: (_) {
         return ListView(
@@ -193,6 +288,6 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
       },
     );
 
-    return _bottomSheet;
+    return _sheet;
   }
 }

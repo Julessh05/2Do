@@ -80,6 +80,8 @@ class Themes {
           ),
         ),
       ),
+
+      /* Radio Theme */
       radioTheme: RadioThemeData(
         fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -93,7 +95,21 @@ class Themes {
         dense: false,
         iconColor: Colors.black,
         textColor: Colors.black,
-        tileColor: Colors.blue.shade800.withAlpha(1),
+        tileColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(50),
+          ),
+          side: BorderSide(
+            color: Colors.white,
+            style: BorderStyle.solid,
+            width: 0.5,
+          ),
+        ),
+        selectedColor: Colors.black,
+        selectedTileColor: Colors.blue.shade800.withAlpha(70),
+        minLeadingWidth: 10,
+        minVerticalPadding: 10,
       ),
 
       /* Icon Themes */

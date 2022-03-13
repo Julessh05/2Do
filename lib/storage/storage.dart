@@ -6,9 +6,6 @@ import 'package:todo/logic/converter.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 
-/// The List of Todos used in the App
-final List<Todo> listOfTodos = [];
-
 /// Class that contains everything in interaction with the
 /// File System
 class Storage {

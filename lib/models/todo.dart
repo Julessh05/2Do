@@ -133,3 +133,9 @@ class Todo implements IdentifiableModel {
   // TODO: implement regExp
   Pattern get regExp => throw UnimplementedError();
 }
+
+/// The List of Todos used in the App
+final List<Todo> listOfTodos = [];
+
+/// The List where checked Todos are stored
+final List<Todo> listOfCheckedTodos = [];
