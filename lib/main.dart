@@ -1,6 +1,10 @@
 library main;
 
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/todo.dart';
@@ -16,100 +20,143 @@ void main() {
   runApp(const TodoApp());
 }
 
-class TodoApp extends StatelessWidget {
+class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 
+  static const routeName = "main";
+  static final themeStream = StreamController<ThemeMode>();
+
+  @override
+  State<TodoApp> createState() => _TodoAppState();
+}
+
+class _TodoAppState extends State<TodoApp> {
   @override
   Widget build(BuildContext context) {
-    final _app = MaterialApp(
-      /* Developer Section */
-      showSemanticsDebugger: false,
-      showPerformanceOverlay: false,
-      debugShowMaterialGrid: false,
-      debugShowCheckedModeBanner: true,
-      checkerboardOffscreenLayers: false,
-      checkerboardRasterCacheImages: false,
+    final _app = StreamBuilder(
+      initialData: Themes.themeMode,
+      stream: TodoApp.themeStream.stream,
+      builder: (_, AsyncSnapshot snapshot) {
+        return MaterialApp(
+          /* Developer Section */
+          showSemanticsDebugger: false,
+          showPerformanceOverlay: false,
+          debugShowMaterialGrid: false,
+          debugShowCheckedModeBanner: true,
+          checkerboardOffscreenLayers: false,
+          checkerboardRasterCacheImages: false,
 
-      /* App Section */
-      title: "2Do App",
-      supportedLocales: Translation.supportedLocales,
-      locale: Translation.activeLocale,
-      useInheritedMediaQuery: false,
-      scrollBehavior: const MaterialScrollBehavior(),
+          /* App Section */
+          title: "2Do App",
 
-      /* Theme Section */
-      themeMode: Themes.themeMode,
-      theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
-      highContrastTheme: Themes.highContrastLightTheme,
-      highContrastDarkTheme: Themes.highContrastDarkTheme,
+          /* Locale Section */
+          localizationsDelegates: const <LocalizationsDelegate>[
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          localeListResolutionCallback: (_, __) {
+            final localeName = Platform.localeName;
+            if (localeName == "de_DE") {
+              Translation.activeLocale = const Locale("de", "DE");
+            } else {
+              Translation.activeLocale = const Locale("en", "US");
+            }
+            return Translation.activeLocale;
+          },
+          supportedLocales: Translation.supportedLocales,
+          locale: Translation.activeLocale,
+          useInheritedMediaQuery: false,
+          scrollBehavior: const MaterialScrollBehavior(),
 
-      /* Routes Section */
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        Homescreen.routeName: (context) => const Homescreen(),
-        SettingsMainScreen.routeName: (context) => const SettingsMainScreen(),
-        AddTodoScreen.routeName: (context) => const AddTodoScreen(),
-        SearchScreen.routeName: (context) => const SearchScreen(),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        // Todo Details Screen
-        if (settings.name == TodoDetailScreen.routeName) {
-          final _todo = settings.arguments as Todo;
+          /* Theme Section */
+          themeMode: snapshot.data,
+          theme: Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
+          highContrastTheme: Themes.highContrastLightTheme,
+          highContrastDarkTheme: Themes.highContrastDarkTheme,
 
-          return MaterialPageRoute(
-            builder: (_) {
-              return TodoDetailScreen(todo: _todo);
-            },
-          );
+          /* Routes Section */
+          initialRoute: '/',
+          routes: <String, WidgetBuilder>{
+            Homescreen.routeName: (context) => const Homescreen(),
+            SettingsMainScreen.routeName: (context) =>
+                const SettingsMainScreen(),
+            AddTodoScreen.routeName: (context) => const AddTodoScreen(),
+            SearchScreen.routeName: (context) => const SearchScreen(),
+            TodoApp.routeName: (context) => const TodoApp()
+          },
+          onGenerateRoute: (RouteSettings settings) {
+            // Todo Details Screen
+            if (settings.name == TodoDetailScreen.routeName) {
+              final _todo = settings.arguments as Todo;
 
-          // Settings Sub Screen
-        } else if (settings.name == SettingsSubScreen.routeName) {
-          final _arguments = settings.arguments as SettingsSubScreenArguments;
+              return MaterialPageRoute(
+                builder: (_) {
+                  return TodoDetailScreen(todo: _todo);
+                },
+              );
 
-          return MaterialPageRoute(
-            builder: (_) {
-              return SettingsSubScreen(arguments: _arguments);
-            },
-          );
+              // Settings Sub Screen
+            } else if (settings.name == SettingsSubScreen.routeName) {
+              final _arguments =
+                  settings.arguments as SettingsSubScreenArguments;
 
-          // Search Results Screen
-        } else if (settings.name == SearchResultScreen.routeName) {
-          final _searchResults = settings.arguments as SearchResultsList;
+              return MaterialPageRoute(
+                builder: (_) {
+                  return SettingsSubScreen(arguments: _arguments);
+                },
+              );
 
-          if (_searchResults.hasResults) {
+              // Search Results Screen
+            } else if (settings.name == SearchResultScreen.routeName) {
+              final _searchResults = settings.arguments as SearchResultsList;
+
+              if (_searchResults.hasResults) {
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return SearchResultScreen(
+                        searchResultsList: _searchResults);
+                  },
+                );
+              } else {
+                return MaterialPageRoute(builder: (_) {
+                  return const SearchResultScreen.noResults();
+                });
+              }
+
+              // Edit Todo Screen
+            } else if (settings.name == EditTodoScreen.routeName) {
+              final _todo = settings.arguments as Todo;
+
+              return MaterialPageRoute(
+                builder: (_) {
+                  return EditTodoScreen(todo: _todo);
+                },
+              );
+            } else {
+              // Do nothing
+            }
+
+            // null because nothing should be done
+            return null;
+          },
+          onUnknownRoute: (_) {
+            // If Route is unknown navigate to the UnknownPage()
+            // This is a Page that says, Page not found
             return MaterialPageRoute(
               builder: (_) {
-                return SearchResultScreen(searchResultsList: _searchResults);
+                return const UnknownPage();
               },
             );
-          } else {
-            return MaterialPageRoute(builder: (_) {
-              return const SearchResultScreen.noResults();
-            });
-          }
-        } else {
-          // Do nothing
-        }
-
-        // null because nothing should be done
-        return null;
-      },
-      onUnknownRoute: (_) {
-        // If Route is unknown navigate to the UnknownPage()
-        // This is a Page that says, Page not found
-        return MaterialPageRoute(
-          builder: (_) {
-            return const UnknownPage();
+          },
+          onGenerateTitle: (_) {
+            // Returns the Title of the App
+            // Can be used to returns localized Titles
+            String _title = "2Do App";
+            return _title;
           },
         );
-      },
-      key: const GlobalObjectKey("2Do App"),
-      onGenerateTitle: (_) {
-        // Returns the Title of the App
-        // Can be used to returns localized Titles
-        String _title = "2Do App";
-        return _title;
       },
     );
 

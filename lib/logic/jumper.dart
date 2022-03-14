@@ -1,18 +1,20 @@
 library logic;
 
 import 'package:flutter/material.dart';
+import 'package:todo/main.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
-import 'package:todo/models/todo.dart';
-import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
-import 'package:todo/screens/todo_detail_screen.dart';
 
-/// This class contains all Jumps and Navigating
+/// This class contains a part of Jumps and Navigating
 /// Actions done in the App
+/// It does not contain everything. This is because sometimes it
+/// is nessecary to call setState(() {}) after navigating to a Widget
+/// or after poping the Widget. setState(() {}) can't be called in a static
+/// reference, so these Methods are implemented into the Widget directly
 class Jumper {
   /// Navigate back to the Homescreen and Renove every
   /// other Screen on the Stack
@@ -22,16 +24,6 @@ class Jumper {
       Homescreen.routeName,
       (route) => false,
     );
-  }
-
-  /// Pushed the [SettingsMainScreen] on Top of the current Route
-  static void openSettings(BuildContext context) {
-    Navigator.pushNamed(context, SettingsMainScreen.routeName);
-  }
-
-  /// Pushes the [AddTodoScreen] on Top of the current Route
-  static void openAddTodo(BuildContext context) {
-    Navigator.pushNamed(context, AddTodoScreen.routeName);
   }
 
   /// Pushes the [SearchScreen] on Top of the current Route
@@ -67,21 +59,15 @@ class Jumper {
     );
   }
 
-  /// Pushes the [TodoDetailScreen] on Top of the current Route.
-  /// Passes a Todo, which is used in the TodoDetailsScreen to show the Todo
-  /// and get the Information needed.
-  static void openTodoDetails(BuildContext context, Todo todo) {
-    Navigator.pushNamed(
-      context,
-      TodoDetailScreen.routeName,
-      arguments: todo,
-    );
-  }
-
   /// goes back one Route.
   /// Is the Same thing as [Navigator.pop(context)].
   /// Is just here to make the Code cleaner
   static void back(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  static void reloadApp(BuildContext context) {
+    // Navigator.pushReplacementNamed(context, TodoApp.routeName);
+    Navigator.pushNamed(context, TodoApp.routeName);
   }
 }

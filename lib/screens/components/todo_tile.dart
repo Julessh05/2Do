@@ -1,10 +1,10 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/homescreen.dart';
+import 'package:todo/screens/todo_detail_screen.dart';
 
 /// A Tile to represent a single Todo in the [Homescreen]
 class TodoTile extends StatefulWidget {
@@ -39,11 +39,22 @@ class _TodoTileState extends State<TodoTile> {
         semanticsLabel: "Todo Title".translate(),
       ),
       // Time
-      subtitle: Text(
+      /* subtitle: Text(
         widget.todo.timeAsString,
         semanticsLabel: "Todo Time".translate(),
+      ), */
+      subtitle: Text(
+        widget.todo.content,
+        semanticsLabel: "Todo Content".translate(),
       ),
-      onTap: () => Jumper.openTodoDetails(context, widget.todo),
+      onTap: () => Navigator.pushNamed(
+        context,
+        TodoDetailScreen.routeName,
+        arguments: widget.todo,
+      ).then((value) => setState(() {})),
+      textColor: widget.todo.checked
+          ? Colors.grey.shade400
+          : Theme.of(context).listTileTheme.textColor,
     );
 
     return _tile;
@@ -63,25 +74,14 @@ class _TodoTileState extends State<TodoTile> {
     setState(() {
       widget.todo.checked = !widget.todo.checked;
       if (widget.todo.checked == true) {
-        listOfTodos.where((element) {
-          if (element == widget.todo) {
-            listOfTodos.remove(element);
-            listOfCheckedTodos.add(element);
-            return true;
-          } else {
-            return false;
-          }
-        });
-      } else {}
-      listOfCheckedTodos.where((element) {
-        if (element == widget.todo) {
-          listOfCheckedTodos.remove(element);
-          listOfTodos.add(element);
-          return true;
-        } else {
-          return false;
-        }
-      });
+        listOfTodos.remove(widget.todo);
+        listOfCheckedTodos.add(widget.todo);
+      } else if (widget.todo.checked == false) {
+        listOfCheckedTodos.remove(widget.todo);
+        listOfTodos.add(widget.todo);
+      } else {
+        // Do nothing
+      }
     });
   }
 }

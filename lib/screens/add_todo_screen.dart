@@ -3,12 +3,9 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
-import 'package:todo/notifications/notifications.dart';
-import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
@@ -124,7 +121,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               content = value;
             },
           ),
-          ListTile(
+          /*  ListTile(
             autofocus: false,
             enabled: true,
             isThreeLine: false,
@@ -168,7 +165,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             subtitle: Text(
               Notifications.importance.toString(),
             ),
-          ),
+          ), */
           const SizedBox(height: 50),
           TextButton(
             onPressed: _createTodo,
@@ -192,12 +189,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     if (title == null || title!.isEmpty) {
       missingValues.add("Title".translate());
     }
-    if (date == null) {
+    /* if (date == null) {
       missingValues.add("Date".translate());
     }
-    if (time == null) {
+     if (time == null) {
       missingValues.add("Time".translate());
-    }
+    } */
 
     if (missingValues.isNotEmpty) {
       showDialog(
@@ -209,19 +206,19 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       );
     } else {
       // Make one DateTime from date and time
-      final DateTime dateTime = DateTime(
+      /*   final DateTime dateTime = DateTime(
         date!.year,
         date!.month,
         date!.day,
         time!.hour,
         time!.minute,
-      );
+      ); */
       final _todo = Todo(
         title: title!,
         content: content,
-        time: dateTime,
+        /*  time: dateTime,
         created: DateTime.now(),
-        importance: importance,
+        importance: importance, */
       );
       // Add the Todo to the global List
       listOfTodos.add(_todo);
@@ -236,11 +233,11 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     final String _title;
     final String _content1;
     String _content2;
-    if (missingValues.length < 1) {
+    if (missingValues.length < 2) {
       final _component = missingValues[0];
       _title = "$_component " + "is missing".translate();
       _content1 = "The following Value is missing:".translate();
-      _content2 = " - $_component";
+      _content2 = " * $_component";
     } else {
       _title = "Some Values missing".translate();
       _content1 = "The following Values are missing:".translate();

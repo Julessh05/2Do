@@ -13,6 +13,9 @@ Sadly I cound't find an Element to use beige on :(
 
 You can use this Todo App to write Todos or Reminders.
 The App will remind you that you have something to do.
+At the Moment this app does not have Notification. That's due to
+the reason that it would have token much more time till the first version
+is ready to be realesed
 
 ## Language
 

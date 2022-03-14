@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
+import 'package:todo/main.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
@@ -56,7 +57,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           ),
 
           // Notifiaction Settings
-          SettingsTile.folder(
+          /*  SettingsTile.folder(
             setting: Setting.folder(name: "Notifications".translate()),
             icon: const Icon(Icons.notifications),
             subtiles: <SettingsSubTile>[
@@ -79,22 +80,12 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
                 simpleDialog: _notificationImportanceDialog,
               )
             ],
-          ),
+          ), */
         ],
       ),
     );
 
     return _scaffold;
-  }
-
-  /// Method called when a Value is changed.
-  /// This method calls setState and sets the [value]
-  /// to the [newValue]
-  void _onChanged(dynamic value, dynamic newValue) {
-    setState(() {
-      value = newValue;
-      print(value);
-    });
   }
 
   /// The Simple Dialog shown to choose your Language
@@ -109,7 +100,12 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       children: <SimpleDialogOption>[
         // Option English
         SimpleDialogOption(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              Translation.activeLocale = const Locale("en", "US");
+            });
+            Jumper.back(context);
+          },
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
@@ -131,7 +127,12 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
 
         // Option German
         SimpleDialogOption(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              Translation.activeLocale = const Locale("de", "DE");
+            });
+            Jumper.back(context);
+          },
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
@@ -178,6 +179,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       semanticLabel: "Choose your Theme Mode".translate(),
       alignment: Alignment.center,
       children: <SimpleDialogOption>[
+        // Option System
         SimpleDialogOption(
           child: RadioListTile(
             autofocus: false,
@@ -190,12 +192,11 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
             value: ThemeMode.system,
             groupValue: Themes.themeMode,
-            onChanged: (_) => _onChanged(
-              Themes.themeMode,
-              ThemeMode.system,
-            ),
+            onChanged: (_) => _changeThemeMode(ThemeMode.system),
           ),
         ),
+
+        // Oprion Light
         SimpleDialogOption(
           child: RadioListTile(
             autofocus: false,
@@ -208,12 +209,11 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             ),
             value: ThemeMode.light,
             groupValue: Themes.themeMode,
-            onChanged: (_) => _onChanged(
-              Themes.themeMode,
-              ThemeMode.light,
-            ),
+            onChanged: (_) => _changeThemeMode(ThemeMode.light),
           ),
         ),
+
+        // Option Dark
         SimpleDialogOption(
           child: RadioListTile(
             autofocus: false,
@@ -222,10 +222,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             toggleable: true,
             value: ThemeMode.dark,
             groupValue: Themes.themeMode,
-            onChanged: (_) => _onChanged(
-              Themes.themeMode,
-              ThemeMode.dark,
-            ),
+            onChanged: (_) => _changeThemeMode(ThemeMode.dark),
             title: Text(
               "Dark".translate(),
               semanticsLabel: "Dark".translate(),
@@ -236,6 +233,17 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     );
 
     return _dialog;
+  }
+
+  /// Method called when the ThemeMode is changed.
+  /// Adds a [ThemeChangedEvent] to the [TodoApp.eventsBloc] and
+  /// passes the Value. Then it calls Jumper.back to navigate back.
+  void _changeThemeMode(ThemeMode mode) {
+    setState(() {
+      TodoApp.themeStream.sink.add(mode);
+      Themes.themeMode = mode;
+    });
+    Jumper.back(context);
   }
 
   /// Dialog to choose the Importance of your Notifications

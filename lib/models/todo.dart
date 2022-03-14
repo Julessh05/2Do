@@ -1,32 +1,39 @@
 library models;
 
-import 'package:todo/logic/converter.dart';
 import 'package:todo/models/identifiable_model.dart';
-import 'package:todo/notifications/notifications.dart';
+
+/// The List of Todos used in the App
+final List<Todo> listOfTodos = [];
+
+/// The List where checked Todos are stored
+final List<Todo> listOfCheckedTodos = [];
+
+/// This List combines the [listOfCheckedTodos] and the [listOfTodos]
+final List<Todo> combinedListOfTodos = listOfTodos + listOfCheckedTodos;
 
 /// Object which represents a single Todo used in the App
 /// [selected] and [checked] are usually not given while creating a Todo
 /// These Values are used by the Widget in the Homescreen to show the Todo
 /// properally
 class Todo implements IdentifiableModel {
-  final String title;
-  final String content;
-  late final DateTime time;
-  final List<String> tags;
+  String title;
+  String content;
+  // late final DateTime time;
+  // final List<String> tags;
   bool selected;
   bool checked;
-  late final DateTime created;
-  late final int? importance;
+  // late final DateTime created;
+  // late final int? importance;
 
   Todo({
     required this.title,
     required this.content,
-    required this.time,
-    this.tags = const ["Standard"],
+    // required this.time,
+    // this.tags = const ["Standard"],
     this.checked = false,
     this.selected = false,
-    required this.created,
-    this.importance,
+    // required this.created,
+    // this.importance,
   })  : assert(
           selected == false,
           "A Todo can't be selected while being created",
@@ -35,7 +42,7 @@ class Todo implements IdentifiableModel {
           checked == false,
           "A Todo can't be checked while being created",
         ) {
-    importance ?? Notifications.importance;
+    // importance ?? Notifications.importance;
   }
 
   /// Created an empty Todo.
@@ -46,11 +53,11 @@ class Todo implements IdentifiableModel {
     this.content = "",
     this.checked = false,
     this.selected = false,
-    this.tags = const ["Empty"],
-    this.importance = 0,
+    // this.tags = const ["Empty"],
+    // this.importance = 0,
   }) {
-    time = DateTime.now();
-    created = DateTime.now();
+    // time = DateTime.now();
+    // created = DateTime.now();
   }
 
   /// Returns the Todo as a Map of String : String
@@ -58,16 +65,16 @@ class Todo implements IdentifiableModel {
     final _map = <String, String>{
       "Title": title,
       "Content": content,
-      "Time": timeAsString,
+      // "Time": timeAsString,
       "Selected": selected.toString(),
       "Checked": checked.toString(),
-      "Importance": importance.toString(),
-      "Tags": "Following are tags",
+      // "Importance": importance.toString(),
+      // "Tags": "Following are tags",
     };
 
-    for (int i = 1; i <= tags.length; i++) {
+    /* for (int i = 1; i <= tags.length; i++) {
       _map.addAll({i.toString(): tags[i]});
-    }
+    } */
 
     return _map;
   }
@@ -85,43 +92,43 @@ class Todo implements IdentifiableModel {
     _result += content;
 
     // Add Time
-    _result += "DateTime:";
-    _result += timeAsString;
+    /*  _result += "DateTime:";
+    _result += timeAsString; */
 
     // Add Checked
     _result += "Checked";
     _result += checked.toString();
 
     // Add created Time
-    _result += "Created on:";
-    _result += createdAsString;
+    /* _result += "Created on:";
+    _result += createdAsString; */
 
     // Add Importance
-    _result += "Importance";
+    /*  _result += "Importance";
     _result += importance.toString();
 
     // Add Tags
     for (int i = 0; i <= tags.length; i++) {
       _result += "tag ${i.toString()}:";
       _result += tags[i];
-    }
+    } */
 
     return _result;
   }
 
   /// Returns the [time] as a String to use in Widgets,
   /// or to store the Value
-  String get timeAsString => Converter.dateToString(time);
+  // String get timeAsString => Converter.dateToString(time);
 
   /// Returns only the time from the [time]
-  String get onlyTime => Converter.onlyTime(time);
+  // String get onlyTime => Converter.onlyTime(time);
 
   /// Returns only the date of the [time]
-  String get onlyDate => Converter.onlyDate(time);
+  // String get onlyDate => Converter.onlyDate(time);
 
   /// Returns the DateTime as String. The DateTime returned is the
   /// Date of creation of this Todo
-  String get createdAsString => Converter.dateToString(created);
+  // String get createdAsString => Converter.dateToString(created);
 
   @override
 
@@ -133,9 +140,3 @@ class Todo implements IdentifiableModel {
   // TODO: implement regExp
   Pattern get regExp => throw UnimplementedError();
 }
-
-/// The List of Todos used in the App
-final List<Todo> listOfTodos = [];
-
-/// The List where checked Todos are stored
-final List<Todo> listOfCheckedTodos = [];

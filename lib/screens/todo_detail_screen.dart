@@ -3,6 +3,7 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/components/todo_details_tile.dart';
@@ -44,250 +45,204 @@ class _TodoDetailScreenState extends State<TodoDetailScreen>
         children: <TodoDetailsTile>[
           // Title
           TodoDetailsTile(
-              title: "Title:",
-              subtitle: widget.todo.title,
-              function: _showBottomSheet),
+            title: "Title:",
+            subtitle: widget.todo.title,
+            function: () => Navigator.pushNamed(
+              context,
+              EditTodoScreen.routeName,
+              arguments: widget.todo,
+            ).then((value) => setState(() {})),
+          ),
 
           // Content
           TodoDetailsTile(
-              title: "Content:",
-              subtitle: widget.todo.content,
-              function: _showBottomSheet),
+            title: "Content:",
+            subtitle: widget.todo.content,
+            function: () => Navigator.pushNamed(
+              context,
+              EditTodoScreen.routeName,
+              arguments: widget.todo,
+            ).then((value) => setState(() {})),
+          ),
 
           // Time
-          TodoDetailsTile(
-              title: "Time:",
-              subtitle: widget.todo.onlyTime,
-              function: _showBottomSheet),
+          /*  TodoDetailsTile(
+            title: "Time:",
+            subtitle: widget.todo.onlyTime,
+            function: _showBottomSheet,
+          ),
 
           // Date
           TodoDetailsTile(
-              title: "Date:",
-              subtitle: widget.todo.onlyDate,
-              function: _showBottomSheet),
+            title: "Date:",
+            subtitle: widget.todo.onlyDate,
+            function: _showBottomSheet,
+          ), */
 
           // Divider
           const TodoDetailsTile.divider(),
 
           // Created on Date and Time
-          TodoDetailsTile(
+          /*  TodoDetailsTile(
             title: "Created on:",
             subtitle: widget.todo.createdAsString,
-          ),
+          ), */
 
           // Edit Button
           TodoDetailsTile.button(
             title: "Edit".translate(),
-            function: _showBottomSheet,
+            function: () => Navigator.pushNamed(
+              context,
+              EditTodoScreen.routeName,
+              arguments: widget.todo,
+            ).then((value) => setState(() {})),
           )
         ],
       ),
-      //bottomSheet: _bottomSheet,
     );
 
     return _scaffold;
   }
+}
 
-  void _showBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (_) {
-          return _bottomSheet;
-        });
-  }
+class EditTodoScreen extends StatefulWidget {
+  const EditTodoScreen({
+    required this.todo,
+    Key? key,
+  }) : super(key: key);
 
-  Widget get _bottomSheet {
-    final _sheet = DraggableScrollableSheet(
-      builder: (_, __) {
-        return ListView(
-          addAutomaticKeepAlives: true,
-          addRepaintBoundaries: true,
-          addSemanticIndexes: true,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          dragStartBehavior: DragStartBehavior.start,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            ListTile(
-              autofocus: false,
-              title: Text("Edit Todo".translate()),
-            ),
-            const SizedBox(height: 15),
-            TextField(
-              autocorrect: true,
-              autofocus: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              dragStartBehavior: DragStartBehavior.start,
-              enableIMEPersonalizedLearning: true,
-              enableInteractiveSelection: true,
-              enableSuggestions: true,
-              enabled: true,
-              keyboardAppearance: Theme.of(context).brightness,
-              keyboardType: TextInputType.text,
-              maxLines: 2,
-              maxLength: 100,
-              maxLengthEnforcement:
-                  MaxLengthEnforcement.truncateAfterCompositionEnds,
-              minLines: 1,
-              obscureText: false,
-              readOnly: false,
-              scrollPhysics: const BouncingScrollPhysics(),
-              smartDashesType: SmartDashesType.enabled,
-              smartQuotesType: SmartQuotesType.enabled,
-              showCursor: true,
-              textDirection: TextDirection.ltr,
-              textAlignVertical: TextAlignVertical.center,
-              textCapitalization: TextCapitalization.sentences,
-              textInputAction: TextInputAction.next,
-              toolbarOptions: const ToolbarOptions(
-                copy: true,
-                cut: true,
-                paste: true,
-                selectAll: true,
-              ),
-              decoration: InputDecoration(
-                labelText: "Edit Title".translate(),
-              ),
-            ),
-            TextField(
-              autocorrect: true,
-              autofocus: false,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              dragStartBehavior: DragStartBehavior.start,
-              enableIMEPersonalizedLearning: true,
-              enableInteractiveSelection: true,
-              enableSuggestions: true,
-              enabled: true,
-              keyboardAppearance: Theme.of(context).brightness,
-              keyboardType: TextInputType.text,
-              maxLines: 5,
-              minLines: 1,
-              maxLengthEnforcement:
-                  MaxLengthEnforcement.truncateAfterCompositionEnds,
-              obscureText: false,
-              readOnly: false,
-              scrollPhysics: const BouncingScrollPhysics(),
-              smartDashesType: SmartDashesType.enabled,
-              smartQuotesType: SmartQuotesType.enabled,
-              showCursor: true,
-              textDirection: TextDirection.ltr,
-              textAlignVertical: TextAlignVertical.center,
-              textCapitalization: TextCapitalization.sentences,
-              textInputAction: TextInputAction.next,
-              toolbarOptions: const ToolbarOptions(
-                copy: true,
-                cut: true,
-                paste: true,
-                selectAll: true,
-              ),
-              decoration: InputDecoration(
-                labelText: "Insert Content".translate(),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-    final _bottomSheet = BottomSheet(
-      enableDrag: true,
-      animationController: AnimationController(
-        vsync: this,
-        animationBehavior: AnimationBehavior.preserve,
+  final Todo todo;
+
+  static const routeName = "/todo_details/edit";
+
+  @override
+  State<EditTodoScreen> createState() => _EditTodoScreenState();
+}
+
+class _EditTodoScreenState extends State<EditTodoScreen> {
+  @override
+  Widget build(BuildContext context) {
+    String title = widget.todo.title;
+    String content = widget.todo.content;
+
+    final _scaffold = Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: Text(
+          "Edit Todo".translate(),
+          semanticsLabel: "Edit Todo".translate(),
+        ),
       ),
-      onClosing: () {},
-      builder: (_) {
-        return ListView(
-          addAutomaticKeepAlives: true,
-          addRepaintBoundaries: true,
-          addSemanticIndexes: true,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          dragStartBehavior: DragStartBehavior.start,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            ListTile(
-              autofocus: false,
-              title: Text("Edit Todo".translate()),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        textDirection: TextDirection.ltr,
+        textBaseline: TextBaseline.alphabetic,
+        verticalDirection: VerticalDirection.down,
+        children: <Widget>[
+          TextFormField(
+            autocorrect: true,
+            autofocus: true,
+            enableIMEPersonalizedLearning: true,
+            enableInteractiveSelection: true,
+            enableSuggestions: true,
+            enabled: true,
+            keyboardAppearance: Theme.of(context).brightness,
+            obscureText: false,
+            keyboardType: TextInputType.text,
+            maxLines: 2,
+            minLines: 1,
+            maxLength: 100,
+            maxLengthEnforcement:
+                MaxLengthEnforcement.truncateAfterCompositionEnds,
+            readOnly: false,
+            smartDashesType: SmartDashesType.enabled,
+            smartQuotesType: SmartQuotesType.enabled,
+            scrollPhysics: const BouncingScrollPhysics(),
+            toolbarOptions: const ToolbarOptions(
+              copy: true,
+              cut: true,
+              paste: true,
+              selectAll: true,
             ),
-            const SizedBox(height: 15),
-            TextField(
-              autocorrect: true,
-              autofocus: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              dragStartBehavior: DragStartBehavior.start,
-              enableIMEPersonalizedLearning: true,
-              enableInteractiveSelection: true,
-              enableSuggestions: true,
-              enabled: true,
-              keyboardAppearance: Theme.of(context).brightness,
-              keyboardType: TextInputType.text,
-              maxLines: 2,
-              maxLength: 100,
-              maxLengthEnforcement:
-                  MaxLengthEnforcement.truncateAfterCompositionEnds,
-              minLines: 1,
-              obscureText: false,
-              readOnly: false,
-              scrollPhysics: const BouncingScrollPhysics(),
-              smartDashesType: SmartDashesType.enabled,
-              smartQuotesType: SmartQuotesType.enabled,
-              showCursor: true,
-              textDirection: TextDirection.ltr,
-              textAlignVertical: TextAlignVertical.center,
-              textCapitalization: TextCapitalization.sentences,
-              textInputAction: TextInputAction.next,
-              toolbarOptions: const ToolbarOptions(
-                copy: true,
-                cut: true,
-                paste: true,
-                selectAll: true,
-              ),
-              decoration: InputDecoration(
-                labelText: "Edit Title".translate(),
-              ),
+            textAlignVertical: TextAlignVertical.center,
+            textCapitalization: TextCapitalization.sentences,
+            textDirection: TextDirection.ltr,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              labelText: "Edit Title".translate(),
             ),
-            TextField(
-              autocorrect: true,
-              autofocus: false,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              dragStartBehavior: DragStartBehavior.start,
-              enableIMEPersonalizedLearning: true,
-              enableInteractiveSelection: true,
-              enableSuggestions: true,
-              enabled: true,
-              keyboardAppearance: Theme.of(context).brightness,
-              keyboardType: TextInputType.text,
-              maxLines: 5,
-              minLines: 1,
-              maxLengthEnforcement:
-                  MaxLengthEnforcement.truncateAfterCompositionEnds,
-              obscureText: false,
-              readOnly: false,
-              scrollPhysics: const BouncingScrollPhysics(),
-              smartDashesType: SmartDashesType.enabled,
-              smartQuotesType: SmartQuotesType.enabled,
-              showCursor: true,
-              textDirection: TextDirection.ltr,
-              textAlignVertical: TextAlignVertical.center,
-              textCapitalization: TextCapitalization.sentences,
-              textInputAction: TextInputAction.next,
-              toolbarOptions: const ToolbarOptions(
-                copy: true,
-                cut: true,
-                paste: true,
-                selectAll: true,
-              ),
-              decoration: InputDecoration(
-                labelText: "Insert Content".translate(),
-              ),
+            initialValue: widget.todo.title,
+            onFieldSubmitted: (value) {
+              title = value;
+              widget.todo.title = title;
+              Jumper.back(context);
+            },
+            onChanged: (value) {
+              title = value;
+              widget.todo.title = title;
+            },
+          ),
+          TextFormField(
+            autocorrect: true,
+            autofocus: true,
+            enableIMEPersonalizedLearning: true,
+            enableInteractiveSelection: true,
+            enableSuggestions: true,
+            enabled: true,
+            keyboardAppearance: Theme.of(context).brightness,
+            obscureText: false,
+            keyboardType: TextInputType.text,
+            maxLines: 5,
+            minLines: 1,
+            maxLengthEnforcement:
+                MaxLengthEnforcement.truncateAfterCompositionEnds,
+            readOnly: false,
+            smartDashesType: SmartDashesType.enabled,
+            smartQuotesType: SmartQuotesType.enabled,
+            scrollPhysics: const BouncingScrollPhysics(),
+            toolbarOptions: const ToolbarOptions(
+              copy: true,
+              cut: true,
+              paste: true,
+              selectAll: true,
             ),
-          ],
-        );
-      },
+            textAlignVertical: TextAlignVertical.center,
+            textCapitalization: TextCapitalization.sentences,
+            textDirection: TextDirection.ltr,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              labelText: "Edit Content".translate(),
+            ),
+            initialValue: widget.todo.content,
+            onFieldSubmitted: (value) {
+              content = value;
+              widget.todo.content = content;
+              Jumper.back(context);
+            },
+            onChanged: (value) {
+              content = value;
+              widget.todo.content = content;
+            },
+          ),
+
+          // Button
+          TextButton(
+            onPressed: () {
+              widget.todo.title = title;
+              widget.todo.content = content;
+              Jumper.back(context);
+            },
+            child: Text(
+              "Confirm".translate(),
+              semanticsLabel: "Confirm".translate(),
+            ),
+          )
+        ],
+      ),
     );
 
-    return _sheet;
+    return _scaffold;
   }
 }

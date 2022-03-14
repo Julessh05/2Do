@@ -57,7 +57,7 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
         semanticsLabel: "Name of the Setting".translate(),
       ),
       subtitle: Text(
-        widget.setting.value,
+        widget.setting.valueAsString,
         semanticsLabel: "Value of the Setting".translate(),
       ),
       enabled: true,

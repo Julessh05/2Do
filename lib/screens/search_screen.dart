@@ -8,7 +8,6 @@ import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/components/search_result_tile.dart';
-import 'package:todo/storage/storage.dart';
 
 /// Screen shown when the User searches something
 class SearchScreen extends StatefulWidget {
@@ -63,62 +62,66 @@ class _SearchScreenState extends State<SearchScreen> {
             filled: false,
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
-            border: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            hintText: "Search something...".translate(),
+            hintStyle: const TextStyle(
+              color: Colors.white,
+            ),
+            border: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
-            errorBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            errorBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            enabledBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
-            focusedBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            focusedBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
-            disabledBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            disabledBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
-            focusedErrorBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+            focusedErrorBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
               borderSide: BorderSide(
-                color: Colors.blue.shade100,
+                color: Colors.white70,
                 style: BorderStyle.solid,
                 width: 0.5,
               ),

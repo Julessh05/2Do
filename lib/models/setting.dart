@@ -1,3 +1,4 @@
+import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/identifiable_model.dart';
 import 'package:todo/styles/themes.dart';
@@ -115,7 +116,7 @@ class Setting implements IdentifiableModel {
 
   /// Returns the current State of the givven Value
   /// as String, no matter what kind of Object you put in
-  String get value {
+  String get valueAsString {
     switch (_valueType) {
       case bool:
         return boolValue.toString();
@@ -130,12 +131,49 @@ class Setting implements IdentifiableModel {
     }
   }
 
+  Object get value {
+    switch (_valueType) {
+      case bool:
+        return boolValue!;
+      case int:
+        return intValue!;
+      case String:
+        return stringValue!;
+      case Object:
+        return objectValue;
+      default:
+        return Error();
+    }
+  }
+
+  String get typeAsString {
+    final String _output;
+    switch (_valueType) {
+      case bool:
+        _output = "bool";
+        break;
+      case int:
+        _output = "int";
+        break;
+      case String:
+        _output = "String";
+        break;
+      case Object:
+        _output = Converter.supportedTypetoString(objectValue.runtimeType);
+        break;
+      default:
+        _output = "Error";
+        break;
+    }
+    return _output;
+  }
+
   /// Returns the Setting as a Map of String : String
   Map<String, String> get asMap {
     final _map = <String, String>{
       "Name": name,
       "ValueType": _valueType.toString(),
-      "Value": value,
+      "Value": valueAsString,
     };
 
     return _map;
@@ -151,11 +189,11 @@ class Setting implements IdentifiableModel {
 
     // Add ValueType
     _result += "ValueType:";
-    _result += _valueType.toString();
+    _result += typeAsString;
 
     // Add Value as String
     _result += "ValueAsString:";
-    _result += value;
+    _result += Converter.supportedObjectToString(value, _valueType);
 
     return _result;
   }

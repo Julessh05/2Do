@@ -11,7 +11,7 @@ class Translation {
   };
 
   /// The active locale (at the Moment)
-  static final activeLocale = supportedLocales.first;
+  static Locale activeLocale = supportedLocales.first;
 
   /// The Translations
   /// Pattern:
@@ -199,7 +199,43 @@ class Translation {
     {
       const Locale("en", "US"): "Importance",
       const Locale("de", "DE"): "Dringlichkeit",
-    }
+    },
+    {
+      const Locale("en", "US"): "Todo Content",
+      const Locale("de", "DE"): "Todo Inhalt",
+    },
+    {
+      const Locale("en", "US"): "Edit Todo",
+      const Locale("de", "DE"): "Todo bearbeiten",
+    },
+    {
+      const Locale("en", "US"): "Edit Title",
+      const Locale("de", "DE"): "Titel bearbeiten",
+    },
+    {
+      const Locale("en", "US"): "Edit Content",
+      const Locale("de", "DE"): "Inhalt bearbeiten",
+    },
+    {
+      const Locale("en", "US"): "Light",
+      const Locale("de", "DE"): "Hell",
+    },
+    {
+      const Locale("en", "US"): "Dark",
+      const Locale("de", "DE"): "Dunkel",
+    },
+    {
+      const Locale("en", "US"): "Search something...",
+      const Locale("de", "DE"): "Suche etwas...",
+    },
+    {
+      const Locale("en", "US"): "You don't have any Todos",
+      const Locale("de", "DE"): "Du hast keine Todos",
+    },
+    {
+      const Locale("en", "US"): "Add one",
+      const Locale("de", "DE"): "Eines hinzufügen",
+    },
   ];
 
   /// Translates the String to the [activeLocale]

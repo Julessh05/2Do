@@ -55,10 +55,10 @@ class Storage {
       final _todo = Todo(
         title: _splittedTodo[0],
         content: _splittedTodo[1],
-        time: Converter.stringToDateTime(_splittedTodo[3]),
+        // time: Converter.stringToDateTime(_splittedTodo[3]),
         checked: _splittedTodo[4].parseBool(),
-        created: Converter.stringToDateTime(_splittedTodo[5]),
-        tags: tags,
+        // created: Converter.stringToDateTime(_splittedTodo[5]),
+        // tags: tags,
         selected: false,
       );
       listOfTodos.add(_todo);

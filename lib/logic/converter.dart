@@ -84,27 +84,85 @@ class Converter {
 
   /// Parses an Settings Value of an supported Type to String
   /// so you can show it or store it
+  /// Supported are:
+  /// Locale and
+  /// ThemeMode
   static String supportedObjectToString(dynamic object, Type type) {
     final String _output;
-    switch (type) {
+    switch (object.runtimeType) {
       case Locale:
-        _output = "Locale($object, $object)";
+        if (object == const Locale("en", "US")) {
+          _output = "German";
+        } else {
+          _output = "English";
+        }
+        break;
+      case ThemeMode:
+        if (object == ThemeMode.dark) {
+          _output = "Dark";
+        } else if (object == ThemeMode.light) {
+          _output = "Light";
+        } else {
+          _output = "System";
+        }
+        break;
+      default:
+        _output = "";
         break;
     }
-    return "";
+    return _output;
+  }
+
+  /// Returns the Type of a specific Value as a String
+  /// This is used to store the Type. The Type then is needed again
+  /// to load the Settings from the Storage
+  static String supportedTypetoString(Type type) {
+    final String _type;
+    switch (type) {
+      case Locale:
+        _type = "Locale";
+        break;
+      case ThemeMode:
+        _type = "ThemeMode";
+        break;
+      default:
+        _type = "Unsupported Type";
+        break;
+    }
+    return _type;
   }
 
   /// Parses a String o an Object which is supported and used in
   /// the App. Returns this Object.
   /// Used to get a ObjectValue from a Setting while reading it from
   /// the Storage
+  /// Supported are:
+  /// Locale and
+  /// ThemeMode
   static Object stringToSupportedObject(String string, String type) {
-    switch (string) {
+    Object object;
+    switch (type) {
       case "Locale":
+        if (string == "English") {
+          object = const Locale("en", "US");
+        } else {
+          object = const Locale("en", "US");
+        }
+        break;
+      case "ThemeMode":
+        if (string == "Dark") {
+          object = ThemeMode.dark;
+        } else if (string == "Light") {
+          object = ThemeMode.light;
+        } else {
+          object = ThemeMode.system;
+        }
         break;
       default:
+        object = Error;
+        break;
     }
-    return Object;
+    return object;
   }
 }
 
