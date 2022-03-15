@@ -3,6 +3,7 @@ library components;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 
@@ -74,11 +75,9 @@ class _TodoTileState extends State<TodoTile> {
     setState(() {
       widget.todo.checked = !widget.todo.checked;
       if (widget.todo.checked == true) {
-        listOfTodos.remove(widget.todo);
-        listOfCheckedTodos.add(widget.todo);
+        TodoList.checkTodo(widget.todo);
       } else if (widget.todo.checked == false) {
-        listOfCheckedTodos.remove(widget.todo);
-        listOfTodos.add(widget.todo);
+        TodoList.uncheckTodo(widget.todo);
       } else {
         // Do nothing
       }

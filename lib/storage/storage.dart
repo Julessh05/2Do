@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo_list.dart';
 
 /// Class that contains everything in interaction with the
 /// File System
@@ -25,7 +26,7 @@ class Storage {
   static void storeTodos() {
     String _data = "";
     // Parsing Todo to String and adding it to _data
-    for (Todo todo in listOfTodos) {
+    for (Todo todo in TodoList.listOfTodos) {
       _data += todo.identifier;
       _data += todo.toString();
     }
@@ -61,7 +62,7 @@ class Storage {
         // tags: tags,
         selected: false,
       );
-      listOfTodos.add(_todo);
+      TodoList.listOfTodos.add(_todo);
     }
   }
 

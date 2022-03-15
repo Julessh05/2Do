@@ -464,7 +464,7 @@ class Themes {
       /* Global Values */
       brightness: Brightness.dark,
       androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
-      scaffoldBackgroundColor: Colors.black87,
+      scaffoldBackgroundColor: Colors.grey.shade900,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       materialTapTargetSize: MaterialTapTargetSize.padded,
 
@@ -476,19 +476,19 @@ class Themes {
       primaryColorDark: Colors.blue.shade800,
       primaryColorLight: Colors.blue.shade800,
       dividerColor: Colors.grey.shade800,
-      backgroundColor: Colors.white,
-      dialogBackgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade900,
+      dialogBackgroundColor: Colors.black87,
       bottomAppBarColor: Colors.blue.shade800,
       indicatorColor: Colors.blue.shade800,
 
       /* Color Scheme */
       // TODO: change to own Color Scheme
-      colorScheme: ColorScheme.dark(),
+      // colorScheme: ColorScheme.dark(),
 
       /* Cupertino Override Theme */
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black87,
+        scaffoldBackgroundColor: Colors.grey.shade900,
         primaryColor: Colors.blue.shade800,
       ),
 
@@ -543,13 +543,13 @@ class Themes {
         dense: false,
         iconColor: Colors.white,
         textColor: Colors.white,
-        tileColor: Colors.black87,
+        tileColor: Colors.grey.shade900,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(50),
           ),
           side: BorderSide(
-            color: Colors.white,
+            color: Colors.black12,
             style: BorderStyle.solid,
             width: 0.5,
           ),
@@ -684,11 +684,11 @@ class Themes {
       ),
 
       /* Dialog Theme */
-      dialogTheme: const DialogTheme(
+      dialogTheme: DialogTheme(
         alignment: Alignment.center,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade900,
         elevation: 20.0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
@@ -705,10 +705,10 @@ class Themes {
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         alignLabelWithHint: true,
-        iconColor: Colors.black,
+        iconColor: Colors.white,
         fillColor: Colors.transparent,
-        prefixIconColor: Colors.black,
-        suffixIconColor: Colors.black,
+        prefixIconColor: Colors.white,
+        suffixIconColor: Colors.white,
         isCollapsed: false,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(

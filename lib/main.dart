@@ -65,7 +65,6 @@ class _TodoAppState extends State<TodoApp> {
             return Translation.activeLocale;
           },
           supportedLocales: Translation.supportedLocales,
-          locale: Translation.activeLocale,
           useInheritedMediaQuery: false,
           scrollBehavior: const MaterialScrollBehavior(),
 

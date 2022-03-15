@@ -92,9 +92,9 @@ class Converter {
     switch (object.runtimeType) {
       case Locale:
         if (object == const Locale("en", "US")) {
-          _output = "German";
+          _output = "German".translate();
         } else {
-          _output = "English";
+          _output = "English".translate();
         }
         break;
       case ThemeMode:

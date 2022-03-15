@@ -7,6 +7,7 @@ import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/search_result_tile.dart';
 
 /// Screen shown when the User searches something
@@ -143,7 +144,7 @@ class _SearchScreenState extends State<SearchScreen> {
     List<SearchResult> listOfResults = [];
 
     // Search Todos
-    for (Todo todo in listOfTodos) {
+    for (Todo todo in TodoList.listOfTodos) {
       if (todo.title == input) {
         // If Todo matches, create Search Result and add it to the list
         final _result = SearchResult(todo: todo);

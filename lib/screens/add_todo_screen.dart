@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo_list.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
@@ -116,6 +117,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ),
             onSubmitted: (value) {
               content = value;
+              _createTodo();
             },
             onChanged: (value) {
               content = value;
@@ -221,7 +223,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         importance: importance, */
       );
       // Add the Todo to the global List
-      listOfTodos.add(_todo);
+      TodoList.addTodo(_todo);
       // Pops the current Route
       Jumper.back(context);
     }

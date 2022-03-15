@@ -236,6 +236,10 @@ class Translation {
       const Locale("en", "US"): "Add one",
       const Locale("de", "DE"): "Eines hinzufügen",
     },
+    {
+      const Locale("en", "US"): "Checked Todos",
+      const Locale("de", "DE"): "Erledigte Todos",
+    },
   ];
 
   /// Translates the String to the [activeLocale]

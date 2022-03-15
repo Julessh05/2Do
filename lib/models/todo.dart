@@ -2,15 +2,6 @@ library models;
 
 import 'package:todo/models/identifiable_model.dart';
 
-/// The List of Todos used in the App
-final List<Todo> listOfTodos = [];
-
-/// The List where checked Todos are stored
-final List<Todo> listOfCheckedTodos = [];
-
-/// This List combines the [listOfCheckedTodos] and the [listOfTodos]
-final List<Todo> combinedListOfTodos = listOfTodos + listOfCheckedTodos;
-
 /// Object which represents a single Todo used in the App
 /// [selected] and [checked] are usually not given while creating a Todo
 /// These Values are used by the Widget in the Homescreen to show the Todo

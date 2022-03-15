@@ -93,7 +93,6 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     final _dialog = SimpleDialog(
       elevation: 20.0,
       alignment: Alignment.center,
-      backgroundColor: Colors.white,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       semanticLabel: "Choose your Language".translate(),
       title: Text("Choose your Language".translate()),
