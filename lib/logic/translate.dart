@@ -138,11 +138,11 @@ class Translation {
     },
     {
       const Locale("en", "US"): "The following Value is missing:",
-      const Locale("de", "DE"): "The folgende Information fehlt:",
+      const Locale("de", "DE"): "Die folgende Information fehlt:",
     },
     {
       const Locale("en", "US"): "The following Values are missing:",
-      const Locale("de", "DE"): "The folgenden Informationen fehlen:",
+      const Locale("de", "DE"): "Die folgenden Informationen fehlen:",
     },
     {
       const Locale("en", "US"): "OK",
@@ -239,6 +239,14 @@ class Translation {
     {
       const Locale("en", "US"): "Checked Todos",
       const Locale("de", "DE"): "Erledigte Todos",
+    },
+    {
+      const Locale("en", "US"): "Show Checked Todos",
+      const Locale("de", "DE"): "Erledigte Todos anzeigen",
+    },
+    {
+      const Locale("en", "US"): "None of your Todos are checked",
+      const Locale("de", "DE"): "Keines deiner Todos ist erledigt",
     },
   ];
 

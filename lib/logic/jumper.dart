@@ -37,7 +37,7 @@ class Jumper {
     BuildContext context,
     SearchResultsList results,
   ) {
-    Navigator.pushNamed(
+    Navigator.pushReplacementNamed(
       context,
       SearchResultScreen.routeName,
       arguments: results,

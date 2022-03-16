@@ -1,9 +1,12 @@
 library components;
 
 import 'package:flutter/material.dart';
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/screens/search_screen.dart';
+import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/screens/todo_detail_screen.dart';
 
 /// Component which represents a single Search Result
 /// in the [SearchResultScreen]
@@ -33,8 +36,24 @@ class _SearchResulTileState extends State<SearchResulTile> {
       subtitle: Text(
         widget.result.isTodo ? "Todo".translate() : "Setting".translate(),
       ),
+      onTap: _openResult,
     );
 
     return _tile;
+  }
+
+  void _openResult() {
+    if (widget.result.isTodo) {
+      Navigator.pushNamed(
+        context,
+        TodoDetailScreen.routeName,
+        arguments: widget.result.todo,
+      ).then((value) => setState(() {}));
+    } else {
+      Navigator.pushNamed(
+        context,
+        SettingsMainScreen.routeName,
+      ).then((value) => setState(() {}));
+    }
   }
 }

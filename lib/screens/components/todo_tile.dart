@@ -11,10 +11,12 @@ import 'package:todo/screens/todo_detail_screen.dart';
 class TodoTile extends StatefulWidget {
   const TodoTile({
     required this.todo,
+    required this.setStateFunc,
     Key? key,
   }) : super(key: key);
 
   final Todo todo;
+  final void Function() setStateFunc;
 
   @override
   _TodoTileState createState() => _TodoTileState();
@@ -82,5 +84,6 @@ class _TodoTileState extends State<TodoTile> {
         // Do nothing
       }
     });
+    widget.setStateFunc;
   }
 }

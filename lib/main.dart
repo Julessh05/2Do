@@ -83,7 +83,9 @@ class _TodoAppState extends State<TodoApp> {
                 const SettingsMainScreen(),
             AddTodoScreen.routeName: (context) => const AddTodoScreen(),
             SearchScreen.routeName: (context) => const SearchScreen(),
-            TodoApp.routeName: (context) => const TodoApp()
+            TodoApp.routeName: (context) => const TodoApp(),
+            CheckedTodosScreen.routeName: (context) =>
+                const CheckedTodosScreen(),
           },
           onGenerateRoute: (RouteSettings settings) {
             // Todo Details Screen

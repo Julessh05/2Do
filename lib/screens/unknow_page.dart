@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 
+/// Screen shown when the User tries to navigate to a Page that can't be
+/// found in this App
 class UnknownPage extends StatefulWidget {
   const UnknownPage({Key? key}) : super(key: key);
 

@@ -1,5 +1,6 @@
 library screens;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
@@ -21,12 +22,20 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
-    TodoList.listOfCheckedTodos.add(Todo(title: "title", content: "content"));
-    TodoList.listOfCheckedTodos.add(Todo(title: "title", content: "content1"));
-    TodoList.listOfTodos.add(Todo(title: "title", content: "content"));
+    Todo _todo = Todo(title: "Title", content: "Some Content");
+    TodoList.addTodo(_todo);
     final _scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("2Do".translate(), semanticsLabel: "Title".translate()),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          tooltip: "Show Checked Todos".translate(),
+          onPressed: () => _openCheckedTodos(context),
+          icon: const Icon(Icons.check_circle_outline_rounded),
+        ),
+        title: Text(
+          "2Do".translate(),
+          semanticsLabel: "Title".translate(),
+        ),
         actions: <IconButton>[
           IconButton(
             icon: const Icon(Icons.search),
@@ -45,7 +54,7 @@ class _HomescreenState extends State<Homescreen> {
           )
         ],
       ),
-      body: body,
+      body: _body,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openAddTodo(context),
         child: const Icon(Icons.add_rounded),
@@ -59,16 +68,23 @@ class _HomescreenState extends State<Homescreen> {
     return _scaffold;
   }
 
-  Widget get body {
+  /// Returns the Body of the Screen depending on the [TodoList.listOfTodos]
+  Widget get _body {
     final Widget _body;
-    if (TodoList.combinedListOfTodos.isNotEmpty) {
+    if (TodoList.listOfTodos.isNotEmpty) {
       _body = ListView.builder(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (_, counter) {
-          return TodoTile(todo: TodoList.listOfTodos[counter]);
+          return TodoTile(
+            todo: TodoList.listOfTodos[counter],
+            setStateFunc: () => _setStateAfterTodoCheck(),
+          );
         },
         itemCount: TodoList.listOfTodos.length,
         scrollDirection: Axis.vertical,
@@ -101,10 +117,6 @@ class _HomescreenState extends State<Homescreen> {
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
               ),
-              const SizedBox(height: 20.0),
-              TodoList.listOfCheckedTodos.isNotEmpty
-                  ? _checkedTodoExpandTile
-                  : Container(),
             ],
           ),
         ),
@@ -113,30 +125,111 @@ class _HomescreenState extends State<Homescreen> {
     return _body;
   }
 
-  Widget get _checkedTodoExpandTile {
-    final _body = ExpansionTile(
-      title: Text(
-        "Checked Todos".translate(),
-        semanticsLabel: "Checked Todos".translate(),
-      ),
-      initiallyExpanded: false,
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
-          child: ListView.builder(
-            itemBuilder: (_, counter) {
-              return TodoTile(todo: TodoList.listOfCheckedTodos[counter]);
-            },
-          ),
-        )
-      ],
-    );
-    return _body;
-  }
-
+  /// Opens the [AddTodoScreen] where you can add a Todo
   void _openAddTodo(BuildContext context) {
     Navigator.pushNamed(context, AddTodoScreen.routeName).then(
       (value) => setState(() {}),
     );
+  }
+
+  /// Opens the [CheckedTodosScreen] where you can see all checked Todos
+  void _openCheckedTodos(BuildContext context) {
+    Navigator.pushNamed(context, CheckedTodosScreen.routeName)
+        .then((value) => setState(() {}));
+  }
+
+  /// Callback Method called when a Todo is checked
+  void _setStateAfterTodoCheck() {
+    setState(() {});
+  }
+}
+
+/// Screen which showns all the checked Todos.
+class CheckedTodosScreen extends StatefulWidget {
+  const CheckedTodosScreen({Key? key}) : super(key: key);
+
+  static const routeName = "/checked_todos";
+
+  @override
+  State<CheckedTodosScreen> createState() => _CheckedTodosScreenState();
+}
+
+class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final _scaffold = Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: Text(
+          "Checked Todos".translate(),
+          semanticsLabel: "Checked Todos".translate(),
+        ),
+      ),
+      body: _body,
+    );
+
+    return _scaffold;
+  }
+
+  /// Returns the Body of the Screen depending on the [TodoList.listOfCheckedTodos]
+  Widget get _body {
+    final Widget _body;
+    if (TodoList.listOfCheckedTodos.isNotEmpty) {
+      _body = ListView.builder(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        scrollDirection: Axis.vertical,
+        physics: const BouncingScrollPhysics(),
+        itemCount: TodoList.listOfCheckedTodos.length,
+        itemBuilder: (_, counter) {
+          return TodoTile(
+            todo: TodoList.listOfCheckedTodos[counter],
+            setStateFunc: _setStateAfterTodoCheck,
+          );
+        },
+      );
+    } else {
+      _body = Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.5,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            mainAxisSize: MainAxisSize.max,
+            verticalDirection: VerticalDirection.down,
+            children: <Widget>[
+              Text(
+                "None of your Todos are checked".translate(),
+                semanticsLabel: "None of your Todos are checked".translate(),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                onPressed: () => Jumper.backToTheHomescreen(context),
+                child: Text(
+                  "Back to the Homescreen".translate(),
+                  semanticsLabel: "Back to the Homescreen".translate(),
+                ),
+                autofocus: false,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return _body;
+  }
+
+  /// Callback Method called when a Todo is unchecked
+  void _setStateAfterTodoCheck() {
+    setState(() {});
   }
 }
