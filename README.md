@@ -25,3 +25,10 @@ At the Moment this App is avaible in English and German
 
 2Do follows the modern states of UX Design and the Human Interface Guidlines.
 We have the Intention that you can use 2Do without having to wonder how it works.
+
+
+### UI Design
+This App uses the Material Design by Google, which is mainly used in
+Googles mobile OS Android. 
+As a Consequence this App has a bit of an Android-like Look.
+But I put a lot of effort into making it stand out and have a bit of it's own look, which is clean and - most important - easy to use
