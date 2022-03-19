@@ -15,11 +15,25 @@ class SettingsSubTile extends StatefulWidget {
     this.alertDialog,
     this.uiSwitch,
     this.icon,
+    this.aboutDialog,
     Key? key,
   })  : assert(
-          uiSwitch == null && simpleDialog != null && alertDialog == null ||
-              uiSwitch != null && simpleDialog == null && alertDialog == null ||
-              uiSwitch == null && simpleDialog == null && alertDialog != null,
+          uiSwitch == null &&
+                  simpleDialog != null &&
+                  alertDialog == null &&
+                  aboutDialog == null ||
+              uiSwitch != null &&
+                  simpleDialog == null &&
+                  alertDialog == null &&
+                  aboutDialog == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  alertDialog != null &&
+                  aboutDialog == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  alertDialog == null &&
+                  aboutDialog != null,
           "You have to define exactly one Widget, not more and not less",
         ),
         super(key: key);
@@ -34,12 +48,14 @@ class SettingsSubTile extends StatefulWidget {
     this.simpleDialog,
     this.uiSwitch,
     Key? key,
+    this.aboutDialog,
   ]) : super(key: key);
 
   final Setting setting;
   final Switch? uiSwitch;
   final SimpleDialog? simpleDialog;
   final AlertDialog? alertDialog;
+  final AboutDialog? aboutDialog;
   final Icon? icon;
 
   @override
@@ -83,6 +99,12 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
               return widget.alertDialog!;
             },
           );
+        } else if (widget.aboutDialog != null) {
+          showAboutDialog(
+            context: context,
+          );
+        } else {
+          // Do nothing
         }
       },
     );

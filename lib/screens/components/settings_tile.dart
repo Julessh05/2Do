@@ -17,25 +17,35 @@ class SettingsTile extends StatefulWidget {
     this.simpleDialog,
     this.alertDialog,
     this.subtiles,
+    this.aboutDialog,
     this.icon,
     Key? key,
   })  : assert(
           uiSwitch == null &&
                   simpleDialog != null &&
                   subtiles == null &&
-                  alertDialog == null ||
+                  alertDialog == null &&
+                  aboutDialog == null ||
               uiSwitch != null &&
                   simpleDialog == null &&
                   subtiles == null &&
-                  alertDialog == null ||
+                  alertDialog == null &&
+                  aboutDialog == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles != null &&
-                  alertDialog == null ||
+                  alertDialog == null &&
+                  aboutDialog == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
-                  alertDialog != null,
+                  alertDialog != null &&
+                  aboutDialog == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  subtiles == null &&
+                  alertDialog == null &&
+                  aboutDialog != null,
           "You have to define exactly one Widget, not more and not less",
         ),
         super(key: key);
@@ -50,6 +60,7 @@ class SettingsTile extends StatefulWidget {
     this.simpleDialog,
     this.subtiles,
     this.uiSwitch,
+    this.aboutDialog,
     Key? key,
   }) : super(key: key);
 
@@ -60,6 +71,7 @@ class SettingsTile extends StatefulWidget {
     this.simpleDialog,
     required this.subtiles,
     this.uiSwitch,
+    this.aboutDialog,
     Key? key,
   }) : super(key: key);
 
@@ -69,6 +81,7 @@ class SettingsTile extends StatefulWidget {
   final AlertDialog? alertDialog;
   final List<SettingsSubTile>? subtiles;
   final Icon? icon;
+  final AboutDialog? aboutDialog;
 
   /// Returns if the Tile has subtiles
   /// and so creates a new Screen
@@ -122,11 +135,20 @@ class _SettingsTileState extends State<SettingsTile> {
             },
           );
         } else if (widget.subtiles != null) {
+          // Navigate to new Screen with Subtiles
           Jumper.openSettingsSubScreen(
             context,
             widget.subtiles!,
             widget.setting,
           );
+        } else if (widget.aboutDialog != null) {
+          // Show About Dialog
+          showDialog(
+              barrierDismissible: true,
+              context: context,
+              builder: (_) {
+                return widget.aboutDialog!;
+              });
         }
       },
       trailing: widget.uiSwitch,

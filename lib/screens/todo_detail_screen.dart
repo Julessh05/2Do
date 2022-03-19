@@ -7,6 +7,7 @@ import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/components/todo_details_tile.dart';
+import 'package:todo/storage/storage.dart';
 
 class TodoDetailScreen extends StatefulWidget {
   const TodoDetailScreen({
@@ -45,7 +46,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen>
         children: <TodoDetailsTile>[
           // Title
           TodoDetailsTile(
-            title: "Title:",
+            title: "Title:".translate(),
             subtitle: widget.todo.title,
             function: () => Navigator.pushNamed(
               context,
@@ -56,13 +57,19 @@ class _TodoDetailScreenState extends State<TodoDetailScreen>
 
           // Content
           TodoDetailsTile(
-            title: "Content:",
+            title: "Content:".translate(),
             subtitle: widget.todo.content,
             function: () => Navigator.pushNamed(
               context,
               EditTodoScreen.routeName,
               arguments: widget.todo,
             ).then((value) => setState(() {})),
+          ),
+
+          // Checked
+          TodoDetailsTile(
+            title: "Checked:".translate(),
+            subtitle: widget.todo.checked.toString(),
           ),
 
           // Time
@@ -177,6 +184,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             onFieldSubmitted: (value) {
               title = value;
               widget.todo.title = title;
+              Storage.storeTodos();
               Jumper.back(context);
             },
             onChanged: (value) {
@@ -219,6 +227,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             onFieldSubmitted: (value) {
               content = value;
               widget.todo.content = content;
+              Storage.storeTodos();
               Jumper.back(context);
             },
             onChanged: (value) {

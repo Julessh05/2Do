@@ -1,7 +1,6 @@
 library storage;
 
-import 'dart:io';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
@@ -10,115 +9,108 @@ import 'package:todo/models/todo_list.dart';
 /// Class that contains everything in interaction with the
 /// File System
 class Storage {
-  /// The File where the Todos are stored
-  /// Stored in Temp Directory because other Dirs are not avaible
-  /// without Problems directly in Dart
-  static final File _todoFile = File("${Directory.systemTemp}/Todos.txt");
+  /// The Box where all Todos are stored
+  /// In this Box there are Stored list of Todos
+  /// 1. List Of Todos
+  /// 2. List Of Checked Todos
+  static Box<Todo>? _todoBox;
 
-  /// The File where all Settings are stored
-  /// Stored in Temp Directory because other Dirs are not avaible
-  /// without Problems directly in Dart
-  static final File _settingsFile =
-      File("${Directory.systemTemp}/Settings.txt");
+  /// The Key / Name for the [_todoBox]
+  static const todoBoxKEY = "Todo Box";
+
+  /// The Box where all Settings are stored
+  /// These Settings are stored as [listOfSettings]
+  static Box<Setting>? _settingsBox;
+
+  /// The Key / Name for the [_settingsBox]
+  static const settingsBoxKey = "Settings Box";
+
+  /// Init Method which inits everything and is responsible
+  /// for registering the Adapters
+  /// Also the Boxes are opened here
+  static Future<void> init() async {
+    Hive.registerAdapter(SettingAdapter());
+    Hive.registerAdapter(TodoAdapter());
+    _todoBox = await Hive.openBox<Todo>(todoBoxKEY);
+    _settingsBox = await Hive.openBox<Setting>(settingsBoxKey);
+    // Check if Box has the list Of Settings
+    if (_settingsBox!.containsKey(AllSettings.languageSetting.hiveKey)) {
+      // Do nothing
+    } else {
+      storeSettings();
+    }
+
+    _settingsBox = await Hive.openBox("Settings Box");
+
+    if (_todoBox!.isNotEmpty) {
+      // Do nothing
+    } else {
+      storeTodos();
+    }
+  }
 
   /// Stores the Todos to the File System.
   /// Stored as one String in the matching File
   static void storeTodos() {
-    String _data = "";
-    // Parsing Todo to String and adding it to _data
-    for (Todo todo in TodoList.listOfTodos) {
-      _data += todo.identifier;
-      _data += todo.toString();
+    for (int i = 0; i < TodoList.listOfTodos.length; i++) {
+      final key = "Unchecked $i";
+      _todoBox!.put(key, TodoList.listOfTodos[i]);
     }
-    // Write File
-    _todoFile.writeAsStringSync(_data);
+
+    for (int i = 0; i < TodoList.listOfCheckedTodos.length; i++) {
+      final key = "Checked $i";
+      _todoBox!.put(key, TodoList.listOfCheckedTodos[i]);
+    }
   }
 
-  /// Loads the Todos and sets it to the [listOfTodos]
+  /// Loads the Todos and sets it to the [TodoList.listOfTodos]
   /// Parsing the one String to all of the Todos
   static void loadTodos() {
-    // Read Data
-    final String _data = _todoFile.readAsStringSync();
-    // Create empty Todo to get Identifier
-    final _emptyTodo = Todo.empty();
-    // Split Data to get different Todos
-    final List<String> _splittedData = _data.split(_emptyTodo.identifier);
-    // Create TodoAsString for every splitted String
-    for (String todoAsString in _splittedData) {
-      // split Data using Todo.regExp
-      final _splittedTodo = todoAsString.split(_emptyTodo.regExp);
-      // Getting Tags
-      List<String> tags = [];
-      for (int i = 6; i < _splittedTodo.length; i++) {
-        tags.add(_splittedTodo[i]);
+    final listOfAllTodosStorage = _todoBox!.values;
+    for (Todo todo in listOfAllTodosStorage) {
+      if (todo.checked) {
+        TodoList.addCheckedTodo(todo);
+      } else {
+        TodoList.addTodo(todo);
       }
-      // create Todo
-      final _todo = Todo(
-        title: _splittedTodo[0],
-        content: _splittedTodo[1],
-        // time: Converter.stringToDateTime(_splittedTodo[3]),
-        checked: _splittedTodo[4].parseBool(),
-        // created: Converter.stringToDateTime(_splittedTodo[5]),
-        // tags: tags,
-        selected: false,
-      );
-      TodoList.listOfTodos.add(_todo);
     }
   }
 
-  /// Deletes the [_todoFile] and all content
+  /// Deletes the Box with Todos from the File System
   static void deleteTodos() {
-    _todoFile.deleteSync();
+    _todoBox!.deleteFromDisk();
   }
 
   /// Stores the Settings to the File System.
   /// Stored as one String in the matching File.
   static void storeSettings() {
-    String _data = "";
-    // Parsing Setting to String and adding it to _data
+    final List<Setting> _list = [];
     for (Setting setting in listOfSettings) {
-      _data += setting.identifier;
-      _data += setting.toString();
+      final Setting _setting;
+      if (setting.objectValue != null) {
+        _setting = Setting(
+          name: setting.name,
+          stringValue: Converter.supportedObjectToString(
+            setting.objectValue,
+            setting.objectValue.runtimeType,
+          ),
+        );
+      } else {
+        _setting = setting;
+      }
+      _list.add(_setting);
     }
-    _settingsFile.writeAsStringSync(_data);
+    for (Setting setting in _list) {
+      _settingsBox!.put(setting.hiveKey, setting);
+    }
   }
 
   /// Loads the Settings and sets it to the [listOfSettings]
   /// Only loads the Values
-  static void loadSettings() {
-    // Read Data
-    final String _data = _settingsFile.readAsStringSync();
-    // Create empty Setting to get Identifier,
-    final _emptySetting = Setting.empty();
-    // Split Data to get different Settings
-    final List<String> _splittedData = _data.split(_emptySetting.identifier);
-    // Create SettingAsString for every splitted String
-    for (int i = 0; i < _splittedData.length; i++) {
-      // split Data using Setting.regExp
-      final _splittedString = _splittedData[i];
-      // set value of the setting dependend on what Value Type they have
-      switch (_splittedString[1]) {
-        case "int":
-          listOfSettings[i].intValue = int.parse(_splittedString[2]);
-          break;
-        case "bool":
-          listOfSettings[i].boolValue = _splittedString[2].parseBool();
-          break;
-        case "String":
-          listOfSettings[i].stringValue = _splittedString[2];
-          break;
-        case "Object":
-          listOfSettings[i].objectValue = Converter.stringToSupportedObject(
-            _splittedString[2],
-            _splittedString[1],
-          );
-          break;
-      }
-    }
-  }
+  static void loadSettings() {}
 
-  /// Deletes the [_settingsFile] and all content
+  /// Deletes the Box with the Settings from the File System
   static void deleteSettings() {
-    _settingsFile.deleteSync();
+    _settingsBox!.deleteFromDisk();
   }
 }

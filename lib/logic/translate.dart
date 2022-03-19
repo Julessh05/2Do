@@ -248,6 +248,18 @@ class Translation {
       const Locale("en", "US"): "None of your Todos are checked",
       const Locale("de", "DE"): "Keines deiner Todos ist erledigt",
     },
+    {
+      const Locale("en", "US"): "Title:",
+      const Locale("de", "DE"): "Titel:",
+    },
+    {
+      const Locale("en", "US"): "Content:",
+      const Locale("de", "DE"): "Inhalt:",
+    },
+    {
+      const Locale("en", "US"): "Checked:",
+      const Locale("de", "DE"): "Erledigt:",
+    },
   ];
 
   /// Translates the String to the [activeLocale]

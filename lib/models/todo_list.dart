@@ -17,10 +17,16 @@ import 'package:todo/models/todo.dart';
 /// This Methods also update the [combinedListOfTodos]
 class TodoList {
   /// The private fileintern List of Todos used in the App
-  static final List<Todo> _listOfTodos = [];
+  static List<Todo> _listOfTodos = [];
+
+  /// The Key for the [listOfTodos]
+  static const listOfTodosKEY = "List Of Todos";
 
   /// The private fileintern List where checked Todos are stored
-  static final List<Todo> _listOfCheckedTodos = [];
+  static List<Todo> _listOfCheckedTodos = [];
+
+  /// The Key for the [listOfCheckedTodos]
+  static const listOfCheckedTodosKEY = "List Of Checked Todos";
 
   /// This private fileintern List combines the [listOfCheckedTodos] and the [listOfTodos]
   static List<Todo> _combinedListOfTodos = [];
@@ -30,10 +36,16 @@ class TodoList {
   static UnmodifiableListView<Todo> get listOfTodos =>
       UnmodifiableListView(_listOfTodos);
 
+  /// Setter for the [_listOfTodos]
+  static set listOfTodos(List<Todo> list) => _listOfTodos = list;
+
   /// The List where all checked Todos are stored
   /// This List is unmodifiable
   static UnmodifiableListView<Todo> get listOfCheckedTodos =>
       UnmodifiableListView(_listOfCheckedTodos);
+
+  /// Setter for the [_listOfCheckedTodos]
+  static set listOfCheckedTodos(List<Todo> list) => _listOfCheckedTodos = list;
 
   /// The List where all Todos are stored
   /// This List is unmodifiable
@@ -44,6 +56,13 @@ class TodoList {
   /// This is used when a new Todo is created, because the Todo is unchecked
   static void addTodo(Todo todo) {
     _listOfTodos.add(todo);
+    _updateCobinedList();
+  }
+
+  /// Adds a Checked Todo to the [listOfCheckedTodos]
+  /// This is used when loading a Todo from the File, which is already checked
+  static void addCheckedTodo(Todo todo) {
+    _listOfCheckedTodos.add(todo);
     _updateCobinedList();
   }
 

@@ -3,11 +3,6 @@
 A Modern desinged Todo App built with Flutter.
 Avaible for Android and IOS.
 
-## Design and Inspiration
-
-This App is hold White and Dark Blue, because these were two of 
-three favorite Colors of the Person I got the Inspiration from.
-Sadly I cound't find an Element to use beige on :(
 
 ## Use
 
@@ -17,9 +12,18 @@ At the Moment this app does not have Notification. That's due to
 the reason that it would have token much more time till the first version
 is ready to be realesed
 
+
 ## Language
 
 At the Moment this App is avaible in English and German
+
+
+## Design and Inspiration
+
+This App is hold White and Dark Blue, because these were two of 
+three favorite Colors of the Person I got the Inspiration from.
+Sadly I cound't find an Element to use beige on :(
+
 
 ### Human Interface Guidline and UX Design
 

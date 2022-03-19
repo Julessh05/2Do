@@ -143,8 +143,8 @@ class Converter {
     Object object;
     switch (type) {
       case "Locale":
-        if (string == "English") {
-          object = const Locale("en", "US");
+        if (string == "German") {
+          object = const Locale("de", "DE");
         } else {
           object = const Locale("en", "US");
         }

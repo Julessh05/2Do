@@ -1,19 +1,37 @@
 library models;
 
-import 'package:todo/models/identifiable_model.dart';
+import 'package:hive/hive.dart';
+
+part 'todo.g.dart';
 
 /// Object which represents a single Todo used in the App
 /// [selected] and [checked] are usually not given while creating a Todo
 /// These Values are used by the Widget in the Homescreen to show the Todo
 /// properally
-class Todo implements IdentifiableModel {
+@HiveType(typeId: 1)
+class Todo extends HiveObject {
+  @HiveField(0)
   String title;
+
+  @HiveField(1)
   String content;
+
+  // @HiveFild(2)
   // late final DateTime time;
+
+  // @HiveFild(3)
   // final List<String> tags;
+
+  @HiveField(4)
   bool selected;
+
+  @HiveField(5)
   bool checked;
+
+  // @HiveFild(6)
   // late final DateTime created;
+
+  // @HiveFild(7)
   // late final int? importance;
 
   Todo({
@@ -120,14 +138,4 @@ class Todo implements IdentifiableModel {
   /// Returns the DateTime as String. The DateTime returned is the
   /// Date of creation of this Todo
   // String get createdAsString => Converter.dateToString(created);
-
-  @override
-
-  /// Returns the Identifier of this Todo Object
-  /// This is used to mark a new Todo in the Storage
-  String get identifier => "Todo:";
-
-  @override
-  // TODO: implement regExp
-  Pattern get regExp => throw UnimplementedError();
 }

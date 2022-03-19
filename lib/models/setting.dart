@@ -1,7 +1,9 @@
+import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
-import 'package:todo/models/identifiable_model.dart';
 import 'package:todo/styles/themes.dart';
+
+part 'setting.g.dart';
 
 /// Represents a single Setting in the App.
 /// The [name] is the name of the Setting
@@ -53,13 +55,28 @@ import 'package:todo/styles/themes.dart';
 /// ```
 ///
 /// Error would be: "You can only define one Value."
-class Setting implements IdentifiableModel {
+@HiveType(typeId: 0)
+class Setting extends HiveObject {
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   bool? boolValue;
+
+  @HiveField(2)
   int? intValue;
+
+  @HiveField(3)
   String? stringValue;
+
+  @HiveField(4)
   dynamic objectValue;
-  late final Type _valueType;
+
+  @HiveField(5)
+  late String valueType;
+
+  @HiveField(6)
+  late String hiveKey;
 
   Setting({
     required this.name,
@@ -83,48 +100,53 @@ class Setting implements IdentifiableModel {
               boolValue == null &&
                   intValue == null &&
                   stringValue == null &&
-                  objectValue != null,
-          "You can only define one Value.",
+                  objectValue != null ||
+              boolValue == null &&
+                  intValue == null &&
+                  stringValue == null &&
+                  objectValue == null,
+          "You can only define one Value. No Value is accepted if you create a Setting.empty or a Setting.folder",
         ) {
     if (boolValue != null) {
-      _valueType = bool;
+      valueType = "bool";
     } else if (intValue != null) {
-      _valueType = int;
+      valueType = "int";
     } else if (stringValue != null) {
-      _valueType = String;
+      valueType = "String";
     } else if (objectValue != null) {
-      _valueType = Object;
+      valueType = "Object";
     } else {
-      _valueType = Error;
+      valueType = "Null";
     }
+    hiveKey = name;
   }
 
   /// Created an empty Setting.
-  /// Can be used to have access to the [identifier] and [regExp] without
-  /// having to create a complex Setting
   Setting.empty({
     this.name = "Placeholder",
   }) {
-    _valueType = Null;
+    valueType = "Null";
+    hiveKey = "Empty Setting";
   }
 
   Setting.folder({
     required this.name,
   }) {
-    _valueType = Null;
+    valueType = "Null";
+    hiveKey = "Folder";
   }
 
   /// Returns the current State of the givven Value
   /// as String, no matter what kind of Object you put in
   String get valueAsString {
-    switch (_valueType) {
-      case bool:
+    switch (valueType) {
+      case "bool":
         return boolValue.toString();
-      case int:
+      case "int":
         return intValue.toString();
-      case String:
+      case "String":
         return stringValue!;
-      case Object:
+      case "Object":
         return objectValue.toString();
       default:
         return "Error parsing Value as String";
@@ -132,14 +154,14 @@ class Setting implements IdentifiableModel {
   }
 
   Object get value {
-    switch (_valueType) {
-      case bool:
+    switch (valueType) {
+      case "bool":
         return boolValue!;
-      case int:
+      case "int":
         return intValue!;
-      case String:
+      case "String":
         return stringValue!;
-      case Object:
+      case "Object":
         return objectValue;
       default:
         return Error();
@@ -148,17 +170,17 @@ class Setting implements IdentifiableModel {
 
   String get typeAsString {
     final String _output;
-    switch (_valueType) {
-      case bool:
+    switch (valueType) {
+      case "bool":
         _output = "bool";
         break;
-      case int:
+      case "int":
         _output = "int";
         break;
-      case String:
+      case "String":
         _output = "String";
         break;
-      case Object:
+      case "Object":
         _output = Converter.supportedTypetoString(objectValue.runtimeType);
         break;
       default:
@@ -172,7 +194,7 @@ class Setting implements IdentifiableModel {
   Map<String, String> get asMap {
     final _map = <String, String>{
       "Name": name,
-      "ValueType": _valueType.toString(),
+      "ValueType": valueType.toString(),
       "Value": valueAsString,
     };
 
@@ -193,26 +215,23 @@ class Setting implements IdentifiableModel {
 
     // Add Value as String
     _result += "ValueAsString:";
-    _result += Converter.supportedObjectToString(value, _valueType);
+    _result += Converter.supportedObjectToString(
+      value,
+      value.runtimeType,
+    );
 
     return _result;
   }
-
-  @override
-  String get identifier => "Setting:";
-
-  @override
-  // TODO: implement regExp
-  Pattern get regExp => throw UnimplementedError();
 }
 
 /// The List that holds all Settings
-final List<Setting> listOfSettings = [
+List<Setting> listOfSettings = [
   AllSettings.languageSetting,
   AllSettings.themeModeSetting,
   AllSettings.notificationActiveSetting,
   AllSettings.notificationImportanceSetting,
   AllSettings.emptySetting,
+  AllSettings.about,
 ];
 
 /// Class that holds all Settings
@@ -242,4 +261,10 @@ class AllSettings {
     name: "Importance",
     intValue: 1,
   );
+
+  static final about = Setting(
+    name: "About".translate(),
+  );
+
+  static const listOfSettingsKEY = "List Of Settings";
 }

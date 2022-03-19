@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/todo.dart';
@@ -14,9 +15,14 @@ import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 import 'package:todo/screens/unknow_page.dart';
+import 'package:todo/storage/storage.dart';
 import 'package:todo/styles/themes.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Storage.init();
+  Storage.loadSettings();
+  Storage.loadTodos();
   runApp(const TodoApp());
 }
 
@@ -114,6 +120,7 @@ class _TodoAppState extends State<TodoApp> {
               final _searchResults = settings.arguments as SearchResultsList;
 
               if (_searchResults.hasResults) {
+                // Results Page
                 return MaterialPageRoute(
                   builder: (_) {
                     return SearchResultScreen(
@@ -121,6 +128,7 @@ class _TodoAppState extends State<TodoApp> {
                   },
                 );
               } else {
+                // No Results Page
                 return MaterialPageRoute(builder: (_) {
                   return const SearchResultScreen.noResults();
                 });

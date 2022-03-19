@@ -7,6 +7,7 @@ import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
+import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
@@ -224,6 +225,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       );
       // Add the Todo to the global List
       TodoList.addTodo(_todo);
+      Storage.storeTodos();
+      _todo.save();
       // Pops the current Route
       Jumper.back(context);
     }

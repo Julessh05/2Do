@@ -81,6 +81,15 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               )
             ],
           ), */
+
+          /* About Settings Tile */
+          SettingsTile(
+            setting: AllSettings.about,
+            aboutDialog: const AboutDialog(
+              applicationName: "2Do",
+              applicationLegalese: "© Julian Schumacher 2022",
+            ),
+          )
         ],
       ),
     );
@@ -235,8 +244,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   }
 
   /// Method called when the ThemeMode is changed.
-  /// Adds a [ThemeChangedEvent] to the [TodoApp.eventsBloc] and
-  /// passes the Value. Then it calls Jumper.back to navigate back.
+  /// Passes the Value to the Stream used to build the App
+  /// Then pops the Dialog with Jumper.back(context)
   void _changeThemeMode(ThemeMode mode) {
     setState(() {
       TodoApp.themeStream.sink.add(mode);
