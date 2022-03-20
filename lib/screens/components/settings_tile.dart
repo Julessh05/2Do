@@ -109,7 +109,7 @@ class _SettingsTileState extends State<SettingsTile> {
         semanticsLabel: "Name of the Setting".translate(),
       ),
       subtitle: Text(
-        widget.setting.valueAsString,
+        widget.setting.valueToDisplay,
         semanticsLabel: "Value of the Setting".translate(),
       ),
       leading: widget.icon,

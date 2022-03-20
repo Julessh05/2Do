@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
@@ -190,6 +191,18 @@ class Setting extends HiveObject {
     return _output;
   }
 
+  String get valueToDisplay {
+    if (valueType == "int") {
+      return intValue.toString();
+    } else if (valueType == "String") {
+      return stringValue!.translate();
+    } else if (valueType == "bool") {
+      return Converter.supportedObjectToDisplayableString(boolValue);
+    } else {
+      return Converter.supportedObjectToDisplayableString(objectValue);
+    }
+  }
+
   /// Returns the Setting as a Map of String : String
   Map<String, String> get asMap {
     final _map = <String, String>{
@@ -215,10 +228,7 @@ class Setting extends HiveObject {
 
     // Add Value as String
     _result += "ValueAsString:";
-    _result += Converter.supportedObjectToString(
-      value,
-      value.runtimeType,
-    );
+    _result += Converter.supportedObjectToDisplayableString(value);
 
     return _result;
   }
@@ -264,7 +274,13 @@ class AllSettings {
 
   static final about = Setting(
     name: "About".translate(),
+    stringValue: "Everything about the App".translate(),
   );
 
   static const listOfSettingsKEY = "List Of Settings";
+
+  static void updateSettings() {
+    languageSetting.objectValue = Translation.activeLocale;
+    themeModeSetting.objectValue = Themes.themeMode;
+  }
 }

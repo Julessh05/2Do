@@ -43,20 +43,14 @@ class Todo extends HiveObject {
     this.selected = false,
     // required this.created,
     // this.importance,
-  })  : assert(
+  }) : assert(
           selected == false,
           "A Todo can't be selected while being created",
-        ),
-        assert(
-          checked == false,
-          "A Todo can't be checked while being created",
         ) {
     // importance ?? Notifications.importance;
   }
 
   /// Created an empty Todo.
-  /// Can be used to have access to the [identifier] and [regExp] without
-  /// having to create a complex Todo
   Todo.empty({
     this.title = "",
     this.content = "",

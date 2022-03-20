@@ -241,6 +241,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             onPressed: () {
               widget.todo.title = title;
               widget.todo.content = content;
+              Storage.storeTodos();
               Jumper.back(context);
             },
             child: Text(

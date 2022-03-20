@@ -6,6 +6,7 @@ import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
+import 'package:todo/storage/storage.dart';
 
 /// A Tile to represent a single Todo in the [Homescreen]
 class TodoTile extends StatefulWidget {
@@ -84,6 +85,7 @@ class _TodoTileState extends State<TodoTile> {
         // Do nothing
       }
     });
+    Storage.storeTodos();
     widget.setStateFunc;
   }
 }

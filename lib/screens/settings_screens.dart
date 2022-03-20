@@ -85,6 +85,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           /* About Settings Tile */
           SettingsTile(
             setting: AllSettings.about,
+            icon: const Icon(Icons.info_outline_rounded),
             aboutDialog: const AboutDialog(
               applicationName: "2Do",
               applicationLegalese: "© Julian Schumacher 2022",
@@ -95,6 +96,15 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     );
 
     return _scaffold;
+  }
+
+  /// Method called when a Setting is changed
+  /// Is responsible for calling setState and updating
+  /// the Value to Display of the Settings
+  void _reload() {
+    setState(() {
+      AllSettings.updateSettings();
+    });
   }
 
   /// The Simple Dialog shown to choose your Language
@@ -109,9 +119,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option English
         SimpleDialogOption(
           onPressed: () {
-            setState(() {
-              Translation.activeLocale = const Locale("en", "US");
-            });
+            Translation.activeLocale = const Locale("en", "US");
+            _reload();
             Jumper.back(context);
           },
           child: Container(
@@ -136,9 +145,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option German
         SimpleDialogOption(
           onPressed: () {
-            setState(() {
-              Translation.activeLocale = const Locale("de", "DE");
-            });
+            Translation.activeLocale = const Locale("de", "DE");
+            _reload();
             Jumper.back(context);
           },
           child: Container(
@@ -250,6 +258,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     setState(() {
       TodoApp.themeStream.sink.add(mode);
       Themes.themeMode = mode;
+      AllSettings.updateSettings();
     });
     Jumper.back(context);
   }

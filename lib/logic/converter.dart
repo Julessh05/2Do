@@ -87,11 +87,11 @@ class Converter {
   /// Supported are:
   /// Locale and
   /// ThemeMode
-  static String supportedObjectToString(dynamic object, Type type) {
+  static String supportedObjectToDisplayableString(dynamic object) {
     final String _output;
     switch (object.runtimeType) {
       case Locale:
-        if (object == const Locale("en", "US")) {
+        if (object == const Locale("de", "DE")) {
           _output = "German".translate();
         } else {
           _output = "English".translate();
@@ -99,11 +99,18 @@ class Converter {
         break;
       case ThemeMode:
         if (object == ThemeMode.dark) {
-          _output = "Dark";
+          _output = "Dark".translate();
         } else if (object == ThemeMode.light) {
-          _output = "Light";
+          _output = "Light".translate();
         } else {
           _output = "System";
+        }
+        break;
+      case bool:
+        if (object == true) {
+          _output = "Active".translate();
+        } else {
+          _output = "intactive".translate();
         }
         break;
       default:

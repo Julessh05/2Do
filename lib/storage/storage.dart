@@ -52,6 +52,7 @@ class Storage {
   /// Stores the Todos to the File System.
   /// Stored as one String in the matching File
   static void storeTodos() {
+    _todoBox!.deleteAll(_todoBox!.keys);
     for (int i = 0; i < TodoList.listOfTodos.length; i++) {
       final key = "Unchecked $i";
       _todoBox!.put(key, TodoList.listOfTodos[i]);
@@ -62,6 +63,8 @@ class Storage {
       _todoBox!.put(key, TodoList.listOfCheckedTodos[i]);
     }
   }
+
+  static void updateTodos() {}
 
   /// Loads the Todos and sets it to the [TodoList.listOfTodos]
   /// Parsing the one String to all of the Todos
@@ -90,9 +93,8 @@ class Storage {
       if (setting.objectValue != null) {
         _setting = Setting(
           name: setting.name,
-          stringValue: Converter.supportedObjectToString(
+          stringValue: Converter.supportedObjectToDisplayableString(
             setting.objectValue,
-            setting.objectValue.runtimeType,
           ),
         );
       } else {

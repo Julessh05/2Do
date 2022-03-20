@@ -260,6 +260,22 @@ class Translation {
       const Locale("en", "US"): "Checked:",
       const Locale("de", "DE"): "Erledigt:",
     },
+    {
+      const Locale("en", "US"): "About",
+      const Locale("de", "DE"): "Über",
+    },
+    {
+      const Locale("en", "US"): "Everything about the App",
+      const Locale("de", "DE"): "Alles über die App",
+    },
+    {
+      const Locale("en", "US"): "Active",
+      const Locale("de", "DE"): "Aktiv",
+    },
+    {
+      const Locale("en", "US"): "Inactive",
+      const Locale("de", "DE"): "Inaktiv",
+    },
   ];
 
   /// Translates the String to the [activeLocale]
