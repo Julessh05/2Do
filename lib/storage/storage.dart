@@ -122,6 +122,8 @@ class Storage {
           final _setting = Setting(
             name: setting.name,
             objectValue: objectValue,
+            isObject: setting.isObject,
+            isObjectType: setting.isObjectType,
           );
           _list.add(_setting);
         } else {

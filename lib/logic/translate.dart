@@ -13,7 +13,7 @@ class Translation {
   };
 
   /// The active locale (at the Moment)
-  static Locale activeLocale = supportedLocales.first;
+  static Locale? activeLocale;
 
   /// The Translations as a [HashMap].
   /// HashMap is used, because it has a constant time
