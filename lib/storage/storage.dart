@@ -64,8 +64,6 @@ class Storage {
     }
   }
 
-  static void updateTodos() {}
-
   /// Loads the Todos and sets it to the [TodoList.listOfTodos]
   /// Parsing the one String to all of the Todos
   static void loadTodos() {
@@ -96,6 +94,8 @@ class Storage {
           stringValue: Converter.supportedObjectToDisplayableString(
             setting.objectValue,
           ),
+          isObject: true,
+          isObjectType: setting.isObjectType,
         );
       } else {
         _setting = setting;
@@ -109,7 +109,31 @@ class Storage {
 
   /// Loads the Settings and sets it to the [listOfSettings]
   /// Only loads the Values
-  static void loadSettings() {}
+  static void loadSettings() {
+    final listOfSettingsStorage = _settingsBox!.values;
+    final List<Setting> _list = [];
+    for (Setting setting in listOfSettingsStorage) {
+      if (setting.isObject != null) {
+        if (setting.isObject == true) {
+          dynamic objectValue = Converter.stringToSupportedObject(
+            setting.stringValue!,
+            setting.isObjectType!,
+          );
+          final _setting = Setting(
+            name: setting.name,
+            objectValue: objectValue,
+          );
+          _list.add(_setting);
+        } else {
+          // Do nothing
+        }
+      } else {
+        _list.add(setting);
+        continue;
+      }
+    }
+    listOfSettings = _list;
+  }
 
   /// Deletes the Box with the Settings from the File System
   static void deleteSettings() {

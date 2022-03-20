@@ -1,5 +1,7 @@
 library logic;
 
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 /// Holds everything needed to translate stuff
@@ -13,290 +15,233 @@ class Translation {
   /// The active locale (at the Moment)
   static Locale activeLocale = supportedLocales.first;
 
-  /// The Translations
+  /// The Translations as a [HashMap].
+  /// HashMap is used, because it has a constant time
+  /// when searching in it.
+  static final HashMap<String, Map<Locale, String>> _translations =
+      HashMap.from(_translationsMap);
+
+  /// The Translations as a Map
   /// Pattern:
   /// ```dart
-  /// {
+  /// "Value in English": {
   ///   const Locale("language Code", "country Code"): "Value"
   ///   const Locale("language Code", "country Code"): "Value"
   /// }
   /// ```
-  static final List<Map<Locale, String>> _translations = [
-    {
-      const Locale("en", "US"): "2Do",
+  static final _translationsMap = <String, Map<Locale, String>>{
+    "2Do": {
       const Locale("de", "DE"): "2Do",
     },
-    {
-      const Locale("en", "US"): "Open Settings",
-      const Locale("de", "DE"): "Einstellungen öffnen"
+    "Open Settings": {
+      const Locale("de", "DE"): "Einstellungen öffnen",
     },
-    {
-      const Locale("en", "US"): "Search",
+    "Search": {
       const Locale("de", "DE"): "Suchen",
     },
-    {
-      const Locale("en", "US"): "Settings",
+    "Settings": {
       const Locale("de", "DE"): "Einstellungen",
     },
-    {
-      const Locale("en", "US"): "Choose your Language",
+    "Choose your Language": {
       const Locale("de", "DE"): "Wähle deine Sprache",
     },
-    {
-      const Locale("en", "US"): "English",
+    "English": {
       const Locale("de", "DE"): "Englisch",
     },
-    {
-      const Locale("en", "US"): "German",
+    "German": {
       const Locale("de", "DE"): "Deutsch",
     },
-    {
-      const Locale("en", "US"): "Title",
+    "Title": {
       const Locale("de", "DE"): "Titel",
     },
-    {
-      const Locale("en", "US"): "Todo Title",
+    "Todo Title": {
       const Locale("de", "DE"): "Todo Titel",
     },
-    {
-      const Locale("en", "US"): "Todo Time",
+    "Todo Time": {
       const Locale("de", "DE"): "Todo Zeit",
     },
-    {
-      const Locale("en", "US"): "Unknown Page",
+    "Unknown Page": {
       const Locale("de", "DE"): "Unbekannte Seite",
     },
-    {
-      const Locale("en", "US"):
-          "Something went wrong while navigating to the page you wanted to see.",
+    "Something went wrong while navigating to the page you wanted to see": {
       const Locale("de", "DE"):
           "Etwas ist schiefgegangen während wir versuchten diese Seite zu finden",
     },
-    {
-      const Locale("en", "US"): "Back to the Homescreen",
+    "Back to the Homescreen": {
       const Locale("de", "DE"): "Zurück zum Startbildschirm",
     },
-    {
-      const Locale("en", "US"): "Name of the Setting",
+    "Name of the Setting": {
       const Locale("de", "DE"): "Name der Einstellung",
     },
-    {
-      const Locale("en", "US"): "Value of the Setting",
+    "Value of the Setting": {
       const Locale("de", "DE"): "Wert der Einstellung",
     },
-    {
-      const Locale("en", "US"): "Value of the Info",
+    "Value of the Info": {
       const Locale("de", "DE"): "Wert der Info",
     },
-    {
-      const Locale("en", "US"): "Choose your Theme Mode",
+    "Choose your Theme Mode": {
       const Locale("de", "DE"): "Wähle dein Farbthema",
     },
-    {
-      const Locale("en", "US"): "Add Todo",
+    "Add Todo": {
       const Locale("de", "DE"): "Todo hinzufügen",
     },
-    {
-      const Locale("en", "US"): "Set a Date",
+    "Set a Date": {
       const Locale("de", "DE"): "Setze das Datum",
     },
-    {
-      const Locale("en", "US"): "Date",
+    "Date": {
       const Locale("de", "DE"): "Datum",
     },
-    {
-      const Locale("en", "US"): "Set a Time",
+    "Set a Time": {
       const Locale("de", "DE"): "Setze die Zeit",
     },
-    {
-      const Locale("en", "US"): "Time",
+    "Time": {
       const Locale("de", "DE"): "Zeit",
     },
-    {
-      const Locale("en", "US"): "Cancel",
+    "Cancel": {
       const Locale("de", "DE"): "Abbrechen",
     },
-    {
-      const Locale("en", "US"): "Confirm",
+    "Confirm": {
       const Locale("de", "DE"): "Bestätigen",
     },
-    {
-      const Locale("en", "US"): "Insert Title",
+    "Insert Title": {
       const Locale("de", "DE"): "Titel einfügen",
     },
-    {
-      const Locale("en", "US"): "Insert Content",
+    "Insert Content": {
       const Locale("de", "DE"): "Inhalt einfügen",
     },
-    {
-      const Locale("en", "US"): "is missing",
+    "is missing": {
       const Locale("de", "DE"): "fehlt",
     },
-    {
-      const Locale("en", "US"): "Some Values missing",
+    "Some Values missing": {
       const Locale("de", "DE"): "Einige Informationen fehlen",
     },
-    {
-      const Locale("en", "US"): "The following Value is missing:",
-      const Locale("de", "DE"): "Die folgende Information fehlt:",
+    "The following Value is missing:": {
+      const Locale("de", "DE"): "Die folgende Information fehlt:"
     },
-    {
-      const Locale("en", "US"): "The following Values are missing:",
+    "The following Values are missing:": {
       const Locale("de", "DE"): "Die folgenden Informationen fehlen:",
     },
-    {
-      const Locale("en", "US"): "OK",
+    "OK": {
       const Locale("de", "DE"): "OK",
     },
-    {
-      const Locale("en", "US"): "Edit Title",
+    "Edit Title": {
       const Locale("de", "DE"): "Titel bearbeiten",
     },
-    {
-      const Locale("en", "US"): "Edit",
+    "Edit": {
       const Locale("de", "DE"): "Bearbeiten",
     },
-    {
-      const Locale("en", "US"): "Language",
+    "Language": {
       const Locale("de", "DE"): "Sprache",
     },
-    {
-      const Locale("en", "US"): "Thememode",
+    "Thememode": {
       const Locale("de", "DE"): "Helligkeitsmodus",
     },
-    {
-      const Locale("en", "US"): "Notifications",
+    "Notifications": {
       const Locale("de", "DE"): "Benachrichtigungen",
     },
-    {
-      const Locale("en", "US"): "Search Results",
+    "Search Results": {
       const Locale("de", "DE"): "Suchergebnisse",
     },
-    {
-      const Locale("en", "US"): "No Results",
+    "No Results": {
       const Locale("de", "DE"): "Keine Ergebnisse",
     },
-    {
-      const Locale("en", "US"): "No Results were found",
+    "No Results were found": {
       const Locale("de", "DE"): "Es wurden keine Ergebnisse gefunden",
     },
-    {
-      const Locale("en", "US"): "Todo",
+    "Todo": {
       const Locale("de", "DE"): "Todo",
     },
-    {
-      const Locale("en", "US"): "Setting",
+    "Setting": {
       const Locale("de", "DE"): "Einstellung",
     },
-    {
-      const Locale("en", "US"): "Choose an Standard Importance",
-      const Locale("de", "DE"): "Wähle die Standard Dringlichkeit",
+    "Choose an Standard Importance": {
+      const Locale("de", "DE"): "Wähle die Standard Dringlichkeit"
     },
-    {
-      const Locale("en", "US"): "Set an Importance",
-      const Locale("de", "DE"): "Setze die Dringlichkeit"
+    "Set an Importance": {
+      const Locale("de", "DE"): "Setze die Dringlichkeit",
     },
-    {
-      const Locale("en", "US"): "Importance",
+    "Importance": {
       const Locale("de", "DE"): "Dringlichkeit",
     },
-    {
-      const Locale("en", "US"): "Todo Content",
+    "Todo Content": {
       const Locale("de", "DE"): "Todo Inhalt",
     },
-    {
-      const Locale("en", "US"): "Edit Todo",
-      const Locale("de", "DE"): "Todo bearbeiten",
+    "Edit Todo": {
+      const Locale("de", "DE"): "Todo Bearbeiten",
     },
-    {
-      const Locale("en", "US"): "Edit Title",
-      const Locale("de", "DE"): "Titel bearbeiten",
-    },
-    {
-      const Locale("en", "US"): "Edit Content",
+    "Edit Content": {
       const Locale("de", "DE"): "Inhalt bearbeiten",
     },
-    {
-      const Locale("en", "US"): "Light",
+    "Light": {
       const Locale("de", "DE"): "Hell",
     },
-    {
-      const Locale("en", "US"): "Dark",
+    "Dark": {
       const Locale("de", "DE"): "Dunkel",
     },
-    {
-      const Locale("en", "US"): "Search something...",
+    "Search something...": {
       const Locale("de", "DE"): "Suche etwas...",
     },
-    {
-      const Locale("en", "US"): "You don't have any Todos",
+    "You don't have any Todos": {
       const Locale("de", "DE"): "Du hast keine Todos",
     },
-    {
-      const Locale("en", "US"): "Add one",
+    "Add one": {
       const Locale("de", "DE"): "Eines hinzufügen",
     },
-    {
-      const Locale("en", "US"): "Checked Todos",
+    "Checked Todos": {
       const Locale("de", "DE"): "Erledigte Todos",
     },
-    {
-      const Locale("en", "US"): "Show Checked Todos",
+    "Show Checked Todos": {
       const Locale("de", "DE"): "Erledigte Todos anzeigen",
     },
-    {
-      const Locale("en", "US"): "None of your Todos are checked",
+    "None of your Todos are checked": {
       const Locale("de", "DE"): "Keines deiner Todos ist erledigt",
     },
-    {
-      const Locale("en", "US"): "Title:",
-      const Locale("de", "DE"): "Titel:",
+    "Title:": {
+      const Locale("de", "DE"): "Titel",
     },
-    {
-      const Locale("en", "US"): "Content:",
+    "Content:": {
       const Locale("de", "DE"): "Inhalt:",
     },
-    {
-      const Locale("en", "US"): "Checked:",
+    "Checked:": {
       const Locale("de", "DE"): "Erledigt:",
     },
-    {
-      const Locale("en", "US"): "About",
+    "About": {
       const Locale("de", "DE"): "Über",
     },
-    {
-      const Locale("en", "US"): "Everything about the App",
+    "Everything about the App": {
       const Locale("de", "DE"): "Alles über die App",
     },
-    {
-      const Locale("en", "US"): "Active",
+    "Active": {
       const Locale("de", "DE"): "Aktiv",
     },
-    {
-      const Locale("en", "US"): "Inactive",
+    "Inactive": {
       const Locale("de", "DE"): "Inaktiv",
     },
-  ];
+    "Delete Todo": {
+      const Locale("de", "DE"): "Todo löschen",
+    },
+  };
 
   /// Translates the String to the [activeLocale]
   static String getTranslation(String input) {
-    for (Map _map in _translations) {
-      if (_map[const Locale("en", "US")] == input) {
-        return _map[activeLocale];
-      } else {
-        continue;
-      }
+    final _translation = _translations[input];
+    if (_translation != null) {
+      return _translation[Translation.activeLocale]!;
+    } else {
+      return input;
     }
-    return input;
   }
 }
 
 /// Extension to translate a String
 extension Translate on String {
-  /// Translates the String
+  /// Translates the String to the Language used in the App
   String translate() {
-    final _translation = Translation.getTranslation(this);
-
-    return _translation;
+    if (Translation.activeLocale == const Locale("en", "US")) {
+      return this;
+    } else {
+      final _translation = Translation.getTranslation(this);
+      return _translation;
+    }
   }
 }

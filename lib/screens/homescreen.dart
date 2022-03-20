@@ -1,12 +1,17 @@
 library screens;
 
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
+import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/storage/storage.dart';
 import 'components/todo_tile.dart';
 
 class Homescreen extends StatefulWidget {
@@ -22,7 +27,64 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
-      appBar: AppBar(
+      appBar: _appBar,
+      body: _body,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _openAddTodo(context),
+        child: const Icon(Icons.add_rounded),
+      ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+    );
+
+    return _scaffold;
+  }
+
+  /// AppBar which depends on whether you have selected
+  /// one or more Tdos or not
+  AppBar get _appBar {
+    bool selected = false;
+    final AppBar _appBar;
+    for (Todo todo in TodoList.listOfTodos) {
+      if (todo.selected) {
+        selected = true;
+        break;
+      } else {
+        continue;
+      }
+    }
+    if (selected) {
+      _appBar = AppBar(
+        title: Text(
+          "Edit".translate(),
+          semanticsLabel: "Edit".translate(),
+        ),
+        actions: <IconButton>[
+          IconButton(
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: () {
+              setState(() {
+                final List<Todo> _list = [];
+                for (Todo todo in TodoList.listOfTodos) {
+                  if (todo.selected) {
+                    _list.add(todo);
+                  } else {
+                    continue;
+                  }
+                }
+                for (Todo todo in _list) {
+                  TodoList.deleteTodo(todo);
+                }
+              });
+            },
+            tooltip: "Delete Todo".translate(),
+          ),
+        ],
+      );
+    } else {
+      _appBar = AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
           tooltip: "Show Checked Todos".translate(),
@@ -50,19 +112,9 @@ class _HomescreenState extends State<Homescreen> {
             tooltip: "Open Settings".translate(),
           )
         ],
-      ),
-      body: _body,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openAddTodo(context),
-        child: const Icon(Icons.add_rounded),
-      ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-    );
-
-    return _scaffold;
+      );
+    }
+    return _appBar;
   }
 
   /// Returns the Body of the Screen depending on the [TodoList.listOfTodos]
@@ -155,17 +207,62 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
-      appBar: AppBar(
+      appBar: _appBar,
+      body: _body,
+    );
+
+    return _scaffold;
+  }
+
+  AppBar get _appBar {
+    bool selected = false;
+    final AppBar _appBar;
+    for (Todo todo in TodoList.listOfCheckedTodos) {
+      if (todo.selected) {
+        selected = true;
+        break;
+      } else {
+        continue;
+      }
+    }
+    if (selected) {
+      _appBar = AppBar(
+        title: Text(
+          "Edit".translate(),
+          semanticsLabel: "Edit".translate(),
+        ),
+        actions: <IconButton>[
+          IconButton(
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: () {
+              setState(() {
+                final List<Todo> _list = [];
+                for (Todo todo in TodoList.listOfCheckedTodos) {
+                  if (todo.selected) {
+                    _list.add(todo);
+                  } else {
+                    continue;
+                  }
+                }
+                for (Todo todo in _list) {
+                  TodoList.deleteTodo(todo);
+                }
+              });
+            },
+            tooltip: "Delete Todo".translate(),
+          ),
+        ],
+      );
+    } else {
+      _appBar = AppBar(
         automaticallyImplyLeading: true,
         title: Text(
           "Checked Todos".translate(),
           semanticsLabel: "Checked Todos".translate(),
         ),
-      ),
-      body: _body,
-    );
-
-    return _scaffold;
+      );
+    }
+    return _appBar;
   }
 
   /// Returns the Body of the Screen depending on the [TodoList.listOfCheckedTodos]

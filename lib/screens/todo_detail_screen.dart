@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/todo_details_tile.dart';
 import 'package:todo/storage/storage.dart';
 
@@ -23,8 +24,7 @@ class TodoDetailScreen extends StatefulWidget {
   State<TodoDetailScreen> createState() => _TodoDetailScreenState();
 }
 
-class _TodoDetailScreenState extends State<TodoDetailScreen>
-    with TickerProviderStateMixin {
+class _TodoDetailScreenState extends State<TodoDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(

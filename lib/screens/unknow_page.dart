@@ -36,10 +36,10 @@ class _UnknownPageState extends State<UnknownPage> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                "Something went wrong while navigating to the page you wanted to see."
+                "Something went wrong while navigating to the page you wanted to see"
                     .translate(),
                 semanticsLabel:
-                    "Something went wrong while navigating to the page you wanted to see."
+                    "Something went wrong while navigating to the page you wanted to see"
                         .translate(),
               ),
               const SizedBox(

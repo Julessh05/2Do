@@ -79,12 +79,20 @@ class Setting extends HiveObject {
   @HiveField(6)
   late String hiveKey;
 
+  @HiveField(7)
+  bool? isObject;
+
+  @HiveField(8)
+  String? isObjectType;
+
   Setting({
     required this.name,
     this.boolValue,
     this.intValue,
     this.stringValue,
     this.objectValue,
+    this.isObject,
+    this.isObjectType,
   }) : assert(
           boolValue != null &&
                   intValue == null &&
@@ -251,12 +259,16 @@ class AllSettings {
   static final languageSetting = Setting(
     name: "Language",
     objectValue: Translation.activeLocale,
+    isObject: true,
+    isObjectType: "Locale",
   );
 
   /// Gives Information about the Theme Mode
   static final themeModeSetting = Setting(
     name: "Thememode",
     objectValue: Themes.themeMode,
+    isObject: true,
+    isObjectType: "ThemeMode",
   );
 
   /// Gives Information if the Notifications are active

@@ -70,6 +70,7 @@ class _TodoTileState extends State<TodoTile> {
     setState(() {
       widget.todo.selected = !widget.todo.selected;
     });
+    widget.setStateFunc();
   }
 
   /// Funtion called when the Todo is checked
@@ -84,8 +85,8 @@ class _TodoTileState extends State<TodoTile> {
       } else {
         // Do nothing
       }
+      widget.setStateFunc();
     });
     Storage.storeTodos();
-    widget.setStateFunc;
   }
 }

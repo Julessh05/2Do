@@ -9,6 +9,7 @@ import 'package:todo/models/setting.dart';
 import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
+import 'package:todo/storage/storage.dart';
 import 'package:todo/styles/themes.dart';
 
 /// The Main Settings Screen from which you can navigate
@@ -104,6 +105,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   void _reload() {
     setState(() {
       AllSettings.updateSettings();
+      Storage.storeSettings();
     });
   }
 
