@@ -6,7 +6,7 @@ abstract class IdentifiableModel {
   /// a new Instance of this Object in the Storage
   final String identifier;
 
-  /// Used to seperate the single fields of an Object while reading
+  /// Used to separate the single fields of an Object while reading
   /// it from the Storage
   /// Usually an [RegExp]
   final Pattern regExp;

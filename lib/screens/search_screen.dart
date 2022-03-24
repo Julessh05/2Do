@@ -137,16 +137,19 @@ class _SearchScreenState extends State<SearchScreen> {
     return _scaffold;
   }
 
-  /// Searchs in the [listOfTodos] and [listOfSettings]
+  /// Searches in the [TodoList.listOfTodos] and [listOfSettings]
   /// and navigates to a new Screen.
-  /// This eigther shows the results or says "No Results found"
+  /// This either shows the results or says "No Results found"
   void _search(String input) {
     List<SearchResult> listOfResults = [];
 
     // Search Todos
     for (Todo todo in TodoList.listOfTodos) {
-      if (todo.title == input) {
+      if (todo.title.toLowerCase().contains(input.toLowerCase())) {
         // If Todo matches, create Search Result and add it to the list
+        final _result = SearchResult(todo: todo);
+        listOfResults.add(_result);
+      } else if (todo.content.toLowerCase().contains(input.toLowerCase())) {
         final _result = SearchResult(todo: todo);
         listOfResults.add(_result);
       } else {
@@ -156,7 +159,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
     // Search Settings
     for (Setting setting in listOfSettings) {
-      if (setting.name == input) {
+      if (setting.name
+          .translate()
+          .toLowerCase()
+          .contains(input.toLowerCase())) {
         // If Setting matches, create Search Result and add it to the list
         final _result = SearchResult(setting: setting);
         listOfResults.add(_result);

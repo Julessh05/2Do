@@ -25,7 +25,7 @@ class Storage {
   /// The Key / Name for the [_settingsBox]
   static const settingsBoxKey = "Settings Box";
 
-  /// Init Method which inits everything and is responsible
+  /// Init Method which initializes everything and is responsible
   /// for registering the Adapters
   /// Also the Boxes are opened here
   static Future<void> init() async {

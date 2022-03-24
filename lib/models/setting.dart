@@ -191,7 +191,7 @@ class Setting extends HiveObject {
         _output = "String";
         break;
       case "Object":
-        _output = Converter.supportedTypetoString(objectValue.runtimeType);
+        _output = Converter.supportedTypeToString(objectValue.runtimeType);
         break;
       default:
         _output = "Error";

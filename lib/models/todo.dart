@@ -7,7 +7,7 @@ part 'todo.g.dart';
 /// Object which represents a single Todo used in the App
 /// [selected] and [checked] are usually not given while creating a Todo
 /// These Values are used by the Widget in the Homescreen to show the Todo
-/// properally
+/// properly
 @HiveType(typeId: 1)
 class Todo extends HiveObject {
   @HiveField(0)
@@ -16,10 +16,10 @@ class Todo extends HiveObject {
   @HiveField(1)
   String content;
 
-  // @HiveFild(2)
+  // @HiveField(2)
   // late final DateTime time;
 
-  // @HiveFild(3)
+  // @HiveField(3)
   // final List<String> tags;
 
   @HiveField(4)
@@ -28,10 +28,10 @@ class Todo extends HiveObject {
   @HiveField(5)
   bool checked;
 
-  // @HiveFild(6)
+  // @HiveField(6)
   // late final DateTime created;
 
-  // @HiveFild(7)
+  // @HiveField(7)
   // late final int? importance;
 
   Todo({
@@ -121,15 +121,15 @@ class Todo extends HiveObject {
 
   /// Returns the [time] as a String to use in Widgets,
   /// or to store the Value
-  // String get timeAsString => Converter.dateToString(time);
+// String get timeAsString => Converter.dateToString(time);
 
   /// Returns only the time from the [time]
-  // String get onlyTime => Converter.onlyTime(time);
+// String get onlyTime => Converter.onlyTime(time);
 
   /// Returns only the date of the [time]
-  // String get onlyDate => Converter.onlyDate(time);
+// String get onlyDate => Converter.onlyDate(time);
 
   /// Returns the DateTime as String. The DateTime returned is the
   /// Date of creation of this Todo
-  // String get createdAsString => Converter.dateToString(created);
+// String get createdAsString => Converter.dateToString(created);
 }

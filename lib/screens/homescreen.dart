@@ -8,6 +8,7 @@ import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
+
 import 'components/todo_tile.dart';
 
 class Homescreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   /// AppBar which depends on whether you have selected
-  /// one or more Tdos or not
+  /// one or more Todos or not
   AppBar get _appBar {
     bool selected = false;
     final AppBar _appBar;
@@ -189,7 +190,7 @@ class _HomescreenState extends State<Homescreen> {
   }
 }
 
-/// Screen which showns all the checked Todos.
+/// Screen which shows all the checked Todos.
 class CheckedTodosScreen extends StatefulWidget {
   const CheckedTodosScreen({Key? key}) : super(key: key);
 

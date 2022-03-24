@@ -34,8 +34,19 @@ class Themes {
       indicatorColor: Colors.blue.shade800,
 
       /* Color Scheme */
-      // TODO: change to own Color Scheme
-      colorScheme: ColorScheme.light(),
+      colorScheme: ColorScheme(
+        brightness: Brightness.light,
+        primary: Colors.blue.shade800,
+        onPrimary: Colors.white,
+        secondary: Colors.red,
+        onSecondary: Colors.green,
+        error: Colors.red.shade700,
+        onError: Colors.white,
+        background: Colors.white,
+        onBackground: Colors.black,
+        surface: Colors.blue.shade800.withAlpha(70),
+        onSurface: Colors.black,
+      ),
 
       /* Cupertino Override Theme */
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
@@ -48,7 +59,6 @@ class Themes {
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 5.0,
-        // TODO: check on Device with Navigation Bar and find out what it does
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarColor: Colors.blue.shade900,
@@ -70,8 +80,8 @@ class Themes {
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
+            bottomLeft: Radius.circular(33),
+            bottomRight: Radius.circular(33),
           ),
           side: BorderSide(
             color: Colors.blue.shade600,
@@ -445,6 +455,8 @@ class Themes {
       ),
 
       /* Typography */
+      // Does not work at the Moment.
+      // MaterialApp is running into a Problem when using this
       // typography: Typography.material2018(),
 
       /* Scrollbar Theme */
@@ -482,8 +494,19 @@ class Themes {
       indicatorColor: Colors.blue.shade800,
 
       /* Color Scheme */
-      // TODO: change to own Color Scheme
-      // colorScheme: ColorScheme.dark(),
+      colorScheme: ColorScheme(
+        brightness: Brightness.dark,
+        primary: Colors.blue.shade800,
+        onPrimary: Colors.white,
+        secondary: Colors.black,
+        onSecondary: Colors.white,
+        error: Colors.red.shade700,
+        onError: Colors.white,
+        background: Colors.black,
+        onBackground: Colors.white,
+        surface: Colors.blue.shade800.withAlpha(70),
+        onSurface: Colors.white,
+      ),
 
       /* Cupertino Override Theme */
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
@@ -496,7 +519,6 @@ class Themes {
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 5.0,
-        // TODO: check on Device with Navigation Bar and find out what it does
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarColor: Colors.blue.shade900,
@@ -518,8 +540,8 @@ class Themes {
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
+            bottomLeft: Radius.circular(33),
+            bottomRight: Radius.circular(33),
           ),
           side: BorderSide(
             color: Colors.blue.shade600,
@@ -554,7 +576,7 @@ class Themes {
             width: 0.5,
           ),
         ),
-        selectedColor: Colors.black,
+        selectedColor: Colors.white,
         selectedTileColor: Colors.blue.shade800.withAlpha(70),
         minLeadingWidth: 10,
         minVerticalPadding: 10,
@@ -745,7 +767,7 @@ class Themes {
             Radius.circular(20),
           ),
           borderSide: BorderSide(
-            color: Colors.purple.shade700,
+            color: Colors.purple.shade600,
             style: BorderStyle.solid,
             width: 0.7,
           ),
@@ -893,6 +915,8 @@ class Themes {
       ),
 
       /* Typography */
+      // Does not work at the Moment.
+      // MaterialApp is running into a Problem when using this
       // typography: Typography.material2018(),
 
       /* Scrollbar Theme */

@@ -40,7 +40,7 @@ class Converter {
     return DateTime.parse(string);
   }
 
-  /// Converts a [DateTime] to a [String] and rerturns the Time only
+  /// Converts a [DateTime] to a [String] and returns the Time only
   /// Format:
   /// HH:MM
   static String onlyTime(DateTime dateTime) {
@@ -72,7 +72,7 @@ class Converter {
   /// Converts a [TimeOfDay] to a [String] and returns it in the
   /// following Format:
   /// HH:MM
-  static String timeOfDaytoString(TimeOfDay time) {
+  static String timeOfDayToString(TimeOfDay time) {
     // Convert Hour
     final String hour = time.hour.toString().padLeft(2, '0');
 
@@ -130,7 +130,7 @@ class Converter {
   /// Returns the Type of a specific Value as a String
   /// This is used to store the Type. The Type then is needed again
   /// to load the Settings from the Storage
-  static String supportedTypetoString(Type type) {
+  static String supportedTypeToString(Type type) {
     final String _type;
     switch (type) {
       case Locale:
@@ -182,7 +182,7 @@ class Converter {
 
 /// Parse String to Bool
 extension BoolParse on String {
-  /// Parses String to Boolean and returns eigther true or false
+  /// Parses String to Boolean and returns either true or false
   /// null isn't possible
   bool parseBool() {
     return toLowerCase() == "true";

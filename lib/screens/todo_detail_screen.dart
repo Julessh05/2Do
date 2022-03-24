@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/todo.dart';
-import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/todo_details_tile.dart';
 import 'package:todo/storage/storage.dart';
 
@@ -69,7 +68,9 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
           // Checked
           TodoDetailsTile(
             title: "Checked:".translate(),
-            subtitle: widget.todo.checked.toString(),
+            subtitle: widget.todo.checked
+                ? "Checked".translate()
+                : "Not yet".translate(),
           ),
 
           // Time

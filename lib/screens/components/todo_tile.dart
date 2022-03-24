@@ -73,7 +73,7 @@ class _TodoTileState extends State<TodoTile> {
     widget.setStateFunc();
   }
 
-  /// Funtion called when the Todo is checked
+  /// Function called when the Todo is checked
   /// and marked as done.
   void _onChecked() {
     setState(() {

@@ -89,6 +89,13 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             icon: const Icon(Icons.info_outline_rounded),
             aboutDialog: const AboutDialog(
               applicationName: "2Do",
+              applicationVersion: TodoApp.appVersionString,
+              children: <Widget>[
+                Text("\n"),
+                Text("A Todo App built with Flutter,"),
+                Text("a UI Framework by Google."),
+                Text("Available on Android and IOS"),
+              ],
               applicationLegalese: "© Julian Schumacher 2022",
             ),
           )
@@ -279,7 +286,6 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             autofocus: false,
             enableFeedback: true,
             isThreeLine: false,
-            // TODO: translate
             title: Text(
               "unimportant".translate(),
               semanticsLabel: "unimportant".translate(),

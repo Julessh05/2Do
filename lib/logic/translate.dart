@@ -210,6 +210,12 @@ class Translation {
     "Checked:": {
       const Locale("de", "DE"): "Erledigt:",
     },
+    "Checked": {
+      const Locale("de", "DE"): "Erledigt",
+    },
+    "Not yet": {
+      const Locale("de", "DE"): "Noch nicht",
+    },
     "About": {
       const Locale("de", "DE"): "Über",
     },

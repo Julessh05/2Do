@@ -7,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
-import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -23,7 +22,6 @@ void main() async {
   await Storage.init();
   Storage.loadSettings();
   Storage.loadTodos();
-  AllSettings.setAllSettings();
   runApp(const TodoApp());
 }
 
@@ -32,6 +30,8 @@ class TodoApp extends StatefulWidget {
 
   static const routeName = "main";
   static final themeStream = StreamController<ThemeMode>();
+  static const double appVersion = 1.0;
+  static const String appVersionString = "1.0.0";
 
   @override
   State<TodoApp> createState() => _TodoAppState();

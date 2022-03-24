@@ -6,7 +6,7 @@ import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 
 /// Is used to show new SettingsTiles from one SettingsTile above them
-/// They have nearly the same options as a [SettingsTile], withour the option
+/// They have nearly the same options as a [SettingsTile], without the option
 /// to have Subtiles
 class SettingsSubTile extends StatefulWidget {
   const SettingsSubTile({

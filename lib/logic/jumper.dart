@@ -12,11 +12,11 @@ import 'package:todo/screens/settings_screens.dart';
 /// This class contains a part of Jumps and Navigating
 /// Actions done in the App
 /// It does not contain everything. This is because sometimes it
-/// is nessecary to call setState(() {}) after navigating to a Widget
-/// or after poping the Widget. setState(() {}) can't be called in a static
+/// is necessary to call setState(() {}) after navigating to a Widget
+/// or after popping the Widget. setState(() {}) can't be called in a static
 /// reference, so these Methods are implemented into the Widget directly
 class Jumper {
-  /// Navigate back to the Homescreen and Renove every
+  /// Navigate back to the Homescreen and Remove every
   /// other Screen on the Stack
   static void backToTheHomescreen(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(

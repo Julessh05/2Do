@@ -147,7 +147,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               date == null ? "Set a Time".translate() : "Time".translate(),
             ),
             subtitle:
-                time == null ? null : Text(Converter.timeOfDaytoString(time!)),
+                time == null ? null : Text(Converter.timeOfDayToString(time!)),
             leading: const Icon(Icons.timelapse_rounded),
             onTap: () => _setTime().then(
               (value) => setState(() {
@@ -291,7 +291,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       locale: Translation.activeLocale,
       cancelText: "Cancel".translate(),
       confirmText: "Confirm".translate(),
-      // TODO: right / useful?
       useRootNavigator: true,
     );
   }
@@ -304,7 +303,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       initialEntryMode: TimePickerEntryMode.dial,
       cancelText: "Cancel".translate(),
       confirmText: "Confirm".translate(),
-      // TODO: right / useful?
       useRootNavigator: true,
     );
   }
