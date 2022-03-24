@@ -65,6 +65,8 @@ class _TodoAppState extends State<TodoApp> {
             final localeName = Platform.localeName;
             if (localeName == "de_DE") {
               Translation.activeLocale = const Locale("de", "DE");
+            } else if(localeName == "fr_FR") {
+              Translation.activeLocale = cosnt Locale("fr", "FR");
             } else {
               Translation.activeLocale = const Locale("en", "US");
             }

@@ -65,11 +65,11 @@ class _SearchScreenState extends State<SearchScreen> {
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             hintText: "Search something...".translate(),
             hintStyle: const TextStyle(
-              color: Colors.white,
+              color: Colors.white70,
             ),
             border: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             errorBorder: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -89,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             enabledBorder: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -99,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             focusedBorder: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -109,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             disabledBorder: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -119,7 +119,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             focusedErrorBorder: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(05),
               ),
               borderSide: BorderSide(
                 color: Colors.white70,
@@ -137,9 +137,9 @@ class _SearchScreenState extends State<SearchScreen> {
     return _scaffold;
   }
 
-  /// Searches in the [TodoList.listOfTodos] and [listOfSettings]
+  /// Searchs in the [TodoList.listOfTodos] and [listOfSettings]
   /// and navigates to a new Screen.
-  /// This either shows the results or says "No Results found"
+  /// This eigther shows the results or says "No Results found"
   void _search(String input) {
     List<SearchResult> listOfResults = [];
 

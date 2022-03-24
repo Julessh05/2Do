@@ -88,6 +88,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             setting: AllSettings.about,
             icon: const Icon(Icons.info_outline_rounded),
             aboutDialog: const AboutDialog(
+              applicationIcon: Icon(Icons.check),
               applicationName: "2Do",
               applicationVersion: TodoApp.appVersionString,
               children: <Widget>[
@@ -170,6 +171,32 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             child: Text(
               "German".translate(),
               semanticsLabel: "German".translate(),
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+
+        // Option French
+        SimpleDialogOption(
+          onPressed: () {
+            Translation.activeLocale = const Locale("fr", "FR");
+            _reload();
+            Jumper.back(context);
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade800,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+            child: Text(
+              "French".translate(),
+              semanticsLabel: "French".translate(),
               style: const TextStyle(
                 color: Colors.white,
               ),

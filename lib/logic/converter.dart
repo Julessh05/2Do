@@ -96,6 +96,8 @@ class Converter {
       case Locale:
         if (object == const Locale("de", "DE")) {
           _output = "German";
+        } else if (object == const Locale("fr", "FR")) {
+          _output = "French";
         } else {
           _output = "English";
         }
@@ -159,6 +161,8 @@ class Converter {
       case "Locale":
         if (string == "German") {
           object = const Locale("de", "DE");
+        } else if (string == "French") {
+          object = const Locale("fr", "FR");
         } else {
           object = const Locale("en", "US");
         }

@@ -247,9 +247,8 @@ class Setting extends HiveObject {
 List<Setting> listOfSettings = [
   AllSettings.languageSetting,
   AllSettings.themeModeSetting,
-  AllSettings.notificationActiveSetting,
-  AllSettings.notificationImportanceSetting,
-  AllSettings.emptySetting,
+  // AllSettings.notificationActiveSetting,
+  // AllSettings.notificationImportanceSetting,
   AllSettings.about,
 ];
 
@@ -277,8 +276,6 @@ class AllSettings {
     name: "activated",
     boolValue: true,
   );
-
-  static final emptySetting = Setting.empty();
 
   static final notificationImportanceSetting = Setting(
     name: "Importance",
@@ -318,11 +315,10 @@ class AllSettings {
   /// Creates the ListOfSettings and sets it to the new values
   static void createListOfSettings() {
     listOfSettings = [
-      themeModeSetting,
       languageSetting,
-      notificationActiveSetting,
-      notificationImportanceSetting,
-      emptySetting,
+      themeModeSetting,
+      // notificationActiveSetting,
+      // notificationImportanceSetting,
       about,
     ];
   }

@@ -17,7 +17,8 @@ is ready to be realesed
 
 ## Language
 
-At the Moment this App is avaible in English, German and French
+At the Moment this App is avaible in English, German and French.
+I do not guarantee that all Translations are right or make sense.
 
 
 ## Design and Inspiration
