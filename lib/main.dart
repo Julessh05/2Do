@@ -1,20 +1,20 @@
 library main;
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
+import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
-import 'package:todo/screens/unknow_page.dart';
+import 'package:todo/screens/unknown_page.dart';
 import 'package:todo/storage/storage.dart';
 import 'package:todo/styles/themes.dart';
 
@@ -23,6 +23,7 @@ void main() async {
   await Storage.init();
   Storage.loadSettings();
   Storage.loadTodos();
+  AllSettings.setAllSettings();
   runApp(const TodoApp());
 }
 
@@ -51,7 +52,6 @@ class _TodoAppState extends State<TodoApp> {
           debugShowCheckedModeBanner: true,
           checkerboardOffscreenLayers: false,
           checkerboardRasterCacheImages: false,
-
           /* App Section */
           title: "2Do App",
 
@@ -61,7 +61,7 @@ class _TodoAppState extends State<TodoApp> {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          localeListResolutionCallback: (_, __) {
+          /* localeListResolutionCallback: (_, __) {
             final localeName = Platform.localeName;
             if (localeName == "de_DE") {
               Translation.activeLocale = const Locale("de", "DE");
@@ -69,7 +69,7 @@ class _TodoAppState extends State<TodoApp> {
               Translation.activeLocale = const Locale("en", "US");
             }
             return Translation.activeLocale;
-          },
+          }, */
           supportedLocales: Translation.supportedLocales,
           useInheritedMediaQuery: false,
           scrollBehavior: const MaterialScrollBehavior(),

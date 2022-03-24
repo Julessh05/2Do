@@ -87,37 +87,44 @@ class Converter {
   /// Supported are:
   /// Locale and
   /// ThemeMode
-  static String supportedObjectToDisplayableString(dynamic object) {
+  static String supportedObjectToDisplayableString(
+    dynamic object,
+    bool? translate,
+  ) {
     final String _output;
     switch (object.runtimeType) {
       case Locale:
         if (object == const Locale("de", "DE")) {
-          _output = "German".translate();
+          _output = "German";
         } else {
-          _output = "English".translate();
+          _output = "English";
         }
         break;
       case ThemeMode:
         if (object == ThemeMode.dark) {
-          _output = "Dark".translate();
+          _output = "Dark";
         } else if (object == ThemeMode.light) {
-          _output = "Light".translate();
+          _output = "Light";
         } else {
           _output = "System";
         }
         break;
       case bool:
         if (object == true) {
-          _output = "Active".translate();
+          _output = "Active";
         } else {
-          _output = "intactive".translate();
+          _output = "Inactive";
         }
         break;
       default:
         _output = "";
         break;
     }
-    return _output;
+    if (translate == true) {
+      return _output.translate();
+    } else {
+      return _output;
+    }
   }
 
   /// Returns the Type of a specific Value as a String

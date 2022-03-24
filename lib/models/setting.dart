@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+library models;
+
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
@@ -205,9 +206,9 @@ class Setting extends HiveObject {
     } else if (valueType == "String") {
       return stringValue!.translate();
     } else if (valueType == "bool") {
-      return Converter.supportedObjectToDisplayableString(boolValue);
+      return Converter.supportedObjectToDisplayableString(boolValue, true);
     } else {
-      return Converter.supportedObjectToDisplayableString(objectValue);
+      return Converter.supportedObjectToDisplayableString(objectValue, true);
     }
   }
 
@@ -236,7 +237,7 @@ class Setting extends HiveObject {
 
     // Add Value as String
     _result += "ValueAsString:";
-    _result += Converter.supportedObjectToDisplayableString(value);
+    _result += Converter.supportedObjectToDisplayableString(value, true);
 
     return _result;
   }
@@ -285,14 +286,44 @@ class AllSettings {
   );
 
   static final about = Setting(
-    name: "About".translate(),
-    stringValue: "Everything about the App".translate(),
+    name: "About",
+    stringValue: "Everything about the App",
   );
 
   static const listOfSettingsKEY = "List Of Settings";
 
+  /// Updates The Settings to the most recent Value
   static void updateSettings() {
     languageSetting.objectValue = Translation.activeLocale;
     themeModeSetting.objectValue = Themes.themeMode;
+    createListOfSettings();
+  }
+
+  /// Sets the Values and the Settings.
+  /// Used whe starting the App
+  static void setAllSettings() {
+    for (Setting setting in listOfSettings) {
+      switch (setting.name) {
+        case "Language":
+          Translation.activeLocale = setting.objectValue;
+          break;
+        case "Thememode":
+          Themes.themeMode = setting.objectValue;
+          break;
+      }
+    }
+    updateSettings();
+  }
+
+  /// Creates the ListOfSettings and sets it to the new values
+  static void createListOfSettings() {
+    listOfSettings = [
+      themeModeSetting,
+      languageSetting,
+      notificationActiveSetting,
+      notificationImportanceSetting,
+      emptySetting,
+      about,
+    ];
   }
 }

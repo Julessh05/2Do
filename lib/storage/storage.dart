@@ -93,6 +93,7 @@ class Storage {
           name: setting.name,
           stringValue: Converter.supportedObjectToDisplayableString(
             setting.objectValue,
+            false,
           ),
           isObject: true,
           isObjectType: setting.isObjectType,
@@ -115,7 +116,7 @@ class Storage {
     for (Setting setting in listOfSettingsStorage) {
       if (setting.isObject != null) {
         if (setting.isObject == true) {
-          dynamic objectValue = Converter.stringToSupportedObject(
+          final dynamic objectValue = Converter.stringToSupportedObject(
             setting.stringValue!,
             setting.isObjectType!,
           );
@@ -135,6 +136,7 @@ class Storage {
       }
     }
     listOfSettings = _list;
+    AllSettings.setAllSettings();
   }
 
   /// Deletes the Box with the Settings from the File System

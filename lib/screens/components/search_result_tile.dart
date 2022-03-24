@@ -1,7 +1,6 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/jumper.dart';
 import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/screens/search_screen.dart';

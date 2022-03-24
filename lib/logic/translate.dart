@@ -13,7 +13,7 @@ class Translation {
   };
 
   /// The active locale (at the Moment)
-  static Locale? activeLocale;
+  static Locale activeLocale = supportedLocales.first;
 
   /// The Translations as a [HashMap].
   /// HashMap is used, because it has a constant time
@@ -32,18 +32,23 @@ class Translation {
   static final _translationsMap = <String, Map<Locale, String>>{
     "2Do": {
       const Locale("de", "DE"): "2Do",
+      const Locale("fr", "FR"): "2Do",
     },
     "Open Settings": {
       const Locale("de", "DE"): "Einstellungen öffnen",
+      const Locale("fr", "FR"): "Ouvrir les paramètres"
     },
     "Search": {
       const Locale("de", "DE"): "Suchen",
+      const Locale("fr", "FR"): "Chercher"
     },
     "Settings": {
       const Locale("de", "DE"): "Einstellungen",
+      const Locale("fr", "FR"): "Réglages"
     },
     "Choose your Language": {
       const Locale("de", "DE"): "Wähle deine Sprache",
+      const Locale("fr", "FR"): "Choisissez votre langue"
     },
     "English": {
       const Locale("de", "DE"): "Englisch",

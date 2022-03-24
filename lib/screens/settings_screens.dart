@@ -57,12 +57,12 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             simpleDialog: _themeModeDialog,
           ),
 
-          // Notifiaction Settings
+          // Notification Settings
           /*  SettingsTile.folder(
             setting: Setting.folder(name: "Notifications".translate()),
             icon: const Icon(Icons.notifications),
             subtiles: <SettingsSubTile>[
-              // Notifiations Active
+              // Notifications Active
               SettingsSubTile(
                 setting: AllSettings.notificationActiveSetting,
                 icon: AllSettings.notificationActiveSetting.boolValue!
@@ -214,7 +214,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           ),
         ),
 
-        // Oprion Light
+        // Option Light
         SimpleDialogOption(
           child: RadioListTile(
             autofocus: false,
@@ -261,6 +261,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       TodoApp.themeStream.sink.add(mode);
       Themes.themeMode = mode;
       AllSettings.updateSettings();
+      _reload();
     });
     Jumper.back(context);
   }
@@ -310,7 +311,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
 }
 
 /// Class that represents the SettingsSubScreen Arguments as a single Object
-/// This can be used to extract the Arguments using the Named NAvigator
+/// This can be used to extract the Arguments using the Named Navigator
 /// and routes
 class SettingsSubScreenArguments {
   const SettingsSubScreenArguments({

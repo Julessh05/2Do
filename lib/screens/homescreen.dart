@@ -1,8 +1,5 @@
 library screens;
 
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
@@ -11,7 +8,6 @@ import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
-import 'package:todo/storage/storage.dart';
 import 'components/todo_tile.dart';
 
 class Homescreen extends StatefulWidget {
