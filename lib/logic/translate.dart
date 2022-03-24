@@ -254,7 +254,7 @@ class Translation {
       const Locale("fr", "FR"): "Aucune de vos tâches n'est cochée",
     },
     "Title:": {
-      const Locale("de", "DE"): "Titel",
+      const Locale("de", "DE"): "Titel:",
       const Locale("fr", "FR"): "Titre:",
     },
     "Content:": {
