@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "com.jules.todo"
-        minSdkVersion flutter.minSdkVersion
+        minSdk 28
         targetSdk 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -58,6 +58,10 @@ android {
     }
     buildToolsVersion '33.0.0 rc2'
     ndkVersion '24.0.8215888'
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
+    }
 }
 
 flutter {
