@@ -318,7 +318,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               semanticsLabel: "unimportant".translate(),
             ),
             value: 0,
-            groupValue: Notifications.importance,
+            groupValue: Notifications.standardImportance,
             onChanged: (_) {},
           ),
         ),
@@ -332,7 +332,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               semanticsLabel: "middle Importance".translate(),
             ),
             value: 1,
-            groupValue: Notifications.importance,
+            groupValue: Notifications.standardImportance,
             onChanged: (_) {},
           ),
         )

@@ -30,8 +30,11 @@ class TodoApp extends StatefulWidget {
 
   static const routeName = "main";
   static final themeStream = StreamController<ThemeMode>();
+  // This double App Version only has one digit after the .
+  // So it just represents major and minor features.
+  // Bugfixes are only seen in the app Version as String
   static const double appVersion = 1.0;
-  static const String appVersionString = "1.0.0";
+  static const String appVersionString = "1.0.1";
 
   @override
   State<TodoApp> createState() => _TodoAppState();

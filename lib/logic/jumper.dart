@@ -1,7 +1,6 @@
 library logic;
 
 import 'package:flutter/material.dart';
-import 'package:todo/main.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
@@ -44,6 +43,8 @@ class Jumper {
     );
   }
 
+  /// Jumps to the Settings Sub Screen to show
+  /// the Subtiles of a Setting
   static void openSettingsSubScreen(
     BuildContext context,
     List<SettingsSubTile> subtiles,
@@ -64,10 +65,5 @@ class Jumper {
   /// Is just here to make the Code cleaner
   static void back(BuildContext context) {
     Navigator.pop(context);
-  }
-
-  static void reloadApp(BuildContext context) {
-    // Navigator.pushReplacementNamed(context, TodoApp.routeName);
-    Navigator.pushNamed(context, TodoApp.routeName);
   }
 }

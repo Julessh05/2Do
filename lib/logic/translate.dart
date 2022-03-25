@@ -8,10 +8,19 @@ import 'package:flutter/material.dart';
 class Translation {
   /// The supported Locales
   static final supportedLocales = {
-    const Locale("en", "US"),
-    const Locale("de", "DE"),
-    const Locale("fr", "FR"),
+    _english,
+    _german,
+    _french,
   };
+
+  // English Language
+  static const _english = Locale("en", "US");
+
+  // German Language
+  static const _german = Locale("de", "DE");
+
+  // French Language
+  static const _french = Locale("fr", "FR");
 
   /// The active locale (at the Moment)
   static Locale activeLocale = supportedLocales.first;
@@ -32,269 +41,270 @@ class Translation {
   /// ```
   static final _translationsMap = <String, Map<Locale, String>>{
     "2Do": {
-      const Locale("de", "DE"): "2Do",
-      const Locale("fr", "FR"): "2Do",
+      _german: "2Do",
+      _french: "2Do",
     },
     "Open Settings": {
-      const Locale("de", "DE"): "Einstellungen öffnen",
-      const Locale("fr", "FR"): "Ouvrir les paramètres"
+      _german: "Einstellungen öffnen",
+      _french: "Ouvrir les paramètres"
     },
     "Search": {
-      const Locale("de", "DE"): "Suchen",
-      const Locale("fr", "FR"): "Chercher"
+      _german: "Suchen",
+      _french: "Chercher",
     },
     "Settings": {
-      const Locale("de", "DE"): "Einstellungen",
-      const Locale("fr", "FR"): "Réglages"
+      _german: "Einstellungen",
+      _french: "Réglages",
     },
     "Choose your Language": {
-      const Locale("de", "DE"): "Wähle deine Sprache",
-      const Locale("fr", "FR"): "Choisissez votre langue"
+      _german: "Wähle deine Sprache",
+      _french: "Choisissez votre langue"
     },
     "English": {
-      const Locale("de", "DE"): "Englisch",
-      const Locale("fr", "FR"): "Anglais"
+      _german: "Englisch",
+      _french: "Anglais",
     },
     "German": {
-      const Locale("de", "DE"): "Deutsch",
-      const Locale("fr", "FR"): "Allemand"
+      _german: "Deutsch",
+      _french: "Allemand",
     },
     "Title": {
-      const Locale("de", "DE"): "Titel",
-      const Locale("fr", "FR"): "Titre"
+      _german: "Titel",
+      _french: "Titre",
     },
     "Todo Title": {
-      const Locale("de", "DE"): "Todo Titel",
-      const Locale("fr", "FR"): "Titre de la tâche"
+      _german: "Todo Titel",
+      _french: "Titre de la tâche",
     },
     "Todo Time": {
-      const Locale("de", "DE"): "Todo Zeit",
-      const Locale("fr", "FR"): "Temps de travail"
+      _german: "Todo Zeit",
+      _french: "Temps de travail",
     },
     "Unknown Page": {
-      const Locale("de", "DE"): "Unbekannte Seite",
-      const Locale("fr", "FR"): "page inconnue"
+      _german: "Unbekannte Seite",
+      _french: "page inconnue",
     },
     "Something went wrong while navigating to the page you wanted to see": {
-      const Locale("de", "DE"):
+      _german:
           "Etwas ist schiefgegangen während wir versuchten diese Seite zu finden",
-      const Locale("fr", "FR"):
+      _french:
           "Une erreur s'est produite lors de la navigation vers la page que vous vouliez voir",
     },
     "Back to the Homescreen": {
-      const Locale("de", "DE"): "Zurück zum Startbildschirm",
-      const Locale("fr", "FR"): "Retour à l'écran d'accueil"
+      _german: "Zurück zum Startbildschirm",
+      _french: "Retour à l'écran d'accueil"
     },
     "Name of the Setting": {
-      const Locale("de", "DE"): "Name der Einstellung",
-      const Locale("fr", "FR"): "Nom du paramètre"
+      _german: "Name der Einstellung",
+      _french: "Nom du paramètre"
     },
     "Value of the Setting": {
-      const Locale("de", "DE"): "Wert der Einstellung",
-      const Locale("fr", "FR"): "Valeur du paramètre"
+      _german: "Wert der Einstellung",
+      _french: "Valeur du paramètre"
     },
     "Value of the Info": {
-      const Locale("de", "DE"): "Wert der Info",
-      const Locale("fr", "FR"): "Valeur de l'info"
+      _german: "Wert der Info",
+      _french: "Valeur de l'info"
     },
     "Choose your Theme Mode": {
-      const Locale("de", "DE"): "Wähle dein Farbthema",
-      const Locale("fr", "FR"): "Choisissez votre mode thématique"
+      _german: "Wähle dein Farbthema",
+      _french: "Choisissez votre mode thématique"
     },
     "Add Todo": {
-      const Locale("de", "DE"): "Todo hinzufügen",
-      const Locale("fr", "FR"): "Ajouter une tâche"
+      _german: "Todo hinzufügen",
+      _french: "Ajouter une tâche",
     },
     "Set a Date": {
-      const Locale("de", "DE"): "Setze das Datum",
-      const Locale("fr", "FR"): "Choisir une date"
+      _german: "Setze das Datum",
+      _french: "Choisir une date",
     },
     "Date": {
-      const Locale("de", "DE"): "Datum",
-      const Locale("fr", "FR"): "Date",
+      _german: "Datum",
+      _french: "Date",
     },
     "Set a Time": {
-      const Locale("de", "DE"): "Setze die Zeit",
-      const Locale("fr", "FR"): "Définir une heure",
+      _german: "Setze die Zeit",
+      _french: "Définir une heure",
     },
     "Time": {
-      const Locale("de", "DE"): "Zeit",
-      const Locale("fr", "FR"): "Temps",
+      _german: "Zeit",
+      _french: "Temps",
     },
     "Cancel": {
-      const Locale("de", "DE"): "Abbrechen",
-      const Locale("fr", "FR"): "Annuler",
+      _german: "Abbrechen",
+      _french: "Annuler",
     },
     "Confirm": {
-      const Locale("de", "DE"): "Bestätigen",
-      const Locale("fr", "FR"): "Confirmer",
+      _german: "Bestätigen",
+      _french: "Confirmer",
     },
     "Insert Title": {
-      const Locale("de", "DE"): "Titel einfügen",
-      const Locale("fr", "FR"): "Insérer un titre",
+      _german: "Titel einfügen",
+      _french: "Insérer un titre",
     },
     "Insert Content": {
-      const Locale("de", "DE"): "Inhalt einfügen",
-      const Locale("fr", "FR"): "Insérer du contenu",
+      _german: "Inhalt einfügen",
+      _french: "Insérer du contenu",
     },
     "is missing": {
-      const Locale("de", "DE"): "fehlt",
-      const Locale("fr", "FR"): "est manquant",
+      _german: "fehlt",
+      _french: "est manquant",
     },
     "Some Values missing": {
-      const Locale("de", "DE"): "Einige Informationen fehlen",
-      const Locale("fr", "FR"): "Certaines valeurs manquent",
+      _german: "Einige Informationen fehlen",
+      _french: "Certaines valeurs manquent",
     },
     "The following Value is missing:": {
-      const Locale("de", "DE"): "Die folgende Information fehlt:",
-      const Locale("fr", "FR"): "La valeur suivante est manquante:",
+      _german: "Die folgende Information fehlt:",
+      _french: "La valeur suivante est manquante:",
     },
     "The following Values are missing:": {
-      const Locale("de", "DE"): "Die folgenden Informationen fehlen:",
-      const Locale("fr", "FR"): "Les valeurs suivantes sont manquantes:",
+      _german: "Die folgenden Informationen fehlen:",
+      _french: "Les valeurs suivantes sont manquantes:",
     },
     "OK": {
-      const Locale("de", "DE"): "OK",
-      const Locale("fr", "FR"): "d'accord",
+      _german: "OK",
+      _french: "d'accord",
     },
     "Edit Title": {
-      const Locale("de", "DE"): "Titel bearbeiten",
-      const Locale("fr", "FR"): "Modifier le titre",
+      _german: "Titel bearbeiten",
+      _french: "Modifier le titre",
     },
     "Edit": {
-      const Locale("de", "DE"): "Bearbeiten",
-      const Locale("fr", "FR"): "Éditer",
+      _german: "Bearbeiten",
+      _french: "Éditer",
     },
     "Language": {
-      const Locale("de", "DE"): "Sprache",
-      const Locale("fr", "FR"): "Langue",
+      _german: "Sprache",
+      _french: "Langue",
     },
     "Thememode": {
-      const Locale("de", "DE"): "Helligkeitsmodus",
-      const Locale("fr", "FR"): "Mode thématique",
+      _german: "Helligkeitsmodus",
+      _french: "Mode thématique",
     },
     "Notifications": {
-      const Locale("de", "DE"): "Benachrichtigungen",
-      const Locale("fr", "FR"): "Avis",
+      _german: "Benachrichtigungen",
+      _french: "Avis",
     },
     "Search Results": {
-      const Locale("de", "DE"): "Suchergebnisse",
-      const Locale("fr", "FR"): "Résultats de recherche",
+      _german: "Suchergebnisse",
+      _french: "Résultats de recherche",
     },
     "No Results": {
-      const Locale("de", "DE"): "Keine Ergebnisse",
-      const Locale("fr", "FR"): "Aucun résultat",
+      _german: "Keine Ergebnisse",
+      _french: "Aucun résultat",
     },
     "No Results were found": {
-      const Locale("de", "DE"): "Es wurden keine Ergebnisse gefunden",
-      const Locale("fr", "FR"): "Aucun resultat n'a été trouvé",
+      _german: "Es wurden keine Ergebnisse gefunden",
+      _french: "Aucun resultat n'a été trouvé",
     },
     "Todo": {
-      const Locale("de", "DE"): "Todo",
-      const Locale("fr", "FR"): "À faire",
+      _german: "Todo",
+      _french: "À faire",
     },
     "Setting": {
-      const Locale("de", "DE"): "Einstellung",
-      const Locale("fr", "FR"): "Réglage",
+      _german: "Einstellung",
+      _french: "Réglage",
     },
     "Choose an Standard Importance": {
-      const Locale("de", "DE"): "Wähle die Standard Dringlichkeit",
-      const Locale("fr", "FR"): "Choisissez une importance standard",
+      _german: "Wähle die Standard Dringlichkeit",
+      _french: "Choisissez une importance standard",
     },
     "Set an Importance": {
-      const Locale("de", "DE"): "Setze die Dringlichkeit",
-      const Locale("fr", "FR"): "Définir une importance",
+      _german: "Setze die Dringlichkeit",
+      _french: "Définir une importance",
     },
     "Importance": {
-      const Locale("de", "DE"): "Dringlichkeit",
-      const Locale("fr", "FR"): "Importance",
+      _german: "Dringlichkeit",
+      _french: "Importance",
     },
     "Todo Content": {
-      const Locale("de", "DE"): "Todo Inhalt",
-      const Locale("fr", "FR"): "Contenu de la tâche",
+      _german: "Todo Inhalt",
+      _french: "Contenu de la tâche",
     },
     "Edit Todo": {
-      const Locale("de", "DE"): "Todo Bearbeiten",
-      const Locale("fr", "FR"): "Modifier la tâche",
+      _german: "Todo Bearbeiten",
+      _french: "Modifier la tâche",
     },
     "Edit Content": {
-      const Locale("de", "DE"): "Inhalt bearbeiten",
-      const Locale("fr", "FR"): "Modifier le contenu"
+      _german: "Inhalt bearbeiten",
+      _french: "Modifier le contenu"
     },
     "Light": {
-      const Locale("de", "DE"): "Hell",
-      const Locale("fr", "FR"): "Léger",
+      _german: "Hell",
+      _french: "Léger",
     },
     "Dark": {
-      const Locale("de", "DE"): "Dunkel",
-      const Locale("fr", "FR"): "Sombre",
+      _german: "Dunkel",
+      _french: "Sombre",
     },
     "Search something...": {
-      const Locale("de", "DE"): "Suche etwas...",
-      const Locale("fr", "FR"): "Rechercher quelque chose...",
+      _german: "Suche etwas...",
+      _french: "Rechercher quelque chose...",
     },
     "You don't have any Todos": {
-      const Locale("de", "DE"): "Du hast keine Todos",
-      const Locale("fr", "FR"): "Vous n'avez pas de Todos",
+      _german: "Du hast keine Todos",
+      _french: "Vous n'avez pas de Todos",
     },
     "Add one": {
-      const Locale("de", "DE"): "Eines hinzufügen",
-      const Locale("fr", "FR"): "Ajoute un",
+      _german: "Eines hinzufügen",
+      _french: "Ajoute un",
     },
     "Checked Todos": {
-      const Locale("de", "DE"): "Erledigte Todos",
-      const Locale("fr", "FR"): "Tâches cochées",
+      _german: "Erledigte Todos",
+      _french: "Tâches cochées",
     },
     "Show Checked Todos": {
-      const Locale("de", "DE"): "Erledigte Todos anzeigen",
-      const Locale("fr", "FR"): "Afficher les tâches cochées",
+      _german: "Erledigte Todos anzeigen",
+      _french: "Afficher les tâches cochées",
     },
     "None of your Todos are checked": {
-      const Locale("de", "DE"): "Keines deiner Todos ist erledigt",
-      const Locale("fr", "FR"): "Aucune de vos tâches n'est cochée",
+      _german: "Keines deiner Todos ist erledigt",
+      _french: "Aucune de vos tâches n'est cochée",
     },
     "Title:": {
-      const Locale("de", "DE"): "Titel:",
-      const Locale("fr", "FR"): "Titre:",
+      _german: "Titel:",
+      _french: "Titre:",
     },
     "Content:": {
-      const Locale("de", "DE"): "Inhalt:",
-      const Locale("fr", "FR"): "Contenu:",
+      _german: "Inhalt:",
+      _french: "Contenu:",
     },
     "Checked:": {
-      const Locale("de", "DE"): "Erledigt:",
-      const Locale("fr", "FR"): "Vérifié:",
+      _german: "Erledigt:",
+      _french: "Vérifié:",
     },
     "Checked": {
-      const Locale("de", "DE"): "Erledigt",
-      const Locale("fr", "FR"): "Vérifié",
+      _german: "Erledigt",
+      _french: "Vérifié",
     },
     "Not yet": {
-      const Locale("de", "DE"): "Noch nicht",
-      const Locale("fr", "FR"): "Pas encore",
+      _german: "Noch nicht",
+      _french: "Pas encore",
     },
     "About": {
-      const Locale("de", "DE"): "Über",
-      const Locale("fr", "FR"): "Sur",
+      _german: "Über",
+      _french: "Sur",
     },
     "Everything about the App": {
-      const Locale("de", "DE"): "Alles über die App",
-      const Locale("fr", "FR"): "Tout sur l'application",
+      _german: "Alles über die App",
+      _french: "Tout sur l'application",
     },
     "Active": {
-      const Locale("de", "DE"): "Aktiv",
-      const Locale("fr", "FR"): "Actif",
+      _german: "Aktiv",
+      _french: "Actif",
     },
     "Inactive": {
-      const Locale("de", "DE"): "Inaktiv",
+      _german: "Inaktiv",
+      _french: "Inactif",
     },
     "Delete Todo": {
-      const Locale("de", "DE"): "Todo löschen",
-      const Locale("fr", "FR"): "Inactif",
+      _german: "Todo löschen",
+      _french: "Supprimer la tâche",
     },
     "French": {
-      const Locale("de", "DE"): "Französisch",
-      const Locale("fr", "FR"): "français",
+      _german: "Französisch",
+      _french: "français",
     }
   };
 

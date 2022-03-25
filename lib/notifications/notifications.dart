@@ -1,5 +1,10 @@
 library notifications;
 
+/// Class that holds everything to do with Notifications
 class Notifications {
-  static int importance = 1;
+  /// Standard Importance of the Notifications
+  static int standardImportance = 1;
+
+  /// Schedules a Notification to show
+  static void schedule() {}
 }
