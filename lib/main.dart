@@ -9,6 +9,7 @@ import 'package:todo/logic/translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/add_todo_screen.dart';
+import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
@@ -89,14 +90,28 @@ class _TodoAppState extends State<TodoApp> {
           /* Routes Section */
           initialRoute: '/',
           routes: <String, WidgetBuilder>{
+            // Homescreen
             Homescreen.routeName: (context) => const Homescreen(),
+
+            // Settings Main Screen
             SettingsMainScreen.routeName: (context) =>
                 const SettingsMainScreen(),
+
+            // Add Todo Screen
             AddTodoScreen.routeName: (context) => const AddTodoScreen(),
+
+            // Search Screen
             SearchScreen.routeName: (context) => const SearchScreen(),
+
+            // Main Screen
             TodoApp.routeName: (context) => const TodoApp(),
+
+            // Checked Todo Screen
             CheckedTodosScreen.routeName: (context) =>
                 const CheckedTodosScreen(),
+
+            // Color Chooser
+            ColorChooser.routeName: (context) => const ColorChooser(),
           },
           onGenerateRoute: (RouteSettings settings) {
             // Todo Details Screen

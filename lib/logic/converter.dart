@@ -141,6 +141,9 @@ class Converter {
       case ThemeMode:
         _type = "ThemeMode";
         break;
+      case Color:
+        _type = "Color";
+        break;
       default:
         _type = "Unsupported Type";
         break;
@@ -175,6 +178,10 @@ class Converter {
         } else {
           object = ThemeMode.system;
         }
+        break;
+      case "Color":
+        // TODO: change
+        object = "";
         break;
       default:
         object = Error;

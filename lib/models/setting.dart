@@ -3,6 +3,7 @@ library models;
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
+import 'package:todo/styles/coloring.dart';
 import 'package:todo/styles/themes.dart';
 
 part 'setting.g.dart';
@@ -285,6 +286,13 @@ class AllSettings {
   static final about = Setting(
     name: "About",
     stringValue: "Everything about the App",
+  );
+
+  static final color = Setting(
+    name: "Color",
+    objectValue: Coloring.mainColor,
+    isObject: true,
+    isObjectType: "Color",
   );
 
   static const listOfSettingsKEY = "List Of Settings";

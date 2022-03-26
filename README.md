@@ -3,7 +3,7 @@
 A Modern desinged Todo App built with Flutter.
 Works on Android and IOS.
 Avaible just for Android at the Moment, because it's not in the App Store.
-It isn't in the Play Store eigther, but the APK can be downloaded and installed on request.
+It isn't in the Play Store either, but the APK can be downloaded and installed on request.
 
 
 ## Use

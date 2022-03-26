@@ -10,6 +10,10 @@ import 'package:todo/screens/components/settings_sub_tile.dart';
 /// There are several Widgets you can pass to the Tile
 /// The [subtiles] create a new Screen and shows the Subtiles
 /// The other options show an Dialog or are Options you see directly in the Tile.
+/// [newScreenRouteName] is the Route Name of a new Screen if you whish to
+/// redirect to a new Screen when pressing the Tile.
+/// If you define [newScreenRouteName] you have to pass [newScreenArguments], even
+/// if it is null. Then just pass null
 class SettingsTile extends StatefulWidget {
   const SettingsTile({
     required this.setting,
@@ -19,33 +23,51 @@ class SettingsTile extends StatefulWidget {
     this.subtiles,
     this.aboutDialog,
     this.icon,
+    this.newScreenRouteName,
+    this.newScreenArguments,
     Key? key,
   })  : assert(
           uiSwitch == null &&
                   simpleDialog != null &&
                   subtiles == null &&
                   alertDialog == null &&
-                  aboutDialog == null ||
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null ||
               uiSwitch != null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
-                  aboutDialog == null ||
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles != null &&
                   alertDialog == null &&
-                  aboutDialog == null ||
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog != null &&
-                  aboutDialog == null ||
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
-                  aboutDialog != null,
+                  aboutDialog != null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  subtiles == null &&
+                  alertDialog == null &&
+                  aboutDialog == null &&
+                  newScreenRouteName != null,
           "You have to define exactly one Widget, not more and not less",
         ),
         super(key: key);
@@ -61,6 +83,8 @@ class SettingsTile extends StatefulWidget {
     this.subtiles,
     this.uiSwitch,
     this.aboutDialog,
+    this.newScreenRouteName,
+    this.newScreenArguments,
     Key? key,
   }) : super(key: key);
 
@@ -72,6 +96,8 @@ class SettingsTile extends StatefulWidget {
     required this.subtiles,
     this.uiSwitch,
     this.aboutDialog,
+    this.newScreenRouteName,
+    this.newScreenArguments,
     Key? key,
   }) : super(key: key);
 
@@ -82,6 +108,8 @@ class SettingsTile extends StatefulWidget {
   final List<SettingsSubTile>? subtiles;
   final Icon? icon;
   final AboutDialog? aboutDialog;
+  final String? newScreenRouteName;
+  final dynamic newScreenArguments;
 
   /// Returns if the Tile has subtiles
   /// and so creates a new Screen
@@ -149,6 +177,13 @@ class _SettingsTileState extends State<SettingsTile> {
               builder: (_) {
                 return widget.aboutDialog!;
               });
+        } else if (widget.newScreenRouteName != null) {
+          // Create New Screen
+          Jumper.openNamedSettingsNewScreen(
+            context,
+            widget.newScreenRouteName!,
+            widget.newScreenArguments,
+          );
         }
       },
       trailing: widget.uiSwitch,

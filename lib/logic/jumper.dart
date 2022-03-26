@@ -3,6 +3,7 @@ library logic;
 import 'package:flutter/material.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
+import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/search_screen.dart';
@@ -57,6 +58,20 @@ class Jumper {
         subtiles: subtiles,
         folder: setting,
       ),
+    );
+  }
+
+  /// Opens a Named Settings new Screen like [ColorChooser]
+  /// for example
+  static void openNamedSettingsNewScreen(
+    BuildContext context,
+    String routeName,
+    dynamic arguments,
+  ) {
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: arguments,
     );
   }
 

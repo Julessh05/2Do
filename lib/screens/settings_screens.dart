@@ -7,6 +7,7 @@ import 'package:todo/logic/translate.dart';
 import 'package:todo/main.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/notifications/notifications.dart';
+import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/storage/storage.dart';
@@ -55,6 +56,14 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             setting: AllSettings.themeModeSetting,
             icon: const Icon(Icons.color_lens),
             simpleDialog: _themeModeDialog,
+          ),
+
+          // Color Setting
+          SettingsTile(
+            setting: AllSettings.color,
+            icon: const Icon(Icons.colorize_rounded),
+            newScreenRouteName: ColorChooser.routeName,
+            newScreenArguments: null,
           ),
 
           // Notification Settings
