@@ -25,7 +25,7 @@ I do not guarantee that all Translations are right or make sense.
 
 This App is hold White and Dark Blue, because these were two of 
 three favorite Colors of the Person I got the Inspiration from.
-Sadly I cound't find an Element to use beige on :(
+Sadly I couldn't find an Element to use beige on :(
 
 
 ### Human Interface Guidline and UX Design
