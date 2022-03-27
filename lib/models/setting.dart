@@ -1,5 +1,7 @@
 library models;
 
+import 'dart:ffi';
+
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
@@ -301,6 +303,7 @@ class AllSettings {
   static void updateSettings() {
     languageSetting.objectValue = Translation.activeLocale;
     themeModeSetting.objectValue = Themes.themeMode;
+    color.objectValue = Coloring.mainColor;
     createListOfSettings();
   }
 
@@ -315,6 +318,9 @@ class AllSettings {
         case "Thememode":
           Themes.themeMode = setting.objectValue;
           break;
+        case "Color":
+          Coloring.mainColor = setting.objectValue;
+          break;
       }
     }
     updateSettings();
@@ -325,6 +331,7 @@ class AllSettings {
     listOfSettings = [
       languageSetting,
       themeModeSetting,
+      color,
       // notificationActiveSetting,
       // notificationImportanceSetting,
       about,

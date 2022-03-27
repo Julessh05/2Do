@@ -46,12 +46,12 @@ class Jumper {
 
   /// Jumps to the Settings Sub Screen to show
   /// the Subtiles of a Setting
-  static void openSettingsSubScreen(
+  static Future<void> openSettingsSubScreen(
     BuildContext context,
     List<SettingsSubTile> subtiles,
     Setting setting,
-  ) {
-    Navigator.pushNamed(
+  ) async {
+    await Navigator.pushNamed(
       context,
       SettingsSubScreen.routeName,
       arguments: SettingsSubScreenArguments(
@@ -63,12 +63,12 @@ class Jumper {
 
   /// Opens a Named Settings new Screen like [ColorChooser]
   /// for example
-  static void openNamedSettingsNewScreen(
+  static Future<void> openNamedSettingsNewScreen(
     BuildContext context,
     String routeName,
     dynamic arguments,
-  ) {
-    Navigator.pushNamed(
+  ) async {
+    await Navigator.pushNamed(
       context,
       routeName,
       arguments: arguments,

@@ -303,7 +303,6 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
     setState(() {
       TodoApp.themeStream.sink.add(mode);
       Themes.themeMode = mode;
-      AllSettings.updateSettings();
       _reload();
     });
     Jumper.back(context);

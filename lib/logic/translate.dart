@@ -309,6 +309,10 @@ class Translation {
     "Choose a Color": {
       _german: "Wähle eine Farbe",
       _french: "Choisir une couleur",
+    },
+    "Color": {
+      _german: "Farbe",
+      _french: "Couleur",
     }
   };
 

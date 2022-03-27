@@ -168,6 +168,8 @@ class _SettingsTileState extends State<SettingsTile> {
             context,
             widget.subtiles!,
             widget.setting,
+          ).then(
+            (value) => setState(() {}),
           );
         } else if (widget.aboutDialog != null) {
           // Show About Dialog
@@ -183,6 +185,8 @@ class _SettingsTileState extends State<SettingsTile> {
             context,
             widget.newScreenRouteName!,
             widget.newScreenArguments,
+          ).then(
+            (value) => setState(() {}),
           );
         }
       },

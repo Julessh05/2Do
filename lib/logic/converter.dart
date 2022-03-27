@@ -118,8 +118,17 @@ class Converter {
           _output = "Inactive";
         }
         break;
+      // Material Color and Color do the Same Thing
+      // That's due to the reason that storing and displaying
+      // are using dirretent Types of objects
+      case MaterialColor:
+        _output = object.value.toRadixString(16);
+        break;
+      case Color:
+        _output = object.value.toRadixString(16);
+        break;
       default:
-        _output = "";
+        _output = "Error parsing String";
         break;
     }
     if (translate == true) {
@@ -180,8 +189,7 @@ class Converter {
         }
         break;
       case "Color":
-        // TODO: change
-        object = "";
+        object = Color(int.parse(string, radix: 16));
         break;
       default:
         object = Error;

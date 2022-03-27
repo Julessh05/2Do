@@ -15,6 +15,21 @@ class ColorChooser extends StatefulWidget {
 }
 
 class _ColorChooserState extends State<ColorChooser> {
+  /// All the colors to choose from
+  final List<Color> _colors = [
+    Colors.amber,
+    Colors.blue,
+    Colors.cyan,
+    Colors.orange,
+    Colors.green,
+    Colors.purple,
+    Colors.indigo,
+    Colors.lime,
+    Colors.teal,
+    Colors.yellow,
+    Colors.red,
+  ];
+
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
@@ -35,14 +50,19 @@ class _ColorChooserState extends State<ColorChooser> {
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        children: const <ColorGridTile>[
-          ColorGridTile(
-            color: Colors.red,
-          )
-        ],
+        children: _colorTiles,
       ),
     );
 
     return _scaffold;
+  }
+
+  List<ColorGridTile> get _colorTiles {
+    final List<ColorGridTile> _tiles = [];
+    for (Color color in _colors) {
+      final _tile = ColorGridTile(color: color);
+      _tiles.add(_tile);
+    }
+    return _tiles;
   }
 }

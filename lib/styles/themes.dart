@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/logic/translate.dart';
+import 'package:todo/styles/coloring.dart';
 
 /// Class with all styles
 class Themes {
@@ -24,19 +25,19 @@ class Themes {
       errorColor: Colors.redAccent.shade700,
       disabledColor: Colors.grey.shade400,
       shadowColor: Colors.black87,
-      primaryColor: Colors.blue.shade800,
-      primaryColorDark: Colors.blue.shade800,
-      primaryColorLight: Colors.blue.shade800,
+      primaryColor: Coloring.mainColor,
+      primaryColorDark: Coloring.mainColor,
+      primaryColorLight: Coloring.mainColor,
       dividerColor: Colors.grey.shade800,
       backgroundColor: Colors.white,
       dialogBackgroundColor: Colors.white,
-      bottomAppBarColor: Colors.blue.shade800,
-      indicatorColor: Colors.blue.shade800,
+      bottomAppBarColor: Coloring.mainColor,
+      indicatorColor: Coloring.mainColor,
 
       /* Color Scheme */
       colorScheme: ColorScheme(
         brightness: Brightness.light,
-        primary: Colors.blue.shade800,
+        primary: Coloring.mainColor,
         onPrimary: Colors.white,
         secondary: Colors.red,
         onSecondary: Colors.green,
@@ -44,7 +45,7 @@ class Themes {
         onError: Colors.white,
         background: Colors.white,
         onBackground: Colors.black,
-        surface: Colors.blue.shade800.withAlpha(70),
+        surface: Coloring.mainColor.withAlpha(70),
         onSurface: Colors.black,
       ),
 
@@ -52,7 +53,7 @@ class Themes {
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.blue.shade800,
+        primaryColor: Coloring.mainColor,
       ),
 
       /* AppBar Theme */
@@ -61,13 +62,13 @@ class Themes {
         elevation: 5.0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
-          statusBarColor: Colors.blue.shade900,
+          statusBarColor: Coloring.mainColor,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarDividerColor: Colors.red,
         ),
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: Coloring.mainColor,
         iconTheme: const IconThemeData(
           color: Colors.white,
           opacity: 1.0,
@@ -84,7 +85,7 @@ class Themes {
             bottomRight: Radius.circular(33),
           ),
           side: BorderSide(
-            color: Colors.blue.shade600,
+            color: Coloring.mainColor.withAlpha(50),
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -93,7 +94,7 @@ class Themes {
 
       /* Radio Theme */
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        fillColor: MaterialStateProperty.all<Color>(Coloring.mainColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         materialTapTargetSize: MaterialTapTargetSize.padded,
       ),
@@ -117,7 +118,7 @@ class Themes {
           ),
         ),
         selectedColor: Colors.black,
-        selectedTileColor: Colors.blue.shade800.withAlpha(70),
+        selectedTileColor: Coloring.mainColor.withAlpha(70),
         minLeadingWidth: 10,
         minVerticalPadding: 10,
       ),
@@ -135,7 +136,7 @@ class Themes {
       /* Checkbox Theme */
       checkboxTheme: CheckboxThemeData(
         checkColor: MaterialStateProperty.all<Color>(Colors.white),
-        fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        fillColor: MaterialStateProperty.all<Color>(Coloring.mainColor),
         materialTapTargetSize: MaterialTapTargetSize.padded,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         shape: const RoundedRectangleBorder(
@@ -144,7 +145,7 @@ class Themes {
           ),
         ),
         side: BorderSide(
-          color: Colors.blue.shade800,
+          color: Coloring.mainColor,
           style: BorderStyle.solid,
           width: 0.7,
         ),
@@ -164,7 +165,7 @@ class Themes {
           elevation: MaterialStateProperty.all<double>(10.0),
           enableFeedback: true,
           backgroundColor: MaterialStateProperty.all<Color>(
-            Colors.blue.shade800,
+            Coloring.mainColor,
           ),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ),
@@ -175,7 +176,7 @@ class Themes {
         disabledColor: Colors.grey.shade400,
         disabledBorderColor: Colors.grey,
         color: Colors.white,
-        fillColor: Colors.blue.shade800,
+        fillColor: Coloring.mainColor,
       ),
 
       /* Elevated Button Theme */
@@ -207,14 +208,14 @@ class Themes {
 
       /* Floating Action Button Theme */
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: Coloring.mainColor,
         disabledElevation: 10.0,
         elevation: 14.0,
         enableFeedback: true,
         foregroundColor: Colors.white,
         shape: CircleBorder(
           side: BorderSide(
-            color: Colors.blue.shade600,
+            color: Coloring.mainColor.withAlpha(50),
             style: BorderStyle.solid,
             width: 0.7,
           ),
@@ -228,7 +229,7 @@ class Themes {
 
       /* Bottom Sheet Theme */
       bottomSheetTheme: BottomSheetThemeData(
-        modalBackgroundColor: Colors.green,
+        modalBackgroundColor: Colors.white,
         modalElevation: 10.0,
         backgroundColor: Colors.white,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -238,7 +239,7 @@ class Themes {
             Radius.circular(30),
           ),
           side: BorderSide(
-            color: Colors.blue.shade800,
+            color: Coloring.mainColor,
             style: BorderStyle.solid,
             width: 0.2,
           ),
@@ -277,7 +278,7 @@ class Themes {
             Radius.circular(30),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade700,
+            color: Coloring.mainColor.withAlpha(50),
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -287,7 +288,7 @@ class Themes {
             Radius.circular(35),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade800,
+            color: Coloring.mainColor,
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -307,7 +308,7 @@ class Themes {
             Radius.circular(20),
           ),
           borderSide: BorderSide(
-            color: Colors.purple.shade700,
+            color: Coloring.mainColor.withBlue(170),
             style: BorderStyle.solid,
             width: 0.7,
           ),
@@ -444,7 +445,7 @@ class Themes {
       /* Progress Indicator Theme */
       progressIndicatorTheme: ProgressIndicatorThemeData(
         circularTrackColor: Colors.white,
-        color: Colors.blue.shade800,
+        color: Coloring.mainColor,
         refreshBackgroundColor: Colors.white,
       ),
 
@@ -484,19 +485,19 @@ class Themes {
       errorColor: Colors.redAccent.shade700,
       disabledColor: Colors.grey.shade400,
       shadowColor: Colors.black87,
-      primaryColor: Colors.blue.shade800,
-      primaryColorDark: Colors.blue.shade800,
-      primaryColorLight: Colors.blue.shade800,
+      primaryColor: Coloring.mainColor,
+      primaryColorDark: Coloring.mainColor,
+      primaryColorLight: Coloring.mainColor,
       dividerColor: Colors.grey.shade800,
       backgroundColor: Colors.grey.shade900,
       dialogBackgroundColor: Colors.black87,
-      bottomAppBarColor: Colors.blue.shade800,
-      indicatorColor: Colors.blue.shade800,
+      bottomAppBarColor: Coloring.mainColor,
+      indicatorColor: Coloring.mainColor,
 
       /* Color Scheme */
       colorScheme: ColorScheme(
         brightness: Brightness.dark,
-        primary: Colors.blue.shade800,
+        primary: Coloring.mainColor,
         onPrimary: Colors.white,
         secondary: Colors.black,
         onSecondary: Colors.white,
@@ -504,7 +505,7 @@ class Themes {
         onError: Colors.white,
         background: Colors.black,
         onBackground: Colors.white,
-        surface: Colors.blue.shade800.withAlpha(70),
+        surface: Coloring.mainColor.withAlpha(70),
         onSurface: Colors.white,
       ),
 
@@ -512,7 +513,7 @@ class Themes {
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.grey.shade900,
-        primaryColor: Colors.blue.shade800,
+        primaryColor: Coloring.mainColor,
       ),
 
       /* AppBar Theme */
@@ -521,13 +522,12 @@ class Themes {
         elevation: 5.0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
-          statusBarColor: Colors.blue.shade900,
+          statusBarColor: Coloring.mainColor,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.light,
-          systemNavigationBarDividerColor: Colors.red,
         ),
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: Coloring.mainColor,
         iconTheme: const IconThemeData(
           color: Colors.white,
           opacity: 1.0,
@@ -544,7 +544,7 @@ class Themes {
             bottomRight: Radius.circular(33),
           ),
           side: BorderSide(
-            color: Colors.blue.shade600,
+            color: Coloring.mainColor.withAlpha(50),
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -553,7 +553,7 @@ class Themes {
 
       /* Radio Theme */
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        fillColor: MaterialStateProperty.all<Color>(Coloring.mainColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         materialTapTargetSize: MaterialTapTargetSize.padded,
       ),
@@ -577,7 +577,7 @@ class Themes {
           ),
         ),
         selectedColor: Colors.white,
-        selectedTileColor: Colors.blue.shade800.withAlpha(70),
+        selectedTileColor: Coloring.mainColor.withAlpha(70),
         minLeadingWidth: 10,
         minVerticalPadding: 10,
       ),
@@ -595,7 +595,7 @@ class Themes {
       /* Checkbox Theme */
       checkboxTheme: CheckboxThemeData(
         checkColor: MaterialStateProperty.all<Color>(Colors.white),
-        fillColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+        fillColor: MaterialStateProperty.all<Color>(Coloring.mainColor),
         materialTapTargetSize: MaterialTapTargetSize.padded,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         shape: const RoundedRectangleBorder(
@@ -604,7 +604,7 @@ class Themes {
           ),
         ),
         side: BorderSide(
-          color: Colors.blue.shade800,
+          color: Coloring.mainColor,
           style: BorderStyle.solid,
           width: 0.7,
         ),
@@ -624,7 +624,7 @@ class Themes {
           elevation: MaterialStateProperty.all<double>(10.0),
           enableFeedback: true,
           backgroundColor: MaterialStateProperty.all<Color>(
-            Colors.blue.shade800,
+            Coloring.mainColor,
           ),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ),
@@ -635,7 +635,7 @@ class Themes {
         disabledColor: Colors.grey.shade400,
         disabledBorderColor: Colors.grey,
         color: Colors.white,
-        fillColor: Colors.blue.shade800,
+        fillColor: Coloring.mainColor,
       ),
 
       /* Elevated Button Theme */
@@ -667,14 +667,14 @@ class Themes {
 
       /* Floating Action Button Theme */
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: Coloring.mainColor,
         disabledElevation: 10.0,
         elevation: 14.0,
         enableFeedback: true,
         foregroundColor: Colors.white,
         shape: CircleBorder(
           side: BorderSide(
-            color: Colors.blue.shade600,
+            color: Coloring.mainColor.withAlpha(50),
             style: BorderStyle.solid,
             width: 0.7,
           ),
@@ -688,7 +688,7 @@ class Themes {
 
       /* Bottom Sheet Theme */
       bottomSheetTheme: BottomSheetThemeData(
-        modalBackgroundColor: Colors.green,
+        modalBackgroundColor: Colors.grey.shade900,
         modalElevation: 10.0,
         backgroundColor: Colors.white,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -698,7 +698,7 @@ class Themes {
             Radius.circular(30),
           ),
           side: BorderSide(
-            color: Colors.blue.shade800,
+            color: Coloring.mainColor,
             style: BorderStyle.solid,
             width: 0.2,
           ),
@@ -737,7 +737,7 @@ class Themes {
             Radius.circular(30),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade700,
+            color: Coloring.mainColor.withAlpha(70),
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -747,7 +747,7 @@ class Themes {
             Radius.circular(35),
           ),
           borderSide: BorderSide(
-            color: Colors.blue.shade800,
+            color: Coloring.mainColor,
             style: BorderStyle.solid,
             width: 1.0,
           ),
@@ -767,7 +767,7 @@ class Themes {
             Radius.circular(20),
           ),
           borderSide: BorderSide(
-            color: Colors.purple.shade600,
+            color: Coloring.mainColor.withBlue(170),
             style: BorderStyle.solid,
             width: 0.7,
           ),
@@ -904,7 +904,7 @@ class Themes {
       /* Progress Indicator Theme */
       progressIndicatorTheme: ProgressIndicatorThemeData(
         circularTrackColor: Colors.white,
-        color: Colors.blue.shade800,
+        color: Coloring.mainColor,
         refreshBackgroundColor: Colors.white,
       ),
 
