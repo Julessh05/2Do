@@ -34,8 +34,8 @@ class TodoApp extends StatefulWidget {
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
-  static const double appVersion = 1.0;
-  static const String appVersionString = "1.0.1";
+  static const double appVersion = 1.1;
+  static const String appVersionString = "1.1.0";
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -161,6 +161,16 @@ class _TodoAppState extends State<TodoApp> {
               return MaterialPageRoute(
                 builder: (_) {
                   return EditTodoScreen(todo: _todo);
+                },
+              );
+
+              // Sub Color Screen
+            } else if (settings.name == SubColorChooser.routeName) {
+              final _color = settings.arguments as Color;
+
+              return MaterialPageRoute(
+                builder: (_) {
+                  return SubColorChooser(color: _color);
                 },
               );
             } else {

@@ -14,10 +14,12 @@ import 'package:todo/styles/themes.dart';
 class ColorGridTile extends StatefulWidget {
   const ColorGridTile({
     required this.color,
+    required this.isSubTile,
     Key? key,
   }) : super(key: key);
 
   final Color color;
+  final bool isSubTile;
 
   @override
   State<ColorGridTile> createState() => _ColorGridTileState();
@@ -50,12 +52,20 @@ class _ColorGridTileState extends State<ColorGridTile> {
   }
 
   void _onTap() {
-    setState(() {
-      Coloring.mainColor = widget.color;
-      TodoApp.themeStream.sink.add(Themes.themeMode);
-      AllSettings.updateSettings();
-      Storage.storeSettings();
-    });
-    Jumper.back(context);
+    if (widget.isSubTile) {
+      setState(() {
+        Coloring.mainColor = widget.color;
+        TodoApp.themeStream.sink.add(Themes.themeMode);
+        AllSettings.updateSettings();
+        Storage.storeSettings();
+      });
+      Jumper.back(context);
+      Jumper.back(context);
+    } else {
+      Jumper.openSubColorScreen(
+        context,
+        widget.color,
+      );
+    }
   }
 }

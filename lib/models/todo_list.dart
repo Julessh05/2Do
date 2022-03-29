@@ -3,6 +3,7 @@ library models;
 import 'dart:collection';
 
 import 'package:todo/models/todo.dart';
+import 'package:todo/storage/storage.dart';
 
 /// Object which holds all 3 different Todo-Lists
 /// The List which are returned trough the getters
@@ -57,6 +58,7 @@ class TodoList {
   static void addTodo(Todo todo) {
     _listOfTodos.add(todo);
     _updateCombinedList();
+    Storage.storeTodos();
   }
 
   /// Adds a Checked Todo to the [listOfCheckedTodos]
@@ -64,6 +66,7 @@ class TodoList {
   static void addCheckedTodo(Todo todo) {
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
+    Storage.storeTodos();
   }
 
   /// Deletes a Todo
@@ -72,6 +75,7 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.remove(todo);
     _updateCombinedList();
+    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfTodos] and adds it to the
@@ -80,6 +84,7 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
+    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfCheckedTodos] and add it
@@ -88,6 +93,7 @@ class TodoList {
     _listOfCheckedTodos.remove(todo);
     _listOfTodos.add(todo);
     _updateCombinedList();
+    Storage.storeTodos();
   }
 
   /// Updates the [_combinedListOfTodos] so this List is always up-to-date

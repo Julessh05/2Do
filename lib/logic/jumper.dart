@@ -75,6 +75,14 @@ class Jumper {
     );
   }
 
+  static void openSubColorScreen(BuildContext context, Color color) {
+    Navigator.pushNamed(
+      context,
+      SubColorChooser.routeName,
+      arguments: color,
+    );
+  }
+
   /// goes back one Route.
   /// Is the Same thing as [Navigator.pop(context)].
   /// Is just here to make the Code cleaner

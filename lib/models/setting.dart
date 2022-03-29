@@ -1,7 +1,5 @@
 library models;
 
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:todo/logic/translate.dart';
