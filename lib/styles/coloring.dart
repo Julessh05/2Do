@@ -5,7 +5,25 @@ import 'package:flutter/material.dart';
 /// Every Color used in the App
 class Coloring {
   /// Main Color used to display most elements in the App
-  static Color mainColor = Colors.blue.shade800;
+  static Color _mainColor = Colors.blue.shade800;
+
+  /// Accent Color used for Text for example
+  static Color _accentColor = Colors.white;
+
+  static Color get mainColor {
+    return _mainColor;
+  }
+
+  static set mainColor(Color color) {
+    _mainColor = color;
+    if (color.isLight()) {
+      _accentColor = Colors.black;
+    } else {
+      _accentColor = Colors.white;
+    }
+  }
+
+  static Color get accentColor => _accentColor;
 
   /// All the colors to choose from
   static final List<Color> colors = [
@@ -281,4 +299,18 @@ class Coloring {
     Colors.redAccent.shade400,
     Colors.redAccent.shade700,
   ];
+}
+
+/// Extension on Color to determine if they
+/// are dark or light
+extension ColorMapping on Color {
+  /// Returns if the Color is dark
+  bool isDark() {
+    return (red * 0.299) + (green * 0.587) + (blue * 0.114) < 186;
+  }
+
+  /// Returns if the Color is light
+  bool isLight() {
+    return (red * 0.299) + (green * 0.587) + (blue * 0.114) > 186;
+  }
 }

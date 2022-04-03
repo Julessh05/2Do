@@ -39,8 +39,8 @@ class Themes {
         brightness: Brightness.light,
         primary: Coloring.mainColor,
         onPrimary: Colors.white,
-        secondary: Colors.red,
-        onSecondary: Colors.green,
+        secondary: Coloring.accentColor,
+        onSecondary: Colors.red,
         error: Colors.red.shade700,
         onError: Colors.white,
         background: Colors.white,
@@ -61,24 +61,27 @@ class Themes {
         centerTitle: true,
         elevation: 5.0,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
+          statusBarBrightness:
+              Coloring.mainColor.isLight() ? Brightness.dark : Brightness.light,
           statusBarColor: Coloring.mainColor,
-          statusBarIconBrightness: Brightness.light,
+          statusBarIconBrightness:
+              Coloring.mainColor.isLight() ? Brightness.dark : Brightness.light,
           systemNavigationBarColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarIconBrightness:
+              Coloring.mainColor.isLight() ? Brightness.dark : Brightness.light,
           systemNavigationBarDividerColor: Colors.red,
         ),
         backgroundColor: Coloring.mainColor,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
+        iconTheme: IconThemeData(
+          color: Coloring.accentColor,
           opacity: 1.0,
         ),
-        actionsIconTheme: const IconThemeData(
+        actionsIconTheme: IconThemeData(
           opacity: 1.0,
-          color: Colors.white,
+          color: Coloring.accentColor,
         ),
         shadowColor: Colors.black87,
-        foregroundColor: Colors.white,
+        foregroundColor: Coloring.accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(33),
@@ -167,7 +170,9 @@ class Themes {
           backgroundColor: MaterialStateProperty.all<Color>(
             Coloring.mainColor,
           ),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(
+            Coloring.accentColor,
+          ),
         ),
       ),
 
