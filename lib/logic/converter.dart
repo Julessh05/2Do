@@ -1,7 +1,7 @@
 library logic;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 
 /// Holds every method to convert Object in another and the other way around
 class Converter {
@@ -132,7 +132,7 @@ class Converter {
         break;
     }
     if (translate == true) {
-      return _output.translate();
+      return _output.tr();
     } else {
       return _output;
     }

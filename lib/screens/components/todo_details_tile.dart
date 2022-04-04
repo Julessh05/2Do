@@ -1,7 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 
 /// A single Tile in the [TodoDetailScreen] to show
@@ -76,11 +76,11 @@ class _TodoDetailsTileState extends State<TodoDetailsTile> {
         autofocus: false,
         title: Text(
           widget.title,
-          semanticsLabel: "Title".translate(),
+          semanticsLabel: "Title".tr(),
         ),
         subtitle: Text(
           widget.subtitle,
-          semanticsLabel: "Value of the Info".translate(),
+          semanticsLabel: "Value of the Info".tr(),
         ),
         enabled: true,
         leading: widget.icon,

@@ -3,7 +3,7 @@ library styles;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/styles/coloring.dart';
 
 /// Class with all styles

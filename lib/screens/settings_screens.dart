@@ -3,7 +3,7 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/main.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/notifications/notifications.dart';
@@ -11,6 +11,7 @@ import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/storage/storage.dart';
+import 'package:todo/styles/coloring.dart';
 import 'package:todo/styles/themes.dart';
 
 /// The Main Settings Screen from which you can navigate
@@ -31,8 +32,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Settings".translate(),
-          semanticsLabel: "Title".translate(),
+          "Settings".tr(),
+          semanticsLabel: "Title".tr(),
         ),
       ),
       body: ListView(
@@ -48,7 +49,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           SettingsTile(
             setting: AllSettings.languageSetting,
             icon: const Icon(Icons.language_rounded),
-            simpleDialog: _languageDialog,
+            simpleDialogFunc: _languageDialog,
           ),
 
           // Theme Mode Setting
@@ -68,7 +69,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
 
           // Notification Settings
           /*  SettingsTile.folder(
-            setting: Setting.folder(name: "Notifications".translate()),
+            setting: Setting.folder(name: "Notifications".tr()),
             icon: const Icon(Icons.notifications),
             subtiles: <SettingsSubTile>[
               // Notifications Active
@@ -127,13 +128,13 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   }
 
   /// The Simple Dialog shown to choose your Language
-  SimpleDialog get _languageDialog {
+  SimpleDialog _languageDialog() {
     final _dialog = SimpleDialog(
       elevation: 20.0,
       alignment: Alignment.center,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      semanticLabel: "Choose your Language".translate(),
-      title: Text("Choose your Language".translate()),
+      semanticLabel: "Choose your Language".tr(),
+      title: Text("Choose your Language".tr()),
       children: <SimpleDialogOption>[
         // Option English
         SimpleDialogOption(
@@ -146,16 +147,16 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blue.shade800,
+              color: Coloring.mainColor,
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
             ),
             child: Text(
-              "English".translate(),
-              semanticsLabel: "English".translate(),
-              style: const TextStyle(
-                color: Colors.white,
+              "English".tr(),
+              semanticsLabel: "English".tr(),
+              style: TextStyle(
+                color: Coloring.accentColor,
               ),
             ),
           ),
@@ -172,16 +173,16 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blue.shade800,
+              color: Coloring.mainColor,
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
             ),
             child: Text(
-              "German".translate(),
-              semanticsLabel: "German".translate(),
-              style: const TextStyle(
-                color: Colors.white,
+              "German".tr(),
+              semanticsLabel: "German".tr(),
+              style: TextStyle(
+                color: Coloring.accentColor,
               ),
             ),
           ),
@@ -198,16 +199,16 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blue.shade800,
+              color: Coloring.mainColor,
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
             ),
             child: Text(
-              "French".translate(),
-              semanticsLabel: "French".translate(),
-              style: const TextStyle(
-                color: Colors.white,
+              "French".tr(),
+              semanticsLabel: "French".tr(),
+              style: TextStyle(
+                color: Coloring.accentColor,
               ),
             ),
           ),
@@ -217,8 +218,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         SimpleDialogOption(
           child: Center(
             child: Text(
-              "Cancel".translate(),
-              semanticsLabel: "Cancel".translate(),
+              "Cancel".tr(),
+              semanticsLabel: "Cancel".tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
               ),
@@ -236,8 +237,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   /// This uses Radio Buttons to choose
   SimpleDialog get _themeModeDialog {
     final _dialog = SimpleDialog(
-      title: Text("Choose your Theme Mode".translate()),
-      semanticLabel: "Choose your Theme Mode".translate(),
+      title: Text("Choose your Theme Mode".tr()),
+      semanticLabel: "Choose your Theme Mode".tr(),
       alignment: Alignment.center,
       children: <SimpleDialogOption>[
         // Option System
@@ -248,8 +249,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             isThreeLine: false,
             toggleable: true,
             title: Text(
-              "System".translate(),
-              semanticsLabel: "System".translate(),
+              "System".tr(),
+              semanticsLabel: "System".tr(),
             ),
             value: ThemeMode.system,
             groupValue: Themes.themeMode,
@@ -265,8 +266,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             isThreeLine: false,
             toggleable: true,
             title: Text(
-              "Light".translate(),
-              semanticsLabel: "Light".translate(),
+              "Light".tr(),
+              semanticsLabel: "Light".tr(),
             ),
             value: ThemeMode.light,
             groupValue: Themes.themeMode,
@@ -285,8 +286,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             groupValue: Themes.themeMode,
             onChanged: (_) => _changeThemeMode(ThemeMode.dark),
             title: Text(
-              "Dark".translate(),
-              semanticsLabel: "Dark".translate(),
+              "Dark".tr(),
+              semanticsLabel: "Dark".tr(),
             ),
           ),
         ),
@@ -314,7 +315,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   SimpleDialog get _notificationImportanceDialog {
     final _dialog = SimpleDialog(
       alignment: Alignment.center,
-      title: Text("Choose an Standard Importance".translate()),
+      title: Text("Choose an Standard Importance".tr()),
       children: <SimpleDialogOption>[
         SimpleDialogOption(
           child: RadioListTile(
@@ -322,8 +323,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             enableFeedback: true,
             isThreeLine: false,
             title: Text(
-              "unimportant".translate(),
-              semanticsLabel: "unimportant".translate(),
+              "unimportant".tr(),
+              semanticsLabel: "unimportant".tr(),
             ),
             value: 0,
             groupValue: Notifications.standardImportance,
@@ -336,8 +337,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             enableFeedback: true,
             isThreeLine: false,
             title: Text(
-              "middle Importance".translate(),
-              semanticsLabel: "middle Importance".translate(),
+              "middle Importance".tr(),
+              semanticsLabel: "middle Importance".tr(),
             ),
             value: 1,
             groupValue: Notifications.standardImportance,

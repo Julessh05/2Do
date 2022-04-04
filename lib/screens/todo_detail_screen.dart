@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/components/todo_details_tile.dart';
 import 'package:todo/storage/storage.dart';
@@ -30,7 +30,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
       appBar: AppBar(
         title: Text(
           widget.todo.title,
-          semanticsLabel: "Title".translate(),
+          semanticsLabel: "Title".tr(),
         ),
         automaticallyImplyLeading: true,
       ),
@@ -45,7 +45,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
         children: <TodoDetailsTile>[
           // Title
           TodoDetailsTile(
-            title: "Title:".translate(),
+            title: "Title:".tr(),
             subtitle: widget.todo.title,
             function: () => Navigator.pushNamed(
               context,
@@ -56,7 +56,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Content
           TodoDetailsTile(
-            title: "Content:".translate(),
+            title: "Content:".tr(),
             subtitle: widget.todo.content,
             function: () => Navigator.pushNamed(
               context,
@@ -67,10 +67,8 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Checked
           TodoDetailsTile(
-            title: "Checked:".translate(),
-            subtitle: widget.todo.checked
-                ? "Checked".translate()
-                : "Not yet".translate(),
+            title: "Checked:".tr(),
+            subtitle: widget.todo.checked ? "Checked".tr() : "Not yet".tr(),
           ),
 
           // Time
@@ -98,7 +96,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Edit Button
           TodoDetailsTile.button(
-            title: "Edit".translate(),
+            title: "Edit".tr(),
             function: () => Navigator.pushNamed(
               context,
               EditTodoScreen.routeName,
@@ -137,8 +135,8 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Edit Todo".translate(),
-          semanticsLabel: "Edit Todo".translate(),
+          "Edit Todo".tr(),
+          semanticsLabel: "Edit Todo".tr(),
         ),
       ),
       body: Column(
@@ -179,7 +177,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             textDirection: TextDirection.ltr,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              labelText: "Edit Title".translate(),
+              labelText: "Edit Title".tr(),
             ),
             initialValue: widget.todo.title,
             onFieldSubmitted: (value) {
@@ -222,7 +220,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             textDirection: TextDirection.ltr,
             textInputAction: TextInputAction.done,
             decoration: InputDecoration(
-              labelText: "Edit Content".translate(),
+              labelText: "Edit Content".tr(),
             ),
             initialValue: widget.todo.content,
             onFieldSubmitted: (value) {
@@ -246,8 +244,8 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
               Jumper.back(context);
             },
             child: Text(
-              "Confirm".translate(),
-              semanticsLabel: "Confirm".translate(),
+              "Confirm".tr(),
+              semanticsLabel: "Confirm".tr(),
             ),
           )
         ],

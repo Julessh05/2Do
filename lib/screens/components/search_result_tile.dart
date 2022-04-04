@@ -1,7 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
@@ -33,7 +33,7 @@ class _SearchResulTileState extends State<SearchResulTile> {
           ? const Icon(Icons.notifications_active)
           : const Icon(Icons.settings),
       subtitle: Text(
-        widget.result.isTodo ? "Todo".translate() : "Setting".translate(),
+        widget.result.isTodo ? "Todo".tr() : "Setting".tr(),
       ),
       onTap: _openResult,
     );

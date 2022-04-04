@@ -2,7 +2,7 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 
@@ -19,6 +19,7 @@ class SettingsTile extends StatefulWidget {
     required this.setting,
     this.uiSwitch,
     this.simpleDialog,
+    this.simpleDialogFunc,
     this.alertDialog,
     this.subtiles,
     this.aboutDialog,
@@ -33,41 +34,54 @@ class SettingsTile extends StatefulWidget {
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
-                  newScreenArguments == null ||
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null ||
               uiSwitch != null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
-                  newScreenArguments == null ||
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles != null &&
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
-                  newScreenArguments == null ||
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog != null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
-                  newScreenArguments == null ||
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog != null &&
                   newScreenRouteName == null &&
-                  newScreenArguments == null ||
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog == null &&
-                  newScreenRouteName != null,
+                  newScreenRouteName != null &&
+                  simpleDialogFunc == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  subtiles == null &&
+                  alertDialog == null &&
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  simpleDialogFunc != null,
           "You have to define exactly one Widget, not more and not less",
         ),
         super(key: key);
@@ -85,6 +99,7 @@ class SettingsTile extends StatefulWidget {
     this.aboutDialog,
     this.newScreenRouteName,
     this.newScreenArguments,
+    this.simpleDialogFunc,
     Key? key,
   }) : super(key: key);
 
@@ -98,6 +113,7 @@ class SettingsTile extends StatefulWidget {
     this.aboutDialog,
     this.newScreenRouteName,
     this.newScreenArguments,
+    this.simpleDialogFunc,
     Key? key,
   }) : super(key: key);
 
@@ -109,6 +125,12 @@ class SettingsTile extends StatefulWidget {
   final Icon? icon;
   final AboutDialog? aboutDialog;
   final String? newScreenRouteName;
+
+  /// Function that can be passed to create a simple Dialog.
+  /// The [simpleDialog] is created once and cached so sometimes there
+  /// are some problems with calling setState() or changing Values while
+  /// this dialog is cached.
+  final SimpleDialog Function()? simpleDialogFunc;
   final dynamic newScreenArguments;
 
   /// Returns if the Tile has subtiles
@@ -133,12 +155,12 @@ class _SettingsTileState extends State<SettingsTile> {
       enabled: true,
       isThreeLine: false,
       title: Text(
-        widget.setting.name.translate(),
-        semanticsLabel: "Name of the Setting".translate(),
+        widget.setting.name.tr(),
+        semanticsLabel: "Name of the Setting".tr(),
       ),
       subtitle: Text(
-        widget.setting.valueToDisplay.translate(),
-        semanticsLabel: "Value of the Setting".translate(),
+        widget.setting.valueToDisplay.tr(),
+        semanticsLabel: "Value of the Setting".tr(),
       ),
       leading: widget.icon,
       onTap: () {
@@ -187,6 +209,13 @@ class _SettingsTileState extends State<SettingsTile> {
             widget.newScreenArguments,
           ).then(
             (value) => setState(() {}),
+          );
+        } else if (widget.simpleDialogFunc != null) {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return widget.simpleDialogFunc!();
+            },
           );
         }
       },

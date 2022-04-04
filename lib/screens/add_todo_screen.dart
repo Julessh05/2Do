@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/storage/storage.dart';
@@ -29,7 +29,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("Add Todo".translate()),
+        title: Text("Add Todo".tr()),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -73,7 +73,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               selectAll: true,
             ),
             decoration: InputDecoration(
-              labelText: "Insert Title".translate(),
+              labelText: "Insert Title".tr(),
             ),
             onSubmitted: (value) {
               title = value;
@@ -114,7 +114,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               selectAll: true,
             ),
             decoration: InputDecoration(
-              labelText: "Insert Content".translate(),
+              labelText: "Insert Content".tr(),
             ),
             onSubmitted: (value) {
               content = value;
@@ -129,7 +129,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             enabled: true,
             isThreeLine: false,
             title: Text(
-              date == null ? "Set a Date".translate() : "Date".translate(),
+              date == null ? "Set a Date".tr() : "Date".tr(),
             ),
             subtitle: date == null ? null : Text(Converter.onlyDate(date!)),
             leading: const Icon(Icons.date_range_rounded),
@@ -144,7 +144,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             enabled: true,
             isThreeLine: false,
             title: Text(
-              date == null ? "Set a Time".translate() : "Time".translate(),
+              date == null ? "Set a Time".tr() : "Time".tr(),
             ),
             subtitle:
                 time == null ? null : Text(Converter.timeOfDayToString(time!)),
@@ -161,8 +161,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             isThreeLine: false,
             title: Text(
               importance == null
-                  ? "Set an Importance".translate()
-                  : "Importance".translate(),
+                  ? "Set an Importance".tr()
+                  : "Importance".tr(),
             ),
             leading: const Icon(Icons.notification_important_rounded),
             subtitle: Text(
@@ -172,7 +172,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
           const SizedBox(height: 50),
           TextButton(
             onPressed: _createTodo,
-            child: Text("Confirm".translate()),
+            child: Text("Confirm".tr()),
             autofocus: false,
             clipBehavior: Clip.antiAliasWithSaveLayer,
           )
@@ -190,13 +190,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     List<String> missingValues = [];
 
     if (title == null || title!.isEmpty) {
-      missingValues.add("Title".translate());
+      missingValues.add("Title".tr());
     }
     /* if (date == null) {
-      missingValues.add("Date".translate());
+      missingValues.add("Date".tr());
     }
      if (time == null) {
-      missingValues.add("Time".translate());
+      missingValues.add("Time".tr());
     } */
 
     if (missingValues.isNotEmpty) {
@@ -240,12 +240,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     String _content2;
     if (missingValues.length < 2) {
       final _component = missingValues[0];
-      _title = "$_component " + "is missing".translate();
-      _content1 = "The following Value is missing:".translate();
+      _title = "$_component " + "is missing".tr();
+      _content1 = "The following Value is missing:".tr();
       _content2 = " * $_component";
     } else {
-      _title = "Some Values missing".translate();
-      _content1 = "The following Values are missing:".translate();
+      _title = "Some Values missing".tr();
+      _content1 = "The following Values are missing:".tr();
       _content2 = "";
       for (String component in missingValues) {
         _content2 += " * $component \n";
@@ -260,13 +260,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       alignment: Alignment.center,
       elevation: 20.0,
       actionsOverflowDirection: VerticalDirection.down,
-      semanticLabel: "Some Values missing".translate(),
+      semanticLabel: "Some Values missing".tr(),
       actionsPadding: const EdgeInsets.all(5),
       actions: <Center>[
         Center(
           child: TextButton(
             onPressed: () => Jumper.back(context),
-            child: Text("OK".translate()),
+            child: Text("OK".tr()),
             autofocus: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
           ),
@@ -289,8 +289,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       initialDatePickerMode: DatePickerMode.day,
       initialEntryMode: DatePickerEntryMode.calendar,
       locale: Translation.activeLocale,
-      cancelText: "Cancel".translate(),
-      confirmText: "Confirm".translate(),
+      cancelText: "Cancel".tr(),
+      confirmText: "Confirm".tr(),
       useRootNavigator: true,
     );
   }
@@ -301,8 +301,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       context: context,
       initialTime: TimeOfDay.now(),
       initialEntryMode: TimePickerEntryMode.dial,
-      cancelText: "Cancel".translate(),
-      confirmText: "Confirm".translate(),
+      cancelText: "Cancel".tr(),
+      confirmText: "Confirm".tr(),
       useRootNavigator: true,
     );
   }

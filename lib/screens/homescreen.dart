@@ -3,7 +3,7 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
@@ -55,8 +55,8 @@ class _HomescreenState extends State<Homescreen> {
     if (selected) {
       _appBar = AppBar(
         title: Text(
-          "Edit".translate(),
-          semanticsLabel: "Edit".translate(),
+          "Edit".tr(),
+          semanticsLabel: "Edit".tr(),
         ),
         actions: <IconButton>[
           IconButton(
@@ -76,7 +76,7 @@ class _HomescreenState extends State<Homescreen> {
                 }
               });
             },
-            tooltip: "Delete Todo".translate(),
+            tooltip: "Delete Todo".tr(),
           ),
         ],
       );
@@ -84,19 +84,19 @@ class _HomescreenState extends State<Homescreen> {
       _appBar = AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
-          tooltip: "Show Checked Todos".translate(),
+          tooltip: "Show Checked Todos".tr(),
           onPressed: () => _openCheckedTodos(context),
           icon: const Icon(Icons.check_circle_outline_rounded),
         ),
         title: Text(
-          "2Do".translate(),
-          semanticsLabel: "Title".translate(),
+          "2Do".tr(),
+          semanticsLabel: "Title".tr(),
         ),
         actions: <IconButton>[
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () => Jumper.openSearch(context),
-            tooltip: "Search".translate(),
+            tooltip: "Search".tr(),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
@@ -106,7 +106,7 @@ class _HomescreenState extends State<Homescreen> {
                 SettingsMainScreen.routeName,
               ).then((value) => setState(() {}));
             },
-            tooltip: "Open Settings".translate(),
+            tooltip: "Open Settings".tr(),
           )
         ],
       );
@@ -148,8 +148,8 @@ class _HomescreenState extends State<Homescreen> {
             verticalDirection: VerticalDirection.down,
             children: <Widget>[
               Text(
-                "You don't have any Todos".translate(),
-                semanticsLabel: "You don't have any Todos".translate(),
+                "You don't have any Todos".tr(),
+                semanticsLabel: "You don't have any Todos".tr(),
               ),
               const SizedBox(
                 height: 20,
@@ -157,8 +157,8 @@ class _HomescreenState extends State<Homescreen> {
               TextButton(
                 onPressed: () => _openAddTodo(context),
                 child: Text(
-                  "Add one".translate(),
-                  semanticsLabel: "Add one".translate(),
+                  "Add one".tr(),
+                  semanticsLabel: "Add one".tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -225,8 +225,8 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
     if (selected) {
       _appBar = AppBar(
         title: Text(
-          "Edit".translate(),
-          semanticsLabel: "Edit".translate(),
+          "Edit".tr(),
+          semanticsLabel: "Edit".tr(),
         ),
         actions: <IconButton>[
           IconButton(
@@ -246,7 +246,7 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
                 }
               });
             },
-            tooltip: "Delete Todo".translate(),
+            tooltip: "Delete Todo".tr(),
           ),
         ],
       );
@@ -254,8 +254,8 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
       _appBar = AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Checked Todos".translate(),
-          semanticsLabel: "Checked Todos".translate(),
+          "Checked Todos".tr(),
+          semanticsLabel: "Checked Todos".tr(),
         ),
       );
     }
@@ -296,8 +296,8 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
             verticalDirection: VerticalDirection.down,
             children: <Widget>[
               Text(
-                "None of your Todos are checked".translate(),
-                semanticsLabel: "None of your Todos are checked".translate(),
+                "None of your Todos are checked".tr(),
+                semanticsLabel: "None of your Todos are checked".tr(),
               ),
               const SizedBox(
                 height: 20,
@@ -305,8 +305,8 @@ class _CheckedTodosScreenState extends State<CheckedTodosScreen> {
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
-                  "Back to the Homescreen".translate(),
-                  semanticsLabel: "Back to the Homescreen".translate(),
+                  "Back to the Homescreen".tr(),
+                  semanticsLabel: "Back to the Homescreen".tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

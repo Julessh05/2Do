@@ -2,7 +2,7 @@ library screens;
 
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 
 /// Screen shown when the User tries to navigate to a Page that can't be
 /// found in this App
@@ -20,8 +20,8 @@ class _UnknownPageState extends State<UnknownPage> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Unknown Page".translate(),
-          semanticsLabel: "Unknown Page".translate(),
+          "Unknown Page".tr(),
+          semanticsLabel: "Unknown Page".tr(),
         ),
       ),
       body: Center(
@@ -37,10 +37,10 @@ class _UnknownPageState extends State<UnknownPage> {
             children: <Widget>[
               Text(
                 "Something went wrong while navigating to the page you wanted to see"
-                    .translate(),
+                    .tr(),
                 semanticsLabel:
                     "Something went wrong while navigating to the page you wanted to see"
-                        .translate(),
+                        .tr(),
               ),
               const SizedBox(
                 height: 20,
@@ -48,8 +48,8 @@ class _UnknownPageState extends State<UnknownPage> {
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
-                  "Back to the Homescreen".translate(),
-                  semanticsLabel: "Back to the Homescreen".translate(),
+                  "Back to the Homescreen".tr(),
+                  semanticsLabel: "Back to the Homescreen".tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

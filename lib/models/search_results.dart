@@ -1,6 +1,6 @@
 library models;
 
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 
@@ -20,7 +20,7 @@ class SearchResult {
     if (isTodo) {
       return todo!.title;
     } else if (!isTodo) {
-      return setting!.name.translate();
+      return setting!.name.tr();
     } else {
       return "Error: Getting Name failed";
     }

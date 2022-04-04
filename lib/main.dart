@@ -1,11 +1,12 @@
 library main;
 
 import 'dart:async';
+import 'package:string_translate/string_translate.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:todo/app_values/translated_strings.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/screens/add_todo_screen.dart';
@@ -35,13 +36,29 @@ class TodoApp extends StatefulWidget {
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
   static const double appVersion = 1.1;
-  static const String appVersionString = "1.1.0";
+  static const String appVersionString = "1.1.3";
 
   @override
   State<TodoApp> createState() => _TodoAppState();
 }
 
 class _TodoAppState extends State<TodoApp> {
+  @override
+  void initState() {
+    /// The supported Locales
+    final supportedLocales = <Locale>{
+      TranslationLocales.english,
+      TranslationLocales.german,
+      TranslationLocales.french,
+    };
+    Translation.init(
+      supportedLocales: supportedLocales,
+      defaultLocale: TranslationLocales.english,
+      translations: TranslatedStrings.translationsMap,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _app = StreamBuilder(

@@ -2,7 +2,7 @@ library screens;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/screens/components/color_grid_tile.dart';
 import 'package:todo/styles/coloring.dart';
 
@@ -22,8 +22,8 @@ class _ColorChooserState extends State<ColorChooser> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Choose a Color".translate(),
-          semanticsLabel: "Choose a Color".translate(),
+          "Choose a Color".tr(),
+          semanticsLabel: "Choose a Color".tr(),
         ),
       ),
       body: GridView.count(
@@ -77,8 +77,8 @@ class _SubColorChooserState extends State<SubColorChooser> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Choose a Color".translate(),
-          semanticsLabel: "Choose a Color".translate(),
+          "Choose a Color".tr(),
+          semanticsLabel: "Choose a Color".tr(),
         ),
       ),
       body: GridView.count(

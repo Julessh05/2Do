@@ -1,7 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 
@@ -70,11 +70,11 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
       isThreeLine: false,
       title: Text(
         widget.setting.name,
-        semanticsLabel: "Name of the Setting".translate(),
+        semanticsLabel: "Name of the Setting".tr(),
       ),
       subtitle: Text(
         widget.setting.valueAsString,
-        semanticsLabel: "Value of the Setting".translate(),
+        semanticsLabel: "Value of the Setting".tr(),
       ),
       enabled: true,
       leading: widget.icon,

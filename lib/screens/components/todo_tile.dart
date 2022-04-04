@@ -1,7 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -40,16 +40,16 @@ class _TodoTileState extends State<TodoTile> {
       // Title
       title: Text(
         widget.todo.title,
-        semanticsLabel: "Todo Title".translate(),
+        semanticsLabel: "Todo Title".tr(),
       ),
       // Time
       /* subtitle: Text(
         widget.todo.timeAsString,
-        semanticsLabel: "Todo Time".translate(),
+        semanticsLabel: "Todo Time".tr(),
       ), */
       subtitle: Text(
         widget.todo.content,
-        semanticsLabel: "Todo Content".translate(),
+        semanticsLabel: "Todo Content".tr(),
       ),
       onTap: () => Navigator.pushNamed(
         context,

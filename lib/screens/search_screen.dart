@@ -3,7 +3,7 @@ library screens;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
@@ -57,14 +57,14 @@ class _SearchScreenState extends State<SearchScreen> {
             paste: true,
             selectAll: true,
           ),
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Coloring.accentColor),
           decoration: InputDecoration(
             alignLabelWithHint: true,
             enabled: true,
             filled: false,
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
-            hintText: "Search something...".translate(),
+            hintText: "Search something...".tr(),
             hintStyle: TextStyle(
               color: Coloring.accentColor,
             ),
@@ -160,10 +160,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
     // Search Settings
     for (Setting setting in listOfSettings) {
-      if (setting.name
-          .translate()
-          .toLowerCase()
-          .contains(input.toLowerCase())) {
+      if (setting.name.tr().toLowerCase().contains(input.toLowerCase())) {
         // If Setting matches, create Search Result and add it to the list
         final _result = SearchResult(setting: setting);
         listOfResults.add(_result);
@@ -217,12 +214,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     if (widget.hasResults) {
       return AppBar(
         automaticallyImplyLeading: true,
-        title: Text("Search Results".translate()),
+        title: Text("Search Results".tr()),
       );
     } else {
       return AppBar(
         automaticallyImplyLeading: true,
-        title: Text("No Results".translate()),
+        title: Text("No Results".tr()),
       );
     }
   }
@@ -258,7 +255,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             verticalDirection: VerticalDirection.down,
             children: <Widget>[
               Text(
-                "No Results were found".translate(),
+                "No Results were found".tr(),
               ),
               const SizedBox(
                 height: 20,
@@ -266,8 +263,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
-                  "Back to the Homescreen".translate(),
-                  semanticsLabel: "Back to the Homescreen".translate(),
+                  "Back to the Homescreen".tr(),
+                  semanticsLabel: "Back to the Homescreen".tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

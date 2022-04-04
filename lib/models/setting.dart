@@ -2,7 +2,7 @@ library models;
 
 import 'package:hive/hive.dart';
 import 'package:todo/logic/converter.dart';
-import 'package:todo/logic/translate.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/styles/coloring.dart';
 import 'package:todo/styles/themes.dart';
 
@@ -205,7 +205,7 @@ class Setting extends HiveObject {
     if (valueType == "int") {
       return intValue.toString();
     } else if (valueType == "String") {
-      return stringValue!.translate();
+      return stringValue!.tr();
     } else if (valueType == "bool") {
       return Converter.supportedObjectToDisplayableString(boolValue, true);
     } else {
