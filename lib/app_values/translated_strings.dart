@@ -220,7 +220,7 @@ class TranslatedStrings {
       TranslationLocales.french: "Vous n'avez pas de Todos",
     },
     "Add one": {
-      TranslationLocales.german: "Eines hinzufügen",
+      TranslationLocales.german: "Neu hinzufügen",
       TranslationLocales.french: "Ajoute un",
     },
     "Checked Todos": {
