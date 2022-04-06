@@ -1,11 +1,11 @@
 library main;
 
 import 'dart:async';
-import 'package:string_translate/string_translate.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:string_translate/string_translate.dart';
 import 'package:todo/app_values/translated_strings.dart';
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/todo.dart';
@@ -32,6 +32,7 @@ class TodoApp extends StatefulWidget {
 
   static const routeName = "main";
   static final themeStream = StreamController<ThemeMode>();
+
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
@@ -51,10 +52,20 @@ class _TodoAppState extends State<TodoApp> {
       TranslationLocales.german,
       TranslationLocales.french,
     };
+
+    // Empty Translations Map
+    final Map<String, Map<Locale, String>> _translations = {};
+
+    // add Values
+    _translations.addAll(TranslatedStrings.translationsMap);
+    _translations.addAll(StandardTranslations.actions);
+    _translations.addAll(StandardTranslations.error);
+
+    // Init Translations Pacakge
     Translation.init(
       supportedLocales: supportedLocales,
       defaultLocale: TranslationLocales.english,
-      translations: TranslatedStrings.translationsMap,
+      translations: _translations,
     );
     super.initState();
   }
@@ -87,7 +98,7 @@ class _TodoAppState extends State<TodoApp> {
             if (localeName == "de_DE") {
               Translation.activeLocale = const Locale("de", "DE");
             } else if(localeName == "fr_FR") {
-              Translation.activeLocale = cosnt Locale("fr", "FR");
+              Translation.activeLocale = const Locale("fr", "FR");
             } else {
               Translation.activeLocale = const Locale("en", "US");
             }

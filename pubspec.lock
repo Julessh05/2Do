@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
+  bloc_implementation:
+    dependency: "direct main"
+    description:
+      name: bloc_implementation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   boolean_selector:
     dependency: transitive
     description:
@@ -517,7 +524,7 @@ packages:
       name: string_translate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   term_glyph:
     dependency: transitive
     description:

@@ -20,12 +20,18 @@ is ready to be realesed
 At the Moment this App is avaible in English, German and French.
 I do not guarantee that all Translations are right or make sense.
 
+For Translations my own Dart Package is used: https://pub.dev/packages/string_translate.
+This Package provides everything needed to translate your Strings.
+
 
 ## Design and Inspiration
 
 This App is hold White and Dark Blue, because these were two of 
 three favorite Colors of the Person I got the Inspiration from.
 Sadly I couldn't find an Element to use beige on :(
+
+Starting from Version 1.1.0 you can pick your own Color, in which the
+App should be shown. You can find the Color Chooser in the Settings Screen.
 
 
 ### Human Interface Guidline and UX Design
