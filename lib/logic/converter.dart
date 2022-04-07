@@ -1,6 +1,7 @@
 library logic;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show TimeOfDay, Locale, ThemeMode, MaterialColor, Color;
 import 'package:string_translate/string_translate.dart';
 
 /// Holds every method to convert Object in another and the other way around

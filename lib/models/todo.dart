@@ -1,6 +1,13 @@
 library models;
 
-import 'package:hive/hive.dart';
+import 'package:hive/hive.dart'
+    show
+        HiveField,
+        HiveType,
+        HiveObject,
+        TypeAdapter,
+        BinaryReader,
+        BinaryWriter;
 
 part 'todo.g.dart';
 

@@ -1,9 +1,9 @@
 library styles;
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' show NoDefaultCupertinoThemeData;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/styles/coloring.dart';
 
 /// Class with all styles

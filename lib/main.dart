@@ -1,14 +1,18 @@
 library main;
 
-import 'dart:async';
+import 'dart:async' show StreamController;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show
+        GlobalCupertinoLocalizations,
+        GlobalMaterialLocalizations,
+        GlobalWidgetsLocalizations;
+import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
+import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/app_values/translated_strings.dart';
 import 'package:todo/models/search_results.dart';
-import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -46,26 +50,11 @@ class TodoApp extends StatefulWidget {
 class _TodoAppState extends State<TodoApp> {
   @override
   void initState() {
-    /// The supported Locales
-    final supportedLocales = <Locale>{
-      TranslationLocales.english,
-      TranslationLocales.german,
-      TranslationLocales.french,
-    };
-
-    // Empty Translations Map
-    final Map<String, Map<Locale, String>> _translations = {};
-
-    // add Values
-    _translations.addAll(TranslatedStrings.translationsMap);
-    _translations.addAll(StandardTranslations.actions);
-    _translations.addAll(StandardTranslations.error);
-
     // Init Translations Pacakge
     Translation.init(
-      supportedLocales: supportedLocales,
-      defaultLocale: TranslationLocales.english,
-      translations: _translations,
+      supportedLocales: TranslatedStrings.supportedLocales,
+      defaultLocale: TranslatedStrings.supportedLocales.first,
+      translations: TranslatedStrings.translations,
     );
     super.initState();
   }

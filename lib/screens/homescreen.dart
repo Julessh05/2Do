@@ -1,10 +1,10 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:string_translate/string_translate.dart';
-import 'package:todo/models/todo.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/settings_screens.dart';

@@ -1,8 +1,8 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/screens/components/color_grid_tile.dart';
 import 'package:todo/styles/coloring.dart';
 

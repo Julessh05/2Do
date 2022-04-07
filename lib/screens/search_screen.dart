@@ -1,12 +1,12 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/models/search_results.dart';
-import 'package:todo/models/setting.dart';
-import 'package:todo/models/todo.dart';
+import 'package:todo/models/setting.dart' show Setting, listOfSettings;
+import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/search_result_tile.dart';
 import 'package:todo/styles/coloring.dart';

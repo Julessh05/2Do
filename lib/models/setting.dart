@@ -1,8 +1,16 @@
 library models;
 
-import 'package:hive/hive.dart';
+import 'package:hive/hive.dart'
+    show
+        HiveField,
+        HiveType,
+        HiveObject,
+        TypeAdapter,
+        BinaryReader,
+        BinaryWriter;
 import 'package:todo/logic/converter.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart'
+    show Translate, Translation;
 import 'package:todo/styles/coloring.dart';
 import 'package:todo/styles/themes.dart';
 

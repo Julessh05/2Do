@@ -1,6 +1,6 @@
 library storage;
 
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart' show Box, Hive;
 import 'package:todo/logic/converter.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';

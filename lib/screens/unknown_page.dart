@@ -2,7 +2,7 @@ library screens;
 
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
 
 /// Screen shown when the User tries to navigate to a Page that can't be
 /// found in this App

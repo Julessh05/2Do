@@ -3,7 +3,7 @@ library components;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart';
-import 'package:todo/models/setting.dart';
+import 'package:todo/models/setting.dart' show Setting;
 import 'package:todo/screens/components/settings_sub_tile.dart';
 
 /// Represents one Setting.

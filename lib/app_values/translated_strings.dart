@@ -1,9 +1,17 @@
 library app_values;
 
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart'
+    show TranslationLocales, StandardTranslations;
 import 'dart:ui';
 
 class TranslatedStrings {
+  /// The Locales that are supported in this App
+  static final supportedLocales = {
+    TranslationLocales.english,
+    TranslationLocales.german,
+    TranslationLocales.french,
+  };
+
   /// The Translations as a Map
   /// Pattern:
   /// ```dart
@@ -12,7 +20,7 @@ class TranslatedStrings {
   ///   const Locale("language Code", "country Code"): "Value"
   /// }
   /// ```
-  static final translationsMap = <String, Map<Locale, String>>{
+  static final _translationsMap = <String, Map<Locale, String>>{
     "2Do": {
       TranslationLocales.german: "2Do",
       TranslationLocales.french: "2Do",
@@ -288,4 +296,16 @@ class TranslatedStrings {
       TranslationLocales.french: "Couleur",
     }
   };
+
+  static Map<String, Map<Locale, String>> get translations {
+    // Empty Translations Map
+    final Map<String, Map<Locale, String>> _translations = {};
+
+    // add Values
+    _translations.addAll(_translationsMap);
+    _translations.addAll(StandardTranslations.actions);
+    _translations.addAll(StandardTranslations.error);
+
+    return _translations;
+  }
 }

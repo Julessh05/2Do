@@ -1,13 +1,14 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:string_translate/string_translate.dart';
-import 'package:todo/main.dart';
-import 'package:todo/models/setting.dart';
+import 'package:string_translate/string_translate.dart'
+    show Translate, Translation;
+import 'package:todo/main.dart' show TodoApp;
+import 'package:todo/models/setting.dart' show Setting, AllSettings;
 import 'package:todo/notifications/notifications.dart';
-import 'package:todo/screens/color_chooser.dart';
+import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/storage/storage.dart';

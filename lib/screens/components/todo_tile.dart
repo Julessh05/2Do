@@ -1,8 +1,8 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:string_translate/string_translate.dart';
-import 'package:todo/models/todo.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';

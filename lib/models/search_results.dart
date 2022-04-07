@@ -1,8 +1,8 @@
 library models;
 
-import 'package:string_translate/string_translate.dart';
-import 'package:todo/models/setting.dart';
-import 'package:todo/models/todo.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/models/setting.dart' show Setting;
+import 'package:todo/models/todo.dart' show Todo;
 
 /// Object that holds a single Search Result
 class SearchResult {

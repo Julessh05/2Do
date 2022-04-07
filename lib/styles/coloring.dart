@@ -1,6 +1,6 @@
 library styles;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color, Colors;
 
 /// Every Color used in the App
 class Coloring {

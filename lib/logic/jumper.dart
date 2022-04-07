@@ -1,8 +1,8 @@
 library logic;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Navigator, BuildContext, Color;
 import 'package:todo/models/search_results.dart';
-import 'package:todo/models/setting.dart';
+import 'package:todo/models/setting.dart' show Setting;
 import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/homescreen.dart';

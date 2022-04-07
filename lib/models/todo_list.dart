@@ -1,8 +1,8 @@
 library models;
 
-import 'dart:collection';
+import 'dart:collection' show UnmodifiableListView;
 
-import 'package:todo/models/todo.dart';
+import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/storage/storage.dart';
 
 /// Object which holds all 3 different Todo-Lists

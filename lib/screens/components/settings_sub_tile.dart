@@ -1,8 +1,8 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:string_translate/string_translate.dart';
-import 'package:todo/models/setting.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/models/setting.dart' show Setting;
 import 'package:todo/screens/components/settings_tile.dart';
 
 /// Is used to show new SettingsTiles from one SettingsTile above them

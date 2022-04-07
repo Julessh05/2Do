@@ -1,7 +1,7 @@
 library components;
 
 import 'package:flutter/material.dart';
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/screens/todo_detail_screen.dart';
 
 /// A single Tile in the [TodoDetailScreen] to show
