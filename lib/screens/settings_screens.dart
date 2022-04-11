@@ -20,7 +20,7 @@ import 'package:todo/styles/themes.dart';
 class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({Key? key}) : super(key: key);
 
-  static const routeName = "/settings";
+  static const routeName = '/settings';
 
   @override
   State<SettingsMainScreen> createState() => _SettingsMainScreenState();
@@ -33,8 +33,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Settings".tr(),
-          semanticsLabel: "Title".tr(),
+          'Settings'.tr(),
+          semanticsLabel: 'Title'.tr(),
         ),
       ),
       body: ListView(
@@ -70,7 +70,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
 
           // Notification Settings
           /*  SettingsTile.folder(
-            setting: Setting.folder(name: "Notifications".tr()),
+            setting: Setting.folder(name: 'Notifications'.tr()),
             icon: const Icon(Icons.notifications),
             subtiles: <SettingsSubTile>[
               // Notifications Active
@@ -100,15 +100,15 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             icon: const Icon(Icons.info_outline_rounded),
             aboutDialog: const AboutDialog(
               applicationIcon: Icon(Icons.check),
-              applicationName: "2Do",
+              applicationName: '2Do',
               applicationVersion: TodoApp.appVersionString,
               children: <Widget>[
-                Text("\n"),
-                Text("A Todo App built with Flutter,"),
-                Text("a UI Framework by Google."),
-                Text("Available on Android and IOS"),
+                Text('\n'),
+                Text('A Todo App built with Flutter,'),
+                Text('a UI Framework by Google.'),
+                Text('Available on Android and IOS'),
               ],
-              applicationLegalese: "© Julian Schumacher 2022",
+              applicationLegalese: '© Julian Schumacher 2022',
             ),
           )
         ],
@@ -134,13 +134,13 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       elevation: 20.0,
       alignment: Alignment.center,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      semanticLabel: "Choose your Language".tr(),
-      title: Text("Choose your Language".tr()),
+      semanticLabel: 'Choose your Language'.tr(),
+      title: Text('Choose your Language'.tr()),
       children: <SimpleDialogOption>[
         // Option English
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale("en", "US");
+            Translation.activeLocale = const Locale('en', 'US');
             _reload();
             Jumper.back(context);
           },
@@ -154,8 +154,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              "English".tr(),
-              semanticsLabel: "English".tr(),
+              'English'.tr(),
+              semanticsLabel: 'English'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
               ),
@@ -166,7 +166,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option German
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale("de", "DE");
+            Translation.activeLocale = const Locale('de', 'DE');
             _reload();
             Jumper.back(context);
           },
@@ -180,8 +180,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              "German".tr(),
-              semanticsLabel: "German".tr(),
+              'German'.tr(),
+              semanticsLabel: 'German'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
               ),
@@ -192,7 +192,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option French
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale("fr", "FR");
+            Translation.activeLocale = const Locale('fr', 'FR');
             _reload();
             Jumper.back(context);
           },
@@ -206,8 +206,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              "French".tr(),
-              semanticsLabel: "French".tr(),
+              'French'.tr(),
+              semanticsLabel: 'French'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
               ),
@@ -219,8 +219,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         SimpleDialogOption(
           child: Center(
             child: Text(
-              "Cancel".tr(),
-              semanticsLabel: "Cancel".tr(),
+              'Cancel'.tr(),
+              semanticsLabel: 'Cancel'.tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
               ),
@@ -238,8 +238,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   /// This uses Radio Buttons to choose
   SimpleDialog get _themeModeDialog {
     final _dialog = SimpleDialog(
-      title: Text("Choose your Theme Mode".tr()),
-      semanticLabel: "Choose your Theme Mode".tr(),
+      title: Text('Choose your Theme Mode'.tr()),
+      semanticLabel: 'Choose your Theme Mode'.tr(),
       alignment: Alignment.center,
       children: <SimpleDialogOption>[
         // Option System
@@ -250,8 +250,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             isThreeLine: false,
             toggleable: true,
             title: Text(
-              "System".tr(),
-              semanticsLabel: "System".tr(),
+              'System'.tr(),
+              semanticsLabel: 'System'.tr(),
             ),
             value: ThemeMode.system,
             groupValue: Themes.themeMode,
@@ -267,8 +267,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             isThreeLine: false,
             toggleable: true,
             title: Text(
-              "Light".tr(),
-              semanticsLabel: "Light".tr(),
+              'Light'.tr(),
+              semanticsLabel: 'Light'.tr(),
             ),
             value: ThemeMode.light,
             groupValue: Themes.themeMode,
@@ -287,8 +287,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             groupValue: Themes.themeMode,
             onChanged: (_) => _changeThemeMode(ThemeMode.dark),
             title: Text(
-              "Dark".tr(),
-              semanticsLabel: "Dark".tr(),
+              'Dark'.tr(),
+              semanticsLabel: 'Dark'.tr(),
             ),
           ),
         ),
@@ -316,7 +316,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   SimpleDialog get _notificationImportanceDialog {
     final _dialog = SimpleDialog(
       alignment: Alignment.center,
-      title: Text("Choose an Standard Importance".tr()),
+      title: Text('Choose an Standard Importance'.tr()),
       children: <SimpleDialogOption>[
         SimpleDialogOption(
           child: RadioListTile(
@@ -324,8 +324,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             enableFeedback: true,
             isThreeLine: false,
             title: Text(
-              "unimportant".tr(),
-              semanticsLabel: "unimportant".tr(),
+              'unimportant'.tr(),
+              semanticsLabel: 'unimportant'.tr(),
             ),
             value: 0,
             groupValue: Notifications.standardImportance,
@@ -338,8 +338,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             enableFeedback: true,
             isThreeLine: false,
             title: Text(
-              "middle Importance".tr(),
-              semanticsLabel: "middle Importance".tr(),
+              'middle Importance'.tr(),
+              semanticsLabel: 'middle Importance'.tr(),
             ),
             value: 1,
             groupValue: Notifications.standardImportance,
@@ -374,7 +374,7 @@ class SettingsSubScreen extends StatefulWidget {
 
   final SettingsSubScreenArguments arguments;
 
-  static const routeName = "/settings/subSettings";
+  static const routeName = '/settings/subSettings';
 
   @override
   State<SettingsSubScreen> createState() => _SettingsSubScreenState();

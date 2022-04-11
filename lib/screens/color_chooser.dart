@@ -9,7 +9,7 @@ import 'package:todo/styles/coloring.dart';
 class ColorChooser extends StatefulWidget {
   const ColorChooser({Key? key}) : super(key: key);
 
-  static const routeName = "/settings/color_chooser";
+  static const routeName = '/settings/color_chooser';
 
   @override
   State<ColorChooser> createState() => _ColorChooserState();
@@ -22,37 +22,62 @@ class _ColorChooserState extends State<ColorChooser> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Choose a Color".tr(),
-          semanticsLabel: "Choose a Color".tr(),
+          'Choose a Color'.tr(),
+          semanticsLabel: 'Choose a Color'.tr(),
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 3,
+      body: ListView(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         dragStartBehavior: DragStartBehavior.start,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        children: _colorTiles,
+        shrinkWrap: true,
+        children: _colorList,
       ),
     );
 
     return _scaffold;
   }
 
-  List<ColorGridTile> get _colorTiles {
-    final List<ColorGridTile> _tiles = [];
-    for (Color color in Coloring.colors) {
-      final _tile = ColorGridTile(
-        color: color,
-        isSubTile: false,
+  List<IntrinsicHeight> get _colorList {
+    final List<IntrinsicHeight> _list = [];
+    for (int counter = 0; counter < Coloring.colors.length - 2; counter++) {
+      _list.add(
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            verticalDirection: VerticalDirection.down,
+            children: <ColorGridTile>[
+              ColorGridTile(
+                firstColor: Coloring.colors[counter],
+                secondColor: Coloring.colors[counter + 1],
+                isSubTile: false,
+                position: ColorGridPosition.left,
+              ),
+              ColorGridTile(
+                firstColor: Coloring.colors[++counter],
+                secondColor: Coloring.colors[counter + 1],
+                isSubTile: false,
+                position: ColorGridPosition.middle,
+              ),
+              ColorGridTile(
+                firstColor: Coloring.colors[++counter],
+                secondColor: Coloring.colors[counter + 1],
+                isSubTile: false,
+                position: ColorGridPosition.right,
+              ),
+            ],
+          ),
+        ),
       );
-      _tiles.add(_tile);
     }
-    return _tiles;
+    return _list;
   }
 }
 
@@ -62,7 +87,7 @@ class SubColorChooser extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  static const routeName = "/settings/color_chooser/sub_color_chooser";
+  static const routeName = '/settings/color_chooser/sub_color_chooser';
 
   final Color color;
 
@@ -77,8 +102,8 @@ class _SubColorChooserState extends State<SubColorChooser> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Choose a Color".tr(),
-          semanticsLabel: "Choose a Color".tr(),
+          'Choose a Color'.tr(),
+          semanticsLabel: 'Choose a Color'.tr(),
         ),
       ),
       body: GridView.count(
@@ -123,12 +148,18 @@ class _SubColorChooserState extends State<SubColorChooser> {
       _colors = Coloring.yellowColors;
     } else if (widget.color == Colors.red) {
       _colors = Coloring.redColors;
+    } else if (widget.color == Colors.brown) {
+      _colors = Coloring.brownColors;
+    } else if (widget.color == Colors.pink) {
+      _colors = Coloring.pinkColors;
     } else {
       _colors = [widget.color];
     }
     for (Color color in _colors) {
       final _tile = ColorGridTile(
-        color: color,
+        position: ColorGridPosition.middle,
+        firstColor: color,
+        secondColor: color,
         isSubTile: true,
       );
       _tiles.add(_tile);

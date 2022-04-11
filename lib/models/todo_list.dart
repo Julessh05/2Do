@@ -21,13 +21,13 @@ class TodoList {
   static List<Todo> _listOfTodos = [];
 
   /// The Key for the [listOfTodos]
-  static const listOfTodosKEY = "List Of Todos";
+  static const listOfTodosKEY = 'List Of Todos';
 
   /// The private file intern List where checked Todos are stored
   static List<Todo> _listOfCheckedTodos = [];
 
   /// The Key for the [listOfCheckedTodos]
-  static const listOfCheckedTodosKEY = "List Of Checked Todos";
+  static const listOfCheckedTodosKEY = 'List Of Checked Todos';
 
   /// This private file intern List combines the [listOfCheckedTodos] and the [listOfTodos]
   static List<Todo> _combinedListOfTodos = [];

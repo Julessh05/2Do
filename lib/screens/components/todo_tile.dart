@@ -40,16 +40,16 @@ class _TodoTileState extends State<TodoTile> {
       // Title
       title: Text(
         widget.todo.title,
-        semanticsLabel: "Todo Title".tr(),
+        semanticsLabel: 'Todo Title'.tr(),
       ),
       // Time
       /* subtitle: Text(
         widget.todo.timeAsString,
-        semanticsLabel: "Todo Time".tr(),
+        semanticsLabel: 'Todo Time'.tr(),
       ), */
       subtitle: Text(
         widget.todo.content,
-        semanticsLabel: "Todo Content".tr(),
+        semanticsLabel: 'Todo Content'.tr(),
       ),
       onTap: () => Navigator.pushNamed(
         context,

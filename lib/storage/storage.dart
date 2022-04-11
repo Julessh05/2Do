@@ -16,14 +16,14 @@ class Storage {
   static Box<Todo>? _todoBox;
 
   /// The Key / Name for the [_todoBox]
-  static const todoBoxKEY = "Todo Box";
+  static const todoBoxKEY = 'Todo Box';
 
   /// The Box where all Settings are stored
   /// These Settings are stored as [listOfSettings]
   static Box<Setting>? _settingsBox;
 
   /// The Key / Name for the [_settingsBox]
-  static const settingsBoxKey = "Settings Box";
+  static const settingsBoxKey = 'Settings Box';
 
   /// Init Method which initializes everything and is responsible
   /// for registering the Adapters
@@ -40,7 +40,7 @@ class Storage {
       storeSettings();
     }
 
-    _settingsBox = await Hive.openBox("Settings Box");
+    _settingsBox = await Hive.openBox('Settings Box');
 
     if (_todoBox!.isNotEmpty) {
       // Do nothing
@@ -54,12 +54,12 @@ class Storage {
   static void storeTodos() {
     _todoBox!.deleteAll(_todoBox!.keys);
     for (int i = 0; i < TodoList.listOfTodos.length; i++) {
-      final key = "Unchecked $i";
+      final key = 'Unchecked $i';
       _todoBox!.put(key, TodoList.listOfTodos[i]);
     }
 
     for (int i = 0; i < TodoList.listOfCheckedTodos.length; i++) {
-      final key = "Checked $i";
+      final key = 'Checked $i';
       _todoBox!.put(key, TodoList.listOfCheckedTodos[i]);
     }
   }

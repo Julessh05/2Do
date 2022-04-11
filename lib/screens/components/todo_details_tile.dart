@@ -13,7 +13,7 @@ class TodoDetailsTile extends StatefulWidget {
   /// The [function] should be null
   const TodoDetailsTile({
     required this.title,
-    this.subtitle = "",
+    this.subtitle = '',
     this.icon,
     Key? key,
     this.isButton = false,
@@ -24,8 +24,8 @@ class TodoDetailsTile extends StatefulWidget {
   /// The [isButton] have to be false
   /// The [function] should be null
   const TodoDetailsTile.divider({
-    this.title = "",
-    this.subtitle = "",
+    this.title = '',
+    this.subtitle = '',
     this.icon,
     this.isButton = false,
     this.function,
@@ -38,7 +38,7 @@ class TodoDetailsTile extends StatefulWidget {
   const TodoDetailsTile.button({
     required this.title,
     required this.function,
-    this.subtitle = "",
+    this.subtitle = '',
     this.icon,
     this.isButton = true,
     Key? key,
@@ -76,11 +76,11 @@ class _TodoDetailsTileState extends State<TodoDetailsTile> {
         autofocus: false,
         title: Text(
           widget.title,
-          semanticsLabel: "Title".tr(),
+          semanticsLabel: 'Title'.tr(),
         ),
         subtitle: Text(
           widget.subtitle,
-          semanticsLabel: "Value of the Info".tr(),
+          semanticsLabel: 'Value of the Info'.tr(),
         ),
         enabled: true,
         leading: widget.icon,

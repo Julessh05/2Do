@@ -20,8 +20,8 @@ class _UnknownPageState extends State<UnknownPage> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Unknown Page".tr(),
-          semanticsLabel: "Unknown Page".tr(),
+          'Unknown Page'.tr(),
+          semanticsLabel: 'Unknown Page'.tr(),
         ),
       ),
       body: Center(
@@ -36,10 +36,10 @@ class _UnknownPageState extends State<UnknownPage> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                "Something went wrong while navigating to the page you wanted to see"
+                'Something went wrong while navigating to the page you wanted to see'
                     .tr(),
                 semanticsLabel:
-                    "Something went wrong while navigating to the page you wanted to see"
+                    'Something went wrong while navigating to the page you wanted to see'
                         .tr(),
               ),
               const SizedBox(
@@ -48,8 +48,8 @@ class _UnknownPageState extends State<UnknownPage> {
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
-                  "Back to the Homescreen".tr(),
-                  semanticsLabel: "Back to the Homescreen".tr(),
+                  'Back to the Homescreen'.tr(),
+                  semanticsLabel: 'Back to the Homescreen'.tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

@@ -82,7 +82,7 @@ class SettingsTile extends StatefulWidget {
                   aboutDialog == null &&
                   newScreenRouteName == null &&
                   simpleDialogFunc != null,
-          "You have to define exactly one Widget, not more and not less",
+          'You have to define exactly one Widget, not more and not less',
         ),
         super(key: key);
 
@@ -156,11 +156,11 @@ class _SettingsTileState extends State<SettingsTile> {
       isThreeLine: false,
       title: Text(
         widget.setting.name.tr(),
-        semanticsLabel: "Name of the Setting".tr(),
+        semanticsLabel: 'Name of the Setting'.tr(),
       ),
       subtitle: Text(
         widget.setting.valueToDisplay.tr(),
-        semanticsLabel: "Value of the Setting".tr(),
+        semanticsLabel: 'Value of the Setting'.tr(),
       ),
       leading: widget.icon,
       onTap: () {

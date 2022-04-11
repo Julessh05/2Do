@@ -26,12 +26,12 @@ class Converter {
     final String minute = dateTime.minute.toString().padLeft(2, '0');
 
     // Returns the Value based on the activeLocale of the Ap
-    if (Translation.activeLocale == const Locale("en", "US")) {
-      return "$day.$month.$year - $hour:$minute";
-    } else if (Translation.activeLocale == const Locale("de", "DE")) {
-      return "$day.$month.$year - $hour:$minute Uhr";
+    if (Translation.activeLocale == const Locale('en', 'US')) {
+      return '$day.$month.$year - $hour:$minute';
+    } else if (Translation.activeLocale == const Locale('de', 'DE')) {
+      return '$day.$month.$year - $hour:$minute Uhr';
     } else {
-      return "$day.$month.$year - $hour:$minute";
+      return '$day.$month.$year - $hour:$minute';
     }
   }
 
@@ -51,7 +51,7 @@ class Converter {
     // Convert Minute
     final String minute = dateTime.minute.toString().padLeft(2, '0');
 
-    return "$hour:$minute";
+    return '$hour:$minute';
   }
 
   /// Converts a [DateTime] to a [String] and return only the Date
@@ -67,7 +67,7 @@ class Converter {
     // Convert Day
     final String day = dateTime.day.toString().padLeft(2, '0');
 
-    return "$day.$month.$year";
+    return '$day.$month.$year';
   }
 
   /// Converts a [TimeOfDay] to a [String] and returns it in the
@@ -80,7 +80,7 @@ class Converter {
     // Convert Minute
     final String minute = time.minute.toString().padLeft(2, '0');
 
-    return "$hour:$minute";
+    return '$hour:$minute';
   }
 
   /// Parses an Settings Value of an supported Type to String
@@ -95,28 +95,28 @@ class Converter {
     final String _output;
     switch (object.runtimeType) {
       case Locale:
-        if (object == const Locale("de", "DE")) {
-          _output = "German";
-        } else if (object == const Locale("fr", "FR")) {
-          _output = "French";
+        if (object == const Locale('de', 'DE')) {
+          _output = 'German';
+        } else if (object == const Locale('fr', 'FR')) {
+          _output = 'French';
         } else {
-          _output = "English";
+          _output = 'English';
         }
         break;
       case ThemeMode:
         if (object == ThemeMode.dark) {
-          _output = "Dark";
+          _output = 'Dark';
         } else if (object == ThemeMode.light) {
-          _output = "Light";
+          _output = 'Light';
         } else {
-          _output = "System";
+          _output = 'System';
         }
         break;
       case bool:
         if (object == true) {
-          _output = "Active";
+          _output = 'Active';
         } else {
-          _output = "Inactive";
+          _output = 'Inactive';
         }
         break;
       // Material Color and Color do the Same Thing
@@ -129,7 +129,7 @@ class Converter {
         _output = object.value.toRadixString(16);
         break;
       default:
-        _output = "Error parsing String";
+        _output = 'Error parsing String';
         break;
     }
     if (translate == true) {
@@ -146,16 +146,16 @@ class Converter {
     final String _type;
     switch (type) {
       case Locale:
-        _type = "Locale";
+        _type = 'Locale';
         break;
       case ThemeMode:
-        _type = "ThemeMode";
+        _type = 'ThemeMode';
         break;
       case Color:
-        _type = "Color";
+        _type = 'Color';
         break;
       default:
-        _type = "Unsupported Type";
+        _type = 'Unsupported Type';
         break;
     }
     return _type;
@@ -171,25 +171,25 @@ class Converter {
   static Object stringToSupportedObject(String string, String type) {
     Object object;
     switch (type) {
-      case "Locale":
-        if (string == "German") {
-          object = const Locale("de", "DE");
-        } else if (string == "French") {
-          object = const Locale("fr", "FR");
+      case 'Locale':
+        if (string == 'German') {
+          object = const Locale('de', 'DE');
+        } else if (string == 'French') {
+          object = const Locale('fr', 'FR');
         } else {
-          object = const Locale("en", "US");
+          object = const Locale('en', 'US');
         }
         break;
-      case "ThemeMode":
-        if (string == "Dark") {
+      case 'ThemeMode':
+        if (string == 'Dark') {
           object = ThemeMode.dark;
-        } else if (string == "Light") {
+        } else if (string == 'Light') {
           object = ThemeMode.light;
         } else {
           object = ThemeMode.system;
         }
         break;
-      case "Color":
+      case 'Color':
         object = Color(int.parse(string, radix: 16));
         break;
       default:
@@ -205,6 +205,6 @@ extension BoolParse on String {
   /// Parses String to Boolean and returns either true or false
   /// null isn't possible
   bool parseBool() {
-    return toLowerCase() == "true";
+    return toLowerCase() == 'true';
   }
 }

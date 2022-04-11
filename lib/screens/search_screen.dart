@@ -15,7 +15,7 @@ import 'package:todo/styles/coloring.dart';
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
-  static const routeName = "/search";
+  static const routeName = '/search';
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
             filled: false,
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
-            hintText: "Search something...".tr(),
+            hintText: 'Search something...'.tr(),
             hintStyle: TextStyle(
               color: Coloring.accentColor,
             ),
@@ -140,7 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// Searchs in the [TodoList.listOfTodos] and [listOfSettings]
   /// and navigates to a new Screen.
-  /// This eigther shows the results or says "No Results found"
+  /// This eigther shows the results or says 'No Results found'
   void _search(String input) {
     List<SearchResult> listOfResults = [];
 
@@ -173,7 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 /// Screen that shows the Results (of there are any).
-/// If not it will show a Message which says "No Results found"
+/// If not it will show a Message which says 'No Results found'
 class SearchResultScreen extends StatefulWidget {
   final bool hasResults;
 
@@ -193,7 +193,7 @@ class SearchResultScreen extends StatefulWidget {
 
   final SearchResultsList searchResultsList;
 
-  static const routeName = "/search/results";
+  static const routeName = '/search/results';
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
@@ -214,12 +214,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     if (widget.hasResults) {
       return AppBar(
         automaticallyImplyLeading: true,
-        title: Text("Search Results".tr()),
+        title: Text('Search Results'.tr()),
       );
     } else {
       return AppBar(
         automaticallyImplyLeading: true,
-        title: Text("No Results".tr()),
+        title: Text('No Results'.tr()),
       );
     }
   }
@@ -255,7 +255,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             verticalDirection: VerticalDirection.down,
             children: <Widget>[
               Text(
-                "No Results were found".tr(),
+                'No Results were found'.tr(),
               ),
               const SizedBox(
                 height: 20,
@@ -263,8 +263,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
                 child: Text(
-                  "Back to the Homescreen".tr(),
-                  semanticsLabel: "Back to the Homescreen".tr(),
+                  'Back to the Homescreen'.tr(),
+                  semanticsLabel: 'Back to the Homescreen'.tr(),
                 ),
                 autofocus: false,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

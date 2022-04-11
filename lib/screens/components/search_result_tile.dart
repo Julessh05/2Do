@@ -33,7 +33,7 @@ class _SearchResulTileState extends State<SearchResulTile> {
           ? const Icon(Icons.notifications_active)
           : const Icon(Icons.settings),
       subtitle: Text(
-        widget.result.isTodo ? "Todo".tr() : "Setting".tr(),
+        widget.result.isTodo ? 'Todo'.tr() : 'Setting'.tr(),
       ),
       onTap: _openResult,
     );

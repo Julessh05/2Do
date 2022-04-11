@@ -45,25 +45,25 @@ class Todo extends HiveObject {
     required this.title,
     required this.content,
     // required this.time,
-    // this.tags = const ["Standard"],
+    // this.tags = const ['Standard'],
     this.checked = false,
     this.selected = false,
     // required this.created,
     // this.importance,
   }) : assert(
           selected == false,
-          "A Todo can't be selected while being created",
+          'A Todo can\'t be selected while being created',
         ) {
     // importance ?? Notifications.importance;
   }
 
   /// Created an empty Todo.
   Todo.empty({
-    this.title = "",
-    this.content = "",
+    this.title = '',
+    this.content = '',
     this.checked = false,
     this.selected = false,
-    // this.tags = const ["Empty"],
+    // this.tags = const ['Empty'],
     // this.importance = 0,
   }) {
     // time = DateTime.now();
@@ -73,13 +73,13 @@ class Todo extends HiveObject {
   /// Returns the Todo as a Map of String : String
   Map<String, String> get asMap {
     final _map = <String, String>{
-      "Title": title,
-      "Content": content,
-      // "Time": timeAsString,
-      "Selected": selected.toString(),
-      "Checked": checked.toString(),
-      // "Importance": importance.toString(),
-      // "Tags": "Following are tags",
+      'Title': title,
+      'Content': content,
+      // 'Time': timeAsString,
+      'Selected': selected.toString(),
+      'Checked': checked.toString(),
+      // 'Importance': importance.toString(),
+      // 'Tags': 'Following are tags',
     };
 
     /* for (int i = 1; i <= tags.length; i++) {
@@ -91,35 +91,35 @@ class Todo extends HiveObject {
 
   @override
   String toString() {
-    String _result = "";
+    String _result = '';
 
     // Add Title
-    _result += "Title:";
+    _result += 'Title:';
     _result += title;
 
     // Add Content
-    _result += "Content:";
+    _result += 'Content:';
     _result += content;
 
     // Add Time
-    /*  _result += "DateTime:";
+    /*  _result += 'DateTime:';
     _result += timeAsString; */
 
     // Add Checked
-    _result += "Checked";
+    _result += 'Checked';
     _result += checked.toString();
 
     // Add created Time
-    /* _result += "Created on:";
+    /* _result += 'Created on:';
     _result += createdAsString; */
 
     // Add Importance
-    /*  _result += "Importance";
+    /*  _result += 'Importance';
     _result += importance.toString();
 
     // Add Tags
     for (int i = 0; i <= tags.length; i++) {
-      _result += "tag ${i.toString()}:";
+      _result += 'tag ${i.toString()}:';
       _result += tags[i];
     } */
 

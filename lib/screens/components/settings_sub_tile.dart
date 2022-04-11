@@ -34,7 +34,7 @@ class SettingsSubTile extends StatefulWidget {
                   simpleDialog == null &&
                   alertDialog == null &&
                   aboutDialog != null,
-          "You have to define exactly one Widget, not more and not less",
+          'You have to define exactly one Widget, not more and not less',
         ),
         super(key: key);
 
@@ -70,11 +70,11 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
       isThreeLine: false,
       title: Text(
         widget.setting.name,
-        semanticsLabel: "Name of the Setting".tr(),
+        semanticsLabel: 'Name of the Setting'.tr(),
       ),
       subtitle: Text(
         widget.setting.valueAsString,
-        semanticsLabel: "Value of the Setting".tr(),
+        semanticsLabel: 'Value of the Setting'.tr(),
       ),
       enabled: true,
       leading: widget.icon,

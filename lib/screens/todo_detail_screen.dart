@@ -15,7 +15,7 @@ class TodoDetailScreen extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  static const routeName = "/todo_details";
+  static const routeName = '/todo_details';
 
   final Todo todo;
 
@@ -30,7 +30,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
       appBar: AppBar(
         title: Text(
           widget.todo.title,
-          semanticsLabel: "Title".tr(),
+          semanticsLabel: 'Title'.tr(),
         ),
         automaticallyImplyLeading: true,
       ),
@@ -45,7 +45,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
         children: <TodoDetailsTile>[
           // Title
           TodoDetailsTile(
-            title: "Title:".tr(),
+            title: 'Title:'.tr(),
             subtitle: widget.todo.title,
             function: () => Navigator.pushNamed(
               context,
@@ -56,7 +56,7 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Content
           TodoDetailsTile(
-            title: "Content:".tr(),
+            title: 'Content:'.tr(),
             subtitle: widget.todo.content,
             function: () => Navigator.pushNamed(
               context,
@@ -67,20 +67,20 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Checked
           TodoDetailsTile(
-            title: "Checked:".tr(),
-            subtitle: widget.todo.checked ? "Checked".tr() : "Not yet".tr(),
+            title: 'Checked:'.tr(),
+            subtitle: widget.todo.checked ? 'Checked'.tr() : 'Not yet'.tr(),
           ),
 
           // Time
           /*  TodoDetailsTile(
-            title: "Time:",
+            title: 'Time:',
             subtitle: widget.todo.onlyTime,
             function: _showBottomSheet,
           ),
 
           // Date
           TodoDetailsTile(
-            title: "Date:",
+            title: 'Date:',
             subtitle: widget.todo.onlyDate,
             function: _showBottomSheet,
           ), */
@@ -90,13 +90,13 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
 
           // Created on Date and Time
           /*  TodoDetailsTile(
-            title: "Created on:",
+            title: 'Created on:',
             subtitle: widget.todo.createdAsString,
           ), */
 
           // Edit Button
           TodoDetailsTile.button(
-            title: "Edit".tr(),
+            title: 'Edit'.tr(),
             function: () => Navigator.pushNamed(
               context,
               EditTodoScreen.routeName,
@@ -119,7 +119,7 @@ class EditTodoScreen extends StatefulWidget {
 
   final Todo todo;
 
-  static const routeName = "/todo_details/edit";
+  static const routeName = '/todo_details/edit';
 
   @override
   State<EditTodoScreen> createState() => _EditTodoScreenState();
@@ -135,8 +135,8 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Edit Todo".tr(),
-          semanticsLabel: "Edit Todo".tr(),
+          'Edit Todo'.tr(),
+          semanticsLabel: 'Edit Todo'.tr(),
         ),
       ),
       body: Column(
@@ -177,7 +177,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             textDirection: TextDirection.ltr,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              labelText: "Edit Title".tr(),
+              labelText: 'Edit Title'.tr(),
             ),
             initialValue: widget.todo.title,
             onFieldSubmitted: (value) {
@@ -220,7 +220,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
             textDirection: TextDirection.ltr,
             textInputAction: TextInputAction.done,
             decoration: InputDecoration(
-              labelText: "Edit Content".tr(),
+              labelText: 'Edit Content'.tr(),
             ),
             initialValue: widget.todo.content,
             onFieldSubmitted: (value) {
@@ -244,8 +244,8 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
               Jumper.back(context);
             },
             child: Text(
-              "Confirm".tr(),
-              semanticsLabel: "Confirm".tr(),
+              'Confirm'.tr(),
+              semanticsLabel: 'Confirm'.tr(),
             ),
           )
         ],

@@ -34,14 +34,14 @@ void main() async {
 class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 
-  static const routeName = "main";
+  static const routeName = 'main';
   static final themeStream = StreamController<ThemeMode>();
 
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
   static const double appVersion = 1.1;
-  static const String appVersionString = "1.1.3";
+  static const String appVersionString = '1.1.3';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -60,6 +60,12 @@ class _TodoAppState extends State<TodoApp> {
   }
 
   @override
+  void dispose() {
+    TodoApp.themeStream.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _app = StreamBuilder(
       initialData: Themes.themeMode,
@@ -74,7 +80,7 @@ class _TodoAppState extends State<TodoApp> {
           checkerboardOffscreenLayers: false,
           checkerboardRasterCacheImages: false,
           /* App Section */
-          title: "2Do App",
+          title: '2Do App',
 
           /* Locale Section */
           localizationsDelegates: const <LocalizationsDelegate>[
@@ -84,12 +90,12 @@ class _TodoAppState extends State<TodoApp> {
           ],
           /* localeListResolutionCallback: (_, __) {
             final localeName = Platform.localeName;
-            if (localeName == "de_DE") {
-              Translation.activeLocale = const Locale("de", "DE");
-            } else if(localeName == "fr_FR") {
-              Translation.activeLocale = const Locale("fr", "FR");
+            if (localeName == 'de_DE') {
+              Translation.activeLocale = const Locale('de', 'DE');
+            } else if(localeName == 'fr_FR') {
+              Translation.activeLocale = const Locale('fr', 'FR');
             } else {
-              Translation.activeLocale = const Locale("en", "US");
+              Translation.activeLocale = const Locale('en', 'US');
             }
             return Translation.activeLocale;
           }, */
@@ -209,7 +215,7 @@ class _TodoAppState extends State<TodoApp> {
           onGenerateTitle: (_) {
             // Returns the Title of the App
             // Can be used to returns localized Titles
-            String _title = "2Do App";
+            String _title = '2Do App';
             return _title;
           },
         );

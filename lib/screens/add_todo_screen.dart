@@ -13,7 +13,7 @@ import 'package:todo/storage/storage.dart';
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
 
-  static const routeName = "/add_todo";
+  static const routeName = '/add_todo';
 
   @override
   State<AddTodoScreen> createState() => _AddTodoScreenState();
@@ -23,14 +23,14 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   DateTime? date;
   TimeOfDay? time;
   String? title;
-  String content = "";
+  String content = '';
   int? importance;
 
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("Add Todo".tr()),
+        title: Text('Add Todo'.tr()),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -74,7 +74,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               selectAll: true,
             ),
             decoration: InputDecoration(
-              labelText: "Insert Title".tr(),
+              labelText: 'Insert Title'.tr(),
             ),
             onSubmitted: (value) {
               title = value;
@@ -115,7 +115,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               selectAll: true,
             ),
             decoration: InputDecoration(
-              labelText: "Insert Content".tr(),
+              labelText: 'Insert Content'.tr(),
             ),
             onSubmitted: (value) {
               content = value;
@@ -130,7 +130,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             enabled: true,
             isThreeLine: false,
             title: Text(
-              date == null ? "Set a Date".tr() : "Date".tr(),
+              date == null ? 'Set a Date'.tr() : 'Date'.tr(),
             ),
             subtitle: date == null ? null : Text(Converter.onlyDate(date!)),
             leading: const Icon(Icons.date_range_rounded),
@@ -145,7 +145,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             enabled: true,
             isThreeLine: false,
             title: Text(
-              date == null ? "Set a Time".tr() : "Time".tr(),
+              date == null ? 'Set a Time'.tr() : 'Time'.tr(),
             ),
             subtitle:
                 time == null ? null : Text(Converter.timeOfDayToString(time!)),
@@ -162,8 +162,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             isThreeLine: false,
             title: Text(
               importance == null
-                  ? "Set an Importance".tr()
-                  : "Importance".tr(),
+                  ? 'Set an Importance'.tr()
+                  : 'Importance'.tr(),
             ),
             leading: const Icon(Icons.notification_important_rounded),
             subtitle: Text(
@@ -173,7 +173,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
           const SizedBox(height: 50),
           TextButton(
             onPressed: _createTodo,
-            child: Text("Confirm".tr()),
+            child: Text('Confirm'.tr()),
             autofocus: false,
             clipBehavior: Clip.antiAliasWithSaveLayer,
           )
@@ -191,13 +191,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     List<String> missingValues = [];
 
     if (title == null || title!.isEmpty) {
-      missingValues.add("Title".tr());
+      missingValues.add('Title'.tr());
     }
     /* if (date == null) {
-      missingValues.add("Date".tr());
+      missingValues.add('Date'.tr());
     }
      if (time == null) {
-      missingValues.add("Time".tr());
+      missingValues.add('Time'.tr());
     } */
 
     if (missingValues.isNotEmpty) {
@@ -241,18 +241,18 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     String _content2;
     if (missingValues.length < 2) {
       final _component = missingValues[0];
-      _title = "$_component " + "is missing".tr();
-      _content1 = "The following Value is missing:".tr();
-      _content2 = " * $_component";
+      _title = '$_component ' + 'is missing'.tr();
+      _content1 = 'The following Value is missing:'.tr();
+      _content2 = ' * $_component';
     } else {
-      _title = "Some Values missing".tr();
-      _content1 = "The following Values are missing:".tr();
-      _content2 = "";
+      _title = 'Some Values missing'.tr();
+      _content1 = 'The following Values are missing:'.tr();
+      _content2 = '';
       for (String component in missingValues) {
-        _content2 += " * $component \n";
+        _content2 += ' * $component \n';
       }
     }
-    final _content = _content1 + "\n" + "\n" + _content2;
+    final _content = _content1 + '\n' + '\n' + _content2;
     final _dialog = AlertDialog(
       scrollable: true,
       title: Text(_title),
@@ -261,13 +261,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       alignment: Alignment.center,
       elevation: 20.0,
       actionsOverflowDirection: VerticalDirection.down,
-      semanticLabel: "Some Values missing".tr(),
+      semanticLabel: 'Some Values missing'.tr(),
       actionsPadding: const EdgeInsets.all(5),
       actions: <Center>[
         Center(
           child: TextButton(
             onPressed: () => Jumper.back(context),
-            child: Text("OK".tr()),
+            child: Text('OK'.tr()),
             autofocus: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
           ),
@@ -290,8 +290,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       initialDatePickerMode: DatePickerMode.day,
       initialEntryMode: DatePickerEntryMode.calendar,
       locale: Translation.activeLocale,
-      cancelText: "Cancel".tr(),
-      confirmText: "Confirm".tr(),
+      cancelText: 'Cancel'.tr(),
+      confirmText: 'Confirm'.tr(),
       useRootNavigator: true,
     );
   }
@@ -302,8 +302,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       context: context,
       initialTime: TimeOfDay.now(),
       initialEntryMode: TimePickerEntryMode.dial,
-      cancelText: "Cancel".tr(),
-      confirmText: "Confirm".tr(),
+      cancelText: 'Cancel'.tr(),
+      confirmText: 'Confirm'.tr(),
       useRootNavigator: true,
     );
   }

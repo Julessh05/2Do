@@ -27,7 +27,7 @@ part 'setting.g.dart';
 /// Example with bool:
 /// ```dart
 /// final _setting = Setting(
-///   name: "Settings Name",
+///   name: 'Settings Name',
 ///   boolValue = true,
 /// );
 /// ```
@@ -35,7 +35,7 @@ part 'setting.g.dart';
 /// Example with int:
 /// ```dart
 /// final _setting = Setting(
-///   name: "Settings Name",
+///   name: 'Settings Name',
 ///   intValue: 4,
 /// );
 /// ```
@@ -43,15 +43,15 @@ part 'setting.g.dart';
 /// Example with string
 /// ```dart
 /// final _setting = Setting(
-///   name: "Settings Name",
-///   stringValue: "Value of the Setting",
+///   name: 'Settings Name',
+///   stringValue: 'Value of the Setting',
 /// );
 /// ```
 ///
 /// Example with Object:
 /// ```dart
 /// final _setting = Setting(
-///   name: "Settings Name",
+///   name: 'Settings Name',
 ///   objectValue: Colors.orange,
 /// );
 /// ```
@@ -59,13 +59,13 @@ part 'setting.g.dart';
 /// This will throw an Error:
 /// ```dart
 /// final _setting = Setting(
-///   name: "Settings Name",
+///   name: 'Settings Name',
 ///   intValue: 4,
-///   stingValue: "4",
+///   stingValue: '4',
 /// );
 /// ```
 ///
-/// Error would be: "You can only define one Value."
+/// Error would be: 'You can only define one Value.'
 @HiveType(typeId: 0)
 class Setting extends HiveObject {
   @HiveField(0)
@@ -124,63 +124,63 @@ class Setting extends HiveObject {
                   intValue == null &&
                   stringValue == null &&
                   objectValue == null,
-          "You can only define one Value. No Value is accepted if you create a Setting.empty or a Setting.folder",
+          'You can only define one Value. No Value is accepted if you create a Setting.empty or a Setting.folder',
         ) {
     if (boolValue != null) {
-      valueType = "bool";
+      valueType = 'bool';
     } else if (intValue != null) {
-      valueType = "int";
+      valueType = 'int';
     } else if (stringValue != null) {
-      valueType = "String";
+      valueType = 'String';
     } else if (objectValue != null) {
-      valueType = "Object";
+      valueType = 'Object';
     } else {
-      valueType = "Null";
+      valueType = 'Null';
     }
     hiveKey = name;
   }
 
   /// Created an empty Setting.
   Setting.empty({
-    this.name = "Placeholder",
+    this.name = 'Placeholder',
   }) {
-    valueType = "Null";
-    hiveKey = "Empty Setting";
+    valueType = 'Null';
+    hiveKey = 'Empty Setting';
   }
 
   Setting.folder({
     required this.name,
   }) {
-    valueType = "Null";
-    hiveKey = "Folder";
+    valueType = 'Null';
+    hiveKey = 'Folder';
   }
 
   /// Returns the current State of the givven Value
   /// as String, no matter what kind of Object you put in
   String get valueAsString {
     switch (valueType) {
-      case "bool":
+      case 'bool':
         return boolValue.toString();
-      case "int":
+      case 'int':
         return intValue.toString();
-      case "String":
+      case 'String':
         return stringValue!;
-      case "Object":
+      case 'Object':
         return objectValue.toString();
       default:
-        return "Error parsing Value as String";
+        return 'Error parsing Value as String';
     }
   }
 
   Object get value {
     switch (valueType) {
-      case "bool":
+      case 'bool':
         return boolValue!;
-      case "int":
+      case 'int':
         return intValue!;
-      case "String":
+      case 'String':
         return stringValue!;
-      case "Object":
+      case 'Object':
         return objectValue;
       default:
         return Error();
@@ -190,31 +190,31 @@ class Setting extends HiveObject {
   String get typeAsString {
     final String _output;
     switch (valueType) {
-      case "bool":
-        _output = "bool";
+      case 'bool':
+        _output = 'bool';
         break;
-      case "int":
-        _output = "int";
+      case 'int':
+        _output = 'int';
         break;
-      case "String":
-        _output = "String";
+      case 'String':
+        _output = 'String';
         break;
-      case "Object":
+      case 'Object':
         _output = Converter.supportedTypeToString(objectValue.runtimeType);
         break;
       default:
-        _output = "Error";
+        _output = 'Error';
         break;
     }
     return _output;
   }
 
   String get valueToDisplay {
-    if (valueType == "int") {
+    if (valueType == 'int') {
       return intValue.toString();
-    } else if (valueType == "String") {
+    } else if (valueType == 'String') {
       return stringValue!.tr();
-    } else if (valueType == "bool") {
+    } else if (valueType == 'bool') {
       return Converter.supportedObjectToDisplayableString(boolValue, true);
     } else {
       return Converter.supportedObjectToDisplayableString(objectValue, true);
@@ -224,9 +224,9 @@ class Setting extends HiveObject {
   /// Returns the Setting as a Map of String : String
   Map<String, String> get asMap {
     final _map = <String, String>{
-      "Name": name,
-      "ValueType": valueType.toString(),
-      "Value": valueAsString,
+      'Name': name,
+      'ValueType': valueType.toString(),
+      'Value': valueAsString,
     };
 
     return _map;
@@ -234,18 +234,18 @@ class Setting extends HiveObject {
 
   @override
   String toString() {
-    String _result = "";
+    String _result = '';
 
     // Add Name
-    _result += "Name:";
+    _result += 'Name:';
     _result += name;
 
     // Add ValueType
-    _result += "ValueType:";
+    _result += 'ValueType:';
     _result += typeAsString;
 
     // Add Value as String
-    _result += "ValueAsString:";
+    _result += 'ValueAsString:';
     _result += Converter.supportedObjectToDisplayableString(value, true);
 
     return _result;
@@ -266,44 +266,44 @@ class AllSettings {
   /// The Language Setting which gives information
   /// about the current language and Locale
   static final languageSetting = Setting(
-    name: "Language",
+    name: 'Language',
     objectValue: Translation.activeLocale,
     isObject: true,
-    isObjectType: "Locale",
+    isObjectType: 'Locale',
   );
 
   /// Gives Information about the Theme Mode
   static final themeModeSetting = Setting(
-    name: "Thememode",
+    name: 'Thememode',
     objectValue: Themes.themeMode,
     isObject: true,
-    isObjectType: "ThemeMode",
+    isObjectType: 'ThemeMode',
   );
 
   /// Gives Information if the Notifications are active
   static final notificationActiveSetting = Setting(
-    name: "activated",
+    name: 'activated',
     boolValue: true,
   );
 
   static final notificationImportanceSetting = Setting(
-    name: "Importance",
+    name: 'Importance',
     intValue: 1,
   );
 
   static final about = Setting(
-    name: "About",
-    stringValue: "Everything about the App",
+    name: 'About',
+    stringValue: 'Everything about the App',
   );
 
   static final color = Setting(
-    name: "Color",
+    name: 'Color',
     objectValue: Coloring.mainColor,
     isObject: true,
-    isObjectType: "Color",
+    isObjectType: 'Color',
   );
 
-  static const listOfSettingsKEY = "List Of Settings";
+  static const listOfSettingsKEY = 'List Of Settings';
 
   /// Updates The Settings to the most recent Value
   static void updateSettings() {
@@ -318,13 +318,13 @@ class AllSettings {
   static void setAllSettings() {
     for (Setting setting in listOfSettings) {
       switch (setting.name) {
-        case "Language":
+        case 'Language':
           Translation.activeLocale = setting.objectValue;
           break;
-        case "Thememode":
+        case 'Thememode':
           Themes.themeMode = setting.objectValue;
           break;
-        case "Color":
+        case 'Color':
           Coloring.mainColor = setting.objectValue;
           break;
       }

@@ -22,7 +22,7 @@ class SearchResult {
     } else if (!isTodo) {
       return setting!.name.tr();
     } else {
-      return "Error: Getting Name failed";
+      return 'Error: Getting Name failed';
     }
   }
 }
