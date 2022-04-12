@@ -97,6 +97,9 @@ class Setting extends HiveObject {
   @HiveField(8)
   String? isObjectType;
 
+  @HiveField(9)
+  String? subtitle;
+
   Setting({
     required this.name,
     this.boolValue,
@@ -152,8 +155,9 @@ class Setting extends HiveObject {
 
   Setting.folder({
     required this.name,
+    this.subtitle,
   }) {
-    valueType = 'Null';
+    valueType = 'folder';
     hiveKey = 'Folder';
   }
 
@@ -162,7 +166,7 @@ class Setting extends HiveObject {
   String get valueAsString {
     switch (valueType) {
       case 'bool':
-        return boolValue.toString();
+        return Converter.supportedObjectToDisplayableString(boolValue, true);
       case 'int':
         return intValue.toString();
       case 'String':
@@ -218,6 +222,8 @@ class Setting extends HiveObject {
       return stringValue!.tr();
     } else if (valueType == 'bool') {
       return Converter.supportedObjectToDisplayableString(boolValue, true);
+    } else if (valueType == 'folder') {
+      return subtitle!;
     } else {
       return Converter.supportedObjectToDisplayableString(objectValue, true);
     }
@@ -258,6 +264,8 @@ class Setting extends HiveObject {
 List<Setting> listOfSettings = [
   AllSettings.languageSetting,
   AllSettings.themeModeSetting,
+  AllSettings.brainstormTitle,
+  AllSettings.brainstormFlying,
   // AllSettings.notificationActiveSetting,
   // AllSettings.notificationImportanceSetting,
   AllSettings.about,
@@ -306,12 +314,12 @@ class AllSettings {
   );
 
   static final brainstormTitle = Setting(
-    name: 'BrainstormTitle',
+    name: 'Title',
     boolValue: BrainstormValues.title,
   );
 
   static final brainstormFlying = Setting(
-    name: 'BrainstormFlying',
+    name: 'Flying Mode',
     boolValue: BrainstormValues.flying,
   );
 
@@ -322,6 +330,8 @@ class AllSettings {
     languageSetting.objectValue = Translation.activeLocale;
     themeModeSetting.objectValue = Themes.themeMode;
     color.objectValue = Coloring.mainColor;
+    brainstormTitle.boolValue = BrainstormValues.title;
+    brainstormFlying.boolValue = BrainstormValues.flying;
     createListOfSettings();
   }
 
@@ -339,10 +349,10 @@ class AllSettings {
         case 'Color':
           Coloring.mainColor = setting.objectValue;
           break;
-        case 'BrainstormTitle':
+        case 'Title':
           BrainstormValues.title = setting.boolValue!;
           break;
-        case 'BrainstormFlying':
+        case 'Flying Mode':
           BrainstormValues.flying = setting.boolValue!;
           break;
       }
@@ -356,6 +366,8 @@ class AllSettings {
       languageSetting,
       themeModeSetting,
       color,
+      brainstormTitle,
+      brainstormFlying,
       // notificationActiveSetting,
       // notificationImportanceSetting,
       about,

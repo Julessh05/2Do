@@ -318,6 +318,18 @@ class TranslatedStrings {
     'Edit Note': {
       TranslationLocales.german: 'Notiz bearbeiten',
       TranslationLocales.french: 'Note éditée',
+    },
+    'Add Note': {
+      TranslationLocales.german: 'Notiz hinzufügen',
+      TranslationLocales.french: 'Ajouter une note',
+    },
+    'Customize your Brainstorm Settings': {
+      TranslationLocales.german: 'Passe deine Brainstorms Einstellungen an',
+      TranslationLocales.french: 'Personnalisez vos paramètres de Brainstorm',
+    },
+    'Flying Mode': {
+      TranslationLocales.german: 'Flying Modus',
+      TranslationLocales.french: 'Mode Flying',
     }
   };
 

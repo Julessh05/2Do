@@ -47,8 +47,8 @@ class SettingsSubTile extends StatefulWidget {
     this.alertDialog,
     this.simpleDialog,
     this.uiSwitch,
-    Key? key,
     this.aboutDialog,
+    Key? key,
   ]) : super(key: key);
 
   final Setting setting;
@@ -69,15 +69,24 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
       autofocus: false,
       isThreeLine: false,
       title: Text(
-        widget.setting.name,
+        widget.setting.name.tr(),
         semanticsLabel: 'Name of the Setting'.tr(),
       ),
       subtitle: Text(
-        widget.setting.valueAsString,
+        widget.setting.valueAsString.tr(),
         semanticsLabel: 'Value of the Setting'.tr(),
       ),
       enabled: true,
       leading: widget.icon,
+      trailing: widget.uiSwitch != null
+          ? Switch(
+              onChanged: (value) {
+                widget.uiSwitch!.onChanged!(value);
+                setState(() {});
+              },
+              value: widget.setting.boolValue!,
+            )
+          : null,
       onTap: () {
         if (widget.uiSwitch != null) {
           // Nothing done when you have a Switch

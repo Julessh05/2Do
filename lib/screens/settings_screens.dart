@@ -1,7 +1,10 @@
 library screens;
 
+import 'dart:async';
+
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
+import 'package:todo/app_values/brainstorm_values.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
@@ -12,7 +15,7 @@ import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/storage/storage.dart';
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 import 'package:todo/styles/themes.dart';
 
 /// The Main Settings Screen from which you can navigate
@@ -21,6 +24,7 @@ class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({Key? key}) : super(key: key);
 
   static const routeName = '/settings';
+  static final StreamController settingsReloadStream = StreamController();
 
   @override
   State<SettingsMainScreen> createState() => _SettingsMainScreenState();
@@ -66,6 +70,40 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
             icon: const Icon(Icons.colorize_rounded),
             newScreenRouteName: ColorChooser.routeName,
             newScreenArguments: null,
+          ),
+
+          // Brainstorm Settings
+          SettingsTile.folder(
+            icon: const Icon(Icons.note_rounded),
+            setting: Setting.folder(
+              name: 'Brainstorm',
+              subtitle: 'Customize your Brainstorm Settings'.tr(),
+            ),
+            subtiles: <SettingsSubTile>[
+              // Title
+              SettingsSubTile(
+                setting: AllSettings.brainstormTitle,
+                uiSwitch: Switch.adaptive(
+                  value: AllSettings.brainstormTitle.boolValue!,
+                  onChanged: (value) {
+                    BrainstormValues.title = value;
+                    _reload();
+                  },
+                ),
+              ),
+
+              // Flying Mode
+              SettingsSubTile(
+                setting: AllSettings.brainstormFlying,
+                uiSwitch: Switch.adaptive(
+                  value: AllSettings.brainstormFlying.boolValue!,
+                  onChanged: (value) {
+                    BrainstormValues.flying = value;
+                    _reload();
+                  },
+                ),
+              )
+            ],
           ),
 
           // Notification Settings

@@ -3,12 +3,10 @@ library screens;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
-import 'package:todo/logic/jumper.dart';
 import 'package:todo/models/brainstorm_list.dart';
 import 'package:todo/models/brainstorm_note.dart';
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
 import 'package:todo/screens/components/notes_tile.dart';
-import 'package:todo/screens/settings_screens.dart';
 
 class BrainstormScreen extends StatefulWidget {
   const BrainstormScreen({Key? key}) : super(key: key);

@@ -31,8 +31,8 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          'Edit Todo'.tr(),
-          semanticsLabel: 'Edit Todo'.tr(),
+          'Edit Note'.tr(),
+          semanticsLabel: 'Edit Note'.tr(),
         ),
       ),
       body: Column(

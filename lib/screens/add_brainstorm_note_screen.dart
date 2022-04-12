@@ -22,13 +22,13 @@ class AddBrainstormNoteScreen extends StatefulWidget {
 
 class _AddBrainstormNoteScreenState extends State<AddBrainstormNoteScreen> {
   String? title;
-  String content = '';
+  String? content;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Todo'.tr()),
+        title: Text('Add Note'.tr()),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -133,20 +133,50 @@ class _AddBrainstormNoteScreenState extends State<AddBrainstormNoteScreen> {
   /// Creates a Note and determines
   /// if the User wants to go back or not
   void _createNote() {
-    BrainstormList.addNote(
-      BrainstormNote(
-        title: title,
-        note: content,
-      ),
-    );
-    Storage.storeBrainstormNotes();
-    if (AllSettings.brainstormFlying.boolValue!) {
-      Navigator.pushReplacementNamed(
-        context,
-        AddBrainstormNoteScreen.routeName,
+    if (content == null || content!.isEmpty) {
+      showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            scrollable: true,
+            title: Text('Empty Note'.tr()),
+            content: Text(
+              'The Note can\'t be empty. Please provide a Text'.tr(),
+            ),
+            actionsOverflowDirection: VerticalDirection.down,
+            actionsAlignment: MainAxisAlignment.center,
+            alignment: Alignment.center,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            actions: <Center>[
+              Center(
+                child: TextButton(
+                  onPressed: () => Jumper.back(context),
+                  child: Text('OK'.tr()),
+                  autofocus: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                ),
+              ),
+            ],
+          );
+        },
       );
     } else {
-      Jumper.back(context);
+      BrainstormList.addNote(
+        BrainstormNote(
+          title: title,
+          note: content!,
+        ),
+      );
+      Storage.storeBrainstormNotes();
+      if (AllSettings.brainstormFlying.boolValue!) {
+        Navigator.pushReplacementNamed(
+          context,
+          AddBrainstormNoteScreen.routeName,
+        );
+      } else {
+        Jumper.back(context);
+      }
     }
   }
 }

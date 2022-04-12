@@ -11,7 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
 import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/app_values/translated_strings.dart';
-import 'package:todo/models/brainstorm_note.dart';
+import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
 import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
