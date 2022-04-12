@@ -32,6 +32,10 @@ class TodoList {
   /// This private file intern List combines the [listOfCheckedTodos] and the [listOfTodos]
   static List<Todo> _combinedListOfTodos = [];
 
+  static List<String> _tags = ['All_Todos'];
+
+  static UnmodifiableListView get tags => UnmodifiableListView(_tags);
+
   /// The List where all unchecked Todos are stored
   /// This List is unmodifiable
   static UnmodifiableListView<Todo> get listOfTodos =>
@@ -110,5 +114,9 @@ class TodoList {
       }
     }
     return false;
+  }
+
+  static void addTag(String tag) {
+    _tags.add(', tag');
   }
 }

@@ -26,8 +26,8 @@ class Todo extends HiveObject {
   // @HiveField(2)
   // late final DateTime time;
 
-  // @HiveField(3)
-  // final List<String> tags;
+  @HiveField(3)
+  final String tags;
 
   @HiveField(4)
   bool selected;
@@ -45,7 +45,7 @@ class Todo extends HiveObject {
     required this.title,
     required this.content,
     // required this.time,
-    // this.tags = const ['Standard'],
+    this.tags = 'All_Todos',
     this.checked = false,
     this.selected = false,
     // required this.created,
@@ -58,14 +58,14 @@ class Todo extends HiveObject {
   }
 
   /// Created an empty Todo.
-  Todo.empty({
-    this.title = '',
-    this.content = '',
-    this.checked = false,
-    this.selected = false,
-    // this.tags = const ['Empty'],
-    // this.importance = 0,
-  }) {
+  Todo.empty(
+      {this.title = '',
+      this.content = '',
+      this.checked = false,
+      this.selected = false,
+      this.tags = 'Empty'
+      // this.importance = 0,
+      }) {
     // time = DateTime.now();
     // created = DateTime.now();
   }
