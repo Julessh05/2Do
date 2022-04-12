@@ -11,7 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
 import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/app_values/translated_strings.dart';
-import 'package:todo/models/search_results.dart';
+import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
@@ -26,7 +26,6 @@ import 'package:todo/styles/themes.dart';
 void main() async {
   await Hive.initFlutter();
   await Storage.init();
-  Storage.loadSettings();
   Storage.loadTodos();
   runApp(const TodoApp());
 }
@@ -50,6 +49,7 @@ class TodoApp extends StatefulWidget {
 class _TodoAppState extends State<TodoApp> {
   @override
   void initState() {
+    Storage.loadSettings(context);
     // Init Translations Pacakge
     Translation.init(
       supportedLocales: TranslatedStrings.supportedLocales,

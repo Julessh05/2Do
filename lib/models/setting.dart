@@ -1,5 +1,6 @@
 library models;
 
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart'
     show
         HiveField,
@@ -315,14 +316,14 @@ class AllSettings {
 
   /// Sets the Values and the Settings.
   /// Used whe starting the App
-  static void setAllSettings() {
+  static void setAllSettings(BuildContext context) {
     for (Setting setting in listOfSettings) {
       switch (setting.name) {
         case 'Language':
           Translation.activeLocale = setting.objectValue;
           break;
         case 'Thememode':
-          Themes.themeMode = setting.objectValue;
+          Themes.setThemeMode(setting.objectValue, context);
           break;
         case 'Color':
           Coloring.mainColor = setting.objectValue;

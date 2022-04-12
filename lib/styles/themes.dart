@@ -8,7 +8,20 @@ import 'package:todo/styles/coloring.dart';
 
 /// Class with all styles
 class Themes {
-  static ThemeMode themeMode = ThemeMode.system;
+  static ThemeMode _themeMode = ThemeMode.system;
+
+  static ThemeMode get themeMode => _themeMode;
+
+  static void setThemeMode(ThemeMode themeMode, BuildContext context) {
+    _themeMode = themeMode;
+    if (Theme.of(context).brightness == Brightness.dark) {
+      Coloring.backgroundColor = Colors.grey.shade900;
+    } else if (Theme.of(context).brightness == Brightness.light) {
+      Coloring.backgroundColor = Colors.white;
+    } else {
+      Coloring.backgroundColor = Colors.red;
+    }
+  }
 
   /// Light Theme of the App
   /// Default Theme

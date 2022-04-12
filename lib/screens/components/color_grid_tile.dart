@@ -20,15 +20,25 @@ enum ColorGridPosition {
 /// [color] is the Color represented
 class ColorGridTile extends StatefulWidget {
   const ColorGridTile({
-    required this.firstColor,
-    required this.secondColor,
+    required this.color,
+    this.colorInfront,
+    this.colorBehind,
     required this.isSubTile,
     required this.position,
     Key? key,
-  }) : super(key: key);
+  })  : assert(
+          position == ColorGridPosition.left && colorBehind != null ||
+              position == ColorGridPosition.middle &&
+                  colorInfront == null &&
+                  colorBehind == null ||
+              position == ColorGridPosition.right && colorInfront != null,
+          'You need to specify the right amount of Colors to your Position',
+        ),
+        super(key: key);
 
-  final Color firstColor;
-  final Color secondColor;
+  final Color color;
+  final Color? colorInfront;
+  final Color? colorBehind;
   final bool isSubTile;
   final ColorGridPosition position;
 
@@ -45,24 +55,17 @@ class _ColorGridTileState extends State<ColorGridTile> {
       child: GestureDetector(
         onTap: _onTap,
         child: GridTile(
-          footer: Text(
-            widget.firstColor.value.toRadixString(16).padLeft(11, ' '),
-          ),
+          footer: widget.color != Coloring.backgroundColor
+              ? Text(
+                  widget.color.value.toRadixString(16).padLeft(11, ' '),
+                )
+              : null,
           child: Container(
             alignment: Alignment.center,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: [
-                  1,
-                ],
-                tileMode: TileMode.clamp,
-                transform: GradientRotation(20),
-              ),
-              color: widget.firstColor,
+              gradient: _gradient,
+              color: widget.color,
               shape: BoxShape.rectangle,
               borderRadius: _borderRadius,
             ),
@@ -74,6 +77,64 @@ class _ColorGridTileState extends State<ColorGridTile> {
     return _tile;
   }
 
+  /// Getter for the Gradient
+  /// depending on the [ColorGridPosition].
+  Gradient? get _gradient {
+    switch (widget.position) {
+      case ColorGridPosition.left:
+        if (widget.color == Coloring.backgroundColor) {
+          return null;
+        } else {
+          return LinearGradient(
+            colors: [
+              widget.color,
+              widget.colorBehind!,
+            ],
+            stops: const <double>[
+              0.45,
+              1.0,
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp,
+          );
+        }
+      case ColorGridPosition.middle:
+        return null;
+      case ColorGridPosition.right:
+        if (widget.color == Coloring.backgroundColor) {
+          return null;
+        } else {
+          return LinearGradient(
+            colors: [
+              widget.colorInfront!,
+              widget.color,
+            ],
+            stops: const <double>[
+              0.1,
+              1,
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp,
+          );
+        }
+      default:
+        return LinearGradient(
+          colors: [
+            widget.colorInfront!,
+            widget.color,
+            widget.colorBehind!,
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          tileMode: TileMode.clamp,
+        );
+    }
+  }
+
+  /// Getter for the Border Radius
+  /// depending on the [ColorGridPosition].
   BorderRadius get _borderRadius {
     switch (widget.position) {
       case ColorGridPosition.left:
@@ -96,7 +157,7 @@ class _ColorGridTileState extends State<ColorGridTile> {
   void _onTap() {
     if (widget.isSubTile) {
       setState(() {
-        Coloring.mainColor = widget.firstColor;
+        Coloring.mainColor = widget.color;
         TodoApp.themeStream.sink.add(Themes.themeMode);
         AllSettings.updateSettings();
         Storage.storeSettings();
@@ -106,7 +167,7 @@ class _ColorGridTileState extends State<ColorGridTile> {
     } else {
       Jumper.openSubColorScreen(
         context,
-        widget.firstColor,
+        widget.color,
       );
     }
   }

@@ -19,6 +19,7 @@ class _ColorChooserState extends State<ColorChooser> {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -55,20 +56,19 @@ class _ColorChooserState extends State<ColorChooser> {
             verticalDirection: VerticalDirection.down,
             children: <ColorGridTile>[
               ColorGridTile(
-                firstColor: Coloring.colors[counter],
-                secondColor: Coloring.colors[counter + 1],
+                color: Coloring.colors[counter],
+                colorBehind: Coloring.colors[counter + 1],
                 isSubTile: false,
                 position: ColorGridPosition.left,
               ),
               ColorGridTile(
-                firstColor: Coloring.colors[++counter],
-                secondColor: Coloring.colors[counter + 1],
+                color: Coloring.colors[++counter],
                 isSubTile: false,
                 position: ColorGridPosition.middle,
               ),
               ColorGridTile(
-                firstColor: Coloring.colors[++counter],
-                secondColor: Coloring.colors[counter + 1],
+                color: Coloring.colors[++counter],
+                colorInfront: Coloring.colors[counter - 1],
                 isSubTile: false,
                 position: ColorGridPosition.right,
               ),
@@ -99,6 +99,7 @@ class _SubColorChooserState extends State<SubColorChooser> {
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -106,16 +107,15 @@ class _SubColorChooserState extends State<SubColorChooser> {
           semanticsLabel: 'Choose a Color'.tr(),
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 3,
+      body: ListView(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         dragStartBehavior: DragStartBehavior.start,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
+        shrinkWrap: true,
         children: _colorTiles,
       ),
     );
@@ -123,8 +123,8 @@ class _SubColorChooserState extends State<SubColorChooser> {
     return _scaffold;
   }
 
-  List<ColorGridTile> get _colorTiles {
-    final List<ColorGridTile> _tiles = [];
+  List<IntrinsicHeight> get _colorTiles {
+    final List<IntrinsicHeight> _tiles = [];
     final List<Color> _colors;
     if (widget.color == Colors.amber) {
       _colors = Coloring.amberColors;
@@ -148,21 +148,46 @@ class _SubColorChooserState extends State<SubColorChooser> {
       _colors = Coloring.yellowColors;
     } else if (widget.color == Colors.red) {
       _colors = Coloring.redColors;
-    } else if (widget.color == Colors.brown) {
+    } else if (widget.color == Colors.brown ||
+        widget.color == Colors.brown.shade800 ||
+        widget.color == Colors.black) {
       _colors = Coloring.brownColors;
     } else if (widget.color == Colors.pink) {
       _colors = Coloring.pinkColors;
     } else {
       _colors = [widget.color];
     }
-    for (Color color in _colors) {
-      final _tile = ColorGridTile(
-        position: ColorGridPosition.middle,
-        firstColor: color,
-        secondColor: color,
-        isSubTile: true,
+    for (int counter = 0; counter < _colors.length - 2; counter++) {
+      _tiles.add(
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            verticalDirection: VerticalDirection.down,
+            children: <ColorGridTile>[
+              ColorGridTile(
+                color: _colors[counter],
+                colorBehind: _colors[counter + 1],
+                isSubTile: true,
+                position: ColorGridPosition.left,
+              ),
+              ColorGridTile(
+                color: _colors[++counter],
+                isSubTile: true,
+                position: ColorGridPosition.middle,
+              ),
+              ColorGridTile(
+                color: _colors[++counter],
+                colorInfront: _colors[counter - 1],
+                isSubTile: true,
+                position: ColorGridPosition.right,
+              ),
+            ],
+          ),
+        ),
       );
-      _tiles.add(_tile);
     }
     return _tiles;
   }

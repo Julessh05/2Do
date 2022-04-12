@@ -1,5 +1,6 @@
 library storage;
 
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart' show Box, Hive;
 import 'package:todo/logic/converter.dart';
 import 'package:todo/models/setting.dart';
@@ -110,7 +111,7 @@ class Storage {
 
   /// Loads the Settings and sets it to the [listOfSettings]
   /// Only loads the Values
-  static void loadSettings() {
+  static void loadSettings(BuildContext context) {
     final listOfSettingsStorage = _settingsBox!.values;
     final List<Setting> _list = [];
     for (Setting setting in listOfSettingsStorage) {
@@ -136,7 +137,7 @@ class Storage {
       }
     }
     listOfSettings = _list;
-    AllSettings.setAllSettings();
+    AllSettings.setAllSettings(context);
   }
 
   /// Deletes the Box with the Settings from the File System
