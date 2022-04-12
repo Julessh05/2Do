@@ -120,11 +120,13 @@ class _HomescreenState extends State<Homescreen> {
     if (TodoList.combinedListOfTodos.isNotEmpty) {
       final _list = <Widget>[];
       _list.addAll(_todoTiles);
-      _list.add(
-        ListTile(
-          title: Text('Checked Todos:'.tr()),
-        ),
-      );
+      if (TodoList.listOfCheckedTodos.isNotEmpty) {
+        _list.add(
+          ListTile(
+            title: Text('Checked Todos:'.tr()),
+          ),
+        );
+      }
       _list.addAll(_checkedTodoTiles);
       _body = ListView(
         addAutomaticKeepAlives: true,

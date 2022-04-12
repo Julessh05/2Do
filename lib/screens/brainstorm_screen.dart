@@ -95,11 +95,13 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
     if (BrainstormList.combinedListOfNotes.isNotEmpty) {
       final _list = <Widget>[];
       _list.addAll(_notesTiles);
-      _list.add(
-        ListTile(
-          title: Text('Checked Notes:'.tr()),
-        ),
-      );
+      if (BrainstormList.listOfCheckedNotes.isNotEmpty) {
+        _list.add(
+          ListTile(
+            title: Text('Checked Notes:'.tr()),
+          ),
+        );
+      }
       _list.addAll(_checkedNotesTiles);
       _body = ListView(
         addAutomaticKeepAlives: true,
