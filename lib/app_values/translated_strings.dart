@@ -2,7 +2,7 @@ library app_values;
 
 import 'package:string_translate/string_translate.dart'
     show TranslationLocales, StandardTranslations;
-import 'dart:ui';
+import 'dart:ui' show Locale;
 
 class TranslatedStrings {
   /// The Locales that are supported in this App
@@ -227,6 +227,10 @@ class TranslatedStrings {
       TranslationLocales.german: 'Du hast keine Todos',
       TranslationLocales.french: 'Vous n\'avez pas de Todos',
     },
+    'You don\'t have any Notes': {
+      TranslationLocales.german: 'Du hast keine Notizen',
+      TranslationLocales.french: 'Vous n\'avez pas de Remarques',
+    },
     'Add one': {
       TranslationLocales.german: 'Neu hinzufügen',
       TranslationLocales.french: 'Ajoute un',
@@ -234,6 +238,10 @@ class TranslatedStrings {
     'Checked Todos': {
       TranslationLocales.german: 'Erledigte Todos',
       TranslationLocales.french: 'Tâches cochées',
+    },
+    'Checked Todos:': {
+      TranslationLocales.german: 'Erledigte Todos:',
+      TranslationLocales.french: 'Tâches cochées:',
     },
     'Show Checked Todos': {
       TranslationLocales.german: 'Erledigte Todos anzeigen',
@@ -294,6 +302,22 @@ class TranslatedStrings {
     'Color': {
       TranslationLocales.german: 'Farbe',
       TranslationLocales.french: 'Couleur',
+    },
+    'Brainstorm': {
+      TranslationLocales.german: 'Brainstorm',
+      TranslationLocales.french: 'Brainstorm',
+    },
+    'Add Brainstorm Todo': {
+      TranslationLocales.german: 'Brainstorm Todo hinzufügen',
+      TranslationLocales.french: 'Ajouter une tâche de Brainstorm',
+    },
+    'Checked Notes:': {
+      TranslationLocales.german: 'Erledigte Notizen:',
+      TranslationLocales.french: 'Billets cochés',
+    },
+    'Edit Note': {
+      TranslationLocales.german: 'Notiz bearbeiten',
+      TranslationLocales.french: 'Note éditée',
     }
   };
 

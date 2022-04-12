@@ -11,11 +11,16 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
 import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/app_values/translated_strings.dart';
+import 'package:todo/models/brainstorm_note.dart';
 import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/todo.dart' show Todo;
+import 'package:todo/screens/add_brainstorm_note_screen.dart';
 import 'package:todo/screens/add_todo_screen.dart';
+import 'package:todo/screens/brainstorm_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
+import 'package:todo/screens/edit_note_screen.dart';
 import 'package:todo/screens/homescreen.dart';
+import 'package:todo/screens/notes_details_screen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
@@ -27,6 +32,7 @@ void main() async {
   await Hive.initFlutter();
   await Storage.init();
   Storage.loadTodos();
+  Storage.loadBrainstormNotes();
   runApp(const TodoApp());
 }
 
@@ -88,17 +94,6 @@ class _TodoAppState extends State<TodoApp> {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          /* localeListResolutionCallback: (_, __) {
-            final localeName = Platform.localeName;
-            if (localeName == 'de_DE') {
-              Translation.activeLocale = const Locale('de', 'DE');
-            } else if(localeName == 'fr_FR') {
-              Translation.activeLocale = const Locale('fr', 'FR');
-            } else {
-              Translation.activeLocale = const Locale('en', 'US');
-            }
-            return Translation.activeLocale;
-          }, */
           supportedLocales: Translation.supportedLocales,
           useInheritedMediaQuery: false,
           scrollBehavior: const MaterialScrollBehavior(),
@@ -116,6 +111,13 @@ class _TodoAppState extends State<TodoApp> {
             // Homescreen
             Homescreen.routeName: (context) => const Homescreen(),
 
+            // Brainstorm Screen
+            BrainstormScreen.routeName: (context) => const BrainstormScreen(),
+
+            // Add Brainstorm Note Screen
+            AddBrainstormNoteScreen.routeName: (context) =>
+                const AddBrainstormNoteScreen(),
+
             // Settings Main Screen
             SettingsMainScreen.routeName: (context) =>
                 const SettingsMainScreen(),
@@ -128,10 +130,6 @@ class _TodoAppState extends State<TodoApp> {
 
             // Main Screen
             TodoApp.routeName: (context) => const TodoApp(),
-
-            // Checked Todo Screen
-            CheckedTodosScreen.routeName: (context) =>
-                const CheckedTodosScreen(),
 
             // Color Chooser
             ColorChooser.routeName: (context) => const ColorChooser(),
@@ -196,6 +194,22 @@ class _TodoAppState extends State<TodoApp> {
                   return SubColorChooser(color: _color);
                 },
               );
+
+              // Notes Details Screen
+            } else if (settings.name == NotesDetailsScreen.routeName) {
+              final _note = settings.arguments as BrainstormNote;
+
+              return MaterialPageRoute(builder: (_) {
+                return NotesDetailsScreen(note: _note);
+              });
+
+              // Edit Note Screen
+            } else if (settings.name == EditNoteScreen.routeName) {
+              final _note = settings.arguments as BrainstormNote;
+
+              return MaterialPageRoute(builder: (_) {
+                return EditNoteScreen(note: _note);
+              });
             } else {
               // Do nothing
             }

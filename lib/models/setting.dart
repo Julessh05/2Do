@@ -9,6 +9,7 @@ import 'package:hive/hive.dart'
         TypeAdapter,
         BinaryReader,
         BinaryWriter;
+import 'package:todo/app_values/brainstorm_values.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
@@ -304,6 +305,16 @@ class AllSettings {
     isObjectType: 'Color',
   );
 
+  static final brainstormTitle = Setting(
+    name: 'BrainstormTitle',
+    boolValue: BrainstormValues.title,
+  );
+
+  static final brainstormFlying = Setting(
+    name: 'BrainstormFlying',
+    boolValue: BrainstormValues.flying,
+  );
+
   static const listOfSettingsKEY = 'List Of Settings';
 
   /// Updates The Settings to the most recent Value
@@ -327,6 +338,12 @@ class AllSettings {
           break;
         case 'Color':
           Coloring.mainColor = setting.objectValue;
+          break;
+        case 'BrainstormTitle':
+          BrainstormValues.title = setting.boolValue!;
+          break;
+        case 'BrainstormFlying':
+          BrainstormValues.flying = setting.boolValue!;
           break;
       }
     }

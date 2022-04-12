@@ -230,7 +230,7 @@ class Themes {
         disabledElevation: 10.0,
         elevation: 14.0,
         enableFeedback: true,
-        foregroundColor: Colors.white,
+        foregroundColor: Coloring.accentColor,
         shape: CircleBorder(
           side: BorderSide(
             color: Coloring.mainColor.withAlpha(50),
@@ -689,7 +689,7 @@ class Themes {
         disabledElevation: 10.0,
         elevation: 14.0,
         enableFeedback: true,
-        foregroundColor: Colors.white,
+        foregroundColor: Coloring.accentColor,
         shape: CircleBorder(
           side: BorderSide(
             color: Coloring.mainColor.withAlpha(50),

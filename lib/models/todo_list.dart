@@ -100,4 +100,15 @@ class TodoList {
   static void _updateCombinedList() {
     _combinedListOfTodos = _listOfTodos + _listOfCheckedTodos;
   }
+
+  static bool get todoMarked {
+    for (Todo todo in _combinedListOfTodos) {
+      if (todo.selected) {
+        return true;
+      } else {
+        continue;
+      }
+    }
+    return false;
+  }
 }

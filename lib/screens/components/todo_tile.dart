@@ -51,17 +51,30 @@ class _TodoTileState extends State<TodoTile> {
         widget.todo.content,
         semanticsLabel: 'Todo Content'.tr(),
       ),
-      onTap: () => Navigator.pushNamed(
-        context,
-        TodoDetailScreen.routeName,
-        arguments: widget.todo,
-      ).then((value) => setState(() {})),
+      onTap: _onTap,
       textColor: widget.todo.checked
           ? Colors.grey.shade400
           : Theme.of(context).listTileTheme.textColor,
     );
 
     return _tile;
+  }
+
+  void _onTap() {
+    if (TodoList.todoMarked) {
+      setState(() {
+        widget.todo.selected = !widget.todo.selected;
+      });
+      widget.setStateFunc;
+    } else {
+      Navigator.pushNamed(
+        context,
+        TodoDetailScreen.routeName,
+        arguments: widget.todo,
+      ).then(
+        (value) => setState(() {}),
+      );
+    }
   }
 
   /// Function called when the Tile is selected

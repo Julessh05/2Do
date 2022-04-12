@@ -3,6 +3,8 @@ library logic;
 import 'package:flutter/material.dart' show Navigator, BuildContext, Color;
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart' show Setting;
+import 'package:todo/screens/add_brainstorm_note_screen.dart';
+import 'package:todo/screens/brainstorm_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -88,5 +90,14 @@ class Jumper {
   /// Is just here to make the Code cleaner
   static void back(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  /// Opens the Brainstorm Screen
+  static void openBrainstormScreen(BuildContext context) {
+    Navigator.pushNamed(context, BrainstormScreen.routeName);
+  }
+
+  static void openAddBrainstorm(BuildContext context) {
+    Navigator.pushNamed(context, AddBrainstormNoteScreen.routeName);
   }
 }

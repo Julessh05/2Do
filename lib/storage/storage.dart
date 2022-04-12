@@ -3,6 +3,8 @@ library storage;
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart' show Box, Hive;
 import 'package:todo/logic/converter.dart';
+import 'package:todo/models/brainstorm_list.dart';
+import 'package:todo/models/brainstorm_note.dart';
 import 'package:todo/models/setting.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todo_list.dart';
@@ -24,7 +26,11 @@ class Storage {
   static Box<Setting>? _settingsBox;
 
   /// The Key / Name for the [_settingsBox]
-  static const settingsBoxKey = 'Settings Box';
+  static const settingsBoxKEY = 'Settings Box';
+
+  static Box<BrainstormNote>? _brainstormBox;
+
+  static const brainstormBoxKEY = 'Brainstorm Box';
 
   /// Init Method which initializes everything and is responsible
   /// for registering the Adapters
@@ -32,8 +38,10 @@ class Storage {
   static Future<void> init() async {
     Hive.registerAdapter(SettingAdapter());
     Hive.registerAdapter(TodoAdapter());
+    Hive.registerAdapter(BrainstormNoteAdapter());
     _todoBox = await Hive.openBox<Todo>(todoBoxKEY);
-    _settingsBox = await Hive.openBox<Setting>(settingsBoxKey);
+    _settingsBox = await Hive.openBox<Setting>(settingsBoxKEY);
+    _brainstormBox = await Hive.openBox<BrainstormNote>(brainstormBoxKEY);
     // Check if Box has the list Of Settings
     if (_settingsBox!.containsKey(AllSettings.languageSetting.hiveKey)) {
       // Do nothing
@@ -47,6 +55,12 @@ class Storage {
       // Do nothing
     } else {
       storeTodos();
+    }
+
+    if (_brainstormBox!.isNotEmpty) {
+      // Do nothing
+    } else {
+      storeBrainstormNotes();
     }
   }
 
@@ -138,6 +152,32 @@ class Storage {
     }
     listOfSettings = _list;
     AllSettings.setAllSettings(context);
+  }
+
+  /// Stores all the Brainstorm Notes
+  static void storeBrainstormNotes() {
+    _brainstormBox!.deleteAll(_brainstormBox!.keys);
+    for (int i = 0; i < BrainstormList.listOfNotes.length; i++) {
+      final key = 'Unchecked $i';
+      _brainstormBox!.put(key, BrainstormList.listOfNotes[i]);
+    }
+
+    for (int i = 0; i < BrainstormList.listOfCheckedNotes.length; i++) {
+      final key = 'Checked $i';
+      _brainstormBox!.put(key, BrainstormList.listOfCheckedNotes[i]);
+    }
+  }
+
+  /// Loads the Brainstorm Notes
+  static void loadBrainstormNotes() {
+    final listOfAllNotesStorage = _brainstormBox!.values;
+    for (BrainstormNote note in listOfAllNotesStorage) {
+      if (note.checked) {
+        BrainstormList.addCheckedNote(note);
+      } else {
+        BrainstormList.addNote(note);
+      }
+    }
   }
 
   /// Deletes the Box with the Settings from the File System
