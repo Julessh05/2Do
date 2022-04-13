@@ -8,6 +8,7 @@ import 'package:hive/hive.dart'
         TypeAdapter,
         BinaryReader,
         BinaryWriter;
+import 'package:todo/models/todo_list.dart';
 
 part 'todo.g.dart';
 
@@ -123,6 +124,15 @@ class Todo extends HiveObject {
       _result += tags[i];
     } */
 
+    return _result;
+  }
+
+  static String tagsToString(List<String> tags) {
+    String _result = '';
+    for (String tag in tags) {
+      _result += '$tag,';
+      TodoList.addTag(tag);
+    }
     return _result;
   }
 

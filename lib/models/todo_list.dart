@@ -117,6 +117,10 @@ class TodoList {
   }
 
   static void addTag(String tag) {
-    _tags.add(', tag');
+    _tags.add(', $tag');
+  }
+
+  static void deleteTag(String tag) {
+    _tags.remove(', $tag');
   }
 }
