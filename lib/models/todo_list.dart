@@ -32,12 +32,15 @@ class TodoList {
   /// This private file intern List combines the [listOfCheckedTodos] and the [listOfTodos]
   static List<Todo> _combinedListOfTodos = [];
 
-  static List<String> _tags = ['All_Todos'];
+  /// The private List of Tags that are created and used in this App
+  static final List<String> _tags = ['All'];
 
-  static UnmodifiableListView get tags => UnmodifiableListView(_tags);
+  /// Getter for the Tag List. It's an unmodifiable List
+  static UnmodifiableListView<String> get tags => UnmodifiableListView(_tags);
 
   /// The List where all unchecked Todos are stored
-  /// This List is unmodifiable
+  /// This List is unmodifiable List, so you can only add Tags through the
+  /// corresponding Method.
   static UnmodifiableListView<Todo> get listOfTodos =>
       UnmodifiableListView(_listOfTodos);
 
@@ -105,6 +108,7 @@ class TodoList {
     _combinedListOfTodos = _listOfTodos + _listOfCheckedTodos;
   }
 
+  /// Returns if a Todo is marked.
   static bool get todoMarked {
     for (Todo todo in _combinedListOfTodos) {
       if (todo.selected) {
@@ -116,10 +120,12 @@ class TodoList {
     return false;
   }
 
+  /// Adds a Tag to the Tags List
   static void addTag(String tag) {
     _tags.add(', $tag');
   }
 
+  /// Delete a Tag from the Tags List
   static void deleteTag(String tag) {
     _tags.remove(', $tag');
   }

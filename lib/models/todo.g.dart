@@ -19,6 +19,7 @@ class TodoAdapter extends TypeAdapter<Todo> {
     return Todo(
       title: fields[0] as String,
       content: fields[1] as String,
+      tags: fields[3] as String,
       checked: fields[5] as bool,
       selected: fields[4] as bool,
     );
@@ -27,11 +28,13 @@ class TodoAdapter extends TypeAdapter<Todo> {
   @override
   void write(BinaryWriter writer, Todo obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.content)
+      ..writeByte(3)
+      ..write(obj.tags)
       ..writeByte(4)
       ..write(obj.selected)
       ..writeByte(5)

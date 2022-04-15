@@ -13,7 +13,7 @@ import 'package:todo/app_values/brainstorm_values.dart';
 import 'package:todo/logic/converter.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 import 'package:todo/styles/themes.dart';
 
 part 'setting.g.dart';

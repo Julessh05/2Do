@@ -1,6 +1,6 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:todo/logic/jumper.dart';
@@ -33,14 +33,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         title: Text('Add Todo'.tr()),
         automaticallyImplyLeading: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        mainAxisSize: MainAxisSize.max,
-        textDirection: TextDirection.ltr,
-        verticalDirection: VerticalDirection.down,
+      body: ListView(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
         children: <Widget>[
+          const SizedBox(height: 20),
           TextField(
             autocorrect: true,
             autofocus: true,
@@ -171,17 +169,51 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ),
           ), */
           const SizedBox(height: 50),
-          TextButton(
-            onPressed: _createTodo,
-            child: Text('Confirm'.tr()),
-            autofocus: false,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: TextButton(
+              onPressed: _createTodo,
+              child: Text('Confirm'.tr()),
+              autofocus: false,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+            ),
+          ),
+          ListTile(
+            title: Text('Tags:'.tr()),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             clipBehavior: Clip.antiAliasWithSaveLayer,
-          )
+            dragStartBehavior: DragStartBehavior.start,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              textBaseline: TextBaseline.alphabetic,
+              textDirection: TextDirection.ltr,
+              verticalDirection: VerticalDirection.down,
+              children: _tagContainerList,
+            ),
+          ),
         ],
       ),
     );
 
     return _scaffold;
+  }
+
+  List<TextButton> get _tagContainerList {
+    final List<TextButton> _list = [];
+    for (String string in TodoList.tags) {
+      _list.add(
+        TextButton(
+          onPressed: () {},
+          child: Text(string),
+        ),
+      );
+    }
+    return _list;
   }
 
   /// Creates a Todo and inserts the Values

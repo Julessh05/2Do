@@ -330,7 +330,11 @@ class TranslatedStrings {
     'Flying Mode': {
       TranslationLocales.german: 'Flying Modus',
       TranslationLocales.french: 'Mode Flying',
-    }
+    },
+    'All': {
+      TranslationLocales.german: 'Alle',
+      TranslationLocales.french: 'Toute',
+    },
   };
 
   static Map<String, Map<Locale, String>> get translations {

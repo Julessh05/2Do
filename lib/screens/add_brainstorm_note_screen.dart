@@ -6,8 +6,8 @@ import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/logic/jumper.dart';
 import 'package:todo/models/brainstorm_list.dart';
-import 'package:todo/models/brainstorm_note.dart';
-import 'package:todo/models/setting.dart';
+import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
+import 'package:todo/models/setting.dart' show AllSettings;
 import 'package:todo/storage/storage.dart';
 
 class AddBrainstormNoteScreen extends StatefulWidget {
@@ -31,14 +31,17 @@ class _AddBrainstormNoteScreenState extends State<AddBrainstormNoteScreen> {
         title: Text('Add Note'.tr()),
         automaticallyImplyLeading: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        mainAxisSize: MainAxisSize.max,
-        textDirection: TextDirection.ltr,
-        verticalDirection: VerticalDirection.down,
+      body: ListView(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: <Widget>[
+          const SizedBox(height: 20),
           AllSettings.brainstormTitle.boolValue!
               ? TextField(
                   autocorrect: true,

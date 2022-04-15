@@ -127,6 +127,20 @@ class Todo extends HiveObject {
     return _result;
   }
 
+  List<String> get tagsAsList {
+    final List<String> _tags = tags.split(', ');
+    final List<String> _result = [];
+    for (String tag in _tags) {
+      if (_result.contains(tag)) {
+        continue;
+      } else {
+        _result.add(tag);
+      }
+    }
+    return _result;
+  }
+
+  /// Method that returns the [tags] as a List of Strings
   static String tagsToString(List<String> tags) {
     String _result = '';
     for (String tag in tags) {
