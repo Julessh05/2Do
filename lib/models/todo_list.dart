@@ -65,7 +65,6 @@ class TodoList {
   static void addTodo(Todo todo) {
     _listOfTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Adds a Checked Todo to the [listOfCheckedTodos]
@@ -73,7 +72,6 @@ class TodoList {
   static void addCheckedTodo(Todo todo) {
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Deletes a Todo
@@ -82,7 +80,6 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.remove(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfTodos] and adds it to the
@@ -91,7 +88,6 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfCheckedTodos] and add it
@@ -100,12 +96,13 @@ class TodoList {
     _listOfCheckedTodos.remove(todo);
     _listOfTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Updates the [_combinedListOfTodos] so this List is always up-to-date
+  /// The Todos are also stored, so the Box with the Todos is always updated too,
   static void _updateCombinedList() {
     _combinedListOfTodos = _listOfTodos + _listOfCheckedTodos;
+    Storage.storeTodos();
   }
 
   /// Returns if a Todo is marked.
@@ -122,7 +119,8 @@ class TodoList {
 
   /// Adds a Tag to the Tags List
   static void addTag(String tag) {
-    _tags.add(', $tag');
+    _tags.add(tag);
+    Storage.storeTodos();
   }
 
   /// Delete a Tag from the Tags List

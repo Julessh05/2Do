@@ -8,6 +8,7 @@ import 'package:hive/hive.dart'
         TypeAdapter,
         BinaryReader,
         BinaryWriter;
+import 'package:todo/exceptions/duplicate_tag_exception.dart';
 import 'package:todo/models/todo_list.dart';
 
 part 'todo.g.dart';
@@ -28,7 +29,7 @@ class Todo extends HiveObject {
   // late final DateTime time;
 
   @HiveField(3)
-  final String tags;
+  String tags;
 
   @HiveField(4)
   bool selected;
@@ -128,7 +129,7 @@ class Todo extends HiveObject {
   }
 
   List<String> get tagsAsList {
-    final List<String> _tags = tags.split(', ');
+    final List<String> _tags = tags.split(',');
     final List<String> _result = [];
     for (String tag in _tags) {
       if (_result.contains(tag)) {
@@ -148,6 +149,28 @@ class Todo extends HiveObject {
       TodoList.addTag(tag);
     }
     return _result;
+  }
+
+  /// Adds a Tag to the Todo.
+  /// If the Tag is already connected with the Todo,
+  /// a [DuplicateTagException] is thrown
+  void addTag(String tag) {
+    if (tagsAsList.contains(tag)) {
+      throw const DuplicateTagException();
+    } else {
+      tags += '$tag,';
+    }
+  }
+
+  /// Removes a Tag from the Todo.
+  /// If the Tag is not connected to the Todo,
+  /// this Method just returns
+  void removeTag(String tag) {
+    if (tagsAsList.contains(tag)) {
+      tagsAsList.remove(tag);
+    } else {
+      return;
+    }
   }
 
   /// Returns the [time] as a String to use in Widgets,
