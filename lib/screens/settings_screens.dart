@@ -192,7 +192,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              'English'.tr(),
+              'English',
               semanticsLabel: 'English'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
@@ -218,7 +218,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              'German'.tr(),
+              'Deutsch',
               semanticsLabel: 'German'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
@@ -244,7 +244,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               ),
             ),
             child: Text(
-              'French'.tr(),
+              'Français',
               semanticsLabel: 'French'.tr(),
               style: TextStyle(
                 color: Coloring.accentColor,
