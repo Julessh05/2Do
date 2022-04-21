@@ -335,6 +335,22 @@ class TranslatedStrings {
       TranslationLocales.german: 'Alle',
       TranslationLocales.french: 'Toute',
     },
+    'Add Tag': {
+      TranslationLocales.german: 'Tag hinzufügen',
+      TranslationLocales.french: 'Ajouter une étiquette',
+    },
+    'Active Tags:': {
+      TranslationLocales.german: 'Aktive Tags:',
+      TranslationLocales.french: 'Balises actives',
+    },
+    'Insert Tag': {
+      TranslationLocales.german: 'Tag einfügen',
+      TranslationLocales.french: 'Insérer une balise',
+    },
+    'A Tag can\'t contains a Comma': {
+      TranslationLocales.german: 'Ein Tag kann keine Kommas enthalten',
+      TranslationLocales.french: 'Une balise ne peut pas contenir de virgule',
+    }
   };
 
   static Map<String, Map<Locale, String>> get translations {

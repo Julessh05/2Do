@@ -8,6 +8,7 @@ import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
+import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   String? title;
   String content = '';
   int? importance;
+  final List<String> tags = [];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,11 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
+        clipBehavior: Clip.antiAlias,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: <Widget>[
           const SizedBox(height: 20),
           TextField(
@@ -179,6 +186,17 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ),
           ),
           ListTile(
+            title: Text('Active Tags:'.tr()),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            verticalDirection: VerticalDirection.down,
+            children: _activeTags,
+          ),
+          ListTile(
             title: Text('Tags:'.tr()),
           ),
           SingleChildScrollView(
@@ -203,16 +221,60 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return _scaffold;
   }
 
-  List<TextButton> get _tagContainerList {
-    final List<TextButton> _list = [];
-    for (String string in TodoList.tags) {
+  List<Widget> get _activeTags {
+    final List<Widget> _list = [];
+    for (String tag in tags) {
       _list.add(
         TextButton(
-          onPressed: () {},
-          child: Text(string),
+          onPressed: () {
+            setState(() {
+              tags.remove(tag);
+            });
+          },
+          child: Text(tag),
         ),
       );
     }
+    return _list;
+  }
+
+  List<Widget> get _tagContainerList {
+    final List<Widget> _list = [];
+    for (String tag in TodoList.tags) {
+      // Add Spacing
+      _list.add(
+        const SizedBox(width: 20),
+      );
+      // Add Tag Button
+      _list.add(
+        TextButton(
+          onPressed: () {
+            setState(() {
+              tags.add(tag);
+            });
+          },
+          child: Text(tag),
+        ),
+      );
+    }
+    // Add Spacing
+    _list.add(
+      const SizedBox(width: 20),
+    );
+    // Add Add Tag Button
+    _list.add(
+      TextButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            AddTagScreen.routeName,
+          ).then((value) => setState(() {}));
+        },
+        child: Text(
+          'Add Tag'.tr(),
+        ),
+      ),
+    );
     return _list;
   }
 
@@ -252,6 +314,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       final _todo = Todo(
         title: title!,
         content: content,
+        tags: Todo.tagsToString(tags),
         /*  time: dateTime,
         created: DateTime.now(),
         importance: importance, */

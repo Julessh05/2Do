@@ -308,7 +308,6 @@ class Coloring {
     Colors.cyan.shade200,
     Colors.cyanAccent.shade100,
     Colors.cyan.shade300,
-    Colors.cyanAccent.shade200,
     Colors.cyanAccent,
     Colors.cyanAccent.shade400,
     Colors.cyan.shade400,

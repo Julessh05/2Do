@@ -15,6 +15,7 @@ import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
 import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
+import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/brainstorm_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
@@ -133,6 +134,9 @@ class _TodoAppState extends State<TodoApp> {
 
             // Color Chooser
             ColorChooser.routeName: (context) => const ColorChooser(),
+
+            // Add Tag
+            AddTagScreen.routeName: (context) => const AddTagScreen(),
           },
           onGenerateRoute: (RouteSettings settings) {
             // Todo Details Screen
