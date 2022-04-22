@@ -21,20 +21,26 @@ class AddTodoScreen extends StatefulWidget {
 }
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
+  // Date of the Todo. Only the Date should be filled
   DateTime? date;
+  // Time of the Todo
   TimeOfDay? time;
+  // Title of the Todo. Can also be named Keyword(s)
   String? title;
+  // Contents of the Todo. Can also be named Notes
   String content = '';
+  // Importance as number
   int? importance;
+  // Tags of the Todo. Can also be named categories
   final List<String> tags = [];
+
+  /// List to delete Tags
+  final List<String> tagsToDelete = [];
 
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
-      appBar: AppBar(
-        title: Text('Add Todo'.tr()),
-        automaticallyImplyLeading: true,
-      ),
+      appBar: _appBar,
       body: ListView(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
@@ -221,6 +227,38 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return _scaffold;
   }
 
+  /// AppBar depending on the Mode.
+  /// If Tags are marked, the AppBar is changed to delete it
+  AppBar get _appBar {
+    if (tagsToDelete.isNotEmpty) {
+      return AppBar(
+        title: Text('Edit'.tr()),
+        automaticallyImplyLeading: true,
+        actions: <IconButton>[
+          // Delete Button
+          IconButton(
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: () {
+              setState(() {
+                for (String tag in tagsToDelete) {
+                  TodoList.deleteTag(tag);
+                }
+              });
+            },
+            tooltip: 'Delete Tag'.tr(),
+          ),
+        ],
+      );
+    } else {
+      return AppBar(
+        title: Text('Add Todo'.tr()),
+        automaticallyImplyLeading: true,
+      );
+    }
+  }
+
+  /// Getter for the Active Tags.
+  /// This is the List to display, so it's a List<Widget>
   List<Widget> get _activeTags {
     final List<Widget> _list = [];
     for (String tag in tags) {
@@ -242,25 +280,44 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     final List<Widget> _list = [];
     for (String tag in TodoList.tags) {
       // Add Spacing
-      _list.add(
-        const SizedBox(width: 20),
-      );
+      _list.add(const SizedBox(width: 20));
       // Add Tag Button
       _list.add(
         TextButton(
-          onPressed: () {
+          onLongPress: () {
             setState(() {
-              tags.add(tag);
+              tagsToDelete.add(tag);
             });
           },
-          child: Text(tag),
+          onPressed: () {
+            if (tagsToDelete.isNotEmpty) {
+              tagsToDelete.add(tag);
+            }
+            if (tags.contains(tag)) {
+            } else {
+              setState(() {
+                tags.add(tag);
+              });
+            }
+          },
+          child: tagsToDelete.contains(tag)
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  textDirection: TextDirection.ltr,
+                  textBaseline: TextBaseline.alphabetic,
+                  verticalDirection: VerticalDirection.down,
+                  children: <Widget>[
+                    const Icon(Icons.delete_outline_outlined),
+                    Text(tag),
+                  ],
+                )
+              : Text(tag),
         ),
       );
     }
     // Add Spacing
-    _list.add(
-      const SizedBox(width: 20),
-    );
+    _list.add(const SizedBox(width: 20));
     // Add Add Tag Button
     _list.add(
       TextButton(

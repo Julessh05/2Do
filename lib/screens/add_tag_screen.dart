@@ -1,8 +1,9 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart'
+    show MaxLengthEnforcement, FilteringTextInputFormatter;
 import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/models/todo_list.dart';
 
@@ -45,10 +46,10 @@ class _AddTagScreenState extends State<AddTagScreen> {
             enabled: true,
             keyboardAppearance: Theme.of(context).brightness,
             keyboardType: TextInputType.text,
-            maxLength: 50,
+            maxLength: 30,
             maxLengthEnforcement:
                 MaxLengthEnforcement.truncateAfterCompositionEnds,
-            maxLines: 1,
+            maxLines: 2,
             minLines: 1,
             obscureText: false,
             readOnly: false,
@@ -60,6 +61,12 @@ class _AddTagScreenState extends State<AddTagScreen> {
             textAlign: TextAlign.start,
             textAlignVertical: TextAlignVertical.center,
             textDirection: TextDirection.ltr,
+            inputFormatters: <FilteringTextInputFormatter>[
+              // Forbids to use a Comma in the Text Field
+              FilteringTextInputFormatter.deny(
+                RegExp(','),
+              ),
+            ],
             toolbarOptions: const ToolbarOptions(
               copy: true,
               cut: true,

@@ -1,7 +1,5 @@
 library screens;
 
-import 'dart:async';
-
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/app_values/brainstorm_values.dart';
@@ -9,7 +7,7 @@ import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
 import 'package:todo/main.dart' show TodoApp;
-import 'package:todo/models/setting.dart' show Setting, AllSettings;
+import 'package:todo/models/setting.dart' hide listOfSettings, SettingAdapter;
 import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/screens/components/settings_sub_tile.dart';
@@ -24,7 +22,6 @@ class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({Key? key}) : super(key: key);
 
   static const routeName = '/settings';
-  static final StreamController settingsReloadStream = StreamController();
 
   @override
   State<SettingsMainScreen> createState() => _SettingsMainScreenState();

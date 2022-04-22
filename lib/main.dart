@@ -57,7 +57,7 @@ class _TodoAppState extends State<TodoApp> {
   @override
   void initState() {
     Storage.loadSettings(context);
-    // Init Translations Pacakge
+    // Init Translations Package
     Translation.init(
       supportedLocales: TranslatedStrings.supportedLocales,
       defaultLocale: TranslatedStrings.supportedLocales.first,

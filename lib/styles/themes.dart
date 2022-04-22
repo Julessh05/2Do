@@ -8,10 +8,16 @@ import 'package:todo/styles/coloring.dart';
 
 /// Class with all styles
 class Themes {
+  /// The Variable to control the ThemeMode
   static ThemeMode _themeMode = ThemeMode.system;
 
+  /// The Getter for the ThemeMode
   static ThemeMode get themeMode => _themeMode;
 
+  /// Set the ThemeMode.
+  /// The [context] is used to determine the most
+  /// recent Theme of the App. This is used to set the
+  /// [Coloring.backgroundColor].
   static void setThemeMode(ThemeMode themeMode, BuildContext context) {
     _themeMode = themeMode;
     if (Theme.of(context).brightness == Brightness.dark) {

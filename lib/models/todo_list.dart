@@ -105,15 +105,19 @@ class TodoList {
     Storage.storeTodos();
   }
 
-  /// Returns if a Todo is marked.
+  /// Returns if any Todo in any List is marked
   static bool get todoMarked {
+    // Iterate over the combined List of Todos
     for (Todo todo in _combinedListOfTodos) {
       if (todo.selected) {
+        // Todo is selected
         return true;
       } else {
+        // Todo isn't selected, therefore continue to search
         continue;
       }
     }
+    // Return false, if no Todo is marked
     return false;
   }
 
@@ -126,5 +130,6 @@ class TodoList {
   /// Delete a Tag from the Tags List
   static void deleteTag(String tag) {
     _tags.remove(', $tag');
+    Storage.storeTodos();
   }
 }

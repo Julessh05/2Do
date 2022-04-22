@@ -2,7 +2,8 @@ library logic;
 
 import 'package:flutter/material.dart'
     show TimeOfDay, Locale, ThemeMode, MaterialColor, Color;
-import 'package:string_translate/string_translate.dart';
+import 'package:string_translate/string_translate.dart'
+    show Translate, Translation;
 
 /// Holds every method to convert Object in another and the other way around
 class Converter {
@@ -169,7 +170,7 @@ class Converter {
   /// Locale and
   /// ThemeMode
   static Object stringToSupportedObject(String string, String type) {
-    Object object;
+    final Object object;
     switch (type) {
       case 'Locale':
         if (string == 'German') {
