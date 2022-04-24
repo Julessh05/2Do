@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'
     show MaxLengthEnforcement, FilteringTextInputFormatter;
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/models/todo_list.dart';
 
+/// Screen to add a new Tag
 class AddTagScreen extends StatefulWidget {
   const AddTagScreen({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class AddTagScreen extends StatefulWidget {
 }
 
 class _AddTagScreenState extends State<AddTagScreen> {
+  String tag = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,17 +79,38 @@ class _AddTagScreenState extends State<AddTagScreen> {
             decoration: InputDecoration(
               labelText: 'Insert Tag'.tr(),
             ),
-            onSubmitted: (tag) {
-              TodoList.addTag(tag);
+            onChanged: (inputTag) {
+              tag = inputTag;
             },
+            onSubmitted: (inputTag) => _confirm(inputTag),
           ),
           ListTile(
             title: Text(
               'A Tag can\'t contains a Comma'.tr(),
             ),
           ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: TextButton(
+              onPressed: () => _confirm(tag),
+              child: Text(
+                'Confirm'.tr(),
+              ),
+            ),
+          )
         ],
       ),
     );
+  }
+
+  /// function called when the User is done
+  /// editing the Text Field.
+  /// It adds the [tag] to the other Tags
+  /// and jumps back to the Route before.
+  void _confirm(String tag) {
+    TodoList.addTag(tag);
+    Jumper.back(context);
   }
 }

@@ -47,7 +47,7 @@ class Todo extends HiveObject {
     required this.title,
     required this.content,
     // required this.time,
-    this.tags = 'All_Todos',
+    this.tags = '',
     this.checked = false,
     this.selected = false,
     // required this.created,
@@ -60,14 +60,14 @@ class Todo extends HiveObject {
   }
 
   /// Created an empty Todo.
-  Todo.empty(
-      {this.title = '',
-      this.content = '',
-      this.checked = false,
-      this.selected = false,
-      this.tags = 'Empty'
-      // this.importance = 0,
-      }) {
+  Todo.empty({
+    this.title = '',
+    this.content = '',
+    this.checked = false,
+    this.selected = false,
+    this.tags = 'Empty',
+    // this.importance = 0,
+  }) {
     // time = DateTime.now();
     // created = DateTime.now();
   }
@@ -118,18 +118,20 @@ class Todo extends HiveObject {
     // Add Importance
     /*  _result += 'Importance';
     _result += importance.toString();
+    */
 
     // Add Tags
-    for (int i = 0; i <= tags.length; i++) {
+    for (int i = 0; i < tagsAsList.length; i++) {
       _result += 'tag ${i.toString()}:';
-      _result += tags[i];
-    } */
+      _result += tagsAsList[i];
+    }
 
     return _result;
   }
 
+  /// Returns the Tags of the Todo as a List
   List<String> get tagsAsList {
-    final List<String> _tags = tags.split(',');
+    final List<String> _tags = tags.split(', ');
     final List<String> _result = [];
     for (String tag in _tags) {
       if (_result.contains(tag)) {
@@ -145,7 +147,11 @@ class Todo extends HiveObject {
   static String tagsToString(List<String> tags) {
     String _result = '';
     for (String tag in tags) {
-      _result += '$tag,';
+      if (_result.isEmpty) {
+        _result += tag;
+      } else {
+        _result += ', $tag';
+      }
       TodoList.addTag(tag);
     }
     return _result;
@@ -157,8 +163,12 @@ class Todo extends HiveObject {
   void addTag(String tag) {
     if (tagsAsList.contains(tag)) {
       throw const DuplicateTagException();
+    } else if (tag.isEmpty) {
+      // Do nothing
+    } else if (tags.isEmpty) {
+      tags += tag;
     } else {
-      tags += '$tag,';
+      tags += ', $tag';
     }
   }
 
@@ -167,7 +177,9 @@ class Todo extends HiveObject {
   /// this Method just returns
   void removeTag(String tag) {
     if (tagsAsList.contains(tag)) {
-      tagsAsList.remove(tag);
+      final List<String> _tagsList = tags.split(', ');
+      _tagsList.remove(tag);
+      tags = tagsToString(_tagsList);
     } else {
       return;
     }

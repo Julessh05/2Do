@@ -318,6 +318,7 @@ class Coloring {
     Colors.cyan.shade700,
     Colors.cyan.shade800,
     Colors.cyan.shade900,
+    backgroundColor,
   ];
 
   /// Brown Colors

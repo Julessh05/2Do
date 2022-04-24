@@ -350,6 +350,10 @@ class TranslatedStrings {
     'A Tag can\'t contains a Comma': {
       TranslationLocales.german: 'Ein Tag kann keine Kommas enthalten',
       TranslationLocales.french: 'Une balise ne peut pas contenir de virgule',
+    },
+    'Tags:': {
+      TranslationLocales.german: 'Kategorien',
+      TranslationLocales.french: 'Mots clés',
     }
   };
 

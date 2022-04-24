@@ -174,6 +174,7 @@ class _HomescreenState extends State<Homescreen> {
     return _body;
   }
 
+  /// Builds the List of Todos
   List<TodoTile> get _todoTiles {
     final List<TodoTile> _list = [];
     for (Todo todo in TodoList.listOfTodos) {

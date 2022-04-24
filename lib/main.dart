@@ -20,6 +20,7 @@ import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/brainstorm_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/edit_note_screen.dart';
+import 'package:todo/screens/edit_todo_screen.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/notes_details_screen.dart';
 import 'package:todo/screens/search_screen.dart';
@@ -37,6 +38,8 @@ void main() async {
   runApp(const TodoApp());
 }
 
+/// The Main Class in which the Main State and
+/// the initial Material App is created
 class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 

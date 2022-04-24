@@ -181,16 +181,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               Notifications.importance.toString(),
             ),
           ), */
-          const SizedBox(height: 50),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: TextButton(
-              onPressed: _createTodo,
-              child: Text('Confirm'.tr()),
-              autofocus: false,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-            ),
-          ),
+          const SizedBox(height: 10),
           ListTile(
             title: Text('Active Tags:'.tr()),
           ),
@@ -220,6 +211,16 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               children: _tagContainerList,
             ),
           ),
+          const SizedBox(height: 50),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: TextButton(
+              onPressed: _createTodo,
+              child: Text('Confirm'.tr()),
+              autofocus: false,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+            ),
+          ),
         ],
       ),
     );
@@ -232,7 +233,10 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   AppBar get _appBar {
     if (tagsToDelete.isNotEmpty) {
       return AppBar(
-        title: Text('Edit'.tr()),
+        title: Text(
+          'Edit'.tr(),
+          semanticsLabel: 'Edit'.tr(),
+        ),
         automaticallyImplyLeading: true,
         actions: <IconButton>[
           // Delete Button
@@ -243,6 +247,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 for (String tag in tagsToDelete) {
                   TodoList.deleteTag(tag);
                 }
+                tagsToDelete.clear();
               });
             },
             tooltip: 'Delete Tag'.tr(),
@@ -276,6 +281,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return _list;
   }
 
+  /// The List of Widgets to show all the Tags
+  /// This Getter also handles the SetState and decides
+  /// if the Tag is shown with a marked to delete it or not
   List<Widget> get _tagContainerList {
     final List<Widget> _list = [];
     for (String tag in TodoList.tags) {

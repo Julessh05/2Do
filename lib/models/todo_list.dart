@@ -33,7 +33,7 @@ class TodoList {
   static List<Todo> _combinedListOfTodos = [];
 
   /// The private List of Tags that are created and used in this App
-  static final List<String> _tags = ['All'];
+  static final List<String> _tags = [];
 
   /// Getter for the Tag List. It's an unmodifiable List
   static UnmodifiableListView<String> get tags => UnmodifiableListView(_tags);
@@ -123,13 +123,47 @@ class TodoList {
 
   /// Adds a Tag to the Tags List
   static void addTag(String tag) {
-    _tags.add(tag);
-    Storage.storeTodos();
+    if (tag.isEmpty) {
+      // Do nothing
+    } else if (_tags.contains(tag)) {
+      // Also do nothing
+    } else {
+      _tags.add(tag);
+      Storage.storeTodos();
+    }
   }
 
   /// Delete a Tag from the Tags List
   static void deleteTag(String tag) {
-    _tags.remove(', $tag');
+    _tags.remove(tag);
     Storage.storeTodos();
+  }
+
+  /// Checks all the Todos and if a
+  /// specific Tag isn't used, deletes it.
+  static void checkTags() {
+    final List<String> tagsToDelete = [];
+    for (String tag in _tags) {
+      if (tagIsUsed(tag)) {
+        continue;
+      } else {
+        tagsToDelete.add(tag);
+      }
+    }
+    for (String tag in tagsToDelete) {
+      deleteTag(tag);
+    }
+  }
+
+  /// Returns if a specific [tag] is used.
+  static bool tagIsUsed(String tag) {
+    for (Todo todo in _combinedListOfTodos) {
+      if (todo.tagsAsList.contains(tag)) {
+        return true;
+      } else {
+        continue;
+      }
+    }
+    return false;
   }
 }
