@@ -53,13 +53,13 @@ class Coloring {
 
   /// The Red Color Shades
   static final redColors = [
+    Colors.red.shade50,
     Colors.red.shade100,
     Colors.red.shade200,
     Colors.redAccent.shade100,
     Colors.red.shade300,
     Colors.redAccent.shade200,
     Colors.red.shade400,
-    Colors.redAccent,
     Colors.red,
     Colors.red.shade500,
     Colors.red.shade600,
@@ -72,12 +72,12 @@ class Coloring {
 
   /// The Pink Colors
   static final pinkColors = [
+    Colors.pink.shade50,
     Colors.pink.shade100,
     Colors.pink.shade200,
     Colors.pink.shade300,
     Colors.pinkAccent.shade100,
     Colors.pinkAccent.shade200,
-    Colors.pinkAccent,
     Colors.pinkAccent.shade400,
     Colors.pinkAccent.shade700,
     Colors.pink.shade400,
@@ -91,12 +91,12 @@ class Coloring {
 
   /// The Purple Color Shades
   static final purpeColors = [
+    Colors.purple.shade50,
     Colors.purple.shade100,
     Colors.purple.shade200,
     Colors.purple.shade300,
     Colors.purpleAccent.shade100,
     Colors.purpleAccent.shade200,
-    Colors.purpleAccent,
     Colors.purpleAccent.shade400,
     Colors.purpleAccent.shade700,
     Colors.purple.shade400,
@@ -110,12 +110,12 @@ class Coloring {
 
   /// The Yellow Color Shades
   static final yellowColors = [
+    Colors.yellow.shade50,
     Colors.yellow.shade100,
     Colors.yellow.shade200,
     Colors.yellow.shade300,
     Colors.yellowAccent.shade100,
     Colors.yellowAccent.shade200,
-    Colors.yellowAccent,
     Colors.yellowAccent.shade400,
     Colors.yellowAccent.shade700,
     Colors.yellow.shade400,
@@ -129,12 +129,12 @@ class Coloring {
 
   /// The Amber Color Shades
   static final amberColors = [
+    Colors.amber.shade50,
     Colors.amber.shade100,
     Colors.amber.shade200,
     Colors.amber.shade300,
     Colors.amberAccent.shade100,
     Colors.amberAccent.shade200,
-    Colors.amberAccent,
     Colors.amberAccent.shade400,
     Colors.amberAccent.shade700,
     Colors.amber.shade400,
@@ -151,43 +151,40 @@ class Coloring {
     Colors.orange.shade100,
     Colors.orange.shade200,
     Colors.orange.shade300,
-    Colors.deepOrange.shade100,
-    Colors.deepOrange.shade200,
-    Colors.deepOrange.shade300,
     Colors.orangeAccent.shade100,
     Colors.orangeAccent.shade200,
-    Colors.orangeAccent,
     Colors.orangeAccent.shade400,
-    Colors.orangeAccent.shade700,
     Colors.orange.shade400,
     Colors.orange,
     Colors.orange.shade500,
     Colors.orange.shade600,
     Colors.orange.shade700,
     Colors.orange.shade800,
+    Colors.deepOrange.shade100,
+    Colors.deepOrange.shade200,
+    Colors.deepOrange.shade300,
+    Colors.orangeAccent.shade700,
     Colors.orange.shade900,
     Colors.deepOrangeAccent.shade100,
     Colors.deepOrangeAccent.shade200,
-    Colors.deepOrangeAccent,
-    Colors.deepOrangeAccent.shade400,
-    Colors.deepOrangeAccent.shade700,
     Colors.deepOrange,
-    Colors.deepOrange.shade400,
     Colors.deepOrange.shade500,
     Colors.deepOrange.shade600,
     Colors.deepOrange.shade700,
     Colors.deepOrange.shade800,
     Colors.deepOrange.shade900,
+    Colors.deepOrangeAccent.shade400,
+    Colors.deepOrangeAccent.shade700,
   ];
 
   /// The Lime Color Shades
   static final limeColors = [
+    Colors.lime.shade50,
     Colors.lime.shade100,
     Colors.lime.shade200,
     Colors.limeAccent.shade100,
     Colors.lime.shade300,
     Colors.lime.shade400,
-    Colors.limeAccent,
     Colors.limeAccent.shade200,
     Colors.limeAccent.shade400,
     Colors.limeAccent.shade700,
@@ -205,11 +202,11 @@ class Coloring {
     Colors.green.shade200,
     Colors.green.shade300,
     Colors.lightGreen.shade100,
+    Colors.lightGreenAccent.shade100,
     Colors.lightGreen.shade200,
     Colors.lightGreen.shade300,
     Colors.greenAccent.shade100,
     Colors.greenAccent.shade200,
-    Colors.greenAccent,
     Colors.greenAccent.shade400,
     Colors.greenAccent.shade700,
     Colors.green.shade400,
@@ -219,9 +216,7 @@ class Coloring {
     Colors.green.shade700,
     Colors.green.shade800,
     Colors.green.shade900,
-    Colors.lightGreenAccent.shade100,
     Colors.lightGreenAccent.shade200,
-    Colors.lightGreenAccent,
     Colors.lightGreenAccent.shade400,
     Colors.lightGreenAccent.shade700,
     Colors.lightGreen.shade400,
@@ -229,16 +224,15 @@ class Coloring {
     Colors.lightGreen.shade500,
     Colors.lightGreen.shade600,
     Colors.lightGreen.shade700,
-    Colors.lightGreen.shade800,
     Colors.lightGreen.shade900,
   ];
 
   /// The Teal Color Shades
   static final tealColors = [
+    Colors.teal.shade50,
     Colors.teal.shade100,
     Colors.tealAccent.shade100,
     Colors.teal.shade200,
-    Colors.tealAccent,
     Colors.tealAccent.shade200,
     Colors.tealAccent.shade400,
     Colors.tealAccent.shade700,
@@ -254,12 +248,12 @@ class Coloring {
 
   /// The Indigo Color Shades
   static final indigoColors = [
+    Colors.indigo.shade50,
     Colors.indigo.shade100,
     Colors.indigo.shade200,
     Colors.indigo.shade300,
     Colors.indigoAccent.shade100,
     Colors.indigoAccent.shade200,
-    Colors.indigoAccent,
     Colors.indigoAccent.shade400,
     Colors.indigoAccent.shade700,
     Colors.indigo.shade400,
@@ -273,9 +267,8 @@ class Coloring {
 
   /// The Blue Color Shades
   static final blueColors = [
-    Colors.blue.shade50,
+    Colors.lightBlueAccent.shade100,
     Colors.blue.shade100,
-    Colors.lightBlue.shade100,
     Colors.blue.shade200,
     Colors.lightBlue.shade200,
     Colors.blueAccent.shade100,
@@ -286,11 +279,12 @@ class Coloring {
     Colors.lightBlue.shade500,
     Colors.blue.shade400,
     Colors.lightBlue.shade600,
+    Colors.lightBlueAccent.shade200,
+    Colors.lightBlueAccent.shade400,
+    Colors.lightBlueAccent.shade700,
     Colors.blue,
     Colors.blueAccent.shade200,
-    Colors.blueAccent,
     Colors.blue.shade500,
-    Colors.blueAccent,
     Colors.blue.shade600,
     Colors.lightBlue.shade700,
     Colors.lightBlue.shade800,
@@ -304,12 +298,12 @@ class Coloring {
 
   /// The Cyan Color Shades
   static final cyanColors = [
+    Colors.cyan.shade50,
     Colors.cyan.shade100,
     Colors.cyan.shade200,
     Colors.cyanAccent.shade100,
     Colors.cyan.shade300,
     Colors.cyanAccent.shade200,
-    Colors.cyanAccent,
     Colors.cyanAccent.shade400,
     Colors.cyan.shade400,
     Colors.cyan,

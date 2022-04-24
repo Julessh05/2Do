@@ -166,8 +166,9 @@ class Converter {
   /// Used to get a ObjectValue from a Setting while reading it from
   /// the Storage
   /// Supported are:
-  /// Locale and
-  /// ThemeMode
+  /// Locale,
+  /// ThemeMode and
+  /// Color
   static Object stringToSupportedObject(String string, String type) {
     Object object;
     switch (type) {

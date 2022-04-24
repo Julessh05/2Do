@@ -6,6 +6,9 @@ import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/screens/components/color_grid_tile.dart';
 import 'package:todo/styles/coloring.dart';
 
+/// The Screen to choose the Color for the App
+/// This is the first Screen.
+/// The real Color is chosen in the [SubColorChooser]
 class ColorChooser extends StatefulWidget {
   const ColorChooser({Key? key}) : super(key: key);
 
@@ -43,6 +46,7 @@ class _ColorChooserState extends State<ColorChooser> {
     return _scaffold;
   }
 
+  /// List of Widgets to display the different Colors.
   List<IntrinsicHeight> get _colorList {
     final List<IntrinsicHeight> _list = [];
     for (int counter = 0; counter < Coloring.colors.length - 2; counter++) {
@@ -81,6 +85,8 @@ class _ColorChooserState extends State<ColorChooser> {
   }
 }
 
+/// The Screen to choose the Color for the App
+/// This screen changes it's Look depending on the [color]
 class SubColorChooser extends StatefulWidget {
   const SubColorChooser({
     required this.color,
@@ -123,6 +129,8 @@ class _SubColorChooserState extends State<SubColorChooser> {
     return _scaffold;
   }
 
+  /// List of the Colors.
+  /// Depending on the [widget.color]
   List<IntrinsicHeight> get _colorTiles {
     final List<IntrinsicHeight> _tiles = [];
     final List<Color> _colors;
