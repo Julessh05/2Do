@@ -10,7 +10,7 @@ import 'package:hive/hive.dart'
         BinaryReader,
         BinaryWriter;
 import 'package:todo/app_values/brainstorm_values.dart';
-import 'package:todo/logic/converter.dart';
+import 'package:todo/logic/converter.dart' show Converter;
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
 import 'package:todo/styles/coloring.dart' show Coloring;

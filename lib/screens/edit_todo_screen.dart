@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/logic/jumper.dart';
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_tag_screen.dart';
@@ -18,6 +19,9 @@ class EditTodoScreen extends StatefulWidget {
 
   final Todo todo;
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp
   static const routeName = '/todo_details/edit';
 
   @override

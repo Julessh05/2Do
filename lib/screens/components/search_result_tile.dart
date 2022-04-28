@@ -2,9 +2,9 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
-import 'package:todo/models/search_results.dart';
-import 'package:todo/screens/search_screen.dart';
-import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/models/search_results.dart' show SearchResult;
+import 'package:todo/screens/search_screen.dart' show SearchResultScreen;
+import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
 import 'package:todo/screens/todo_detail_screen.dart';
 
 /// Component which represents a single Search Result

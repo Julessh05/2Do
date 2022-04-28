@@ -2,7 +2,7 @@ library storage;
 
 import 'package:flutter/material.dart' show BuildContext;
 import 'package:hive_flutter/hive_flutter.dart' show Box, Hive;
-import 'package:todo/logic/converter.dart';
+import 'package:todo/logic/converter.dart' show Converter;
 import 'package:todo/models/brainstorm_list.dart';
 import 'package:todo/models/brainstorm_note.dart';
 import 'package:todo/models/setting.dart';

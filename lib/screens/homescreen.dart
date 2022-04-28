@@ -4,16 +4,19 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
-import 'package:todo/screens/settings_screens.dart';
-
 import 'package:todo/screens/components/todo_tile.dart';
+import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/';
 
   @override

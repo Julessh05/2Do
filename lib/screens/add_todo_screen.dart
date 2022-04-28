@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_tag_screen.dart';
@@ -14,6 +15,9 @@ import 'package:todo/storage/storage.dart';
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/add_todo';
 
   @override

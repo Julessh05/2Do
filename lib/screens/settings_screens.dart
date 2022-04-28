@@ -21,6 +21,9 @@ import 'package:todo/styles/themes.dart';
 class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings';
 
   @override
@@ -409,6 +412,9 @@ class SettingsSubScreen extends StatefulWidget {
 
   final SettingsSubScreenArguments arguments;
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings/subSettings';
 
   @override

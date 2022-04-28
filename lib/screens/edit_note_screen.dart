@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/logic/jumper.dart';
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
 import 'package:todo/storage/storage.dart';
 
@@ -13,6 +14,9 @@ class EditNoteScreen extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/brainstorm/details/edit';
 
   final BrainstormNote note;

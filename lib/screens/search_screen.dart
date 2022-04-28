@@ -4,17 +4,21 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/search_results.dart';
 import 'package:todo/models/setting.dart' show Setting, listOfSettings;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/search_result_tile.dart';
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 
 /// Screen shown when the User searches something
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/search';
 
   @override
@@ -193,6 +197,9 @@ class SearchResultScreen extends StatefulWidget {
 
   final SearchResultsList searchResultsList;
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/search/results';
 
   @override

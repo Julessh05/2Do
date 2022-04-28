@@ -3,6 +3,7 @@ library screens;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/brainstorm_list.dart';
 import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
@@ -11,6 +12,9 @@ import 'package:todo/screens/components/notes_tile.dart';
 class BrainstormScreen extends StatefulWidget {
   const BrainstormScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/brainstorm';
 
   @override

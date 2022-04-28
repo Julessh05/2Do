@@ -3,12 +3,16 @@ library screens;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/screens/components/color_grid_tile.dart';
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 
 class ColorChooser extends StatefulWidget {
   const ColorChooser({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings/color_chooser';
 
   @override
@@ -87,6 +91,9 @@ class SubColorChooser extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings/color_chooser/sub_color_chooser';
 
   final Color color;
