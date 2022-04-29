@@ -56,7 +56,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    buildToolsVersion '33.0.0 rc2'
+    buildToolsVersion '33.0.0 rc3'
     ndkVersion '24.0.8215888'
     dependenciesInfo {
         includeInApk true
