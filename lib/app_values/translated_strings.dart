@@ -1,8 +1,9 @@
 library app_values;
 
+import 'dart:ui' show Locale;
+
 import 'package:string_translate/string_translate.dart'
     show TranslationLocales, StandardTranslations;
-import 'dart:ui' show Locale;
 
 class TranslatedStrings {
   /// The Locales that are supported in this App
@@ -110,10 +111,6 @@ class TranslatedStrings {
     'Time': {
       TranslationLocales.german: 'Zeit',
       TranslationLocales.french: 'Temps',
-    },
-    'Cancel': {
-      TranslationLocales.german: 'Abbrechen',
-      TranslationLocales.french: 'Annuler',
     },
     'Confirm': {
       TranslationLocales.german: 'Bestätigen',
@@ -354,6 +351,10 @@ class TranslatedStrings {
     'Tags:': {
       TranslationLocales.german: 'Kategorien',
       TranslationLocales.french: 'Mots clés',
+    },
+    '2Do App': {
+      TranslationLocales.german: '2Do App',
+      TranslationLocales.french: '2Do App',
     }
   };
 
