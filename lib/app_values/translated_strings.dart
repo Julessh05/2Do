@@ -1,8 +1,9 @@
 library app_values;
 
+import 'dart:ui' show Locale;
+
 import 'package:string_translate/string_translate.dart'
     show TranslationLocales, StandardTranslations;
-import 'dart:ui' show Locale;
 
 class TranslatedStrings {
   /// The Locales that are supported in this App
@@ -110,10 +111,6 @@ class TranslatedStrings {
     'Time': {
       TranslationLocales.german: 'Zeit',
       TranslationLocales.french: 'Temps',
-    },
-    'Cancel': {
-      TranslationLocales.german: 'Abbrechen',
-      TranslationLocales.french: 'Annuler',
     },
     'Confirm': {
       TranslationLocales.german: 'Bestätigen',
@@ -330,6 +327,38 @@ class TranslatedStrings {
     'Flying Mode': {
       TranslationLocales.german: 'Flying Modus',
       TranslationLocales.french: 'Mode Flying',
+    },
+    'All': {
+      TranslationLocales.german: 'Alle',
+      TranslationLocales.french: 'Toute',
+    },
+    'Add Tag': {
+      TranslationLocales.german: 'Tag hinzufügen',
+      TranslationLocales.french: 'Ajouter une étiquette',
+    },
+    'Active Tags:': {
+      TranslationLocales.german: 'Aktive Tags:',
+      TranslationLocales.french: 'Balises actives',
+    },
+    'Insert Tag': {
+      TranslationLocales.german: 'Tag einfügen',
+      TranslationLocales.french: 'Insérer une balise',
+    },
+    'A Tag can\'t contains a Comma': {
+      TranslationLocales.german: 'Ein Tag kann keine Kommas enthalten',
+      TranslationLocales.french: 'Une balise ne peut pas contenir de virgule',
+    },
+    'Tags:': {
+      TranslationLocales.german: 'Kategorien',
+      TranslationLocales.french: 'Mots clés',
+    },
+    'Tag': {
+      TranslationLocales.german: 'Kategorie',
+      TranslationLocales.french: 'Étiqueter',
+    },
+    '2Do App': {
+      TranslationLocales.german: '2Do App',
+      TranslationLocales.french: '2Do App',
     }
   };
 

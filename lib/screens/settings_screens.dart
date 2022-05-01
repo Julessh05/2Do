@@ -1,7 +1,5 @@
 library screens;
 
-import 'dart:async';
-
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/app_values/brainstorm_values.dart';
@@ -9,7 +7,7 @@ import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
 import 'package:todo/main.dart' show TodoApp;
-import 'package:todo/models/setting.dart' show Setting, AllSettings;
+import 'package:todo/models/setting.dart' hide listOfSettings, SettingAdapter;
 import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/screens/components/settings_sub_tile.dart';
@@ -23,8 +21,10 @@ import 'package:todo/styles/themes.dart';
 class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings';
-  static final StreamController settingsReloadStream = StreamController();
 
   @override
   State<SettingsMainScreen> createState() => _SettingsMainScreenState();
@@ -412,6 +412,9 @@ class SettingsSubScreen extends StatefulWidget {
 
   final SettingsSubScreenArguments arguments;
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/settings/subSettings';
 
   @override

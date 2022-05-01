@@ -9,16 +9,19 @@ import 'package:flutter_localizations/flutter_localizations.dart'
         GlobalMaterialLocalizations,
         GlobalWidgetsLocalizations;
 import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
-import 'package:string_translate/string_translate.dart' show Translation;
+import 'package:string_translate/string_translate.dart'
+    show Translate, Translation;
 import 'package:todo/app_values/translated_strings.dart';
 import 'package:todo/models/brainstorm_note.dart' show BrainstormNote;
 import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
+import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/brainstorm_screen.dart';
 import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/edit_note_screen.dart';
+import 'package:todo/screens/edit_todo_screen.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/notes_details_screen.dart';
 import 'package:todo/screens/search_screen.dart';
@@ -26,16 +29,23 @@ import 'package:todo/screens/settings_screens.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 import 'package:todo/screens/unknown_page.dart';
 import 'package:todo/storage/storage.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 import 'package:todo/styles/themes.dart';
 
 void main() async {
+  // Init Hive Store Package
   await Hive.initFlutter();
+  // Init Storage Class
   await Storage.init();
+  // Load Data
   Storage.loadTodos();
   Storage.loadBrainstormNotes();
+  // Start the App
   runApp(const TodoApp());
 }
 
+/// The Main Class in which the Main State and
+/// the initial Material App is created
 class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 
@@ -55,8 +65,9 @@ class TodoApp extends StatefulWidget {
 class _TodoAppState extends State<TodoApp> {
   @override
   void initState() {
+    // Load Settings is done here, because it needs a BuildContext
     Storage.loadSettings(context);
-    // Init Translations Pacakge
+    // Init Translations Package
     Translation.init(
       supportedLocales: TranslatedStrings.supportedLocales,
       defaultLocale: TranslatedStrings.supportedLocales.first,
@@ -73,6 +84,10 @@ class _TodoAppState extends State<TodoApp> {
 
   @override
   Widget build(BuildContext context) {
+    /// This String is used as App Title, Global App Key
+    /// and restorationScopeId for Widget restauration
+    const String _title = '2Do App';
+
     final _app = StreamBuilder(
       initialData: Themes.themeMode,
       stream: TodoApp.themeStream.stream,
@@ -86,7 +101,22 @@ class _TodoAppState extends State<TodoApp> {
           checkerboardOffscreenLayers: false,
           checkerboardRasterCacheImages: false,
           /* App Section */
-          title: '2Do App',
+
+          // Keys / IDs
+          scaffoldMessengerKey: GlobalKey<ScaffoldMessengerState>(
+            debugLabel: 'Scaffold_Messenger_KEY',
+          ),
+          navigatorKey: GlobalKey(debugLabel: 'Navigator_KEY'),
+          key: const GlobalObjectKey(_title),
+          restorationScopeId: _title,
+
+          // Title Section
+          title: _title,
+          onGenerateTitle: (_) {
+            // Returns the Title of the App
+            // Can be used to returns localized Titles
+            return _title.tr();
+          },
 
           /* Locale Section */
           localizationsDelegates: const <LocalizationsDelegate>[
@@ -104,6 +134,7 @@ class _TodoAppState extends State<TodoApp> {
           darkTheme: Themes.darkTheme,
           highContrastTheme: Themes.highContrastLightTheme,
           highContrastDarkTheme: Themes.highContrastDarkTheme,
+          color: Coloring.mainColor,
 
           /* Routes Section */
           initialRoute: '/',
@@ -133,7 +164,12 @@ class _TodoAppState extends State<TodoApp> {
 
             // Color Chooser
             ColorChooser.routeName: (context) => const ColorChooser(),
+
+            // Add Tag
+            AddTagScreen.routeName: (context) => const AddTagScreen(),
           },
+
+          // On Generate Routes
           onGenerateRoute: (RouteSettings settings) {
             // Todo Details Screen
             if (settings.name == TodoDetailScreen.routeName) {
@@ -170,9 +206,11 @@ class _TodoAppState extends State<TodoApp> {
                 );
               } else {
                 // No Results Page
-                return MaterialPageRoute(builder: (_) {
-                  return const SearchResultScreen.noResults();
-                });
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return const SearchResultScreen.noResults();
+                  },
+                );
               }
 
               // Edit Todo Screen
@@ -199,17 +237,21 @@ class _TodoAppState extends State<TodoApp> {
             } else if (settings.name == NotesDetailsScreen.routeName) {
               final _note = settings.arguments as BrainstormNote;
 
-              return MaterialPageRoute(builder: (_) {
-                return NotesDetailsScreen(note: _note);
-              });
+              return MaterialPageRoute(
+                builder: (_) {
+                  return NotesDetailsScreen(note: _note);
+                },
+              );
 
               // Edit Note Screen
             } else if (settings.name == EditNoteScreen.routeName) {
               final _note = settings.arguments as BrainstormNote;
 
-              return MaterialPageRoute(builder: (_) {
-                return EditNoteScreen(note: _note);
-              });
+              return MaterialPageRoute(
+                builder: (_) {
+                  return EditNoteScreen(note: _note);
+                },
+              );
             } else {
               // Do nothing
             }
@@ -225,12 +267,6 @@ class _TodoAppState extends State<TodoApp> {
                 return const UnknownPage();
               },
             );
-          },
-          onGenerateTitle: (_) {
-            // Returns the Title of the App
-            // Can be used to returns localized Titles
-            String _title = '2Do App';
-            return _title;
           },
         );
       },

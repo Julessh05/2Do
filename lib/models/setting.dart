@@ -10,10 +10,10 @@ import 'package:hive/hive.dart'
         BinaryReader,
         BinaryWriter;
 import 'package:todo/app_values/brainstorm_values.dart';
-import 'package:todo/logic/converter.dart';
+import 'package:todo/logic/converter.dart' show Converter;
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 import 'package:todo/styles/themes.dart';
 
 part 'setting.g.dart';
@@ -42,7 +42,7 @@ part 'setting.g.dart';
 /// );
 /// ```
 ///
-/// Example with string
+/// Example with String
 /// ```dart
 /// final _setting = Setting(
 ///   name: 'Settings Name',
@@ -178,6 +178,8 @@ class Setting extends HiveObject {
     }
   }
 
+  /// Returns the Value of the Setting.
+  /// This Method detects which Value is given and returns it.
   Object get value {
     switch (valueType) {
       case 'bool':
@@ -193,6 +195,7 @@ class Setting extends HiveObject {
     }
   }
 
+  /// Returns the Type of the Setting as a String
   String get typeAsString {
     final String _output;
     switch (valueType) {
@@ -215,6 +218,7 @@ class Setting extends HiveObject {
     return _output;
   }
 
+  /// Returns the Value to display as a String
   String get valueToDisplay {
     if (valueType == 'int') {
       return intValue.toString();
@@ -296,16 +300,21 @@ class AllSettings {
     boolValue: true,
   );
 
+  /// Setting that controls the Importance of the Notifications
   static final notificationImportanceSetting = Setting(
     name: 'Importance',
     intValue: 1,
   );
 
+  /// About Setting that has no interaction.
+  /// This does only provide the Information for
+  /// the about Dialog
   static final about = Setting(
     name: 'About',
     stringValue: 'Everything about the App',
   );
 
+  /// Setting that controls the Main Color used in the App
   static final color = Setting(
     name: 'Color',
     objectValue: Coloring.mainColor,
@@ -313,16 +322,20 @@ class AllSettings {
     isObjectType: 'Color',
   );
 
+  /// Setting to control whether the Brainstorm Notes have
+  /// a Title or not
   static final brainstormTitle = Setting(
     name: 'Title',
     boolValue: BrainstormValues.title,
   );
 
+  /// Setting to control whether to Flying Mode is active
   static final brainstormFlying = Setting(
     name: 'Flying Mode',
     boolValue: BrainstormValues.flying,
   );
 
+  /// Key of the List of Settings
   static const listOfSettingsKEY = 'List Of Settings';
 
   /// Updates The Settings to the most recent Value

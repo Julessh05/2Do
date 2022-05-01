@@ -2,9 +2,9 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
-import 'package:todo/models/search_results.dart';
-import 'package:todo/screens/search_screen.dart';
-import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/models/search_results.dart' show SearchResult;
+import 'package:todo/screens/search_screen.dart' show SearchResultScreen;
+import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
 import 'package:todo/screens/todo_detail_screen.dart';
 
 /// Component which represents a single Search Result
@@ -32,13 +32,23 @@ class _SearchResulTileState extends State<SearchResulTile> {
       leading: widget.result.isTodo
           ? const Icon(Icons.notifications_active)
           : const Icon(Icons.settings),
-      subtitle: Text(
-        widget.result.isTodo ? 'Todo'.tr() : 'Setting'.tr(),
-      ),
+      subtitle: Text(_subtitle),
       onTap: _openResult,
     );
 
     return _tile;
+  }
+
+  String get _subtitle {
+    if (widget.result.isSetting) {
+      return 'Setting'.tr();
+    } else if (widget.result.isTodo) {
+      return 'Todo'.tr();
+    } else if (widget.result.isTag) {
+      return 'Tag'.tr();
+    } else {
+      return 'Unspecified';
+    }
   }
 
   void _openResult() {

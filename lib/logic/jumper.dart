@@ -1,7 +1,7 @@
 library logic;
 
 import 'package:flutter/material.dart' show Navigator, BuildContext, Color;
-import 'package:todo/models/search_results.dart';
+import 'package:todo/models/search_results.dart' show SearchResultsList;
 import 'package:todo/models/setting.dart' show Setting;
 import 'package:todo/screens/add_brainstorm_note_screen.dart';
 import 'package:todo/screens/brainstorm_screen.dart';
@@ -9,7 +9,7 @@ import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/search_screen.dart';
-import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/screens/settings_screens.dart' hide SettingsMainScreen;
 
 /// This class contains a part of Jumps and Navigating
 /// Actions done in the App

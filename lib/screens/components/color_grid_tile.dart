@@ -2,11 +2,11 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/main.dart';
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/setting.dart' show AllSettings;
-import 'package:todo/screens/color_chooser.dart';
+import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/storage/storage.dart';
-import 'package:todo/styles/coloring.dart';
+import 'package:todo/styles/coloring.dart' show Coloring;
 import 'package:todo/styles/themes.dart';
 
 /// Enum to determine the position of the ColorGridTile in the Row

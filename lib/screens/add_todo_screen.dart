@@ -1,18 +1,23 @@
 library screens;
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show MaxLengthEnforcement;
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
+import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
+import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/add_todo';
 
   @override
@@ -20,27 +25,37 @@ class AddTodoScreen extends StatefulWidget {
 }
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
+  // Date of the Todo. Only the Date should be filled
   DateTime? date;
+  // Time of the Todo
   TimeOfDay? time;
+  // Title of the Todo. Can also be named Keyword(s)
   String? title;
+  // Contents of the Todo. Can also be named Notes
   String content = '';
+  // Importance as number
   int? importance;
+  // Tags of the Todo. Can also be named categories
+  final List<String> tags = [];
+
+  /// List to delete Tags
+  final List<String> tagsToDelete = [];
 
   @override
   Widget build(BuildContext context) {
     final _scaffold = Scaffold(
-      appBar: AppBar(
-        title: Text('Add Todo'.tr()),
-        automaticallyImplyLeading: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        mainAxisSize: MainAxisSize.max,
-        textDirection: TextDirection.ltr,
-        verticalDirection: VerticalDirection.down,
+      appBar: _appBar,
+      body: ListView(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
+        clipBehavior: Clip.antiAlias,
+        dragStartBehavior: DragStartBehavior.start,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: <Widget>[
+          const SizedBox(height: 20),
           TextField(
             autocorrect: true,
             autofocus: true,
@@ -170,18 +185,166 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               Notifications.importance.toString(),
             ),
           ), */
-          const SizedBox(height: 50),
-          TextButton(
-            onPressed: _createTodo,
-            child: Text('Confirm'.tr()),
-            autofocus: false,
+          const SizedBox(height: 10),
+          ListTile(
+            title: Text('Active Tags:'.tr()),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            textBaseline: TextBaseline.alphabetic,
+            textDirection: TextDirection.ltr,
+            verticalDirection: VerticalDirection.down,
+            children: _activeTags,
+          ),
+          ListTile(
+            title: Text('Tags:'.tr()),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             clipBehavior: Clip.antiAliasWithSaveLayer,
-          )
+            dragStartBehavior: DragStartBehavior.start,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              textBaseline: TextBaseline.alphabetic,
+              textDirection: TextDirection.ltr,
+              verticalDirection: VerticalDirection.down,
+              children: _tagContainerList,
+            ),
+          ),
+          const SizedBox(height: 50),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: TextButton(
+              onPressed: _createTodo,
+              child: Text('Confirm'.tr()),
+              autofocus: false,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+            ),
+          ),
         ],
       ),
     );
 
     return _scaffold;
+  }
+
+  /// AppBar depending on the Mode.
+  /// If Tags are marked, the AppBar is changed to delete it
+  AppBar get _appBar {
+    if (tagsToDelete.isNotEmpty) {
+      return AppBar(
+        title: Text(
+          'Edit'.tr(),
+          semanticsLabel: 'Edit'.tr(),
+        ),
+        automaticallyImplyLeading: true,
+        actions: <IconButton>[
+          // Delete Button
+          IconButton(
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: () {
+              setState(() {
+                for (String tag in tagsToDelete) {
+                  TodoList.deleteTag(tag);
+                }
+                tagsToDelete.clear();
+              });
+            },
+            tooltip: 'Delete Tag'.tr(),
+          ),
+        ],
+      );
+    } else {
+      return AppBar(
+        title: Text('Add Todo'.tr()),
+        automaticallyImplyLeading: true,
+      );
+    }
+  }
+
+  /// Getter for the Active Tags.
+  /// This is the List to display, so it's a List<Widget>
+  List<Widget> get _activeTags {
+    final List<Widget> _list = [];
+    for (String tag in tags) {
+      _list.add(
+        TextButton(
+          onPressed: () {
+            setState(() {
+              tags.remove(tag);
+            });
+          },
+          child: Text(tag),
+        ),
+      );
+    }
+    return _list;
+  }
+
+  /// The List of Widgets to show all the Tags
+  /// This Getter also handles the SetState and decides
+  /// if the Tag is shown with a marked to delete it or not
+  List<Widget> get _tagContainerList {
+    final List<Widget> _list = [];
+    for (String tag in TodoList.tags) {
+      // Add Spacing
+      _list.add(const SizedBox(width: 20));
+      // Add Tag Button
+      _list.add(
+        TextButton(
+          onLongPress: () {
+            setState(() {
+              tagsToDelete.add(tag);
+            });
+          },
+          onPressed: () {
+            if (tagsToDelete.isNotEmpty) {
+              tagsToDelete.add(tag);
+            }
+            if (tags.contains(tag)) {
+            } else {
+              setState(() {
+                tags.add(tag);
+              });
+            }
+          },
+          child: tagsToDelete.contains(tag)
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  textDirection: TextDirection.ltr,
+                  textBaseline: TextBaseline.alphabetic,
+                  verticalDirection: VerticalDirection.down,
+                  children: <Widget>[
+                    const Icon(Icons.delete_outline_outlined),
+                    Text(tag),
+                  ],
+                )
+              : Text(tag),
+        ),
+      );
+    }
+    // Add Spacing
+    _list.add(const SizedBox(width: 20));
+    // Add Add Tag Button
+    _list.add(
+      TextButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            AddTagScreen.routeName,
+          ).then((value) => setState(() {}));
+        },
+        child: Text(
+          'Add Tag'.tr(),
+        ),
+      ),
+    );
+    return _list;
   }
 
   /// Creates a Todo and inserts the Values
@@ -220,6 +383,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       final _todo = Todo(
         title: title!,
         content: content,
+        tags: Todo.tagsToString(tags),
         /*  time: dateTime,
         created: DateTime.now(),
         importance: importance, */

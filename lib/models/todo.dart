@@ -8,6 +8,8 @@ import 'package:hive/hive.dart'
         TypeAdapter,
         BinaryReader,
         BinaryWriter;
+import 'package:todo/exceptions/duplicate_tag_exception.dart';
+import 'package:todo/models/todo_list.dart';
 
 part 'todo.g.dart';
 
@@ -26,8 +28,8 @@ class Todo extends HiveObject {
   // @HiveField(2)
   // late final DateTime time;
 
-  // @HiveField(3)
-  // final List<String> tags;
+  @HiveField(3)
+  String tags;
 
   @HiveField(4)
   bool selected;
@@ -45,7 +47,7 @@ class Todo extends HiveObject {
     required this.title,
     required this.content,
     // required this.time,
-    // this.tags = const ['Standard'],
+    this.tags = '',
     this.checked = false,
     this.selected = false,
     // required this.created,
@@ -63,7 +65,7 @@ class Todo extends HiveObject {
     this.content = '',
     this.checked = false,
     this.selected = false,
-    // this.tags = const ['Empty'],
+    this.tags = 'Empty',
     // this.importance = 0,
   }) {
     // time = DateTime.now();
@@ -116,14 +118,75 @@ class Todo extends HiveObject {
     // Add Importance
     /*  _result += 'Importance';
     _result += importance.toString();
+    */
 
     // Add Tags
-    for (int i = 0; i <= tags.length; i++) {
+    for (int i = 0; i < tagsAsList.length; i++) {
       _result += 'tag ${i.toString()}:';
-      _result += tags[i];
-    } */
+      _result += tagsAsList[i];
+    }
 
     return _result;
+  }
+
+  /// Returns the Tags of the Todo as a List
+  List<String> get tagsAsList {
+    final List<String> _tags = tags.split(', ');
+    final List<String> _result = [];
+    for (String tag in _tags) {
+      if (_result.contains(tag)) {
+        continue;
+      } else {
+        _result.add(tag);
+      }
+    }
+    if (_tags.length == 1 && _tags[0] == '') {
+      return [];
+    } else {
+      return _result;
+    }
+  }
+
+  /// Method that returns the [tags] as a List of Strings
+  static String tagsToString(List<String> tags) {
+    String _result = '';
+    for (String tag in tags) {
+      if (_result.isEmpty) {
+        _result += tag;
+      } else {
+        _result += ', $tag';
+      }
+      TodoList.addTag(tag);
+    }
+    return _result;
+  }
+
+  /// Adds a Tag to the Todo.
+  /// If the Tag is already connected with the Todo,
+  /// a [DuplicateTagException] is thrown
+  void addTag(String tag) {
+    if (tagsAsList.contains(tag)) {
+      throw const DuplicateTagException();
+    } else if (tag.isEmpty) {
+      // Do nothing
+    } else if (tags.isEmpty) {
+      tags += tag;
+    } else {
+      tags += ', $tag';
+    }
+  }
+
+  /// Removes a Tag from the Todo.
+  /// If the Tag is not connected to the Todo,
+  /// this Method just returns
+  void removeTag(String tag) {
+    if (tagsAsList.contains(tag)) {
+      final List<String> _tagsList = tags.split(', ');
+      _tagsList.remove(tag);
+      tags = tagsToString(_tagsList);
+    } else {
+      return;
+    }
   }
 
   /// Returns the [time] as a String to use in Widgets,

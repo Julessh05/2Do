@@ -32,8 +32,15 @@ class TodoList {
   /// This private file intern List combines the [listOfCheckedTodos] and the [listOfTodos]
   static List<Todo> _combinedListOfTodos = [];
 
+  /// The private List of Tags that are created and used in this App
+  static final List<String> _tags = [];
+
+  /// Getter for the Tag List. It's an unmodifiable List
+  static UnmodifiableListView<String> get tags => UnmodifiableListView(_tags);
+
   /// The List where all unchecked Todos are stored
-  /// This List is unmodifiable
+  /// This List is unmodifiable List, so you can only add Tags through the
+  /// corresponding Method.
   static UnmodifiableListView<Todo> get listOfTodos =>
       UnmodifiableListView(_listOfTodos);
 
@@ -58,7 +65,6 @@ class TodoList {
   static void addTodo(Todo todo) {
     _listOfTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Adds a Checked Todo to the [listOfCheckedTodos]
@@ -66,7 +72,6 @@ class TodoList {
   static void addCheckedTodo(Todo todo) {
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Deletes a Todo
@@ -75,7 +80,6 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.remove(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfTodos] and adds it to the
@@ -84,7 +88,6 @@ class TodoList {
     _listOfTodos.remove(todo);
     _listOfCheckedTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Removes the [todo] from the [listOfCheckedTodos] and add it
@@ -93,17 +96,69 @@ class TodoList {
     _listOfCheckedTodos.remove(todo);
     _listOfTodos.add(todo);
     _updateCombinedList();
-    Storage.storeTodos();
   }
 
   /// Updates the [_combinedListOfTodos] so this List is always up-to-date
+  /// The Todos are also stored, so the Box with the Todos is always updated too,
   static void _updateCombinedList() {
     _combinedListOfTodos = _listOfTodos + _listOfCheckedTodos;
+    Storage.storeTodos();
   }
 
+  /// Returns if any Todo in any List is marked
   static bool get todoMarked {
+    // Iterate over the combined List of Todos
     for (Todo todo in _combinedListOfTodos) {
       if (todo.selected) {
+        // Todo is selected
+        return true;
+      } else {
+        // Todo isn't selected, therefore continue to search
+        continue;
+      }
+    }
+    // Return false, if no Todo is marked
+    return false;
+  }
+
+  /// Adds a Tag to the Tags List
+  static void addTag(String tag) {
+    if (tag.isEmpty) {
+      // Do nothing
+    } else if (_tags.contains(tag)) {
+      // Also do nothing
+    } else {
+      _tags.add(tag);
+      Storage.storeTodos();
+    }
+  }
+
+  /// Delete a Tag from the Tags List
+  static void deleteTag(String tag) {
+    _tags.remove(tag);
+    Storage.storeTodos();
+  }
+
+  /// Checks all the Todos and if a
+  /// specific Tag isn't used, deletes it.
+  static void checkTags() {
+    final List<String> tagsToDelete = [];
+    for (String tag in _tags) {
+      if (tagIsUsed(tag)) {
+        continue;
+      } else {
+        tagsToDelete.add(tag);
+      }
+    }
+    for (String tag in tagsToDelete) {
+      deleteTag(tag);
+    }
+  }
+
+  /// Returns if a specific [tag] is used.
+  static bool tagIsUsed(String tag) {
+    for (Todo todo in _combinedListOfTodos) {
+      if (todo.tagsAsList.contains(tag)) {
         return true;
       } else {
         continue;
