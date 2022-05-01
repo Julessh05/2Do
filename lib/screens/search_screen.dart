@@ -150,6 +150,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
     // Search Todos
     for (Todo todo in TodoList.listOfTodos) {
+      for (String tag in todo.tagsAsList) {
+        if (tag.toLowerCase().contains(input.toLowerCase())) {
+          final _result = SearchResult(todo: todo);
+          listOfResults.add(_result);
+        } else {
+          continue;
+        }
+      }
+
       if (todo.title.toLowerCase().contains(input.toLowerCase())) {
         // If Todo matches, create Search Result and add it to the list
         final _result = SearchResult(todo: todo);

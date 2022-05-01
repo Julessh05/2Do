@@ -2,6 +2,7 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
+import 'package:todo/logic/jumper.dart';
 import 'package:todo/models/search_results.dart' show SearchResult;
 import 'package:todo/screens/search_screen.dart' show SearchResultScreen;
 import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
@@ -58,11 +59,15 @@ class _SearchResulTileState extends State<SearchResulTile> {
         TodoDetailScreen.routeName,
         arguments: widget.result.todo,
       ).then((value) => setState(() {}));
-    } else {
+    } else if (widget.result.isSetting) {
       Navigator.pushNamed(
         context,
         SettingsMainScreen.routeName,
       ).then((value) => setState(() {}));
+    } else if (widget.result.isTag) {
+      Jumper.backToTheHomescreen(context);
+    } else {
+      // Do nohing
     }
   }
 }
