@@ -354,7 +354,7 @@ class AllSettings {
     for (Setting setting in listOfSettings) {
       switch (setting.name) {
         case 'Language':
-          Translation.activeLocale = setting.objectValue;
+          Translation.changeLanguage(setting.objectValue);
           break;
         case 'Thememode':
           Themes.setThemeMode(setting.objectValue, context);
