@@ -352,6 +352,10 @@ class TranslatedStrings {
       TranslationLocales.german: 'Kategorien',
       TranslationLocales.french: 'Mots clés',
     },
+    'Tag': {
+      TranslationLocales.german: 'Kategorie',
+      TranslationLocales.french: 'Étiqueter',
+    },
     '2Do App': {
       TranslationLocales.german: '2Do App',
       TranslationLocales.french: '2Do App',

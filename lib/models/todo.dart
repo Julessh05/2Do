@@ -140,7 +140,11 @@ class Todo extends HiveObject {
         _result.add(tag);
       }
     }
-    return _result;
+    if (_tags.length == 1 && _tags[0] == '') {
+      return [];
+    } else {
+      return _result;
+    }
   }
 
   /// Method that returns the [tags] as a List of Strings

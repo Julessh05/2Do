@@ -32,13 +32,23 @@ class _SearchResulTileState extends State<SearchResulTile> {
       leading: widget.result.isTodo
           ? const Icon(Icons.notifications_active)
           : const Icon(Icons.settings),
-      subtitle: Text(
-        widget.result.isTodo ? 'Todo'.tr() : 'Setting'.tr(),
-      ),
+      subtitle: Text(_subtitle),
       onTap: _openResult,
     );
 
     return _tile;
+  }
+
+  String get _subtitle {
+    if (widget.result.isSetting) {
+      return 'Setting'.tr();
+    } else if (widget.result.isTodo) {
+      return 'Todo'.tr();
+    } else if (widget.result.isTag) {
+      return 'Tag'.tr();
+    } else {
+      return 'Unspecified';
+    }
   }
 
   void _openResult() {

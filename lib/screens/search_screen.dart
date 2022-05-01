@@ -171,6 +171,14 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     }
 
+    for (String tag in TodoList.tags) {
+      if (tag.toLowerCase().contains(input.toLowerCase())) {
+        final _result = SearchResult(tag: tag);
+
+        listOfResults.add(_result);
+      }
+    }
+
     final _results = SearchResultsList(searchResults: listOfResults);
     Jumper.openSearchResultsScreen(context, _results);
   }
