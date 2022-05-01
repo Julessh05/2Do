@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:todo/app_values/brainstorm_values.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
-    show Translate, Translation;
+    hide StandardTranslations;
 import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/setting.dart' hide listOfSettings, SettingAdapter;
 import 'package:todo/notifications/notifications.dart';
@@ -178,7 +178,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option English
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale('en', 'US');
+            Translation.changeLanguage(TranslationLocales.english);
             _reload();
             Jumper.back(context);
           },
@@ -204,7 +204,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option German
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale('de', 'DE');
+            Translation.changeLanguage(TranslationLocales.german);
             _reload();
             Jumper.back(context);
           },
@@ -230,7 +230,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
         // Option French
         SimpleDialogOption(
           onPressed: () {
-            Translation.activeLocale = const Locale('fr', 'FR');
+            Translation.changeLanguage(TranslationLocales.french);
             _reload();
             Jumper.back(context);
           },

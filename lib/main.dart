@@ -49,7 +49,12 @@ void main() async {
 class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 
+  /// The Name of the Route for this Screen.
+  /// Is used to navigate trough the App.
+  /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = 'main';
+
+  /// The Stream that controlls the ThemeMode
   static final themeStream = StreamController<ThemeMode>();
 
   // This double App Version only has one digit after the .
