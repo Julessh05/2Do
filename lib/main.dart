@@ -1,7 +1,5 @@
 library main;
 
-import 'dart:async' show StreamController;
-
 import 'package:bloc_implementation/bloc_implementation.dart' show BlocParent;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'
@@ -56,9 +54,6 @@ class TodoApp extends StatefulWidget {
   /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = 'main';
 
-  /// The Stream that controlls the ThemeMode
-  static final themeStream = StreamController<ThemeMode>();
-
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
@@ -70,6 +65,7 @@ class TodoApp extends StatefulWidget {
 }
 
 class _TodoAppState extends State<TodoApp> {
+  ThemeMode? themeMode;
   @override
   void initState() {
     // Load Settings is done here, because it needs a BuildContext
@@ -81,12 +77,6 @@ class _TodoAppState extends State<TodoApp> {
       translations: TranslatedStrings.translations,
     );
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    TodoApp.themeStream.close();
-    super.dispose();
   }
 
   @override
@@ -134,7 +124,8 @@ class _TodoAppState extends State<TodoApp> {
         scrollBehavior: const MaterialScrollBehavior(),
 
         /* Theme Section */
-        themeMode: ThemeMode.system,
+        themeMode: themeMode ?? ThemeMode.system,
+        //  then((value) => ),
         theme: Themes.lightTheme,
         darkTheme: Themes.darkTheme,
         highContrastTheme: Themes.highContrastLightTheme,

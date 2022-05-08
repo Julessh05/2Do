@@ -1,8 +1,9 @@
 library components;
 
+import 'package:bloc_implementation/bloc_implementation.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/blocs/main_bloc.dart';
 import 'package:todo/logic/jumper.dart';
-import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/setting.dart' show AllSettings;
 import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/storage/storage.dart';
@@ -158,7 +159,9 @@ class _ColorGridTileState extends State<ColorGridTile> {
     if (widget.isSubTile) {
       setState(() {
         Coloring.mainColor = widget.color;
-        TodoApp.themeStream.sink.add(Themes.themeMode);
+        BlocParent.of<MainBloc>(context)
+            .themeModeController
+            .add(Themes.themeMode);
         AllSettings.updateSettings();
         Storage.storeSettings();
       });
