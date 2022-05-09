@@ -57,8 +57,8 @@ class TodoApp extends StatefulWidget {
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
-  static const double appVersion = 2.1;
-  static const String appVersionString = '2.1.0';
+  static const double appVersion = 3.0;
+  static const String appVersionString = '3.0.0';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -76,6 +76,7 @@ class _TodoAppState extends State<TodoApp> {
       defaultLocale: TranslatedStrings.supportedLocales.first,
       translations: TranslatedStrings.translations,
     );
+    // Call Super
     super.initState();
   }
 
