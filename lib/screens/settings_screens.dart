@@ -1,10 +1,8 @@
 library screens;
 
-import 'package:bloc_implementation/bloc_implementation.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:todo/app_values/brainstorm_values.dart';
-import 'package:todo/blocs/main_bloc.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart'
     hide StandardTranslations;
@@ -343,7 +341,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   /// Then pops the Dialog with Jumper.back(context)
   void _changeThemeMode(ThemeMode mode) {
     setState(() {
-      BlocParent.of<MainBloc>(context).themeModeController.add(mode);
+      TodoApp.themeStream.sink.add(mode);
       Themes.setThemeMode(mode, context);
       _reload();
     });
