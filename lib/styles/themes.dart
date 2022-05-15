@@ -35,7 +35,7 @@ class Themes {
     final _lightTheme = ThemeData(
       /* Global Values */
       brightness: Brightness.light,
-      androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
+      useMaterial3: true,
       scaffoldBackgroundColor: Colors.white,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -485,10 +485,10 @@ class Themes {
       // typography: Typography.material2018(),
 
       /* Scrollbar Theme */
-      scrollbarTheme: const ScrollbarThemeData(
+      scrollbarTheme: ScrollbarThemeData(
+        trackVisibility: MaterialStateProperty.all<bool>(true),
         interactive: true,
-        showTrackOnHover: true,
-        isAlwaysShown: false,
+        thumbVisibility: MaterialStateProperty.all<bool>(false),
       ),
     );
 
@@ -500,7 +500,7 @@ class Themes {
     final _darkTheme = ThemeData(
       /* Global Values */
       brightness: Brightness.dark,
-      androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
+      useMaterial3: true,
       scaffoldBackgroundColor: Colors.grey.shade900,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -944,10 +944,10 @@ class Themes {
       // typography: Typography.material2018(),
 
       /* Scrollbar Theme */
-      scrollbarTheme: const ScrollbarThemeData(
+      scrollbarTheme: ScrollbarThemeData(
         interactive: true,
-        showTrackOnHover: true,
-        isAlwaysShown: false,
+        trackVisibility: MaterialStateProperty.all<bool>(true),
+        thumbVisibility: MaterialStateProperty.all<bool>(false),
       ),
     );
 

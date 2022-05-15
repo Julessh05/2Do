@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "com.jules.todo"
-        minSdk 28
+        minSdk 30
         targetSdk 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -64,12 +64,13 @@ android {
             renderscriptDebuggable true
         }
     }
-    buildToolsVersion '33.0.0 rc3'
+    buildToolsVersion '33.0.0 rc4'
     ndkVersion '24.0.8215888'
     dependenciesInfo {
         includeInApk true
         includeInBundle true
     }
+    namespace 'com.jules.todo'
 }
 
 flutter {
@@ -78,5 +79,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
 }

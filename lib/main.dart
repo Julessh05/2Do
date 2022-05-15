@@ -26,6 +26,7 @@ import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/notes_details_screen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/screens/sorted_todo_screen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 import 'package:todo/screens/unknown_page.dart';
 import 'package:todo/storage/storage.dart';
@@ -54,14 +55,13 @@ class TodoApp extends StatefulWidget {
   /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = 'main';
 
-  /// The Stream that controlls the ThemeMode
   static final themeStream = StreamController<ThemeMode>();
 
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
-  static const double appVersion = 2.1;
-  static const String appVersionString = '2.1.0';
+  static const double appVersion = 3.0;
+  static const String appVersionString = '3.0.0';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -78,6 +78,7 @@ class _TodoAppState extends State<TodoApp> {
       defaultLocale: TranslatedStrings.supportedLocales.first,
       translations: TranslatedStrings.translations,
     );
+    // Call Super
     super.initState();
   }
 
@@ -93,10 +94,10 @@ class _TodoAppState extends State<TodoApp> {
     /// and restorationScopeId for Widget restauration
     const String _title = '2Do App';
 
-    final _app = StreamBuilder(
-      initialData: Themes.themeMode,
+    return StreamBuilder<ThemeMode>(
+      initialData: ThemeMode.system,
       stream: TodoApp.themeStream.stream,
-      builder: (_, AsyncSnapshot snapshot) {
+      builder: (context, snapshot) {
         return MaterialApp(
           /* Developer Section */
           showSemanticsDebugger: false,
@@ -135,6 +136,7 @@ class _TodoAppState extends State<TodoApp> {
 
           /* Theme Section */
           themeMode: snapshot.data,
+          //  then((value) => ),
           theme: Themes.lightTheme,
           darkTheme: Themes.darkTheme,
           highContrastTheme: Themes.highContrastLightTheme,
@@ -257,6 +259,16 @@ class _TodoAppState extends State<TodoApp> {
                   return EditNoteScreen(note: _note);
                 },
               );
+
+              // Sorted Todo Screen
+            } else if (settings.name == SortedTodoScreen.routeName) {
+              final _tag = settings.arguments as String;
+
+              return MaterialPageRoute(
+                builder: (_) {
+                  return SortedTodoScreen(tag: _tag);
+                },
+              );
             } else {
               // Do nothing
             }
@@ -276,7 +288,5 @@ class _TodoAppState extends State<TodoApp> {
         );
       },
     );
-
-    return _app;
   }
 }

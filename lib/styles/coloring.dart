@@ -90,7 +90,7 @@ class Coloring {
   ];
 
   /// The Purple Color Shades
-  static final purpeColors = [
+  static final purpleColors = [
     Colors.purple.shade50,
     Colors.purple.shade100,
     Colors.purple.shade200,

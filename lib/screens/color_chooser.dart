@@ -152,7 +152,7 @@ class _SubColorChooserState extends State<SubColorChooser> {
     } else if (widget.color == Colors.green) {
       _colors = Coloring.greenColors;
     } else if (widget.color == Colors.purple) {
-      _colors = Coloring.purpeColors;
+      _colors = Coloring.purpleColors;
     } else if (widget.color == Colors.indigo) {
       _colors = Coloring.indigoColors;
     } else if (widget.color == Colors.lime) {
