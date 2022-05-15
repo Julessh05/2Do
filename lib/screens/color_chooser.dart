@@ -25,7 +25,7 @@ class ColorChooser extends StatefulWidget {
 class _ColorChooserState extends State<ColorChooser> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -46,15 +46,13 @@ class _ColorChooserState extends State<ColorChooser> {
         children: _colorList,
       ),
     );
-
-    return _scaffold;
   }
 
   /// List of Widgets to display the different Colors.
   List<IntrinsicHeight> get _colorList {
-    final List<IntrinsicHeight> _list = [];
+    final List<IntrinsicHeight> list = [];
     for (int counter = 0; counter < Coloring.colors.length - 2; counter++) {
-      _list.add(
+      list.add(
         IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +83,7 @@ class _ColorChooserState extends State<ColorChooser> {
         ),
       );
     }
-    return _list;
+    return list;
   }
 }
 
@@ -111,7 +109,7 @@ class SubColorChooser extends StatefulWidget {
 class _SubColorChooserState extends State<SubColorChooser> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -132,48 +130,46 @@ class _SubColorChooserState extends State<SubColorChooser> {
         children: _colorTiles,
       ),
     );
-
-    return _scaffold;
   }
 
   /// List of the Colors.
   /// Depending on the [widget.color]
   List<IntrinsicHeight> get _colorTiles {
-    final List<IntrinsicHeight> _tiles = [];
-    final List<Color> _colors;
+    final List<IntrinsicHeight> tiles = [];
+    final List<Color> colors;
     if (widget.color == Colors.amber) {
-      _colors = Coloring.amberColors;
+      colors = Coloring.amberColors;
     } else if (widget.color == Colors.blue) {
-      _colors = Coloring.blueColors;
+      colors = Coloring.blueColors;
     } else if (widget.color == Colors.cyan) {
-      _colors = Coloring.cyanColors;
+      colors = Coloring.cyanColors;
     } else if (widget.color == Colors.orange) {
-      _colors = Coloring.orangeColors;
+      colors = Coloring.orangeColors;
     } else if (widget.color == Colors.green) {
-      _colors = Coloring.greenColors;
+      colors = Coloring.greenColors;
     } else if (widget.color == Colors.purple) {
-      _colors = Coloring.purpleColors;
+      colors = Coloring.purpleColors;
     } else if (widget.color == Colors.indigo) {
-      _colors = Coloring.indigoColors;
+      colors = Coloring.indigoColors;
     } else if (widget.color == Colors.lime) {
-      _colors = Coloring.limeColors;
+      colors = Coloring.limeColors;
     } else if (widget.color == Colors.teal) {
-      _colors = Coloring.tealColors;
+      colors = Coloring.tealColors;
     } else if (widget.color == Colors.yellow) {
-      _colors = Coloring.yellowColors;
+      colors = Coloring.yellowColors;
     } else if (widget.color == Colors.red) {
-      _colors = Coloring.redColors;
+      colors = Coloring.redColors;
     } else if (widget.color == Colors.brown ||
         widget.color == Colors.brown.shade800 ||
         widget.color == Colors.black) {
-      _colors = Coloring.brownColors;
+      colors = Coloring.brownColors;
     } else if (widget.color == Colors.pink) {
-      _colors = Coloring.pinkColors;
+      colors = Coloring.pinkColors;
     } else {
-      _colors = [widget.color];
+      colors = [widget.color];
     }
-    for (int counter = 0; counter < _colors.length - 2; counter++) {
-      _tiles.add(
+    for (int counter = 0; counter < colors.length - 2; counter++) {
+      tiles.add(
         IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,19 +179,19 @@ class _SubColorChooserState extends State<SubColorChooser> {
             verticalDirection: VerticalDirection.down,
             children: <ColorGridTile>[
               ColorGridTile(
-                color: _colors[counter],
-                colorBehind: _colors[counter + 1],
+                color: colors[counter],
+                colorBehind: colors[counter + 1],
                 isSubTile: true,
                 position: ColorGridPosition.left,
               ),
               ColorGridTile(
-                color: _colors[++counter],
+                color: colors[++counter],
                 isSubTile: true,
                 position: ColorGridPosition.middle,
               ),
               ColorGridTile(
-                color: _colors[++counter],
-                colorInfront: _colors[counter - 1],
+                color: colors[++counter],
+                colorInfront: colors[counter - 1],
                 isSubTile: true,
                 position: ColorGridPosition.right,
               ),
@@ -204,6 +200,6 @@ class _SubColorChooserState extends State<SubColorChooser> {
         ),
       );
     }
-    return _tiles;
+    return tiles;
   }
 }

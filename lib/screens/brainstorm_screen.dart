@@ -43,7 +43,7 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
 
   AppBar get _appBar {
     bool selected = false;
-    final AppBar _appBar;
+    final AppBar appBar;
     for (BrainstormNote note in BrainstormList.combinedListOfNotes) {
       if (note.selected) {
         selected = true;
@@ -53,7 +53,7 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
       }
     }
     if (selected) {
-      _appBar = AppBar(
+      appBar = AppBar(
         title: Text(
           'Edit'.tr(),
           semanticsLabel: 'Edit'.tr(),
@@ -63,16 +63,16 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
             icon: const Icon(Icons.delete_outline_rounded),
             onPressed: () {
               setState(() {
-                final List<BrainstormNote> _list = [];
+                final List<BrainstormNote> list = [];
                 for (BrainstormNote note
                     in BrainstormList.combinedListOfNotes) {
                   if (note.selected) {
-                    _list.add(note);
+                    list.add(note);
                   } else {
                     continue;
                   }
                 }
-                for (BrainstormNote note in _list) {
+                for (BrainstormNote note in list) {
                   BrainstormList.deleteNote(note);
                 }
               });
@@ -81,7 +81,7 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
         ],
       );
     } else {
-      _appBar = AppBar(
+      appBar = AppBar(
         automaticallyImplyLeading: true,
         title: Text(
           'Brainstorm'.tr(),
@@ -89,23 +89,23 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
         ),
       );
     }
-    return _appBar;
+    return appBar;
   }
 
   Widget get _body {
-    final Widget _body;
+    final Widget body;
     if (BrainstormList.combinedListOfNotes.isNotEmpty) {
-      final _list = <Widget>[];
-      _list.addAll(_notesTiles);
+      final list = <Widget>[];
+      list.addAll(_notesTiles);
       if (BrainstormList.listOfCheckedNotes.isNotEmpty) {
-        _list.add(
+        list.add(
           ListTile(
             title: Text('Checked Notes:'.tr()),
           ),
         );
       }
-      _list.addAll(_checkedNotesTiles);
-      _body = ListView(
+      list.addAll(_checkedNotesTiles);
+      body = ListView(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
@@ -114,10 +114,10 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
-        children: _list,
+        children: list,
       );
     } else {
-      _body = Center(
+      body = Center(
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1.5,
           child: Column(
@@ -137,19 +137,19 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
               ),
               TextButton(
                 onPressed: () => _openAddNote(),
+                autofocus: false,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Text(
                   'Add one'.tr(),
                   semanticsLabel: 'Add one'.tr(),
                 ),
-                autofocus: false,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
               ),
             ],
           ),
         ),
       );
     }
-    return _body;
+    return body;
   }
 
   void _openAddNote() {
@@ -159,25 +159,25 @@ class _BrainstormScreenState extends State<BrainstormScreen> {
   }
 
   List<NotesTile> get _notesTiles {
-    final List<NotesTile> _list = [];
+    final List<NotesTile> list = [];
     for (BrainstormNote note in BrainstormList.listOfNotes) {
-      _list.add(NotesTile(
+      list.add(NotesTile(
         note: note,
         setStateFunc: _setStateFunc,
       ));
     }
-    return _list;
+    return list;
   }
 
   List<NotesTile> get _checkedNotesTiles {
-    final List<NotesTile> _list = [];
+    final List<NotesTile> list = [];
     for (BrainstormNote note in BrainstormList.listOfCheckedNotes) {
-      _list.add(NotesTile(
+      list.add(NotesTile(
         note: note,
         setStateFunc: _setStateFunc,
       ));
     }
-    return _list;
+    return list;
   }
 
   void _setStateFunc() {

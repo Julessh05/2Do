@@ -159,9 +159,9 @@ class _AddBrainstormNoteScreenState extends State<AddBrainstormNoteScreen> {
               Center(
                 child: TextButton(
                   onPressed: () => Jumper.back(context),
-                  child: Text('OK'.tr()),
                   autofocus: true,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Text('OK'.tr()),
                 ),
               ),
             ],

@@ -33,7 +33,7 @@ class SettingsMainScreen extends StatefulWidget {
 class _SettingsMainScreenState extends State<SettingsMainScreen> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -140,20 +140,18 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               applicationIcon: Icon(Icons.check),
               applicationName: '2Do',
               applicationVersion: TodoApp.appVersionString,
+              applicationLegalese: '© Julian Schumacher 2022',
               children: <Widget>[
                 Text('\n'),
                 Text('A Todo App built with Flutter,'),
                 Text('a UI Framework by Google.'),
                 Text('Available on Android and IOS'),
               ],
-              applicationLegalese: '© Julian Schumacher 2022',
             ),
           )
         ],
       ),
     );
-
-    return _scaffold;
   }
 
   /// Method called when a Setting is changed
@@ -168,7 +166,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
 
   /// The Simple Dialog shown to choose your Language
   SimpleDialog _languageDialog() {
-    final _dialog = SimpleDialog(
+    final dialog = SimpleDialog(
       elevation: 20.0,
       alignment: Alignment.center,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -269,13 +267,13 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       ],
     );
 
-    return _dialog;
+    return dialog;
   }
 
   /// The Simple Dialog to choose your Theme Mode
   /// This uses Radio Buttons to choose
   SimpleDialog get _themeModeDialog {
-    final _dialog = SimpleDialog(
+    final dialog = SimpleDialog(
       title: Text('Choose your Theme Mode'.tr()),
       semanticLabel: 'Choose your Theme Mode'.tr(),
       alignment: Alignment.center,
@@ -333,7 +331,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       ],
     );
 
-    return _dialog;
+    return dialog;
   }
 
   /// Method called when the ThemeMode is changed.
@@ -351,8 +349,8 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   /// Dialog to choose the Importance of your Notifications
   /// This is used to determine whether your importance should interrupt
   /// or not
-  SimpleDialog get _notificationImportanceDialog {
-    final _dialog = SimpleDialog(
+  SimpleDialog get notificationImportanceDialog {
+    final dialog = SimpleDialog(
       alignment: Alignment.center,
       title: Text('Choose an Standard Importance'.tr()),
       children: <SimpleDialogOption>[
@@ -387,7 +385,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
       ],
     );
 
-    return _dialog;
+    return dialog;
   }
 }
 
@@ -424,7 +422,7 @@ class SettingsSubScreen extends StatefulWidget {
 class _SettingsSubScreenState extends State<SettingsSubScreen> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(widget.arguments.folder.name),
         automaticallyImplyLeading: true,
@@ -441,7 +439,5 @@ class _SettingsSubScreenState extends State<SettingsSubScreen> {
         children: widget.arguments.subtiles,
       ),
     );
-
-    return _scaffold;
   }
 }

@@ -107,11 +107,11 @@ class Storage {
   /// Stores the Settings to the File System.
   /// Stored as one String in the matching File.
   static void storeSettings() {
-    final List<Setting> _list = [];
+    final List<Setting> list = [];
     for (Setting setting in listOfSettings) {
-      final Setting _setting;
+      final Setting localSetting;
       if (setting.objectValue != null) {
-        _setting = Setting(
+        localSetting = Setting(
           name: setting.name,
           stringValue: Converter.supportedObjectToDisplayableString(
             setting.objectValue,
@@ -121,11 +121,11 @@ class Storage {
           isObjectType: setting.isObjectType,
         );
       } else {
-        _setting = setting;
+        localSetting = setting;
       }
-      _list.add(_setting);
+      list.add(localSetting);
     }
-    for (Setting setting in _list) {
+    for (Setting setting in list) {
       _settingsBox!.put(setting.hiveKey, setting);
     }
   }
@@ -134,7 +134,7 @@ class Storage {
   /// Only loads the Values
   static void loadSettings(BuildContext context) {
     final listOfSettingsStorage = _settingsBox!.values;
-    final List<Setting> _list = [];
+    final List<Setting> list = [];
     for (Setting setting in listOfSettingsStorage) {
       if (setting.isObject != null) {
         if (setting.isObject == true) {
@@ -142,22 +142,22 @@ class Storage {
             setting.stringValue!,
             setting.isObjectType!,
           );
-          final _setting = Setting(
+          final localSetting = Setting(
             name: setting.name,
             objectValue: objectValue,
             isObject: setting.isObject,
             isObjectType: setting.isObjectType,
           );
-          _list.add(_setting);
+          list.add(localSetting);
         } else {
           // Do nothing
         }
       } else {
-        _list.add(setting);
+        list.add(setting);
         continue;
       }
     }
-    listOfSettings = _list;
+    listOfSettings = list;
     AllSettings.setAllSettings(context);
   }
 

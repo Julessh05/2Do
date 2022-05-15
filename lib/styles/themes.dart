@@ -32,7 +32,7 @@ class Themes {
   /// Light Theme of the App
   /// Default Theme
   static ThemeData get lightTheme {
-    final _lightTheme = ThemeData(
+    return ThemeData(
       /* Global Values */
       brightness: Brightness.light,
       useMaterial3: true,
@@ -491,13 +491,11 @@ class Themes {
         thumbVisibility: MaterialStateProperty.all<bool>(false),
       ),
     );
-
-    return _lightTheme;
   }
 
   /// Dark Theme of the App
   static ThemeData get darkTheme {
-    final _darkTheme = ThemeData(
+    return ThemeData(
       /* Global Values */
       brightness: Brightness.dark,
       useMaterial3: true,
@@ -950,21 +948,15 @@ class Themes {
         thumbVisibility: MaterialStateProperty.all<bool>(false),
       ),
     );
-
-    return _darkTheme;
   }
 
   /// High Contrast Light Theme of the App
   static ThemeData get highContrastLightTheme {
-    final _highContrastLightTheme = ThemeData();
-
-    return _highContrastLightTheme;
+    return ThemeData();
   }
 
   /// High Contrast Dark Theme of the App
   static ThemeData get highContrastDarkTheme {
-    final _highContrastDarkTheme = ThemeData();
-
-    return _highContrastDarkTheme;
+    return ThemeData();
   }
 }

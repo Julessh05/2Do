@@ -13,12 +13,17 @@ import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/storage/storage.dart';
 
 class AddTodoScreen extends StatefulWidget {
-  const AddTodoScreen({Key? key}) : super(key: key);
+  const AddTodoScreen({
+    this.tag,
+    Key? key,
+  }) : super(key: key);
 
   /// The Name of the Route for this Screen.
   /// Is used to navigate trough the App.
   /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = '/add_todo';
+
+  final String? tag;
 
   @override
   State<AddTodoScreen> createState() => _AddTodoScreenState();
@@ -42,8 +47,16 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   final List<String> tagsToDelete = [];
 
   @override
+  void initState() {
+    if (widget.tag != null && !tags.contains(widget.tag)) {
+      tags.add(widget.tag!);
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: _appBar,
       body: ListView(
         addAutomaticKeepAlives: true,
@@ -220,16 +233,14 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             fit: BoxFit.scaleDown,
             child: TextButton(
               onPressed: _createTodo,
-              child: Text('Confirm'.tr()),
               autofocus: false,
               clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Text('Confirm'.tr()),
             ),
           ),
         ],
       ),
     );
-
-    return _scaffold;
   }
 
   /// AppBar depending on the Mode.
@@ -269,9 +280,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   /// Getter for the Active Tags.
   /// This is the List to display, so it's a List<Widget>
   List<Widget> get _activeTags {
-    final List<Widget> _list = [];
+    final List<Widget> list = [];
     for (String tag in tags) {
-      _list.add(
+      list.add(
         TextButton(
           onPressed: () {
             setState(() {
@@ -282,19 +293,19 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         ),
       );
     }
-    return _list;
+    return list;
   }
 
   /// The List of Widgets to show all the Tags
   /// This Getter also handles the SetState and decides
   /// if the Tag is shown with a marked to delete it or not
   List<Widget> get _tagContainerList {
-    final List<Widget> _list = [];
+    final List<Widget> list = [];
     for (String tag in TodoList.tags) {
       // Add Spacing
-      _list.add(const SizedBox(width: 20));
+      list.add(const SizedBox(width: 20));
       // Add Tag Button
-      _list.add(
+      list.add(
         TextButton(
           onLongPress: () {
             setState(() {
@@ -329,9 +340,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       );
     }
     // Add Spacing
-    _list.add(const SizedBox(width: 20));
+    list.add(const SizedBox(width: 20));
     // Add Add Tag Button
-    _list.add(
+    list.add(
       TextButton(
         onPressed: () {
           Navigator.pushNamed(
@@ -344,7 +355,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         ),
       ),
     );
-    return _list;
+    return list;
   }
 
   /// Creates a Todo and inserts the Values
@@ -380,7 +391,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         time!.hour,
         time!.minute,
       ); */
-      final _todo = Todo(
+      final todo = Todo(
         title: title!,
         content: content,
         tags: Todo.tagsToString(tags),
@@ -389,9 +400,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         importance: importance, */
       );
       // Add the Todo to the global List
-      TodoList.addTodo(_todo);
+      TodoList.addTodo(todo);
       Storage.storeTodos();
-      _todo.save();
+      todo.save();
       // Pops the current Route
       Jumper.back(context);
     }
@@ -400,27 +411,27 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   /// Shows an Error Dialog if some Values are not given
   /// and as a consequence the Todo can't be created
   AlertDialog _errorDialog(List<String> missingValues) {
-    final String _title;
-    final String _content1;
-    String _content2;
+    final String title;
+    final String content1;
+    String content2;
     if (missingValues.length < 2) {
-      final _component = missingValues[0];
-      _title = '$_component ' + 'is missing'.tr();
-      _content1 = 'The following Value is missing:'.tr();
-      _content2 = ' * $_component';
+      final component = missingValues[0];
+      title = '$component is missing'.tr();
+      content1 = 'The following Value is missing:'.tr();
+      content2 = ' * $component';
     } else {
-      _title = 'Some Values missing'.tr();
-      _content1 = 'The following Values are missing:'.tr();
-      _content2 = '';
+      title = 'Some Values missing'.tr();
+      content1 = 'The following Values are missing:'.tr();
+      content2 = '';
       for (String component in missingValues) {
-        _content2 += ' * $component \n';
+        content2 += ' * $component \n';
       }
     }
-    final _content = _content1 + '\n' + '\n' + _content2;
-    final _dialog = AlertDialog(
+    final content = '$content1 + \n \n $content2';
+    final dialog = AlertDialog(
       scrollable: true,
-      title: Text(_title),
-      content: Text(_content),
+      title: Text(title),
+      content: Text(content),
       actionsAlignment: MainAxisAlignment.center,
       alignment: Alignment.center,
       elevation: 20.0,
@@ -431,15 +442,15 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         Center(
           child: TextButton(
             onPressed: () => Jumper.back(context),
-            child: Text('OK'.tr()),
             autofocus: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: Text('OK'.tr()),
           ),
         ),
       ],
     );
 
-    return _dialog;
+    return dialog;
   }
 
   /// Shows the Date Picker and returns the Date

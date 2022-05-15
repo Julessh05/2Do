@@ -44,11 +44,11 @@ class NotesDetailsTile extends StatefulWidget {
 class _NotesDetailsTileState extends State<NotesDetailsTile> {
   @override
   Widget build(BuildContext context) {
-    final Widget _tile;
+    final Widget tile;
     if (widget.isButton) {
       // Fitted Box to make Button not appear
       // in the whole width
-      _tile = FittedBox(
+      tile = FittedBox(
         alignment: Alignment.center,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         fit: BoxFit.scaleDown,
@@ -59,7 +59,7 @@ class _NotesDetailsTileState extends State<NotesDetailsTile> {
         ),
       );
     } else {
-      _tile = ListTile(
+      tile = ListTile(
         autofocus: false,
         title: Text(
           widget.title ?? '',
@@ -75,6 +75,6 @@ class _NotesDetailsTileState extends State<NotesDetailsTile> {
         onTap: widget.function,
       );
     }
-    return _tile;
+    return tile;
   }
 }

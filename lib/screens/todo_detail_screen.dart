@@ -33,7 +33,7 @@ class TodoDetailScreen extends StatefulWidget {
 class _TodoDetailScreenState extends State<TodoDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(
           widget.todo.title,
@@ -128,7 +128,5 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
         ],
       ),
     );
-
-    return _scaffold;
   }
 }

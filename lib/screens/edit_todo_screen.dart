@@ -39,7 +39,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
     String title = widget.todo.title;
     String content = widget.todo.content;
 
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -200,16 +200,14 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
         ],
       ),
     );
-
-    return _scaffold;
   }
 
   /// Getter for the Active Tags.
   /// This is the List to display, so it's a List<Widget>
   List<Widget> get _activeTags {
-    final List<Widget> _list = [];
+    final List<Widget> list = [];
     for (String tag in tags) {
-      _list.add(
+      list.add(
         TextButton(
           onPressed: () {
             setState(() {
@@ -221,19 +219,19 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
         ),
       );
     }
-    return _list;
+    return list;
   }
 
   /// The List of Widgets to show all the Tags
   /// This Getter also handles the SetState and decides
   /// if the Tag is shown with a marked to delete it or not
   List<Widget> get _tagContainerList {
-    final List<Widget> _list = [];
+    final List<Widget> list = [];
     for (String tag in TodoList.tags) {
       // Add Spacing
-      _list.add(const SizedBox(width: 20));
+      list.add(const SizedBox(width: 20));
       // Add Tag Button
-      _list.add(
+      list.add(
         TextButton(
           onPressed: () {
             if (tags.contains(tag)) {
@@ -262,9 +260,9 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
       );
     }
     // Add Spacing
-    _list.add(const SizedBox(width: 20));
+    list.add(const SizedBox(width: 20));
     // Add Add Tag Button
-    _list.add(
+    list.add(
       TextButton(
         onPressed: () {
           Navigator.pushNamed(
@@ -277,6 +275,6 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
         ),
       ),
     );
-    return _list;
+    return list;
   }
 }

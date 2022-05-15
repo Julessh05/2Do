@@ -371,18 +371,22 @@ class TranslatedStrings {
     'Open Brainstorm Mode': {
       TranslationLocales.german: 'Brainstorm Modus öffnen',
       TranslationLocales.french: 'Ouvrir le mode brainstorm',
-    }
+    },
+    'You don\'t have any Todos with this Tag': {
+      TranslationLocales.german: 'Du hast keine Todos in dieser Kategorie',
+      TranslationLocales.french: 'vous n\'avez aucune tâche avec ce tag',
+    },
   };
 
   static Map<String, Map<Locale, String>> get translations {
     // Empty Translations Map
-    final Map<String, Map<Locale, String>> _translations = {};
+    final Map<String, Map<Locale, String>> translations = {};
 
     // add Values
-    _translations.addAll(_translationsMap);
-    _translations.addAll(StandardTranslations.actions);
-    _translations.addAll(StandardTranslations.error);
+    translations.addAll(_translationsMap);
+    translations.addAll(StandardTranslations.actions);
+    translations.addAll(StandardTranslations.error);
 
-    return _translations;
+    return translations;
   }
 }
