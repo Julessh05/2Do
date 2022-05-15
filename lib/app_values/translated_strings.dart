@@ -359,6 +359,18 @@ class TranslatedStrings {
     '2Do App': {
       TranslationLocales.german: '2Do App',
       TranslationLocales.french: '2Do App',
+    },
+    'All Todos': {
+      TranslationLocales.german: 'Alle Todos',
+      TranslationLocales.french: 'Toutes les tâches',
+    },
+    'Show all Todos': {
+      TranslationLocales.german: 'Alle Todos anzeigen',
+      TranslationLocales.french: 'Afficher toutes les tâches',
+    },
+    'Open Brainstorm Mode': {
+      TranslationLocales.german: 'Brainstorm Modus öffnen',
+      TranslationLocales.french: 'Ouvrir le mode brainstorm',
     }
   };
 

@@ -26,6 +26,7 @@ import 'package:todo/screens/homescreen.dart';
 import 'package:todo/screens/notes_details_screen.dart';
 import 'package:todo/screens/search_screen.dart';
 import 'package:todo/screens/settings_screens.dart';
+import 'package:todo/screens/sorted_todo_screen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 import 'package:todo/screens/unknown_page.dart';
 import 'package:todo/storage/storage.dart';
@@ -256,6 +257,16 @@ class _TodoAppState extends State<TodoApp> {
               return MaterialPageRoute(
                 builder: (_) {
                   return EditNoteScreen(note: _note);
+                },
+              );
+
+              // Sorted Todo Screen
+            } else if (settings.name == SortedTodoScreen.routeName) {
+              final _tag = settings.arguments as String;
+
+              return MaterialPageRoute(
+                builder: (_) {
+                  return SortedTodoScreen(tag: _tag);
                 },
               );
             } else {

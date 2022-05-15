@@ -10,6 +10,7 @@ import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/components/todo_tile.dart';
 import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
+import 'package:todo/screens/sorted_todo_screen.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -26,68 +27,11 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
-      appBar: _appBar,
-      body: _body,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openAddTodo(context),
-        child: const Icon(Icons.add_rounded),
-      ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-    );
-
-    return _scaffold;
-  }
-
-  /// AppBar which depends on whether you have selected
-  /// one or more Todos or not
-  AppBar get _appBar {
-    bool selected = false;
-    final AppBar _appBar;
-    for (Todo todo in TodoList.combinedListOfTodos) {
-      if (todo.selected) {
-        selected = true;
-        break;
-      } else {
-        continue;
-      }
-    }
-    if (selected) {
-      _appBar = AppBar(
-        title: Text(
-          'Edit'.tr(),
-          semanticsLabel: 'Edit'.tr(),
-        ),
-        actions: <IconButton>[
-          IconButton(
-            icon: const Icon(Icons.delete_outline_rounded),
-            onPressed: () {
-              setState(() {
-                final List<Todo> _list = [];
-                for (Todo todo in TodoList.combinedListOfTodos) {
-                  if (todo.selected) {
-                    _list.add(todo);
-                  } else {
-                    continue;
-                  }
-                }
-                for (Todo todo in _list) {
-                  TodoList.deleteTodo(todo);
-                }
-              });
-            },
-            tooltip: 'Delete Todo'.tr(),
-          ),
-        ],
-      );
-    } else {
-      _appBar = AppBar(
+    return Scaffold(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
-          tooltip: 'Show Checked Todos'.tr(),
+          tooltip: 'Open Brainstorm Mode'.tr(),
           onPressed: () => Jumper.openBrainstormScreen(context),
           icon: const Icon(Icons.note_add_rounded),
         ),
@@ -112,26 +56,24 @@ class _HomescreenState extends State<Homescreen> {
             tooltip: 'Open Settings'.tr(),
           )
         ],
-      );
-    }
-    return _appBar;
+      ),
+      body: _body,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _openAddTodo(context),
+        child: const Icon(Icons.add_rounded),
+      ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+    );
   }
 
-  /// Returns the Body of the Screen depending on the [TodoList.listOfTodos]
   Widget get _body {
-    final Widget _body;
-    if (TodoList.combinedListOfTodos.isNotEmpty) {
-      final _list = <Widget>[];
-      _list.addAll(_todoTiles);
-      if (TodoList.listOfCheckedTodos.isNotEmpty) {
-        _list.add(
-          ListTile(
-            title: Text('Checked Todos:'.tr()),
-          ),
-        );
-      }
-      _list.addAll(_checkedTodoTiles);
-      _body = ListView(
+    const allTodosTag = '#<All>#';
+
+    if (TodoList.tags.isEmpty) {
+      return ListView(
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
         addSemanticIndexes: true,
@@ -139,71 +81,61 @@ class _HomescreenState extends State<Homescreen> {
         dragStartBehavior: DragStartBehavior.start,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: const BouncingScrollPhysics(),
-        children: _list,
+        scrollDirection: Axis.vertical,
+        children: <ListTile>[
+          ListTile(
+            autofocus: true,
+            enableFeedback: true,
+            enabled: true,
+            isThreeLine: false,
+            title: Text('All Todos'.tr()),
+            subtitle: Text('Show all Todos'.tr()),
+            onTap: () => _onTap(allTodosTag),
+          ),
+        ],
       );
     } else {
-      _body = Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.5,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            textBaseline: TextBaseline.alphabetic,
-            textDirection: TextDirection.ltr,
-            mainAxisSize: MainAxisSize.max,
-            verticalDirection: VerticalDirection.down,
-            children: <Widget>[
-              Text(
-                'You don\'t have any Todos'.tr(),
-                semanticsLabel: 'You don\'t have any Todos'.tr(),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                onPressed: () => _openAddTodo(context),
-                child: Text(
-                  'Add one'.tr(),
-                  semanticsLabel: 'Add one'.tr(),
-                ),
-                autofocus: false,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-              ),
-            ],
-          ),
-        ),
+      return ListView.builder(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        addSemanticIndexes: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        dragStartBehavior: DragStartBehavior.down,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemCount: TodoList.tags.length + 1,
+        itemBuilder: (_, counter) {
+          final String _tag = TodoList.tags[counter - 1];
+
+          if (counter == 0) {
+            return ListTile(
+              autofocus: true,
+              enableFeedback: true,
+              enabled: true,
+              isThreeLine: false,
+              title: Text('All Todos'.tr()),
+              subtitle: Text('Show all Todos'.tr()),
+              onTap: () => _onTap(allTodosTag),
+            );
+          } else {
+            return ListTile(
+              autofocus: false,
+              enableFeedback: true,
+              enabled: true,
+              isThreeLine: false,
+              title: Text(_tag),
+              onTap: () => _onTap(_tag),
+            );
+          }
+        },
       );
     }
-    return _body;
   }
 
-  /// Builds the List of Todos
-  List<TodoTile> get _todoTiles {
-    final List<TodoTile> _list = [];
-    for (Todo todo in TodoList.listOfTodos) {
-      _list.add(
-        TodoTile(
-          todo: todo,
-          setStateFunc: _setStateAfterTodoCheck,
-        ),
-      );
-    }
-    return _list;
-  }
-
-  List<TodoTile> get _checkedTodoTiles {
-    final List<TodoTile> _list = [];
-    for (int counter = 0;
-        counter < TodoList.listOfCheckedTodos.length;
-        counter++) {
-      _list.add(
-        TodoTile(
-          todo: TodoList.listOfCheckedTodos[counter],
-          setStateFunc: _setStateAfterTodoCheck,
-        ),
-      );
-    }
-    return _list;
+  void _onTap(String tag) {
+    Navigator.pushNamed(context, SortedTodoScreen.routeName)
+        .then((_) => setState(() {}));
   }
 
   /// Opens the [AddTodoScreen] where you can add a Todo
@@ -211,10 +143,5 @@ class _HomescreenState extends State<Homescreen> {
     Navigator.pushNamed(context, AddTodoScreen.routeName).then(
       (value) => setState(() {}),
     );
-  }
-
-  /// Callback Method called when a Todo is checked
-  void _setStateAfterTodoCheck() {
-    setState(() {});
   }
 }
