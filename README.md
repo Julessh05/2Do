@@ -1,8 +1,8 @@
 # 2Do
 
-A Modern desinged Todo App built with Flutter.
+A Modern designed Todo App built with Flutter.
 Works on Android and IOS.
-Avaible just for Android at the Moment, because it's not in the App Store.
+Available just for Android at the Moment, because it's not in the App Store.
 It isn't in the Play Store either, but the APK can be downloaded and installed on request.
 
 
@@ -12,7 +12,7 @@ You can use this Todo App to write Todos or Reminders.
 The App will remind you that you have something to do.
 At the Moment this app does not have Notification. That's due to
 the reason that it would have token much more time till the first version
-is ready to be realesed
+is ready to be released
 
 
 ## Language
@@ -34,7 +34,7 @@ Starting from Version 1.1.0 you can pick your own Color, in which the
 App should be shown. You can find the Color Chooser in the Settings Screen.
 
 
-### Human Interface Guidline and UX Design
+### Human Interface Guideline and UX Design
 
 2Do follows the modern states of UX Design and the Human Interface Guidlines.
 We have the Intention that you can use 2Do without having to wonder how it works.
