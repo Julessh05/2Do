@@ -26,13 +26,14 @@ class SettingAdapter extends TypeAdapter<Setting> {
       isObjectType: fields[8] as String?,
     )
       ..valueType = fields[5] as String
-      ..hiveKey = fields[6] as String;
+      ..hiveKey = fields[6] as String
+      ..subtitle = fields[9] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Setting obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class SettingAdapter extends TypeAdapter<Setting> {
       ..writeByte(7)
       ..write(obj.isObject)
       ..writeByte(8)
-      ..write(obj.isObjectType);
+      ..write(obj.isObjectType)
+      ..writeByte(9)
+      ..write(obj.subtitle);
   }
 
   @override

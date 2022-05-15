@@ -74,7 +74,7 @@ class Todo extends HiveObject {
 
   /// Returns the Todo as a Map of String : String
   Map<String, String> get asMap {
-    final _map = <String, String>{
+    final map = <String, String>{
       'Title': title,
       'Content': content,
       // 'Time': timeAsString,
@@ -88,28 +88,28 @@ class Todo extends HiveObject {
       _map.addAll({i.toString(): tags[i]});
     } */
 
-    return _map;
+    return map;
   }
 
   @override
   String toString() {
-    String _result = '';
+    String result = '';
 
     // Add Title
-    _result += 'Title:';
-    _result += title;
+    result += 'Title:';
+    result += title;
 
     // Add Content
-    _result += 'Content:';
-    _result += content;
+    result += 'Content:';
+    result += content;
 
     // Add Time
     /*  _result += 'DateTime:';
     _result += timeAsString; */
 
     // Add Checked
-    _result += 'Checked';
-    _result += checked.toString();
+    result += 'Checked';
+    result += checked.toString();
 
     // Add created Time
     /* _result += 'Created on:';
@@ -122,43 +122,43 @@ class Todo extends HiveObject {
 
     // Add Tags
     for (int i = 0; i < tagsAsList.length; i++) {
-      _result += 'tag ${i.toString()}:';
-      _result += tagsAsList[i];
+      result += 'tag ${i.toString()}:';
+      result += tagsAsList[i];
     }
 
-    return _result;
+    return result;
   }
 
   /// Returns the Tags of the Todo as a List
   List<String> get tagsAsList {
-    final List<String> _tags = tags.split(', ');
-    final List<String> _result = [];
-    for (String tag in _tags) {
-      if (_result.contains(tag)) {
+    final List<String> localTags = tags.split(', ');
+    final List<String> result = [];
+    for (String tag in localTags) {
+      if (result.contains(tag)) {
         continue;
       } else {
-        _result.add(tag);
+        result.add(tag);
       }
     }
-    if (_tags.length == 1 && _tags[0] == '') {
+    if (localTags.length == 1 && localTags[0] == '') {
       return [];
     } else {
-      return _result;
+      return result;
     }
   }
 
   /// Method that returns the [tags] as a List of Strings
   static String tagsToString(List<String> tags) {
-    String _result = '';
+    String result = '';
     for (String tag in tags) {
-      if (_result.isEmpty) {
-        _result += tag;
+      if (result.isEmpty) {
+        result += tag;
       } else {
-        _result += ', $tag';
+        result += ', $tag';
       }
       TodoList.addTag(tag);
     }
-    return _result;
+    return result;
   }
 
   /// Adds a Tag to the Todo.
@@ -181,9 +181,9 @@ class Todo extends HiveObject {
   /// this Method just returns
   void removeTag(String tag) {
     if (tagsAsList.contains(tag)) {
-      final List<String> _tagsList = tags.split(', ');
-      _tagsList.remove(tag);
-      tags = tagsToString(_tagsList);
+      final List<String> tagsList = tags.split(', ');
+      tagsList.remove(tag);
+      tags = tagsToString(tagsList);
     } else {
       return;
     }

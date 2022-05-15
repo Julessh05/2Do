@@ -60,8 +60,8 @@ class TodoApp extends StatefulWidget {
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
-  static const double appVersion = 3.0;
-  static const String appVersionString = '3.0.0';
+  static const double appVersion = 2.2;
+  static const String appVersionString = '2.2.0';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -92,7 +92,7 @@ class _TodoAppState extends State<TodoApp> {
   Widget build(BuildContext context) {
     /// This String is used as App Title, Global App Key
     /// and restorationScopeId for Widget restauration
-    const String _title = '2Do App';
+    const String title = '2Do App';
 
     return StreamBuilder<ThemeMode>(
       initialData: ThemeMode.system,
@@ -113,15 +113,15 @@ class _TodoAppState extends State<TodoApp> {
             debugLabel: 'Scaffold_Messenger_KEY',
           ),
           navigatorKey: GlobalKey(debugLabel: 'Navigator_KEY'),
-          key: const GlobalObjectKey(_title),
-          restorationScopeId: _title,
+          key: const GlobalObjectKey(title),
+          restorationScopeId: title,
 
           // Title Section
-          title: _title,
+          title: title,
           onGenerateTitle: (_) {
             // Returns the Title of the App
             // Can be used to returns localized Titles
-            return _title.tr();
+            return title.tr();
           },
 
           /* Locale Section */
@@ -160,9 +160,6 @@ class _TodoAppState extends State<TodoApp> {
             SettingsMainScreen.routeName: (context) =>
                 const SettingsMainScreen(),
 
-            // Add Todo Screen
-            AddTodoScreen.routeName: (context) => const AddTodoScreen(),
-
             // Search Screen
             SearchScreen.routeName: (context) => const SearchScreen(),
 
@@ -180,35 +177,34 @@ class _TodoAppState extends State<TodoApp> {
           onGenerateRoute: (RouteSettings settings) {
             // Todo Details Screen
             if (settings.name == TodoDetailScreen.routeName) {
-              final _todo = settings.arguments as Todo;
+              final todo = settings.arguments as Todo;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return TodoDetailScreen(todo: _todo);
+                  return TodoDetailScreen(todo: todo);
                 },
               );
 
               // Settings Sub Screen
             } else if (settings.name == SettingsSubScreen.routeName) {
-              final _arguments =
+              final arguments =
                   settings.arguments as SettingsSubScreenArguments;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return SettingsSubScreen(arguments: _arguments);
+                  return SettingsSubScreen(arguments: arguments);
                 },
               );
 
               // Search Results Screen
             } else if (settings.name == SearchResultScreen.routeName) {
-              final _searchResults = settings.arguments as SearchResultsList;
+              final searchResults = settings.arguments as SearchResultsList;
 
-              if (_searchResults.hasResults) {
+              if (searchResults.hasResults) {
                 // Results Page
                 return MaterialPageRoute(
                   builder: (_) {
-                    return SearchResultScreen(
-                        searchResultsList: _searchResults);
+                    return SearchResultScreen(searchResultsList: searchResults);
                   },
                 );
               } else {
@@ -222,51 +218,63 @@ class _TodoAppState extends State<TodoApp> {
 
               // Edit Todo Screen
             } else if (settings.name == EditTodoScreen.routeName) {
-              final _todo = settings.arguments as Todo;
+              final todo = settings.arguments as Todo;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return EditTodoScreen(todo: _todo);
+                  return EditTodoScreen(todo: todo);
                 },
               );
 
               // Sub Color Screen
             } else if (settings.name == SubColorChooser.routeName) {
-              final _color = settings.arguments as Color;
+              final color = settings.arguments as Color;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return SubColorChooser(color: _color);
+                  return SubColorChooser(color: color);
                 },
               );
 
               // Notes Details Screen
             } else if (settings.name == NotesDetailsScreen.routeName) {
-              final _note = settings.arguments as BrainstormNote;
+              final note = settings.arguments as BrainstormNote;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return NotesDetailsScreen(note: _note);
+                  return NotesDetailsScreen(note: note);
                 },
               );
 
               // Edit Note Screen
             } else if (settings.name == EditNoteScreen.routeName) {
-              final _note = settings.arguments as BrainstormNote;
+              final note = settings.arguments as BrainstormNote;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return EditNoteScreen(note: _note);
+                  return EditNoteScreen(note: note);
                 },
               );
 
               // Sorted Todo Screen
             } else if (settings.name == SortedTodoScreen.routeName) {
-              final _tag = settings.arguments as String;
+              final tag = settings.arguments as String?;
 
               return MaterialPageRoute(
                 builder: (_) {
-                  return SortedTodoScreen(tag: _tag);
+                  return SortedTodoScreen(tag: tag);
+                },
+              );
+
+              // Add Todo Screen
+            } else if (settings.name == AddTodoScreen.routeName) {
+              final tag = settings.arguments as String?;
+
+              return MaterialPageRoute(
+                builder: (_) {
+                  return AddTodoScreen(
+                    tag: tag,
+                  );
                 },
               );
             } else {

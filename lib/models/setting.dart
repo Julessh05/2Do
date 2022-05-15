@@ -197,25 +197,25 @@ class Setting extends HiveObject {
 
   /// Returns the Type of the Setting as a String
   String get typeAsString {
-    final String _output;
+    final String output;
     switch (valueType) {
       case 'bool':
-        _output = 'bool';
+        output = 'bool';
         break;
       case 'int':
-        _output = 'int';
+        output = 'int';
         break;
       case 'String':
-        _output = 'String';
+        output = 'String';
         break;
       case 'Object':
-        _output = Converter.supportedTypeToString(objectValue.runtimeType);
+        output = Converter.supportedTypeToString(objectValue.runtimeType);
         break;
       default:
-        _output = 'Error';
+        output = 'Error';
         break;
     }
-    return _output;
+    return output;
   }
 
   /// Returns the Value to display as a String
@@ -235,32 +235,32 @@ class Setting extends HiveObject {
 
   /// Returns the Setting as a Map of String : String
   Map<String, String> get asMap {
-    final _map = <String, String>{
+    final map = <String, String>{
       'Name': name,
       'ValueType': valueType.toString(),
       'Value': valueAsString,
     };
 
-    return _map;
+    return map;
   }
 
   @override
   String toString() {
-    String _result = '';
+    String result = '';
 
     // Add Name
-    _result += 'Name:';
-    _result += name;
+    result += 'Name:';
+    result += name;
 
     // Add ValueType
-    _result += 'ValueType:';
-    _result += typeAsString;
+    result += 'ValueType:';
+    result += typeAsString;
 
     // Add Value as String
-    _result += 'ValueAsString:';
-    _result += Converter.supportedObjectToDisplayableString(value, true);
+    result += 'ValueAsString:';
+    result += Converter.supportedObjectToDisplayableString(value, true);
 
-    return _result;
+    return result;
   }
 }
 

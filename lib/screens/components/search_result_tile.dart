@@ -2,10 +2,10 @@ library components;
 
 import 'package:flutter/material.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
-import 'package:todo/logic/jumper.dart';
 import 'package:todo/models/search_results.dart' show SearchResult;
 import 'package:todo/screens/search_screen.dart' show SearchResultScreen;
 import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
+import 'package:todo/screens/sorted_todo_screen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 
 /// Component which represents a single Search Result
@@ -25,7 +25,7 @@ class SearchResulTile extends StatefulWidget {
 class _SearchResulTileState extends State<SearchResulTile> {
   @override
   Widget build(BuildContext context) {
-    final _tile = ListTile(
+    final tile = ListTile(
       autofocus: false,
       enabled: true,
       isThreeLine: false,
@@ -37,7 +37,7 @@ class _SearchResulTileState extends State<SearchResulTile> {
       onTap: _openResult,
     );
 
-    return _tile;
+    return tile;
   }
 
   String get _subtitle {
@@ -65,7 +65,11 @@ class _SearchResulTileState extends State<SearchResulTile> {
         SettingsMainScreen.routeName,
       ).then((value) => setState(() {}));
     } else if (widget.result.isTag) {
-      Jumper.backToTheHomescreen(context);
+      Navigator.pushNamed(
+        context,
+        SortedTodoScreen.routeName,
+        arguments: widget.result.tag,
+      );
     } else {
       // Do nohing
     }

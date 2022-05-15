@@ -28,14 +28,14 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    final _controller = TextEditingController();
+    final controller = TextEditingController();
 
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: TextField(
           autocorrect: true,
           autofocus: true,
-          controller: _controller,
+          controller: controller,
           enableIMEPersonalizedLearning: true,
           enableInteractiveSelection: true,
           enableSuggestions: true,
@@ -138,8 +138,6 @@ class _SearchScreenState extends State<SearchScreen> {
         automaticallyImplyLeading: true,
       ),
     );
-
-    return _scaffold;
   }
 
   /// Searchs in the [TodoList.listOfTodos] and [listOfSettings]
@@ -152,8 +150,8 @@ class _SearchScreenState extends State<SearchScreen> {
     for (Todo todo in TodoList.listOfTodos) {
       for (String tag in todo.tagsAsList) {
         if (tag.toLowerCase().contains(input.toLowerCase())) {
-          final _result = SearchResult(todo: todo);
-          listOfResults.add(_result);
+          final result = SearchResult(todo: todo);
+          listOfResults.add(result);
         } else {
           continue;
         }
@@ -161,11 +159,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
       if (todo.title.toLowerCase().contains(input.toLowerCase())) {
         // If Todo matches, create Search Result and add it to the list
-        final _result = SearchResult(todo: todo);
-        listOfResults.add(_result);
+        final result = SearchResult(todo: todo);
+        listOfResults.add(result);
       } else if (todo.content.toLowerCase().contains(input.toLowerCase())) {
-        final _result = SearchResult(todo: todo);
-        listOfResults.add(_result);
+        final result = SearchResult(todo: todo);
+        listOfResults.add(result);
       } else {
         continue;
       }
@@ -175,21 +173,21 @@ class _SearchScreenState extends State<SearchScreen> {
     for (Setting setting in listOfSettings) {
       if (setting.name.tr().toLowerCase().contains(input.toLowerCase())) {
         // If Setting matches, create Search Result and add it to the list
-        final _result = SearchResult(setting: setting);
-        listOfResults.add(_result);
+        final result = SearchResult(setting: setting);
+        listOfResults.add(result);
       }
     }
 
     for (String tag in TodoList.tags) {
       if (tag.toLowerCase().contains(input.toLowerCase())) {
-        final _result = SearchResult(tag: tag);
+        final result = SearchResult(tag: tag);
 
-        listOfResults.add(_result);
+        listOfResults.add(result);
       }
     }
 
-    final _results = SearchResultsList(searchResults: listOfResults);
-    Jumper.openSearchResultsScreen(context, _results);
+    final results = SearchResultsList(searchResults: listOfResults);
+    Jumper.openSearchResultsScreen(context, results);
   }
 }
 
@@ -226,12 +224,10 @@ class SearchResultScreen extends StatefulWidget {
 class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: appBar,
       body: body,
     );
-
-    return _scaffold;
   }
 
   AppBar get appBar {
@@ -286,12 +282,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               ),
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
+                autofocus: false,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Text(
                   'Back to the Homescreen'.tr(),
                   semanticsLabel: 'Back to the Homescreen'.tr(),
                 ),
-                autofocus: false,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
               ),
             ],
           ),

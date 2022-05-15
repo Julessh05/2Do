@@ -144,13 +144,13 @@ class SettingsTile extends StatefulWidget {
   }
 
   @override
-  _SettingsTileState createState() => _SettingsTileState();
+  State<SettingsTile> createState() => _SettingsTileState();
 }
 
 class _SettingsTileState extends State<SettingsTile> {
   @override
   Widget build(BuildContext context) {
-    final _tile = ListTile(
+    return ListTile(
       autofocus: false,
       enabled: true,
       isThreeLine: false,
@@ -221,7 +221,5 @@ class _SettingsTileState extends State<SettingsTile> {
       },
       trailing: widget.uiSwitch,
     );
-
-    return _tile;
   }
 }

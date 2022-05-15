@@ -16,7 +16,7 @@ class UnknownPage extends StatefulWidget {
 class _UnknownPageState extends State<UnknownPage> {
   @override
   Widget build(BuildContext context) {
-    final _scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -47,19 +47,17 @@ class _UnknownPageState extends State<UnknownPage> {
               ),
               TextButton(
                 onPressed: () => Jumper.backToTheHomescreen(context),
+                autofocus: false,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Text(
                   'Back to the Homescreen'.tr(),
                   semanticsLabel: 'Back to the Homescreen'.tr(),
                 ),
-                autofocus: false,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
               ),
             ],
           ),
         ),
       ),
     );
-
-    return _scaffold;
   }
 }

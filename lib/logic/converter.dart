@@ -93,50 +93,50 @@ class Converter {
     dynamic object,
     bool? translate,
   ) {
-    final String _output;
+    final String output;
     switch (object.runtimeType) {
       case Locale:
         if (object == const Locale('de', 'DE')) {
-          _output = 'German';
+          output = 'German';
         } else if (object == const Locale('fr', 'FR')) {
-          _output = 'French';
+          output = 'French';
         } else {
-          _output = 'English';
+          output = 'English';
         }
         break;
       case ThemeMode:
         if (object == ThemeMode.dark) {
-          _output = 'Dark';
+          output = 'Dark';
         } else if (object == ThemeMode.light) {
-          _output = 'Light';
+          output = 'Light';
         } else {
-          _output = 'System';
+          output = 'System';
         }
         break;
       case bool:
         if (object == true) {
-          _output = 'Active';
+          output = 'Active';
         } else {
-          _output = 'Inactive';
+          output = 'Inactive';
         }
         break;
       // Material Color and Color do the Same Thing
       // That's due to the reason that storing and displaying
       // are using dirretent Types of objects
       case MaterialColor:
-        _output = object.value.toRadixString(16);
+        output = object.value.toRadixString(16);
         break;
       case Color:
-        _output = object.value.toRadixString(16);
+        output = object.value.toRadixString(16);
         break;
       default:
-        _output = 'Error parsing String';
+        output = 'Error parsing String';
         break;
     }
     if (translate == true) {
-      return _output.tr();
+      return output.tr();
     } else {
-      return _output;
+      return output;
     }
   }
 
@@ -144,22 +144,22 @@ class Converter {
   /// This is used to store the Type. The Type then is needed again
   /// to load the Settings from the Storage
   static String supportedTypeToString(Type type) {
-    final String _type;
+    final String localType;
     switch (type) {
       case Locale:
-        _type = 'Locale';
+        localType = 'Locale';
         break;
       case ThemeMode:
-        _type = 'ThemeMode';
+        localType = 'ThemeMode';
         break;
       case Color:
-        _type = 'Color';
+        localType = 'Color';
         break;
       default:
-        _type = 'Unsupported Type';
+        localType = 'Unsupported Type';
         break;
     }
-    return _type;
+    return localType;
   }
 
   /// Parses a String o an Object which is supported and used in

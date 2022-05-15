@@ -17,6 +17,9 @@ import 'package:todo/storage/storage.dart';
 /// uncheck a Todo.
 /// This Methods also update the [combinedListOfTodos]
 class TodoList {
+  /// The Tag to tell the Program, the user wants all Tags
+  static const allTodosTag = '#<All>#';
+
   /// The private file intern List of Todos used in the App
   static List<Todo> _listOfTodos = [];
 
@@ -165,5 +168,20 @@ class TodoList {
       }
     }
     return false;
+  }
+
+  static List<Todo> allTodosWithSpecificTag(String? tag) {
+    if (tag == null) {
+      return combinedListOfTodos;
+    }
+    final List<Todo> list = [];
+    for (Todo todo in _combinedListOfTodos) {
+      if (todo.tagsAsList.contains(tag)) {
+        list.add(todo);
+      } else {
+        continue;
+      }
+    }
+    return list;
   }
 }

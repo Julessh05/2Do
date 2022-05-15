@@ -49,7 +49,7 @@ class ColorGridTile extends StatefulWidget {
 class _ColorGridTileState extends State<ColorGridTile> {
   @override
   Widget build(BuildContext context) {
-    final _tile = SizedBox(
+    final tile = SizedBox(
       height: MediaQuery.of(context).size.width / 3,
       width: MediaQuery.of(context).size.width / 3,
       child: GestureDetector(
@@ -74,7 +74,7 @@ class _ColorGridTileState extends State<ColorGridTile> {
       ),
     );
 
-    return _tile;
+    return tile;
   }
 
   /// Getter for the Gradient

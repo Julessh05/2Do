@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:todo/logic/jumper.dart';
 import 'package:string_translate/string_translate.dart' show Translate;
 import 'package:todo/main.dart' show TodoApp;
-import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/add_todo_screen.dart';
-import 'package:todo/screens/components/todo_tile.dart';
 import 'package:todo/screens/settings_screens.dart' show SettingsMainScreen;
 import 'package:todo/screens/sorted_todo_screen.dart';
 
@@ -21,7 +19,7 @@ class Homescreen extends StatefulWidget {
   static const routeName = '/';
 
   @override
-  _HomescreenState createState() => _HomescreenState();
+  State<Homescreen> createState() => _HomescreenState();
 }
 
 class _HomescreenState extends State<Homescreen> {
@@ -70,8 +68,6 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   Widget get _body {
-    const allTodosTag = '#<All>#';
-
     if (TodoList.tags.isEmpty) {
       return ListView(
         addAutomaticKeepAlives: true,
@@ -90,7 +86,7 @@ class _HomescreenState extends State<Homescreen> {
             isThreeLine: false,
             title: Text('All Todos'.tr()),
             subtitle: Text('Show all Todos'.tr()),
-            onTap: () => _onTap(allTodosTag),
+            onTap: () => _onTap(TodoList.allTodosTag),
           ),
         ],
       );
@@ -106,8 +102,6 @@ class _HomescreenState extends State<Homescreen> {
         scrollDirection: Axis.vertical,
         itemCount: TodoList.tags.length + 1,
         itemBuilder: (_, counter) {
-          final String _tag = TodoList.tags[counter - 1];
-
           if (counter == 0) {
             return ListTile(
               autofocus: true,
@@ -116,16 +110,17 @@ class _HomescreenState extends State<Homescreen> {
               isThreeLine: false,
               title: Text('All Todos'.tr()),
               subtitle: Text('Show all Todos'.tr()),
-              onTap: () => _onTap(allTodosTag),
+              onTap: () => _onTap(TodoList.allTodosTag),
             );
           } else {
+            final String tag = TodoList.tags[counter - 1];
             return ListTile(
               autofocus: false,
               enableFeedback: true,
               enabled: true,
               isThreeLine: false,
-              title: Text(_tag),
-              onTap: () => _onTap(_tag),
+              title: Text(tag),
+              onTap: () => _onTap(tag),
             );
           }
         },
@@ -134,8 +129,13 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   void _onTap(String tag) {
-    Navigator.pushNamed(context, SortedTodoScreen.routeName)
-        .then((_) => setState(() {}));
+    if (tag == TodoList.allTodosTag) {
+      Navigator.pushNamed(context, SortedTodoScreen.routeName)
+          .then((_) => setState(() {}));
+    } else {
+      Navigator.pushNamed(context, SortedTodoScreen.routeName, arguments: tag)
+          .then((_) => setState(() {}));
+    }
   }
 
   /// Opens the [AddTodoScreen] where you can add a Todo

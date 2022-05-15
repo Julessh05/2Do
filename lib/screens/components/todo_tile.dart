@@ -20,13 +20,13 @@ class TodoTile extends StatefulWidget {
   final void Function() setStateFunc;
 
   @override
-  _TodoTileState createState() => _TodoTileState();
+  State<TodoTile> createState() => _TodoTileState();
 }
 
 class _TodoTileState extends State<TodoTile> {
   @override
   Widget build(BuildContext context) {
-    final _tile = ListTile(
+    return ListTile(
       selected: widget.todo.selected,
       autofocus: false,
       isThreeLine: false,
@@ -56,8 +56,6 @@ class _TodoTileState extends State<TodoTile> {
           ? Colors.grey.shade400
           : Theme.of(context).listTileTheme.textColor,
     );
-
-    return _tile;
   }
 
   void _onTap() {

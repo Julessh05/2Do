@@ -65,7 +65,7 @@ class SettingsSubTile extends StatefulWidget {
 class _SettingsSubTileState extends State<SettingsSubTile> {
   @override
   Widget build(BuildContext context) {
-    final _tile = ListTile(
+    final tile = ListTile(
       autofocus: false,
       isThreeLine: false,
       title: Text(
@@ -118,6 +118,6 @@ class _SettingsSubTileState extends State<SettingsSubTile> {
       },
     );
 
-    return _tile;
+    return tile;
   }
 }
