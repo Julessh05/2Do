@@ -71,6 +71,7 @@ android {
         includeInBundle true
     }
     namespace 'com.jules.todo'
+
 }
 
 flutter {
