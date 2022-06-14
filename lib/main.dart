@@ -55,6 +55,7 @@ class TodoApp extends StatefulWidget {
   /// These Values are set in the [MaterialApp] of the [TodoApp]
   static const routeName = 'main';
 
+  /// The Stream to control the Theme Mode used in this App
   static final themeStream = StreamController<ThemeMode>();
 
   // This double App Version only has one digit after the .
