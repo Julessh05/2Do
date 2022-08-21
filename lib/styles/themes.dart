@@ -3,6 +3,7 @@ library styles;
 import 'package:flutter/cupertino.dart' show NoDefaultCupertinoThemeData;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+import 'package:helpful_extensions/helpful_extensions.dart' show ColorMapping;
 import 'package:string_translate/string_translate.dart' show Translation;
 import 'package:todo/styles/coloring.dart';
 
