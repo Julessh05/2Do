@@ -41,7 +41,7 @@ android {
 
         }
     }
-    compileSdk 32
+    compileSdk 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -82,7 +82,7 @@ android {
         }
     }
     buildToolsVersion '33.0.0'
-    ndkVersion '24.0.8215888'
+    ndkVersion '25.0.8775105'
     dependenciesInfo {
         includeInApk true
         includeInBundle true
