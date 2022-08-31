@@ -384,8 +384,7 @@ class TranslatedStrings {
 
     // add Values
     translations.addAll(_translationsMap);
-    translations.addAll(StandardTranslations.actions);
-    translations.addAll(StandardTranslations.error);
+    translations.addAll(StandardTranslations.all);
 
     return translations;
   }

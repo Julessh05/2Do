@@ -26,24 +26,27 @@ class SettingsTile extends StatefulWidget {
     this.icon,
     this.newScreenRouteName,
     this.newScreenArguments,
+    this.newScreen,
     Key? key,
   })  : assert(
-          uiSwitch == null &&
-                  simpleDialog != null &&
-                  subtiles == null &&
-                  alertDialog == null &&
-                  aboutDialog == null &&
-                  newScreenRouteName == null &&
-                  newScreenArguments == null &&
-                  simpleDialogFunc == null ||
-              uiSwitch != null &&
+          uiSwitch != null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
                   newScreenArguments == null &&
-                  simpleDialogFunc == null ||
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
+              uiSwitch == null &&
+                  simpleDialog != null &&
+                  subtiles == null &&
+                  alertDialog == null &&
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  newScreenArguments == null &&
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles != null &&
@@ -51,7 +54,8 @@ class SettingsTile extends StatefulWidget {
                   aboutDialog == null &&
                   newScreenRouteName == null &&
                   newScreenArguments == null &&
-                  simpleDialogFunc == null ||
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
@@ -59,7 +63,8 @@ class SettingsTile extends StatefulWidget {
                   aboutDialog == null &&
                   newScreenRouteName == null &&
                   newScreenArguments == null &&
-                  simpleDialogFunc == null ||
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
@@ -67,22 +72,33 @@ class SettingsTile extends StatefulWidget {
                   aboutDialog != null &&
                   newScreenRouteName == null &&
                   newScreenArguments == null &&
-                  simpleDialogFunc == null ||
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName != null &&
-                  simpleDialogFunc == null ||
+                  simpleDialogFunc == null &&
+                  newScreen == null ||
               uiSwitch == null &&
                   simpleDialog == null &&
                   subtiles == null &&
                   alertDialog == null &&
                   aboutDialog == null &&
                   newScreenRouteName == null &&
-                  simpleDialogFunc != null,
-          'You have to define exactly one Widget, not more and not less',
+                  simpleDialogFunc != null &&
+                  newScreen == null ||
+              uiSwitch == null &&
+                  simpleDialog == null &&
+                  subtiles == null &&
+                  alertDialog == null &&
+                  aboutDialog == null &&
+                  newScreenRouteName == null &&
+                  simpleDialogFunc == null &&
+                  newScreen != null,
+          'You have to define exactly one Parameter, not more and not less',
         ),
         super(key: key);
 
@@ -100,9 +116,25 @@ class SettingsTile extends StatefulWidget {
     this.newScreenRouteName,
     this.newScreenArguments,
     this.simpleDialogFunc,
+    this.newScreen,
     Key? key,
-  }) : super(key: key);
+  })  : assert(
+          uiSwitch == null &&
+              simpleDialog == null &&
+              subtiles == null &&
+              alertDialog == null &&
+              aboutDialog == null &&
+              newScreenRouteName == null &&
+              newScreenArguments == null &&
+              simpleDialogFunc == null &&
+              newScreen == null,
+          'You can\'t define an Action in an Setting without an Action.',
+        ),
+        super(key: key);
 
+  /// Use this if this Tile
+  /// is representing a Category of Settings
+  /// instead of only one Setting.
   const SettingsTile.folder({
     required this.setting,
     this.alertDialog,
@@ -114,17 +146,63 @@ class SettingsTile extends StatefulWidget {
     this.newScreenRouteName,
     this.newScreenArguments,
     this.simpleDialogFunc,
+    this.newScreen,
     Key? key,
-  }) : super(key: key);
+  })  : assert(
+          uiSwitch == null &&
+              simpleDialog == null &&
+              subtiles != null &&
+              alertDialog == null &&
+              aboutDialog == null &&
+              newScreenRouteName == null &&
+              newScreenArguments == null &&
+              simpleDialogFunc == null &&
+              newScreen == null,
+          'You have to define the Subtiles, so you cannot define other parameters.',
+        ),
+        super(key: key);
 
+  /// The corresponding Setting for
+  /// this Settings Tile
   final Setting setting;
+
+  /// The Switch this Setting used to
+  /// determine it's value
   final Switch? uiSwitch;
+
+  /// The simple Dialog shown
+  /// when clicking this TIle
   final SimpleDialog? simpleDialog;
+
+  /// The alert Dialog shown
+  /// when clicking this tile.
   final AlertDialog? alertDialog;
+
+  /// All the Settings Sub Tiles
+  /// that are shown on a new Screen,
+  /// if you click this Settings Tile.
+  ///
+  /// This is used when this Settings Tile
+  /// represents a category of Settings
+  /// instead of a simple Setting.
   final List<SettingsSubTile>? subtiles;
+
+  /// The Icon in front of the Setting.
   final Icon? icon;
+
+  /// The About Dialog shown
+  /// when clicking on this Setting.
   final AboutDialog? aboutDialog;
+
+  /// The Route Name of the new
+  /// Screen the App should navigate
+  /// to if this Settings Tile is clicked.
   final String? newScreenRouteName;
+
+  /// Use this is you want to
+  /// navigate to a new Screen that
+  /// does not have a Route Name.
+  final Widget? newScreen;
 
   /// Function that can be passed to create a simple Dialog.
   /// The [simpleDialog] is created once and cached so sometimes there
@@ -216,6 +294,15 @@ class _SettingsTileState extends State<SettingsTile> {
             builder: (_) {
               return widget.simpleDialogFunc!();
             },
+          );
+        } else if (widget.newScreen != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) {
+                return widget.newScreen!;
+              },
+            ),
           );
         }
       },

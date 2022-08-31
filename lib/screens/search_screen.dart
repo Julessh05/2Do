@@ -10,7 +10,7 @@ import 'package:todo/models/setting.dart' show Setting, listOfSettings;
 import 'package:todo/models/todo.dart' show Todo;
 import 'package:todo/models/todo_list.dart';
 import 'package:todo/screens/components/search_result_tile.dart';
-import 'package:todo/styles/coloring.dart' show Coloring;
+import 'package:modern_themes/modern_themes.dart' show Coloring;
 
 /// Screen shown when the User searches something
 class SearchScreen extends StatefulWidget {
@@ -61,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
             paste: true,
             selectAll: true,
           ),
-          style: TextStyle(color: Coloring.accentColor),
+          style: TextStyle(color: Coloring.secondaryColor),
           decoration: InputDecoration(
             alignLabelWithHint: true,
             enabled: true,
@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             hintText: 'Search something...'.tr(),
             hintStyle: TextStyle(
-              color: Coloring.accentColor,
+              color: Coloring.secondaryColor,
             ),
             border: const UnderlineInputBorder(
               borderRadius: BorderRadius.all(

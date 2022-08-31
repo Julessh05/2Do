@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
         GlobalMaterialLocalizations,
         GlobalWidgetsLocalizations;
 import 'package:hive_flutter/hive_flutter.dart' show Hive, HiveX;
+import 'package:modern_themes/modern_themes.dart';
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
 import 'package:todo/app_values/translated_strings.dart';
@@ -19,7 +20,6 @@ import 'package:todo/screens/add_brainstorm_note_screen.dart';
 import 'package:todo/screens/add_tag_screen.dart';
 import 'package:todo/screens/add_todo_screen.dart';
 import 'package:todo/screens/brainstorm_screen.dart';
-import 'package:todo/screens/color_chooser.dart';
 import 'package:todo/screens/edit_note_screen.dart';
 import 'package:todo/screens/edit_todo_screen.dart';
 import 'package:todo/screens/homescreen.dart';
@@ -30,8 +30,6 @@ import 'package:todo/screens/sorted_todo_screen.dart';
 import 'package:todo/screens/todo_detail_screen.dart';
 import 'package:todo/screens/unknown_page.dart';
 import 'package:todo/storage/storage.dart';
-import 'package:todo/styles/coloring.dart' show Coloring;
-import 'package:todo/styles/themes.dart';
 
 void main() async {
   // Init Hive Store Package
@@ -61,8 +59,8 @@ class TodoApp extends StatefulWidget {
   // This double App Version only has one digit after the .
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
-  static const double appVersion = 2.2;
-  static const String appVersionString = '2.2.0';
+  static const double appVersion = 2.3;
+  static const String appVersionString = '2.3.0';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
@@ -167,9 +165,6 @@ class _TodoAppState extends State<TodoApp> {
             // Main Screen
             TodoApp.routeName: (context) => const TodoApp(),
 
-            // Color Chooser
-            ColorChooser.routeName: (context) => const ColorChooser(),
-
             // Add Tag
             AddTagScreen.routeName: (context) => const AddTagScreen(),
           },
@@ -224,16 +219,6 @@ class _TodoAppState extends State<TodoApp> {
               return MaterialPageRoute(
                 builder: (_) {
                   return EditTodoScreen(todo: todo);
-                },
-              );
-
-              // Sub Color Screen
-            } else if (settings.name == SubColorChooser.routeName) {
-              final color = settings.arguments as Color;
-
-              return MaterialPageRoute(
-                builder: (_) {
-                  return SubColorChooser(color: color);
                 },
               );
 

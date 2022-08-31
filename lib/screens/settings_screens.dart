@@ -9,12 +9,11 @@ import 'package:string_translate/string_translate.dart'
 import 'package:todo/main.dart' show TodoApp;
 import 'package:todo/models/setting.dart' hide listOfSettings, SettingAdapter;
 import 'package:todo/notifications/notifications.dart';
-import 'package:todo/screens/color_chooser.dart' show ColorChooser;
 import 'package:todo/screens/components/settings_sub_tile.dart';
 import 'package:todo/screens/components/settings_tile.dart';
 import 'package:todo/storage/storage.dart';
-import 'package:todo/styles/coloring.dart' show Coloring;
-import 'package:todo/styles/themes.dart';
+import 'package:modern_themes/modern_themes.dart';
+import 'package:color_chooser/color_chooser.dart';
 
 /// The Main Settings Screen from which you can navigate
 /// to the other Settings Screens and can set the Value of the Settings
@@ -68,8 +67,14 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
           SettingsTile(
             setting: AllSettings.color,
             icon: const Icon(Icons.colorize_rounded),
-            newScreenRouteName: ColorChooser.routeName,
-            newScreenArguments: null,
+            newScreen: ColorChooserScreenMobile(
+              title: 'Choose a Color'.tr(),
+              changeColorFunction: ((c) {
+                Coloring.changeColor(c);
+                TodoApp.themeStream.sink.add(Themes.themeMode);
+                _reload();
+              }),
+            ),
           ),
 
           // Brainstorm Settings
@@ -193,7 +198,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               'English',
               semanticsLabel: 'English'.tr(),
               style: TextStyle(
-                color: Coloring.accentColor,
+                color: Coloring.secondaryColor,
               ),
             ),
           ),
@@ -219,7 +224,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               'Deutsch',
               semanticsLabel: 'German'.tr(),
               style: TextStyle(
-                color: Coloring.accentColor,
+                color: Coloring.secondaryColor,
               ),
             ),
           ),
@@ -245,7 +250,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               'Français',
               semanticsLabel: 'French'.tr(),
               style: TextStyle(
-                color: Coloring.accentColor,
+                color: Coloring.secondaryColor,
               ),
             ),
           ),
@@ -340,7 +345,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
   void _changeThemeMode(ThemeMode mode) {
     setState(() {
       TodoApp.themeStream.sink.add(mode);
-      Themes.setThemeMode(mode, context);
+      Themes.changeTheme(mode);
       _reload();
     });
     Jumper.back(context);

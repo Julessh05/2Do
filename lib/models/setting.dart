@@ -9,12 +9,11 @@ import 'package:hive/hive.dart'
         TypeAdapter,
         BinaryReader,
         BinaryWriter;
+import 'package:modern_themes/modern_themes.dart';
 import 'package:todo/app_values/brainstorm_values.dart';
 import 'package:todo/logic/converter.dart' show Converter;
 import 'package:string_translate/string_translate.dart'
     show Translate, Translation;
-import 'package:todo/styles/coloring.dart' show Coloring;
-import 'package:todo/styles/themes.dart';
 
 part 'setting.g.dart';
 
@@ -357,10 +356,10 @@ class AllSettings {
           Translation.changeLanguage(setting.objectValue);
           break;
         case 'Thememode':
-          Themes.setThemeMode(setting.objectValue, context);
+          Themes.changeTheme(setting.objectValue);
           break;
         case 'Color':
-          Coloring.mainColor = setting.objectValue;
+          Coloring.changeColor(setting.objectValue);
           break;
         case 'Title':
           BrainstormValues.title = setting.boolValue!;
