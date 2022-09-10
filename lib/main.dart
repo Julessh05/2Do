@@ -60,7 +60,7 @@ class TodoApp extends StatefulWidget {
   // So it just represents major and minor features.
   // Bugfixes are only seen in the app Version as String
   static const double appVersion = 2.3;
-  static const String appVersionString = '2.3.0';
+  static const String appVersionString = '2.3.1';
 
   @override
   State<TodoApp> createState() => _TodoAppState();
