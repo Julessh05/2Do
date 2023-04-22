@@ -51,4 +51,4 @@ But I put a lot of effort into making it stand out and have a bit of it's own lo
 
 
 ### Copyright
-© Julian Schumacher 2022
+© 2023 Julian Schumacher

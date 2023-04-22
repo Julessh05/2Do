@@ -145,7 +145,7 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
               applicationIcon: Icon(Icons.check),
               applicationName: '2Do',
               applicationVersion: TodoApp.appVersionString,
-              applicationLegalese: '© Julian Schumacher 2022',
+              applicationLegalese: '© 2023 Julian Schumacher',
               children: <Widget>[
                 Text('\n'),
                 Text('A Todo App built with Flutter,'),
