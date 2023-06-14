@@ -102,7 +102,7 @@ class _TodoAppState extends State<TodoApp> {
           showSemanticsDebugger: false,
           showPerformanceOverlay: false,
           debugShowMaterialGrid: false,
-          debugShowCheckedModeBanner: true,
+          debugShowCheckedModeBanner: false,
           checkerboardOffscreenLayers: false,
           checkerboardRasterCacheImages: false,
           /* App Section */
